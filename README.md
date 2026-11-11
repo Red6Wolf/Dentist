@@ -24,7 +24,8 @@ python3 -m http.server 8000
 ├── scripts/                   # интерактивность
 ├── assets/
 │   ├── clinic/                # фото клиники и сюжетные изображения
-│   └── doctors/               # портреты-примеры врачей
+│   ├── doctors/               # портреты врачей
+│   └── licenses/              # опубликованные сканы лицензии
 ├── DESIGN.md                 # визуальные правила
 ├── PRODUCT.md                # продуктовый контекст
 ├── CONTRIBUTING.md           # правила читабельного кода и новых файлов
@@ -39,7 +40,11 @@ python3 -m http.server 8000
 - `PRODUCT.md` — подтверждённый продуктовый контекст для дальнейшей работы
 - `CONTRIBUTING.md` — правила форматирования кода и размещения новых файлов
 - `scripts/app.js` — интерактивный выбор направления и времени для звонка
+- `scripts/catalogue.js` — поиск по прайсу и открытие разделов по прямым ссылкам
 - `assets/clinic/` — фотографии интерьера и сюжетные изображения
-- `assets/doctors/` — портреты-примеры для карточек врачей
+- `assets/doctors/` — портреты для карточек врачей. Портреты с именами по ID профиля взяты с прежнего сайта клиники.
+- `assets/licenses/` — три скана из раздела лицензий прежнего сайта
 
-В блоке команды стоят временные стоковые фотографии для визуализации карточек. Они не изображают реальных сотрудников клиники; перед публикацией замените их подтверждёнными портретами команды. Источники — Pexels: [01](https://www.pexels.com/photo/portrait-of-smiling-dentist-in-white-shirt-20596946/), [02](https://www.pexels.com/photo/female-dentist-in-modern-dental-clinic-37458354/), [03](https://www.pexels.com/photo/dental-professional-in-modern-clinic-setting-37458355/), [04](https://www.pexels.com/photo/smiling-female-dentist-in-clinic-setting-37458356/), [05](https://www.pexels.com/photo/confident-female-dentist-in-professional-attire-31043313/), [06](https://www.pexels.com/photo/female-dentist-in-white-uniform-5355860/), [07](https://www.pexels.com/photo/professional-portrait-of-a-female-dentist-31017709/), [08](https://www.pexels.com/photo/orthodontist-standing-and-smiling-in-a-clinic-14235194/). Перед публичным запуском также проверьте актуальность цен и отзывов.
+Каталог услуг и полный прайс находятся в `pages/services.html`. Якоря цен имеют формат `p01-01`, а якоря услуг — `service-984`. Ссылки «Цены» в каталоге фильтруют прайс по этим якорям.
+
+Перенесённые цены и портреты сверены с [прежним сайтом клиники](https://stomatologiya-apelsin.ru/). Сканы и реквизиты отражают опубликованный документ. Перед публичным запуском подтвердите актуальность цен, состава команды, фотографий и лицензии у клиники.

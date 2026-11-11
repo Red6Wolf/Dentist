@@ -14,6 +14,7 @@
 
   <body>
     <div class="page">
+      <a class="skip-link" href="#main-content">Перейти к содержимому</a>
       <header class="panel subpage-hero subpage-hero--contact">
         <nav class="nav" aria-label="Основная навигация">
           <a class="brand" href="../index.html"
@@ -31,46 +32,42 @@
           </div>
         </nav>
         <div>
-          <div class="micro">Контакты · запись на приём</div>
-          <h1>Будем рады<br />помочь</h1>
+          <h1>Контакты и запись</h1>
           <p>Позвоните администратору — подберём врача и удобное время.</p>
         </div>
       </header>
-      <main class="subpage-main">
+      <main class="subpage-main" id="main-content" tabindex="-1">
         <section class="panel subpage-section">
           <div class="contact-layout">
             <div class="contact-panel">
               <h2>Как нас найти</h2>
               <dl>
                 <dt>Адрес</dt>
-                <dd>Москва, Тайнинская улица, 17, корпус 1</dd>
+                <dd>129345, Москва, Тайнинская улица, 17, корпус 1</dd>
                 <dt>Метро</dt>
                 <dd>Медведково · Бабушкинская</dd>
                 <dt>Телефон</dt>
                 <dd><a href="tel:+74991853333">+7 (499) 185-33-33</a></dd>
+                <dt>Электронная почта</dt>
+                <dd><a class="content-link" href="mailto:info@stomatologiya-apelsin.ru">info@stomatologiya-apelsin.ru</a></dd>
+                <dt>ВКонтакте</dt>
+                <dd><a class="content-link" href="https://vk.com/apelstom">Группа клиники</a></dd>
                 <dt>Часы</dt>
                 <dd>Пн–Пт 09:00–21:00 <br />Сб–Вс 10:00–19:00</dd>
               </dl>
             </div>
-            <div
-              class="map-card"
-              role="img"
-              aria-label="Схематичная карта расположения клиники"
-            >
-              <span class="map-label">Тайнинская улица, 17к1</span
-              ><a
-                class="map-link"
-                href="https://yandex.ru/maps/?text=Москва%2C%20Тайнинская%20улица%2C%2017%20корпус%201"
-                target="_blank"
-                rel="noreferrer"
-                >Открыть маршрут ↗</a
-              >
-            </div>
+            <figure class="entrance-photo">
+              <img src="../assets/clinic/gallery-16.webp"
+                  alt="Вход в клинику со стороны Тайнинской улицы" decoding="async" />
+              <figcaption>
+                <a class="content-link" href="https://yandex.ru/maps/?rtext=~55.885121%2C37.68524"
+                    target="_blank" rel="noreferrer">Построить маршрут в Яндекс Картах</a>
+              </figcaption>
+            </figure>
           </div>
         </section>
         <section class="panel subpage-section" id="booking">
-          <div class="micro">Запись на приём</div>
-          <h2>Позвоните — всё подскажем</h2>
+          <h2>Запись на приём</h2>
           <p class="subpage-lead">
             Выберите направление заранее, чтобы администратор быстрее
             сориентировал вас по специалисту и времени.
@@ -97,6 +94,10 @@
               >Позвонить администратору <b>↗</b></a
             >
           </div>
+          <p class="subpage-lead">
+            Для общих вопросов можно
+            <a class="content-link" href="mailto:info@stomatologiya-apelsin.ru">написать на электронную почту</a>.
+          </p>
         </section>
       </main>
       <footer class="panel footer">
