@@ -1,0 +1,24 @@
+# macOS
+.DS_Store
+
+# Dependencies
+node_modules/
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Editor settings
+.idea/
+.vscode/
+
+# Local preview and build output
+dist/
+build/
+# Local design audit cache
+.impeccable/hook.cache.json

@@ -1,0 +1,53 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "hero-eyebrow-chip",
+        "value": "*",
+        "files": [
+          "pages/clinic.html"
+        ],
+        "createdAt": "2026-11-11T12:06:31.636Z",
+        "reason": "Осознанный breadcrumb-контекст для страницы семейной клиники."
+      },
+      {
+        "rule": "hero-eyebrow-chip",
+        "value": "*",
+        "files": [
+          "pages/contact.html"
+        ],
+        "createdAt": "2026-11-11T12:06:31.660Z",
+        "reason": "Осознанный breadcrumb-контекст для страницы записи и контактов."
+      },
+      {
+        "rule": "hero-eyebrow-chip",
+        "value": "*",
+        "files": [
+          "pages/doctors.html"
+        ],
+        "createdAt": "2026-11-11T12:06:31.681Z",
+        "reason": "Осознанный breadcrumb-контекст для страницы команды."
+      },
+      {
+        "rule": "hero-eyebrow-chip",
+        "value": "*",
+        "files": [
+          "pages/services.html"
+        ],
+        "createdAt": "2026-11-11T12:06:31.702Z",
+        "reason": "Осознанный breadcrumb-контекст для каталога услуг."
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "pages/*.html"
+        ],
+        "createdAt": "2026-11-11T12:06:36.011Z",
+        "reason": "Палитра выбрана намеренно: мягкий апельсиновый оттенок поддерживает бренд и семейную атмосферу клиники."
+      }
+    ]
+  }
+}

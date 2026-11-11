@@ -1,0 +1,114 @@
+/* Дополнительные страницы: общая сетка, спокойные карточки и типографика. */
+
+.subpage-hero {
+    min-height: 500px;
+    padding: 150px 7% 74px;
+    display: flex;
+    align-items: end;
+    position: relative;
+    color: var(--cream);
+    background: #5B473C url('../assets/clinic/office.jpeg') center/cover no-repeat;
+}
+
+.subpage-hero--clinic {
+    background-image: url('../assets/clinic/reception.jpeg');
+}
+
+.subpage-hero--contact {
+    background-image: url('../assets/clinic/office.jpeg');
+}
+
+.subpage-hero--doctors {
+    background-image: url('../assets/clinic/consultation.jpeg');
+}
+
+.subpage-hero--services {
+    background-image: url('../assets/clinic/office.jpeg');
+}
+
+.subpage-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(43, 34, 29, .78), rgba(43, 34, 29, .22));
+}
+
+.subpage-hero > div { position: relative; z-index: 1; max-width: 760px; }
+.subpage-hero .micro { color: #F5EDE6; }
+.subpage-hero .navlinks a,
+.subpage-hero .navphone,
+.subpage-hero .navcta {
+    font-size: 12px;
+}
+.subpage-hero h1 { margin: 18px 0 0; font-size: clamp(48px, 8vw, 104px); line-height: .95; letter-spacing: -.07em; }
+.subpage-hero p { max-width: 520px; margin: 22px 0 0; color: #F5EDE6; line-height: 1.7; font-size: 15px; }
+
+.subpage-main { padding: 8px 0 0; }
+.subpage-section { padding: 72px 6%; animation: page-section-in .65s cubic-bezier(.2,.7,.2,1) both; }
+.subpage-section + .subpage-section { border-top: 1px solid var(--line); }
+.subpage-section > .micro { margin-bottom: 12px; }
+.subpage-section h2 { margin: 0 0 24px; font-size: clamp(34px, 5vw, 64px); line-height: 1; letter-spacing: -.065em; }
+.subpage-lead { max-width: 720px; color: var(--muted); font-size: 17px; line-height: 1.65; }
+
+.service-catalog { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 34px; }
+.catalog-card { min-height: 240px; padding: 26px; border: 1px solid var(--line); border-radius: 18px; display: flex; flex-direction: column; background: var(--cream); transition: transform .2s ease, border-color .2s ease; }
+.catalog-card:hover { transform: translateY(-3px); border-color: var(--orange); }
+.catalog-card .catalog-number { color: var(--orange-deep); font: 12px var(--mono); }
+.catalog-card h3 { margin: 42px 0 8px; font-size: 24px; letter-spacing: -.04em; }
+.catalog-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.catalog-card .catalog-price { margin-top: auto; padding-top: 22px; font: 12px var(--mono); color: var(--orange-deep); }
+
+.doctor-page-grid { margin-top: 32px; }
+.doctor-page-grid .doctor-photo { height: 320px; }
+
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: stretch; }
+.story-grid > div { padding: 34px; border-radius: 18px; background: var(--sand); }
+.story-grid p { max-width: 580px; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.75; }
+.story-grid .story-image { min-height: 360px; background: url('../assets/clinic/reception.jpeg') center/cover; }
+.feature-list { display: grid; gap: 10px; padding: 0; margin: 24px 0 0; list-style: none; }
+.feature-list li { padding: 14px 0 14px 30px; border-top: 1px solid var(--line); position: relative; }
+.feature-list li::before { content: '↗'; position: absolute; left: 0; color: var(--orange-deep); }
+
+.contact-layout { display: grid; grid-template-columns: .7fr 1.3fr; gap: 18px; }
+.contact-panel { padding: 32px; border-radius: 18px; background: var(--sand); }
+.contact-panel h2 { margin: 0 0 25px; font-size: 28px; letter-spacing: -.045em; }
+.contact-panel dl { margin: 0; }
+.contact-panel dt { margin-top: 18px; color: var(--muted); font: 11px var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+.contact-panel dd { margin: 6px 0 0; line-height: 1.5; }
+.contact-layout .map-card { min-height: 390px; }
+
+.page-cta { margin-top: 30px; }
+.page-cta .locbutton { margin-top: 0; }
+
+.price-section--compact {
+    padding-top: 34px;
+}
+
+.hours-note {
+    margin-top: 18px;
+}
+
+.choice-set--spaced {
+    margin-top: 28px;
+}
+
+@keyframes page-section-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .subpage-section { animation: none; }
+}
+
+@media (max-width: 700px) {
+    .subpage-hero { min-height: 470px; padding: 130px 20px 44px; }
+    .subpage-hero h1 { font-size: clamp(48px, 15vw, 72px); }
+    .subpage-hero p { font-size: 13px; }
+    .subpage-section { padding: 48px 15px; }
+    .service-catalog, .story-grid, .contact-layout { grid-template-columns: 1fr; }
+    .catalog-card { min-height: 210px; }
+    .doctor-page-grid .doctor-photo { height: 210px; }
+    .story-grid .story-image { min-height: 240px; order: -1; }
+    .contact-layout .map-card { min-height: 280px; }
+}
