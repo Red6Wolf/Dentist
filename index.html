@@ -16,6 +16,7 @@
     />
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="styles/pages.css" />
+    <link rel="stylesheet" href="styles/home.css" />
   </head>
   <body>
     <div class="page">
@@ -110,18 +111,47 @@
             </a>
           </div>
           <div class="services">
-            <a class="feature-photo" href="pages/services.html#children">
-              <div class="feature-caption">
-                <div class="micro">01 · Для детей и подростков</div>
-                <h3>Детская стоматология</h3>
-                <div class="chips">
-                  <span class="chip">Лечение молочных зубов</span>
-                  <span class="chip">Профилактика</span>
-                  <span class="chip">Гигиена для детей</span>
-                </div>
+            <div class="feature-slider" aria-label="Направления стоматологии">
+              <div class="feature-slides">
+                <a class="feature-slide is-active" href="pages/services.html#children" aria-hidden="false">
+                  <img src="assets/clinic/child-visit.jpeg" alt="" loading="lazy" decoding="async" />
+                  <div class="feature-caption">
+                    <h3 class="feature-title">Детская стоматология</h3>
+                    <span class="feature-description">Знакомство с врачом, профилактика и лечение молочных зубов</span>
+                    <span class="feature-open">Смотреть направление ↗</span>
+                  </div>
+                </a>
+                <a class="feature-slide" href="pages/services.html#therapy" aria-hidden="true" tabindex="-1">
+                  <img src="assets/clinic/gallery-04.webp" alt="" loading="lazy" decoding="async" />
+                  <div class="feature-caption">
+                    <h3 class="feature-title">Лечение зубов</h3>
+                    <span class="feature-description">Лечение кариеса и пульпита, восстановление зубов</span>
+                    <span class="feature-open">Смотреть направление ↗</span>
+                  </div>
+                </a>
+                <a class="feature-slide" href="pages/services.html#ortho" aria-hidden="true" tabindex="-1">
+                  <img src="assets/clinic/gallery-09.webp" alt="" loading="lazy" decoding="async" />
+                  <div class="feature-caption">
+                    <h3 class="feature-title">Ортодонтия</h3>
+                    <span class="feature-description">Диагностика прикуса, брекеты и наблюдение у ортодонта</span>
+                    <span class="feature-open">Смотреть направление ↗</span>
+                  </div>
+                </a>
+                <a class="feature-slide" href="pages/services.html#implantology" aria-hidden="true" tabindex="-1">
+                  <img src="assets/clinic/consultation.jpeg" alt="" loading="lazy" decoding="async" />
+                  <div class="feature-caption">
+                    <h3 class="feature-title">Имплантация</h3>
+                    <span class="feature-description">План лечения и восстановление утраченных зубов</span>
+                    <span class="feature-open">Смотреть направление ↗</span>
+                  </div>
+                </a>
               </div>
-              <span class="feature-arrow">↗</span>
-            </a>
+              <div class="feature-controls" aria-label="Управление направлениями">
+                <button class="feature-control" type="button" data-slide-direction="previous" aria-label="Предыдущее направление">←</button>
+                <span class="feature-counter" aria-live="off">01 / 04</span>
+                <button class="feature-control" type="button" data-slide-direction="next" aria-label="Следующее направление">→</button>
+              </div>
+            </div>
             <div>
               <div class="service-list">
                 <a class="service-row" href="pages/services.html#therapy">
@@ -215,7 +245,7 @@
         </section>
         <!-- Расположение клиники -->
         <section class="panel location-feature reveal-on-scroll" id="clinic">
-          <div class="rings"></div>
+          <img class="orange-slice" src="assets/illustrations/orange-cross-section.svg" alt="" aria-hidden="true" />
           <div class="bubble b1" aria-hidden="true"></div>
           <div class="bubble b2" aria-hidden="true"></div>
           <div class="bubble b3" aria-hidden="true"></div>
@@ -383,7 +413,6 @@
               <a href="https://www.yell.ru/moscow/com/semejnaya-stomatologiya-apelsin-na-tajninskoj-ulice_11946865/">
                 Читать отзывы на Yell.ru
               </a>
-              <a href="https://stomatologiya-apelsin.ru/reviews">Отзывы на прежнем сайте</a>
             </div>
           </div>
         </section>
@@ -491,16 +520,22 @@
               <strong>Пн–Пт 09:00–21:00<br />Сб–Вс 10:00–19:00</strong>
             </div>
           </div>
-          <div class="map-card map-card--entrance">
-            <img src="assets/clinic/gallery-16.webp" alt="Вход в клинику со стороны Тайнинской улицы"
-                loading="lazy" decoding="async" />
-            <a
-              class="map-link"
-              href="https://yandex.ru/maps/?rtext=~55.885121%2C37.68524"
-              target="_blank"
-              rel="noreferrer"
-              >Открыть маршрут в Яндекс Картах ↗</a
-            >
+          <div class="contact-media">
+            <div class="map-card map-card--yandex">
+              <iframe
+                title="Яндекс Карты: стоматология Апельсин, Тайнинская улица, 17, корпус 1"
+                src="https://yandex.ru/map-widget/v1/?ll=37.68524%2C55.885121&amp;z=17&amp;pt=37.68524%2C55.885121%2Cpm2rdl"
+                loading="lazy"
+                allowfullscreen
+              ></iframe>
+              <a class="map-link" href="https://yandex.ru/maps/org/semeynaya_stomatologiya_apelsin/1796694882/"
+                  target="_blank" rel="noopener noreferrer">Открыть в Яндекс Картах ↗</a>
+            </div>
+            <figure class="contact-entrance">
+              <img src="assets/clinic/gallery-16.webp" alt="Вход в клинику со стороны Тайнинской улицы"
+                  loading="lazy" decoding="async" />
+              <figcaption>Вход в клинику</figcaption>
+            </figure>
           </div>
         </section>
       </main>
@@ -560,5 +595,6 @@
       </footer>
     </div>
     <script src="scripts/app.js" defer></script>
+    <script src="scripts/home.js" defer></script>
   </body>
 </html>

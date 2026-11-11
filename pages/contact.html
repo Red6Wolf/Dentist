@@ -10,6 +10,7 @@
     />
     <link rel="stylesheet" href="../styles/styles.css" />
     <link rel="stylesheet" href="../styles/pages.css" />
+    <link rel="stylesheet" href="../styles/home.css" />
   </head>
 
   <body>
@@ -56,14 +57,23 @@
                 <dd>Пн–Пт 09:00–21:00 <br />Сб–Вс 10:00–19:00</dd>
               </dl>
             </div>
-            <figure class="entrance-photo">
-              <img src="../assets/clinic/gallery-16.webp"
-                  alt="Вход в клинику со стороны Тайнинской улицы" decoding="async" />
-              <figcaption>
-                <a class="content-link" href="https://yandex.ru/maps/?rtext=~55.885121%2C37.68524"
-                    target="_blank" rel="noreferrer">Построить маршрут в Яндекс Картах</a>
-              </figcaption>
-            </figure>
+            <div class="contact-media">
+              <div class="map-card map-card--yandex">
+                <iframe
+                  title="Яндекс Карты: стоматология Апельсин, Тайнинская улица, 17, корпус 1"
+                  src="https://yandex.ru/map-widget/v1/?ll=37.68524%2C55.885121&amp;z=17&amp;pt=37.68524%2C55.885121%2Cpm2rdl"
+                  loading="lazy"
+                  allowfullscreen
+                ></iframe>
+                <a class="map-link" href="https://yandex.ru/maps/org/semeynaya_stomatologiya_apelsin/1796694882/"
+                    target="_blank" rel="noopener noreferrer">Открыть в Яндекс Картах ↗</a>
+              </div>
+              <figure class="contact-entrance">
+                <img src="../assets/clinic/gallery-16.webp" alt="Вход в клинику со стороны Тайнинской улицы"
+                    loading="lazy" decoding="async" />
+                <figcaption>Вход в клинику</figcaption>
+              </figure>
+            </div>
           </div>
         </section>
         <section class="panel subpage-section" id="booking">

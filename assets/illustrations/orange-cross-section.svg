@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" fill="none">
+    <defs>
+        <path
+            id="segment"
+            d="M -18 -66 C -68 -151 -123 -261 -148 -350 Q 0 -394 148 -350 C 123 -261 68 -151 18 -66 Q 0 -45 -18 -66 Z"
+        />
+        <path
+            id="fiber"
+            d="M 0 -81 C 0 -170 0 -266 0 -347 M -48 -116 C -80 -203 -105 -278 -119 -334 M 48 -116 C 80 -203 105 -278 119 -334"
+        />
+    </defs>
+
+    <g transform="translate(500 500)">
+        <circle r="472" fill="#E7A56E" opacity=".38" />
+        <circle r="449" fill="#F1B57D" />
+        <circle r="426" fill="#FFF1DE" />
+        <circle r="401" fill="#F7C48F" />
+
+        <g stroke="#FFF0DB" stroke-width="13" stroke-linejoin="round">
+            <use href="#segment" fill="#F2A866" />
+            <use href="#segment" transform="rotate(45)" fill="#F6B370" />
+            <use href="#segment" transform="rotate(90)" fill="#F0A363" />
+            <use href="#segment" transform="rotate(135)" fill="#F7B87B" />
+            <use href="#segment" transform="rotate(180)" fill="#F1A768" />
+            <use href="#segment" transform="rotate(225)" fill="#F6B675" />
+            <use href="#segment" transform="rotate(270)" fill="#F2AA6D" />
+            <use href="#segment" transform="rotate(315)" fill="#F7B77B" />
+        </g>
+
+        <g stroke="#FFE2BD" stroke-width="4" stroke-linecap="round" opacity=".78">
+            <use href="#fiber" />
+            <use href="#fiber" transform="rotate(45)" />
+            <use href="#fiber" transform="rotate(90)" />
+            <use href="#fiber" transform="rotate(135)" />
+            <use href="#fiber" transform="rotate(180)" />
+            <use href="#fiber" transform="rotate(225)" />
+            <use href="#fiber" transform="rotate(270)" />
+            <use href="#fiber" transform="rotate(315)" />
+        </g>
+
+        <circle r="66" fill="#FFF0DC" />
+        <path d="M -28 -29 Q 0 -13 29 -28 M -33 14 Q 0 4 33 15" stroke="#F4C796" stroke-width="9" stroke-linecap="round" />
+    </g>
+</svg>
