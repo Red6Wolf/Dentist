@@ -14,6 +14,8 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <link rel="canonical" href="https://stomatologiya-apelsin.ru/pages/contact.html" />
+    <link rel="preload" as="image" href="../assets/clinic/gallery-20.webp" />
     <link rel="stylesheet" href="../styles/styles.css" />
     <link rel="stylesheet" href="../styles/pages.css" />
     <link rel="stylesheet" href="../styles/home.css" />
@@ -86,34 +88,17 @@
         <section class="panel subpage-section" id="booking">
           <h2>Запись на приём</h2>
           <p class="subpage-lead">
-            Выберите направление заранее, чтобы администратор быстрее
-            сориентировал вас по специалисту и времени.
+            Позвоните администратору, чтобы подобрать специалиста и время приёма.
           </p>
-          <div class="choice-set choice-set--spaced">
-            <button class="choice" type="button" aria-pressed="false">
-              Осмотр
-            </button>
-            <button class="choice" type="button" aria-pressed="false">
-              Лечение
-            </button>
-            <button class="choice" type="button" aria-pressed="false">
-              Детский приём
-            </button>
-            <button class="choice" type="button" aria-pressed="false">
-              Гигиена
-            </button>
-            <button class="choice" type="button" aria-pressed="false">
-              Ортодонтия
-            </button>
-          </div>
+          <p class="selected-doctor" id="selected-doctor" hidden></p>
           <div class="page-cta">
             <a class="locbutton" href="tel:+74991853333"
               >Позвонить администратору <b>↗</b></a
             >
           </div>
           <p class="subpage-lead">
-            Для общих вопросов можно
-            <a class="content-link" href="mailto:info@stomatologiya-apelsin.ru">написать на электронную почту</a>.
+            Можно также
+            <a class="content-link" id="booking-email" href="mailto:info@stomatologiya-apelsin.ru?subject=Запись%20на%20приём">написать на электронную почту</a>.
           </p>
         </section>
       </main>
@@ -126,5 +111,6 @@
       </footer>
     </div>
     <script src="../scripts/app.js" defer></script>
+    <script src="../scripts/contact.js" defer></script>
   </body>
 </html>

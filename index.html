@@ -14,9 +14,41 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <link rel="canonical" href="https://stomatologiya-apelsin.ru/" />
+    <link rel="preload" as="image" href="assets/clinic/consultation.jpeg" />
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="styles/pages.css" />
     <link rel="stylesheet" href="styles/home.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Dentist",
+        "name": "Апельсин",
+        "url": "https://stomatologiya-apelsin.ru/",
+        "telephone": "+7-499-185-33-33",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Тайнинская улица, 17, корпус 1",
+          "addressLocality": "Москва",
+          "postalCode": "129345",
+          "addressCountry": "RU"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "21:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Saturday", "Sunday"],
+            "opens": "10:00",
+            "closes": "19:00"
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div class="page">
@@ -46,7 +78,8 @@
           </div>
           <div class="hero-side">
             <p>
-              Терапия, гигиена, ортодонтия и хирургия для взрослых и детей.
+              Семейная стоматология на Тайнинской для взрослых и детей.
+              Лечение, гигиена и ортодонтия в одной клинике.
             </p>
             <div class="hero-actions">
               <a class="roundbtn" href="tel:+74991853333">
@@ -150,7 +183,7 @@
                     <h3>Лечение зубов</h3>
                     <p>Кариес · Пульпит · Реставрации</p>
                   </div>
-                  <span class="price">Приём · 1 000 ₽</span>
+                  <span class="price">Первичный приём · 1 000 ₽</span>
                   <span class="arrow">↗</span>
                 </a>
                 <a class="service-row" href="pages/services.html#hygiene">
@@ -168,7 +201,7 @@
                     <h3>Ортодонтия</h3>
                     <p>Исправление прикуса · Брекеты</p>
                   </div>
-                  <span class="price">Приём · 1 150 ₽</span>
+                  <span class="price">Первичный приём · 1 150 ₽</span>
                   <span class="arrow">↗</span>
                 </a>
                 <a class="service-row" href="pages/services.html#implantology">
@@ -186,7 +219,7 @@
                     <h3>Хирургия</h3>
                     <p>Удаление зубов · Хирургические манипуляции</p>
                   </div>
-                  <span class="price">Приём · 1 000 ₽</span>
+                  <span class="price">Первичный приём · 1 000 ₽</span>
                   <span class="arrow">↗</span>
                 </a>
                 <a class="service-row" href="pages/services.html#prosthetics">
@@ -195,7 +228,7 @@
                     <h3>Протезирование</h3>
                     <p>Металлокерамика · Зуботехническая лаборатория</p>
                   </div>
-                  <span class="price">Приём · 1 000 ₽</span>
+                  <span class="price">Первичный приём · 1 000 ₽</span>
                   <span class="arrow">↗</span>
                 </a>
                 <a class="service-row" href="pages/services.html#aesthetics">
@@ -345,7 +378,7 @@
             <div class="micro">Стоимость</div>
             <h2>Цены</h2>
             <p>
-              Стоимость консультаций и снимков. Актуальные цены уточняйте при записи.
+              Цены на первичный приём и снимки. Стоимость лечения зависит от процедуры.
             </p>
             <a class="locbutton" href="pages/services.html#prices">
               Открыть полный прайс
@@ -382,7 +415,7 @@
               </tbody>
             </table>
             <div class="price-note">
-              Прайс проверен 12 ноября 2026 года.
+              Цены перенесены из опубликованного прайса. Уточняйте актуальность при записи.
             </div>
           </div>
         </section>
@@ -394,7 +427,7 @@
           <div class="review-sources">
             <div>
               <strong>4,9 из 5</strong>
-              <p>Оценка в карточке клиники на Yell.</p>
+              <p>Оценка в карточке клиники на Yell.ru. Отзывы собраны из Zoon.</p>
             </div>
             <div class="review-source-links">
               <a href="https://www.yell.ru/moscow/com/semejnaya-stomatologiya-apelsin-na-tajninskoj-ulice_11946865/">
@@ -402,83 +435,44 @@
               </a>
             </div>
           </div>
+          <div class="review-quotes">
+            <figure>
+              <blockquote>«Мне понравилось качество обслуживания и отношение стоматолога Вячеслава Викторовича Мухина».</blockquote>
+              <figcaption>
+                Ярослава · 25 июня 2019 ·
+                <a href="https://stomatologiya-apelsin.ru/specialist/mukhinvv#reviews">Источник отзыва</a>
+              </figcaption>
+            </figure>
+            <figure>
+              <blockquote>«В клинике все очень чисто и хорошо».</blockquote>
+              <figcaption>
+                Галина · 20 марта 2020 ·
+                <a href="https://stomatologiya-apelsin.ru/specialist/mukhinvv#reviews">Источник отзыва</a>
+              </figcaption>
+            </figure>
+          </div>
         </section>
-        <!-- Выбор направления для записи -->
+        <!-- Связь с администратором -->
         <section class="panel booking reveal-on-scroll" id="booking">
           <div class="booking-photo">
             <div>
               <div class="micro">Запись на приём</div>
-              <h2>Выберите,<br />с чем прийти</h2>
+              <h2>Начнём<br />с разговора</h2>
             </div>
           </div>
           <div class="booking-form">
             <p>
-              Администратор подберёт врача и свободное время по телефону.
-              Отметьте, что вам нужно, — так разговор займёт меньше времени.
+              Позвоните администратору и расскажите, что вас беспокоит.
+              Подскажем, к какому специалисту обратиться, и согласуем время приёма.
             </p>
-            <div class="field-label" id="service-label">01 · Направление</div>
-            <div
-              class="choice-set"
-              data-group="service"
-              role="group"
-              aria-labelledby="service-label"
-            >
-              <button class="choice" type="button" aria-pressed="false">
-                Осмотр и консультация
-              </button>
-              <button class="choice" type="button" aria-pressed="false">
-                Лечение зубов
-              </button>
-              <button class="choice" type="button" aria-pressed="false">
-                Детский приём
-              </button>
-              <button class="choice" type="button" aria-pressed="false">
-                Гигиена
-              </button>
-              <button class="choice" type="button" aria-pressed="false">
-                Ортодонтия
-              </button>
-              <button class="choice" type="button" aria-pressed="false">
-                Хирургия
-              </button>
-              <button class="choice" type="button" aria-pressed="false">
-                Нужен совет
-              </button>
-            </div>
-            <div class="field-label" id="time-label">02 · Удобное время</div>
-            <div
-              class="choice-set"
-              data-group="time"
-              role="group"
-              aria-labelledby="time-label"
-            >
-              <button class="choice" type="button" aria-pressed="false">
-                Утро
-              </button>
-              <button class="choice" type="button" aria-pressed="false">
-                День
-              </button>
-              <button class="choice" type="button" aria-pressed="false">
-                Вечер
-              </button>
-              <button class="choice" type="button" aria-pressed="false">
-                Выходные
-              </button>
-            </div>
             <div class="call-box">
-              <div class="micro">03 · Позвонить</div>
-              <p id="call-copy" aria-live="polite">
-                Выберите направление и время — подскажем, что сказать
-                администратору.
-              </p>
+              <p>Запись по телефону</p>
               <a class="pillbtn" href="tel:+74991853333">
-                <span>☎ &nbsp;+7 (499) 185-33-33</span>
+                <span>+7 (499) 185-33-33</span>
                 <b>↗</b>
               </a>
             </div>
-            <div class="notice">
-              Дату и время приёма подтверждает администратор по телефону.
-            </div>
+            <a class="booking-email content-link" href="mailto:info@stomatologiya-apelsin.ru?subject=Запись%20на%20приём">Или напишите на электронную почту</a>
           </div>
         </section>
         <!-- Контакты и маршрут -->
