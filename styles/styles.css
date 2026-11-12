@@ -1121,21 +1121,6 @@ span.icon-arrow:not(.arrow) {
     white-space: nowrap;
 }
 
-.foot-end {
-    border-top: 1px solid #ffffff25;
-    padding-top: 12px;
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    color: #EAC9B2;
-    font: 500 11px var(--label);
-    text-transform: uppercase;
-}
-
-.foot-end a {
-    font-size: 12px;
-}
-
 /* Планшеты */
 
 @media(max-width:950px) {
@@ -1490,11 +1475,6 @@ span.icon-arrow:not(.arrow) {
     .big-logo {
         font-size: 21vw;
         margin: 18px 0;
-    }
-
-    .foot-end {
-        flex-direction: column;
-        font-size: 10px;
     }
 
 }
