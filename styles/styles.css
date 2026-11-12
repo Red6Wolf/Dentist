@@ -254,6 +254,10 @@ main:focus {
     text-underline-offset: 6px;
 }
 
+.nav-menu-button {
+    display: none;
+}
+
 .navlinks a:focus-visible,
 .service-row:focus-visible,
 .feature-slide:focus-visible {
@@ -1267,15 +1271,23 @@ span.icon-arrow:not(.arrow) {
 
 /* Планшеты */
 
-@media(max-width:950px) {
+@media (max-width: 1180px) {
     .navlinks {
-        top: 50px;
+        top: 58px;
         left: 0;
         right: 0;
         justify-content: center;
         width: 100%;
         transform: none;
     }
+
+    .navlinks a {
+        padding-inline: 12px;
+        font-size: 18px;
+    }
+}
+
+@media(max-width:950px) {
 
     .services {
         grid-template-columns: .75fr 1.25fr;
@@ -1332,22 +1344,66 @@ span.icon-arrow:not(.arrow) {
     }
 
     .navlinks {
-        display: grid;
-        grid-template-columns: repeat(3, max-content);
-        justify-content: center;
-        column-gap: 12px;
-        row-gap: 0;
+        top: 56px;
+        flex-wrap: wrap;
     }
 
-    .navlinks a {
+    .nav--enhanced .navlinks {
+        display: grid;
+        gap: 0;
+        padding: 12px;
+        border: 1px solid rgba(255, 249, 242, .18);
+        border-radius: 16px;
+        background: #30251f;
+        box-shadow: 0 18px 35px rgba(24, 16, 10, .26);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-8px);
+        transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+    }
+
+    .nav--enhanced.nav--open .navlinks {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    .nav--enhanced .navlinks a {
+        justify-content: start;
+        min-height: 48px;
+        padding: 10px 15px;
+        border-radius: 9px;
+        font-size: 18px;
+    }
+
+    .nav--enhanced .navlinks a:hover,
+    .nav--enhanced .navlinks a:focus-visible {
+        background: rgba(255, 249, 242, .1);
+        text-decoration: none;
+    }
+
+    .nav--enhanced .nav-menu-button {
+        display: block;
         min-height: 44px;
-        padding: 0 2px;
+        margin-left: auto;
+        padding: 8px 10px;
+        border: 1px solid rgba(255, 249, 242, .65);
+        border-radius: 999px;
+        background: rgba(36, 25, 19, .42);
         color: #fff;
-        font-size: 15px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .nav--enhanced .navright {
+        margin-left: 0;
     }
 
     .brand-name {
-        font-size: 23px;
+        font-size: 21px;
     }
 
     .brand-caption {
@@ -1363,7 +1419,8 @@ span.icon-arrow:not(.arrow) {
     }
 
     .navcta {
-        padding: 11px 14px;
+        padding: 10px 11px;
+        font-size: 13px;
     }
 
     .hero-copy {
