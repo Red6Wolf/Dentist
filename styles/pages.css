@@ -281,6 +281,45 @@
     border-bottom: 1px solid var(--line);
 }
 
+.profile-details > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    list-style: none;
+    font-size: 17px;
+    transition: color 180ms ease;
+}
+
+.profile-details > summary::-webkit-details-marker {
+    display: none;
+}
+
+.profile-details > summary::after {
+    content: '';
+    flex: none;
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid var(--orange-deep);
+    border-bottom: 2px solid var(--orange-deep);
+    transform: rotate(45deg);
+    transition: transform 280ms cubic-bezier(.16, 1, .3, 1);
+}
+
+.profile-details[open] > summary::after {
+    transform: rotate(225deg);
+}
+
+.profile-details > summary:hover {
+    color: var(--orange-deep);
+}
+
+.profile-details > summary:focus-visible {
+    border-radius: 4px;
+    outline: 2px solid var(--orange-deep);
+    outline-offset: 3px;
+}
+
 .profile-details ul,
 .document-list {
     padding-left: 20px;
@@ -289,6 +328,7 @@
 
 .profile-details ul {
     margin-top: 0;
+    padding-bottom: 5px;
 }
 
 .profile-details li + li,

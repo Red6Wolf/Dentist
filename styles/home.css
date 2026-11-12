@@ -130,75 +130,162 @@
     font: 12px var(--mono);
 }
 
-/* Апельсиновый срез становится фоном для рассказа о клинике. */
+.feature-autoplay {
+    min-height: 38px;
+    border: 0;
+    border-radius: 999px;
+    padding: 0 12px;
+    background: #fff7f0;
+    color: var(--ink);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.feature-autoplay:hover {
+    background: #ffd8b4;
+}
+
+/* Короткий рассказ о клинике и живой апельсиновый срез. */
 
 .location-feature {
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: clamp(20px, 4vw, 70px);
+    min-height: 620px;
+    padding: 55px clamp(30px, 6vw, 95px);
     background: #f7ebe0;
+}
+
+.loc-copy {
+    position: relative;
+    z-index: 1;
+    max-width: 490px;
+    text-align: left;
+}
+
+.loc-copy h2 {
+    max-width: 12ch;
+    margin: 0 0 22px;
+    font-size: clamp(40px, 4.5vw, 65px);
+    line-height: 1.06;
+    letter-spacing: -.04em;
+}
+
+.loc-copy p {
+    max-width: 32ch;
+    margin: 0;
+    color: #5e4b40;
+    font-size: clamp(16px, 1.4vw, 19px);
+    line-height: 1.55;
+}
+
+.loc-copy .locbutton {
+    margin-top: 27px;
+    font-size: 14px;
+}
+
+.orange-scene {
+    position: relative;
+    width: min(100%, 570px);
+    aspect-ratio: 1;
+    justify-self: center;
 }
 
 .orange-slice {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: min(82vw, 800px);
-    max-width: none;
-    opacity: .82;
-    transform: translate(-50%, -50%) rotate(-8deg) scale(.94);
+    width: 100%;
+    opacity: .86;
+    transform: translate(-50%, -50%);
     pointer-events: none;
 }
 
+.bubble {
+    position: absolute;
+    width: clamp(76px, 9vw, 112px);
+    aspect-ratio: 1;
+    border: 4px solid #f7ebe0;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 9px 25px rgba(84, 49, 28, .16);
+}
+
+.bubble.b1 {
+    top: 4%;
+    left: 12%;
+    background-image: url('../assets/clinic/gallery-20.webp');
+}
+
+.bubble.b2 {
+    top: 13%;
+    right: -1%;
+    background-image: url('../assets/clinic/gallery-04.webp');
+}
+
+.bubble.b3 {
+    bottom: 7%;
+    left: 3%;
+    background-image: url('../assets/clinic/gallery-13.webp');
+}
+
+.bubble.b4 {
+    right: 16%;
+    bottom: 0;
+    background-image: url('../assets/clinic/gallery-19.webp');
+}
+
 .location-feature.reveal-visible .orange-slice {
-    animation: orange-arrive 850ms cubic-bezier(.16, 1, .3, 1) both;
-}
-
-.location-feature .loc-copy {
-    background: rgba(255, 250, 245, .96);
-    backdrop-filter: none;
-    box-shadow: 0 18px 50px rgba(119, 70, 39, .12);
-}
-
-.location-feature .b1,
-.location-feature .b2 {
-    top: 6%;
-}
-
-.location-feature .b3,
-.location-feature .b4 {
-    bottom: 6%;
+    animation:
+        citrus-unfold 950ms cubic-bezier(.16, 1, .3, 1) both,
+        citrus-drift 12s 950ms ease-in-out infinite alternate;
 }
 
 .location-feature.reveal-visible .bubble {
-    animation: citrus-photo-arrive 670ms cubic-bezier(.16, 1, .3, 1) both;
+    animation: citrus-photo-arrive 700ms cubic-bezier(.16, 1, .3, 1) both;
 }
 
 .location-feature.reveal-visible .b2 {
-    animation-delay: 90ms;
+    animation-delay: 120ms;
 }
 
 .location-feature.reveal-visible .b3 {
-    animation-delay: 160ms;
+    animation-delay: 210ms;
 }
 
 .location-feature.reveal-visible .b4 {
-    animation-delay: 230ms;
+    animation-delay: 300ms;
 }
 
-@keyframes orange-arrive {
+@keyframes citrus-unfold {
     from {
-        opacity: .42;
-        transform: translate(-50%, -50%) rotate(-8deg) scale(.9);
+        clip-path: circle(12% at 50% 50%);
+        opacity: .45;
     }
 
     to {
-        opacity: .82;
-        transform: translate(-50%, -50%) rotate(0) scale(1);
+        clip-path: circle(75% at 50% 50%);
+        opacity: .86;
+    }
+}
+
+@keyframes citrus-drift {
+    from {
+        transform: translate(-50%, -50%) rotate(-5deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(5deg);
     }
 }
 
 @keyframes citrus-photo-arrive {
     from {
-        opacity: .3;
-        transform: translateY(22px) scale(.94);
+        opacity: .2;
+        transform: translateY(25px) scale(.9);
     }
 
     to {
@@ -275,6 +362,15 @@
     .feature-slider {
         min-height: 600px;
     }
+
+    .location-feature {
+        min-height: 520px;
+        padding: 45px 38px;
+    }
+
+    .loc-copy h2 {
+        font-size: clamp(38px, 4.5vw, 48px);
+    }
 }
 
 @media (max-width: 700px) {
@@ -290,10 +386,6 @@
 
     .feature-title {
         font-size: 31px;
-    }
-
-    .orange-slice {
-        width: 590px;
     }
 
     .contact-media {
@@ -313,16 +405,6 @@
         transform: translateX(-50%);
     }
 
-    .location-feature .b1,
-    .location-feature .b2 {
-        top: 3%;
-    }
-
-    .location-feature .b3,
-    .location-feature .b4 {
-        bottom: 3%;
-    }
-
     .contact-entrance {
         height: 205px;
         min-height: 0;
@@ -330,6 +412,33 @@
 
     .contact-entrance img {
         object-position: center 43%;
+    }
+}
+
+@media (max-width: 650px) {
+    .location-feature {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        min-height: 0;
+        padding: 46px 22px 20px;
+    }
+
+    .loc-copy h2 {
+        max-width: 14ch;
+        margin-bottom: 18px;
+        font-size: clamp(36px, 10vw, 43px);
+    }
+
+    .loc-copy p {
+        font-size: 16px;
+    }
+
+    .orange-scene {
+        width: min(100%, 390px);
+    }
+
+    .bubble {
+        width: 72px;
     }
 }
 

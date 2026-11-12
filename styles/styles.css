@@ -532,39 +532,7 @@ main:focus {
     margin-top: 17px;
 }
 
-/* Блок о расположении */
-
-.location-feature {
-    min-height: 720px;
-    background: var(--sand);
-    position: relative;
-    display: grid;
-    place-items: center;
-    text-align: center;
-}
-
-.loc-copy {
-    position: relative;
-    z-index: 1;
-    max-width: 500px;
-    padding: 34px;
-    background: rgba(248, 245, 241, 0.94);
-    border-radius: 28px;
-    backdrop-filter: blur(3px);
-}
-
-.loc-copy h2 {
-    font-size: clamp(33px,4vw,53px);
-    line-height: 1.02;
-    letter-spacing: -.065em;
-    margin: 14px 0;
-}
-
-.loc-copy p {
-    font-size: 12px;
-    line-height: 1.7;
-    color: var(--muted);
-}
+/* Кнопка перехода к подробной информации */
 
 .locbutton {
     display: inline-flex;
@@ -587,40 +555,6 @@ main:focus {
     border-radius: 50%;
     background: var(--cream);
     color: var(--ink);
-}
-
-.bubble {
-    position: absolute;
-    width: 124px;
-    height: 124px;
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center;
-    box-shadow: 0 5px 20px #3D251614;
-}
-
-.bubble.b1 {
-    left: calc(50% - 280px);
-    top: 14%;
-    background-image: url('../assets/clinic/gallery-20.webp');
-}
-
-.bubble.b2 {
-    right: calc(50% - 280px);
-    top: 14%;
-    background-image: url('../assets/clinic/gallery-04.webp');
-}
-
-.bubble.b3 {
-    left: calc(50% - 235px);
-    bottom: 12%;
-    background-image: url('../assets/clinic/gallery-13.webp');
-}
-
-.bubble.b4 {
-    right: calc(50% - 235px);
-    bottom: 12%;
-    background-image: url('../assets/clinic/gallery-19.webp');
 }
 
 /* Команда клиники */
@@ -1171,17 +1105,6 @@ main:focus {
         grid-template-columns: .6fr 1.4fr;
     }
 
-    .bubble {
-        width: 100px;
-        height: 100px;
-    }
-
-/* Блок о расположении */
-
-    .location-feature {
-        min-height: 590px;
-    }
-
 }
 
 /* Телефоны */
@@ -1368,46 +1291,6 @@ main:focus {
 
     .price {
         font-size: 11px;
-    }
-
-/* Блок о расположении */
-
-    .location-feature {
-        min-height: 570px;
-    }
-
-    .bubble {
-        width: 74px;
-        height: 74px;
-    }
-
-    .bubble.b1 {
-        left: 8%;
-        top: 21%;
-    }
-
-    .bubble.b2 {
-        right: 8%;
-        top: 22%;
-    }
-
-    .bubble.b3 {
-        left: 14%;
-        bottom: 17%;
-    }
-
-    .bubble.b4 {
-        right: 13%;
-        bottom: 17%;
-    }
-
-    .loc-copy {
-        max-width: 330px;
-        padding: 20px;
-    }
-
-    .loc-copy h2 {
-        font-size: 35px;
     }
 
 /* Команда клиники */

@@ -8,12 +8,12 @@ if (featureSlider) {
     const counter = featureSlider.querySelector(".feature-counter");
     const previousButton = featureSlider.querySelector('[data-slide-direction="previous"]');
     const nextButton = featureSlider.querySelector('[data-slide-direction="next"]');
+    const autoplayButton = featureSlider.querySelector(".feature-autoplay");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     let activeIndex = 0;
     let isVisible = false;
-    let isHovered = false;
-    let hasFocus = false;
+    let isPaused = false;
 
     function showSlide(nextIndex, direction) {
         const incomingSlide = slides[nextIndex];
@@ -49,20 +49,14 @@ if (featureSlider) {
     previousButton.addEventListener("click", () => moveSlide(-1));
     nextButton.addEventListener("click", () => moveSlide(1));
 
-    featureSlider.addEventListener("pointerenter", () => {
-        isHovered = true;
+    autoplayButton.addEventListener("click", () => {
+        isPaused = !isPaused;
+        autoplayButton.textContent = isPaused ? "Продолжить" : "Пауза";
     });
 
-    featureSlider.addEventListener("pointerleave", () => {
-        isHovered = false;
-    });
-
-    featureSlider.addEventListener("focusin", () => {
-        hasFocus = true;
-    });
-
-    featureSlider.addEventListener("focusout", (event) => {
-        hasFocus = featureSlider.contains(event.relatedTarget);
+    autoplayButton.hidden = reducedMotion.matches;
+    reducedMotion.addEventListener("change", () => {
+        autoplayButton.hidden = reducedMotion.matches;
     });
 
     if ("IntersectionObserver" in window) {
@@ -79,13 +73,16 @@ if (featureSlider) {
         if (
             isVisible &&
             !document.hidden &&
-            !isHovered &&
-            !hasFocus &&
+            !isPaused &&
+            !(
+                featureSlider.contains(document.activeElement) &&
+                document.activeElement.matches(":focus-visible")
+            ) &&
             !reducedMotion.matches
         ) {
             moveSlide(1);
         }
-    }, 6500);
+    }, 4500);
 
     featureSlider.classList.add("is-ready");
 }
