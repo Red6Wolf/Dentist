@@ -10,8 +10,9 @@
     --text: #2D211C;
     --muted: #75665E;
     --line: #E6D7C9;
-    --mono: 'DM Mono',monospace;
-    --sans: Manrope,Arial,sans-serif;
+    --label: Montserrat, Arial, sans-serif;
+    --display: Montserrat, Arial, sans-serif;
+    --sans: Manrope, Arial, sans-serif;
 }
 
 * {
@@ -28,6 +29,14 @@ body {
     background: #F3E7DC;
     color: var(--text);
     font-family: var(--sans);
+}
+
+h1,
+h2,
+h3,
+.brand-name,
+.big-logo {
+    font-family: var(--display);
 }
 
 a {
@@ -93,7 +102,7 @@ main:focus {
 }
 
 .micro {
-    font: 11px var(--mono);
+    font: 500 11px var(--label);
     letter-spacing: .08em;
     text-transform: uppercase;
     color: var(--muted);
@@ -110,7 +119,7 @@ main:focus {
     min-height: 620px;
     position: relative;
     color: white;
-    background: #5B473C url('../assets/clinic/consultation.jpeg') center 42%/cover no-repeat;
+    background: #2b2826 url('../assets/clinic/hero-aligner.webp') center 50%/cover no-repeat;
 }
 
 .hero:before {
@@ -254,7 +263,7 @@ main:focus {
 }
 
 .hero h1 {
-    font: 500 clamp(52px, 6.2vw, 98px)/1.02 var(--sans);
+    font: 500 clamp(52px, 6.2vw, 98px)/1.02 var(--display);
     letter-spacing: -.04em;
     margin: 0;
     max-width: 820px;
@@ -360,7 +369,7 @@ main:focus {
 }
 
 .intro h2 {
-    font: 600 clamp(27px,3.4vw,48px)/1.2 var(--sans);
+    font: 600 clamp(27px,3.4vw,48px)/1.2 var(--display);
     letter-spacing: -.055em;
     max-width: 940px;
     margin: 0 auto;
@@ -433,7 +442,7 @@ main:focus {
 }
 
 .section-head h2 {
-    font: 600 clamp(34px,4.1vw,59px)/1 var(--sans);
+    font: 600 clamp(34px,4.1vw,59px)/1 var(--display);
     letter-spacing: -.065em;
     margin: 9px 0 0;
 }
@@ -503,7 +512,7 @@ main:focus {
 }
 
 .service-row .num {
-    font: 10px var(--mono);
+    font: 500 11px var(--label);
     color: var(--muted);
 }
 
@@ -521,7 +530,7 @@ main:focus {
 }
 
 .price {
-    font: 11px var(--mono);
+    font: 500 11px var(--label);
     letter-spacing: .02em;
     white-space: nowrap;
 }
@@ -537,7 +546,7 @@ main:focus {
 }
 
 .service-extra {
-    font: 11px var(--mono);
+    font: 500 11px var(--label);
     color: var(--muted);
     text-transform: uppercase;
     margin-top: 17px;
@@ -586,7 +595,7 @@ main:focus {
 }
 
 .teamhead h2 {
-    font: 500 clamp(37px,5vw,64px)/1 var(--sans);
+    font: 500 clamp(37px,5vw,64px)/1 var(--display);
     letter-spacing: -.06em;
     margin: 12px 0;
 }
@@ -649,7 +658,7 @@ main:focus {
     position: absolute;
     bottom: 13px;
     left: 14px;
-    font: 11px var(--mono);
+    font: 500 11px var(--label);
     letter-spacing: .09em;
     color: var(--cream);
     padding: 5px 7px;
@@ -665,7 +674,7 @@ main:focus {
 }
 
 .doctor-role {
-    font: 12px var(--mono);
+    font: 500 12px var(--label);
     letter-spacing: .06em;
     text-transform: uppercase;
     color: #6B574B;
@@ -750,7 +759,7 @@ main:focus {
 
 .price-table td:last-child {
     text-align: right;
-    font: 12px var(--mono);
+    font: 500 12px var(--label);
     white-space: nowrap;
 }
 
@@ -783,7 +792,7 @@ main:focus {
 }
 
 .reviews-top a {
-    font: 11px var(--mono);
+    font: 500 11px var(--label);
     text-transform: uppercase;
 }
 
@@ -891,13 +900,13 @@ main:focus {
 
 .review-bottom small {
     display: block;
-    font: 11px var(--mono);
+    font: 500 11px var(--label);
     color: var(--muted);
     margin-top: 4px;
 }
 
 .review-bottom span {
-    font: 11px var(--mono);
+    font: 500 11px var(--label);
     color: var(--muted);
 }
 
@@ -1081,7 +1090,7 @@ main:focus {
     justify-content: space-between;
     gap: 15px;
     color: #EAC9B2;
-    font: 10px var(--mono);
+    font: 500 11px var(--label);
     text-transform: uppercase;
 }
 

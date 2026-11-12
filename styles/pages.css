@@ -33,7 +33,7 @@
     background: linear-gradient(90deg, rgba(43, 34, 29, .78), rgba(43, 34, 29, .22));
 }
 
-.subpage-hero > div { position: relative; z-index: 1; max-width: 760px; }
+.subpage-hero > div { position: relative; z-index: 1; max-width: 960px; }
 .subpage-hero .micro { color: #F5EDE6; }
 .subpage-hero h1 { margin: 18px 0 0; font-size: clamp(48px, 8vw, 104px); line-height: .95; letter-spacing: -.07em; }
 .subpage-hero p { max-width: 520px; margin: 22px 0 0; color: #F5EDE6; line-height: 1.7; font-size: 15px; }
@@ -48,10 +48,10 @@
 .service-catalog { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 34px; }
 .catalog-card { min-height: 240px; padding: 26px; border: 1px solid var(--line); border-radius: 18px; display: flex; flex-direction: column; background: var(--cream); transition: transform .2s ease, border-color .2s ease; }
 .catalog-card:hover { transform: translateY(-3px); border-color: var(--orange); }
-.catalog-card .catalog-number { color: var(--orange-deep); font: 12px var(--mono); }
+.catalog-card .catalog-number { color: var(--orange-deep); font: 500 12px var(--label); }
 .catalog-card h3 { margin: 42px 0 8px; font-size: 24px; letter-spacing: -.04em; }
 .catalog-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
-.catalog-card .catalog-price { margin-top: auto; padding-top: 22px; font: 12px var(--mono); color: var(--orange-deep); }
+.catalog-card .catalog-price { margin-top: auto; padding-top: 22px; font: 500 12px var(--label); color: var(--orange-deep); }
 
 .doctor-page-grid { margin-top: 32px; }
 .doctor-page-grid .doctor-photo { height: 320px; }
@@ -68,7 +68,7 @@
 .contact-panel { padding: 32px; border-radius: 18px; background: var(--sand); }
 .contact-panel h2 { margin: 0 0 25px; font-size: 28px; letter-spacing: -.045em; }
 .contact-panel dl { margin: 0; }
-.contact-panel dt { margin-top: 18px; color: var(--muted); font: 11px var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+.contact-panel dt { margin-top: 18px; color: var(--muted); font: 500 11px var(--label); text-transform: uppercase; letter-spacing: .08em; }
 .contact-panel dd { margin: 6px 0 0; line-height: 1.5; }
 .contact-layout .map-card { min-height: 390px; }
 
