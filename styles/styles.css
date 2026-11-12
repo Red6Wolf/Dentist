@@ -296,12 +296,11 @@ main:focus {
 }
 
 .roundbtn {
-    min-height: 44px;
+    height: 44px;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 9px;
-    padding: 0 16px;
+    flex: none;
+    overflow: hidden;
     background: var(--cream);
     color: var(--ink);
     border-radius: 999px;
@@ -310,16 +309,55 @@ main:focus {
     white-space: nowrap;
 }
 
-.roundbtn span:first-child {
-    width: 22px;
-    height: 22px;
+.call-icon {
+    flex: none;
+    width: 44px;
+    height: 44px;
     display: grid;
     place-items: center;
-    border-radius: 50%;
-    background: var(--orange);
-    color: var(--ink);
-    font-size: 12px;
-    line-height: 1;
+}
+
+.call-icon::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: var(--orange-deep);
+    mask: url('../assets/icons/phone.svg') center / contain no-repeat;
+}
+
+.call-label {
+    max-width: 0;
+    opacity: 0;
+    transition: max-width 280ms ease, opacity 180ms ease, padding 280ms ease;
+}
+
+.roundbtn:hover .call-label,
+.roundbtn:focus-visible .call-label {
+    max-width: 100px;
+    padding-right: 16px;
+    opacity: 1;
+}
+
+@media (hover: none) {
+    .roundbtn .call-label {
+        max-width: 100px;
+        padding-right: 16px;
+        opacity: 1;
+    }
+}
+
+.icon-arrow::after {
+    content: '';
+    display: block;
+    width: 17px;
+    height: 17px;
+    background: currentColor;
+    mask: url('../assets/icons/arrow-up-right.svg') center / contain no-repeat;
+}
+
+span.icon-arrow:not(.arrow) {
+    display: inline-flex;
+    vertical-align: -3px;
 }
 
 .pillbtn {
@@ -1229,6 +1267,12 @@ main:focus {
     .hero-side p {
         font-size: 13px;
         margin-bottom: 17px;
+    }
+
+    .roundbtn .call-label {
+        max-width: 100px;
+        padding-right: 16px;
+        opacity: 1;
     }
 
     .hero-bottom {

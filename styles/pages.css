@@ -62,7 +62,7 @@
 .story-grid .story-image { min-height: 360px; background: url('../assets/clinic/reception.jpeg') center/cover; }
 .feature-list { display: grid; gap: 10px; padding: 0; margin: 24px 0 0; list-style: none; }
 .feature-list li { padding: 14px 0 14px 30px; border-top: 1px solid var(--line); position: relative; }
-.feature-list li::before { content: '↗'; position: absolute; left: 0; color: var(--orange-deep); }
+.feature-list li::before { content: ''; position: absolute; left: 0; top: 17px; width: 16px; height: 16px; background: var(--orange-deep); mask: url('../assets/icons/arrow-up-right.svg') center / contain no-repeat; }
 
 .contact-layout { display: grid; grid-template-columns: .7fr 1.3fr; gap: 18px; }
 .contact-panel { padding: 32px; border-radius: 18px; background: var(--sand); }
