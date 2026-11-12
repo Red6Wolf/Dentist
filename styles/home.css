@@ -76,7 +76,7 @@
 .feature-description {
     max-width: 36ch;
     color: #fff6f0;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.5;
 }
 
@@ -85,7 +85,7 @@
     margin-top: 3px;
     border-bottom: 1px solid currentColor;
     padding-bottom: 4px;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 700;
 }
 
@@ -126,7 +126,7 @@
 
 .loc-copy .locbutton {
     margin-top: 27px;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .orange-scene {
@@ -312,7 +312,7 @@
     padding: 42px 16px 16px;
     background: linear-gradient(0deg, rgba(31, 22, 16, .75), transparent);
     color: #fff;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 700;
 }
 

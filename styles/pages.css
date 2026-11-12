@@ -48,10 +48,10 @@
 .service-catalog { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 34px; }
 .catalog-card { min-height: 240px; padding: 26px; border: 1px solid var(--line); border-radius: 18px; display: flex; flex-direction: column; background: var(--cream); transition: transform .2s ease, border-color .2s ease; }
 .catalog-card:hover { transform: translateY(-3px); border-color: var(--orange); }
-.catalog-card .catalog-number { color: var(--orange-deep); font: 500 12px var(--label); }
+.catalog-card .catalog-number { color: var(--orange-deep); font: 500 14px var(--label); }
 .catalog-card h3 { margin: 42px 0 8px; font-size: 24px; letter-spacing: -.04em; }
-.catalog-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
-.catalog-card .catalog-price { margin-top: auto; padding-top: 22px; font: 500 12px var(--label); color: var(--orange-deep); }
+.catalog-card p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
+.catalog-card .catalog-price { margin-top: auto; padding-top: 22px; font: 500 14px var(--label); color: var(--orange-deep); }
 
 .doctor-page-grid { margin-top: 32px; }
 .doctor-page-grid .doctor-photo { height: 320px; }
@@ -68,7 +68,7 @@
 .contact-panel { padding: 32px; border-radius: 18px; background: var(--sand); }
 .contact-panel h2 { margin: 0 0 25px; font-size: 28px; letter-spacing: -.045em; }
 .contact-panel dl { margin: 0; }
-.contact-panel dt { margin-top: 18px; color: var(--muted); font: 500 11px var(--label); text-transform: uppercase; letter-spacing: .08em; }
+.contact-panel dt { margin-top: 18px; color: var(--muted); font: 500 13px var(--label); text-transform: uppercase; letter-spacing: .08em; }
 .contact-panel dd { margin: 6px 0 0; line-height: 1.5; }
 .contact-layout .map-card { min-height: 390px; }
 
@@ -98,7 +98,7 @@
     border: 1px solid var(--line);
     border-radius: 999px;
     color: var(--text);
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
 }
 
@@ -228,7 +228,7 @@
 .full-price-table th {
     padding: 10px 8px;
     text-align: left;
-    font-size: 14px;
+    font-size: 15px;
     background: var(--sand);
 }
 
@@ -465,7 +465,7 @@
 @media (max-width: 700px) {
     .subpage-hero { min-height: 470px; padding: 130px 20px 44px; }
     .subpage-hero h1 { font-size: clamp(35px, 11vw, 68px); overflow-wrap: anywhere; }
-    .subpage-hero p { font-size: 13px; }
+    .subpage-hero p { font-size: 15px; }
     .subpage-section { padding: 48px 15px; }
     .service-catalog, .story-grid, .contact-layout { grid-template-columns: 1fr; }
     .catalog-card { min-height: 210px; }
