@@ -70,6 +70,13 @@
     line-height: 1.55;
 }
 
+.booking-dialog__doctor {
+    margin: 14px 0 0;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
 .booking-dialog__phone {
     display: flex;
     align-items: center;
@@ -86,7 +93,7 @@
 }
 
 .booking-dialog__phone:hover {
-    background: #a74d07;
+    background: var(--orange-action-hover);
 }
 
 .booking-dialog__phone strong {
@@ -157,8 +164,32 @@
     cursor: pointer;
 }
 
-.booking-dialog__submit:hover {
-    background: #a74d07;
+.booking-dialog__submit:not(:disabled):hover {
+    background: var(--orange-action-hover);
+}
+
+.booking-dialog__submit:disabled {
+    cursor: wait;
+    opacity: .72;
+}
+
+.booking-dialog__status {
+    margin: 2px 0 0;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.booking-dialog__status[data-state="error"] {
+    color: #a12717;
+}
+
+.booking-dialog__status[data-state="success"] {
+    color: #27613a;
+}
+
+.booking-dialog__doctor[hidden],
+.booking-dialog__status[hidden] {
+    display: none;
 }
 
 @keyframes booking-dialog-enter {

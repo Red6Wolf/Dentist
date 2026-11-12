@@ -1,4 +1,4 @@
-// Окно связи для кнопок записи. Сайт пока статический: заявка передаётся через почту пользователя.
+// Окно связи и отправка заявки администратору через сервер сайта.
 const bookingTriggers = document.querySelectorAll("[data-booking-dialog]");
 
 if (bookingTriggers.length > 0 && typeof HTMLDialogElement !== "undefined") {
@@ -23,9 +23,9 @@ if (bookingTriggers.length > 0 && typeof HTMLDialogElement !== "undefined") {
             <div class="booking-dialog__divider"><span>или</span></div>
             <h3>Попросить перезвонить</h3>
             <p class="booking-dialog__note">
-                После заполнения откроется письмо. Отправьте его,
-                чтобы администратор получил заявку.
+                Оставьте номер и удобное время. Администратор свяжется с вами.
             </p>
+            <p class="booking-dialog__doctor" hidden></p>
             <form class="booking-dialog__form">
                 <label>
                     Ваше имя
@@ -39,7 +39,8 @@ if (bookingTriggers.length > 0 && typeof HTMLDialogElement !== "undefined") {
                     Когда удобно позвонить
                     <input name="time" type="text" placeholder="Завтра после 16:00" required />
                 </label>
-                <button class="booking-dialog__submit" type="submit">Открыть письмо с заявкой</button>
+                <button class="booking-dialog__submit" type="submit">Отправить заявку</button>
+                <p class="booking-dialog__status" role="status" aria-live="polite" hidden></p>
             </form>
         </div>
     `;
@@ -47,7 +48,18 @@ if (bookingTriggers.length > 0 && typeof HTMLDialogElement !== "undefined") {
 
     const closeButton = dialog.querySelector(".booking-dialog__close");
     const form = dialog.querySelector(".booking-dialog__form");
+    const submitButton = dialog.querySelector(".booking-dialog__submit");
+    const status = dialog.querySelector(".booking-dialog__status");
+    const doctorNotice = dialog.querySelector(".booking-dialog__doctor");
     let activeTrigger = null;
+    let pendingRequest = null;
+
+    function showStatus(message, state) {
+        status.textContent = message;
+        status.dataset.state = state;
+        status.setAttribute("role", state === "error" ? "alert" : "status");
+        status.hidden = false;
+    }
 
     bookingTriggers.forEach((trigger) => {
         trigger.addEventListener("click", (event) => {
@@ -55,6 +67,12 @@ if (bookingTriggers.length > 0 && typeof HTMLDialogElement !== "undefined") {
 
             event.preventDefault();
             activeTrigger = trigger;
+            status.hidden = true;
+
+            const selectedDoctor = document.documentElement.dataset.selectedDoctor;
+            doctorNotice.textContent = selectedDoctor ? `Выбранный врач: ${selectedDoctor}` : "";
+            doctorNotice.hidden = !selectedDoctor;
+
             dialog.showModal();
             document.body.classList.add("booking-dialog-open");
         });
@@ -67,11 +85,12 @@ if (bookingTriggers.length > 0 && typeof HTMLDialogElement !== "undefined") {
     });
 
     dialog.addEventListener("close", () => {
+        pendingRequest?.abort();
         document.body.classList.remove("booking-dialog-open");
         activeTrigger?.focus();
     });
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         const fields = new FormData(form);
@@ -84,11 +103,55 @@ if (bookingTriggers.length > 0 && typeof HTMLDialogElement !== "undefined") {
             return;
         }
 
-        const subject = encodeURIComponent("Просьба перезвонить — сайт Апельсин");
-        const body = encodeURIComponent(
-            `Здравствуйте! Пожалуйста, перезвоните мне.\n\nИмя: ${name}\nТелефон: ${phone}\nУдобное время: ${time}`
-        );
+        submitButton.disabled = true;
+        submitButton.textContent = "Отправляем…";
+        status.hidden = true;
+        const request = new AbortController();
+        pendingRequest = request;
+        const timeout = window.setTimeout(() => request.abort(), 15000);
 
-        window.location.href = `mailto:info@stomatologiya-apelsin.ru?subject=${subject}&body=${body}`;
+        try {
+            const response = await fetch("/api/callback", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                signal: request.signal,
+                body: JSON.stringify({
+                    name,
+                    phone,
+                    time,
+                    doctor: document.documentElement.dataset.selectedDoctor || "",
+                }),
+            });
+            const result = await response.json().catch(() => ({
+                error: "Онлайн-заявка временно недоступна.",
+            }));
+
+            if (!response.ok) {
+                throw new Error(result.error || "Не удалось отправить заявку.");
+            }
+
+            showStatus("Заявка отправлена. Администратор свяжется с вами.", "success");
+            form.reset();
+        } catch (error) {
+            if (error.name === "AbortError" && !dialog.open) return;
+
+            let message = error.message;
+
+            if (error.name === "AbortError") {
+                message = "Сайт слишком долго не отвечает.";
+            } else if (error instanceof TypeError) {
+                message = "Не удалось связаться с сайтом.";
+            }
+
+            showStatus(
+                `${message} Позвоните нам по номеру +7 (499) 185-33-33.`,
+                "error"
+            );
+        } finally {
+            window.clearTimeout(timeout);
+            pendingRequest = null;
+            submitButton.disabled = false;
+            submitButton.textContent = "Отправить заявку";
+        }
     });
 }

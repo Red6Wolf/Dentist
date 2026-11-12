@@ -26,6 +26,12 @@ function hasScrollableParent(element) {
 }
 
 function animateScroll() {
+    if (document.querySelector("dialog[open]")) {
+        scrollFrame = 0;
+        scrollTarget = window.scrollY;
+        return;
+    }
+
     const distance = scrollTarget - window.scrollY;
 
     if (Math.abs(distance) < 0.5) {
@@ -44,6 +50,7 @@ window.addEventListener("wheel", (event) => {
     if (
         !desktopPointer.matches ||
         reducedMotion.matches ||
+        document.querySelector("dialog[open]") ||
         event.ctrlKey ||
         event.metaKey ||
         event.shiftKey ||

@@ -4,9 +4,14 @@
     --ink: #2D211C;
     --orange: #e4710f;
     --orange-action: #b95608;
+    --orange-action-hover: #a74d07;
     --orange-deep: #A94F20;
     --cream: #FFF9F2;
     --sand: #F8EDE2;
+    --page-bg: #F3E7DC;
+    --footer-bg: #3E3935;
+    --footer-text: #EAC9B2;
+    --hero-text: #F5EDE6;
     --text: #2D211C;
     --muted: #75665E;
     --line: #E6D7C9;
@@ -26,7 +31,7 @@ html {
 
 body {
     margin: 0;
-    background: #F3E7DC;
+    background: var(--page-bg);
     color: var(--text);
     font-family: var(--sans);
 }
@@ -108,14 +113,6 @@ button {
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
     }
 }
 
@@ -329,7 +326,7 @@ main:focus {
 }
 
 .navcta:hover {
-    background: #c75f08;
+    background: var(--orange-action-hover);
 }
 
 .hero-copy {
@@ -1106,7 +1103,7 @@ span.icon-arrow:not(.arrow) {
 }
 
 .call-box .micro {
-    color: #EAC9B2;
+    color: var(--footer-text);
 }
 
 .call-box p {
@@ -1179,7 +1176,7 @@ span.icon-arrow:not(.arrow) {
 }
 
 .footer {
-    background: #3E3935;
+    background: var(--footer-bg);
     color: var(--cream);
     padding: 42px 2.2% 18px;
 }
@@ -1192,7 +1189,7 @@ span.icon-arrow:not(.arrow) {
 }
 
 .foot-col .micro {
-    color: #EAC9B2;
+    color: var(--footer-text);
     margin-bottom: 13px;
     font-size: 15px;
 }
@@ -1264,7 +1261,7 @@ span.icon-arrow:not(.arrow) {
 .foot-end {
     border-top: 1px solid #ffffff25;
     padding-top: 12px;
-    color: #EAC9B2;
+    color: var(--footer-text);
     font: 500 15px var(--label);
 }
 
@@ -1272,7 +1269,12 @@ span.icon-arrow:not(.arrow) {
 
 @media(max-width:950px) {
     .navlinks {
-        display: none;
+        top: 50px;
+        left: 0;
+        right: 0;
+        justify-content: center;
+        width: 100%;
+        transform: none;
     }
 
     .services {
@@ -1315,7 +1317,7 @@ span.icon-arrow:not(.arrow) {
 
     .hero {
         height: calc(100svh - 4px);
-        min-height: 620px;
+        min-height: 540px;
         background-position: 58% center;
     }
 
@@ -1330,28 +1332,16 @@ span.icon-arrow:not(.arrow) {
     }
 
     .navlinks {
-        position: absolute;
-        top: 50px;
-        left: 0;
-        right: 0;
-        display: flex;
-        width: 100%;
-        overflow-x: auto;
-        padding: 0;
-        gap: 5px;
-        background: transparent;
-        scrollbar-width: none;
-        transform: none;
-    }
-
-    .navlinks::-webkit-scrollbar {
-        display: none;
+        display: grid;
+        grid-template-columns: repeat(3, max-content);
+        justify-content: center;
+        column-gap: 12px;
+        row-gap: 0;
     }
 
     .navlinks a {
-        flex: 0 0 auto;
         min-height: 44px;
-        padding: 0 9px;
+        padding: 0 2px;
         color: #fff;
         font-size: 15px;
     }
@@ -1506,15 +1496,15 @@ span.icon-arrow:not(.arrow) {
     }
 
     .service-row h3 {
-        font-size: 14px;
+        font-size: 17px;
     }
 
     .service-row p {
-        font-size: 13px;
+        font-size: 15px;
     }
 
     .price {
-        font-size: 13px;
+        font-size: 15px;
     }
 
 /* Команда клиники */
@@ -1558,12 +1548,12 @@ span.icon-arrow:not(.arrow) {
     }
 
     .price-table td {
-        font-size: 15px;
+        font-size: 16px;
         padding: 11px 0;
     }
 
     .price-table td:last-child {
-        font-size: 15px;
+        font-size: 16px;
     }
 
     .reviews {
@@ -1654,4 +1644,20 @@ span.icon-arrow:not(.arrow) {
         margin: 18px 0;
     }
 
+}
+
+@media (max-width: 360px) and (max-height: 640px) {
+    .hero-copy {
+        bottom: 73px;
+        gap: 12px;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero-side p {
+        margin-bottom: 12px;
+        font-size: 14px;
+    }
 }
