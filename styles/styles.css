@@ -858,11 +858,19 @@ span.icon-arrow:not(.arrow) {
     margin: 10px 0;
 }
 
+.price-intro .micro {
+    font-size: 15px;
+}
+
 .price-intro p {
     color: var(--muted);
-    font-size: 14px;
-    line-height: 1.7;
-    max-width: 260px;
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 290px;
+}
+
+.price-intro .locbutton {
+    font-size: 16px;
 }
 
 .price-table {
@@ -873,12 +881,14 @@ span.icon-arrow:not(.arrow) {
 .price-table td {
     padding: 13px 0;
     border-bottom: 1px solid var(--line);
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .price-table td:last-child {
     text-align: right;
-    font: 500 14px var(--label);
+    font: 500 16px var(--label);
+    font-variant-numeric: tabular-nums;
+    padding-left: 14px;
     white-space: nowrap;
 }
 
@@ -887,7 +897,7 @@ span.icon-arrow:not(.arrow) {
 }
 
 .price-note {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--muted);
     margin-top: 14px;
 }
@@ -1548,12 +1558,12 @@ span.icon-arrow:not(.arrow) {
     }
 
     .price-table td {
-        font-size: 13px;
+        font-size: 15px;
         padding: 11px 0;
     }
 
     .price-table td:last-child {
-        font-size: 14px;
+        font-size: 15px;
     }
 
     .reviews {
