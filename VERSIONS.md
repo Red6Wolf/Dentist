@@ -9,7 +9,8 @@
 | [`snapshot-03-map-slider`](https://github.com/Red6Wolf/Dentist/tree/snapshot-03-map-slider) | Карта Яндекса и карточки направлений | `9f8b97e` |
 | [`snapshot-04-clinic-doctors`](https://github.com/Red6Wolf/Dentist/tree/snapshot-04-clinic-doctors) | Обновлён блок клиники и раскрытие сведений о врачах | `5cdfc4f` |
 | [`snapshot-05-prices-carousel`](https://github.com/Red6Wolf/Dentist/tree/snapshot-05-prices-carousel) | Автоматический слайдер и понятные ссылки на прайс; быстрое вращение апельсина | `0b7d4ae` |
-| [`snapshot-06-slow-orange`](https://github.com/Red6Wolf/Dentist/tree/snapshot-06-slow-orange) | Спокойное вращение апельсина и сохранённая история версий | текущий коммит |
+| [`snapshot-06-slow-orange`](https://github.com/Red6Wolf/Dentist/tree/snapshot-06-slow-orange) | Спокойное вращение апельсина и сохранённая история версий | `74a79a7` |
+| [`snapshot-07-hero`](https://github.com/Red6Wolf/Dentist/tree/snapshot-07-hero) | Обновлён заголовок и расстояния на первом экране | текущий коммит |
 
 ## Как вернуться к прежней версии
 
