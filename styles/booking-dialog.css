@@ -1,0 +1,200 @@
+/* Окно выбора способа связи. */
+
+.booking-dialog-open {
+    overflow: hidden;
+}
+
+.booking-dialog {
+    width: min(580px, calc(100% - 32px));
+    max-height: calc(100dvh - 32px);
+    margin: auto;
+    padding: 0;
+    overflow-y: auto;
+    border: 0;
+    border-radius: 18px;
+    background: var(--cream);
+    color: var(--ink);
+    box-shadow: 0 24px 65px rgba(31, 22, 16, .28);
+}
+
+.booking-dialog[open] {
+    animation: booking-dialog-enter 280ms cubic-bezier(.16, 1, .3, 1);
+}
+
+.booking-dialog::backdrop {
+    background: rgba(28, 21, 17, .7);
+}
+
+.booking-dialog__content {
+    position: relative;
+    padding: 38px;
+}
+
+.booking-dialog__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+}
+
+.booking-dialog__close:hover {
+    background: var(--sand);
+}
+
+.booking-dialog__close svg {
+    width: 18px;
+    height: 18px;
+}
+
+.booking-dialog h2 {
+    max-width: 12ch;
+    margin: 0 48px 12px 0;
+    font-size: clamp(26px, 4vw, 36px);
+    line-height: 1.12;
+    letter-spacing: -.035em;
+}
+
+.booking-dialog__intro,
+.booking-dialog__note {
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.booking-dialog__phone {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 60px;
+    margin-top: 24px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    background: var(--orange-action);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.booking-dialog__phone:hover {
+    background: #a74d07;
+}
+
+.booking-dialog__phone strong {
+    white-space: nowrap;
+}
+
+.booking-dialog__divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 25px 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.booking-dialog__divider::before,
+.booking-dialog__divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+}
+
+.booking-dialog h3 {
+    margin: 0 0 8px;
+    font-size: 21px;
+    letter-spacing: -.025em;
+}
+
+.booking-dialog__form {
+    display: grid;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.booking-dialog__form label {
+    display: grid;
+    gap: 7px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.booking-dialog__form input {
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 12px;
+    border: 1px solid #b9a99c;
+    border-radius: 10px;
+    background: #fff;
+    color: var(--ink);
+    font: 500 16px var(--sans);
+}
+
+.booking-dialog__form input::placeholder {
+    color: #75665e;
+    opacity: 1;
+}
+
+.booking-dialog__submit {
+    min-height: 48px;
+    margin-top: 5px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--orange-action);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.booking-dialog__submit:hover {
+    background: #a74d07;
+}
+
+@keyframes booking-dialog-enter {
+    from { opacity: .4; transform: translateY(12px) scale(.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 650px) {
+    .booking-dialog__content {
+        padding: 24px 20px;
+    }
+
+    .booking-dialog__close {
+        top: 16px;
+        right: 16px;
+    }
+
+    .booking-dialog__phone {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 3px;
+        margin-top: 18px;
+    }
+
+    .booking-dialog__divider {
+        margin: 18px 0;
+    }
+
+    .booking-dialog__form {
+        gap: 11px;
+        margin-top: 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .booking-dialog[open] {
+        animation: none;
+    }
+}

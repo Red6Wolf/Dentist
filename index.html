@@ -17,6 +17,7 @@
     <link rel="canonical" href="https://stomatologiya-apelsin.ru/" />
     <link rel="preload" as="image" href="assets/clinic/hero-aligner.webp" />
     <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/booking-dialog.css" />
     <link rel="stylesheet" href="styles/pages.css" />
     <link rel="stylesheet" href="styles/home.css" />
     <script type="application/ld+json">
@@ -69,7 +70,7 @@
           </div>
           <div class="navright">
             <a class="navphone" href="tel:+74991853333">+7 (499) 185-33-33</a>
-            <a class="navcta" href="#booking">Записаться</a>
+            <a class="navcta" href="#booking" data-booking-dialog>Записаться</a>
           </div>
         </nav>
         <div class="hero-copy">
@@ -86,7 +87,7 @@
                 <span class="call-icon" aria-hidden="true"></span>
                 <span class="call-label">Позвонить</span>
               </a>
-              <a class="pillbtn" href="#booking">
+              <a class="pillbtn" href="#booking" data-booking-dialog>
                 Записаться на приём
                 <b class="icon-arrow" aria-hidden="true"></b>
               </a>
@@ -596,6 +597,7 @@
     </div>
     <script src="scripts/app.js" defer></script>
     <script src="scripts/scroll.js" defer></script>
+    <script src="scripts/booking-dialog.js" defer></script>
     <script src="scripts/home.js" defer></script>
   </body>
 </html>

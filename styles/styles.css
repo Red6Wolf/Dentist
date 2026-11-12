@@ -120,7 +120,7 @@ button {
 }
 
 .page {
-    width: min(1800px, calc(100% - 8px));
+    width: min(2400px, calc(50% + 900px), calc(100% - 8px));
     margin: 4px auto;
 }
 
@@ -1390,10 +1390,30 @@ span.icon-arrow:not(.arrow) {
         margin-bottom: 17px;
     }
 
-    .roundbtn .call-label {
-        max-width: 100px;
-        padding-right: 16px;
-        opacity: 1;
+    .hero-actions {
+        width: 100%;
+    }
+
+    .hero-actions .roundbtn {
+        width: 48px;
+        height: 48px;
+    }
+
+    .hero-actions .call-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .hero-actions .call-label {
+        display: none;
+    }
+
+    .hero-actions .pillbtn {
+        flex: 1;
+        justify-content: space-between;
+        min-height: 48px;
+        font-size: 14px;
+        white-space: nowrap;
     }
 
     .hero-bottom {
