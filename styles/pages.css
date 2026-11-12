@@ -406,7 +406,19 @@
 
 .gallery-photo {
     display: block;
+    min-width: 0;
+    padding: 0;
+    border: 0;
     border-radius: 12px;
+    background: var(--sand);
+    cursor: zoom-in;
+    transition: background-color 220ms ease;
+}
+
+.gallery-photo.is-expanded {
+    grid-column: 1 / -1;
+    padding: 16px;
+    cursor: zoom-out;
 }
 
 .gallery-photo img {
@@ -416,6 +428,12 @@
     object-fit: cover;
     border-radius: inherit;
     background: var(--sand);
+}
+
+.gallery-photo.is-expanded img {
+    max-height: 75vh;
+    aspect-ratio: auto;
+    object-fit: contain;
 }
 
 .document-facts {

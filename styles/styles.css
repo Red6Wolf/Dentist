@@ -151,17 +151,17 @@ main:focus {
 
 .brand-name {
     color: var(--orange);
-    font-size: 23px;
+    font-size: 28px;
     font-weight: 800;
     letter-spacing: -.055em;
 }
 
 .brand-caption {
     margin-top: 3px;
-    color: rgba(255, 249, 242, .72);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: .24em;
+    color: #FFF6EC;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .13em;
     text-transform: uppercase;
 }
 
@@ -1103,29 +1103,41 @@ span.icon-arrow:not(.arrow) {
 .foot-col .micro {
     color: #EAC9B2;
     margin-bottom: 13px;
+    font-size: 13px;
 }
 
 .foot-col a,.foot-col span {
     display: block;
-    font-size: 12px;
-    line-height: 2;
+    font-size: 15px;
+    line-height: 1.7;
     color: #F8EEE5;
 }
 
 .big-logo {
-    font-size: clamp(90px,22vw,290px);
+    display: flex;
+    align-items: center;
+    gap: .04em;
+    font-size: clamp(80px,18vw,240px);
     line-height: .8;
-    letter-spacing: -.09em;
+    letter-spacing: -.075em;
     font-weight: 600;
     margin: 15px 0 28px;
     white-space: nowrap;
+}
+
+.big-logo::before {
+    content: '';
+    flex: none;
+    width: .3em;
+    height: .3em;
+    background: url('../assets/icons/orange-slice.svg') center / contain no-repeat;
 }
 
 .foot-end {
     border-top: 1px solid #ffffff25;
     padding-top: 12px;
     color: #EAC9B2;
-    font: 500 11px var(--label);
+    font: 500 14px var(--label);
 }
 
 /* Планшеты */
@@ -1218,7 +1230,7 @@ span.icon-arrow:not(.arrow) {
     }
 
     .brand-name {
-        font-size: 20px;
+        font-size: 23px;
     }
 
     .brand-caption {
@@ -1480,7 +1492,7 @@ span.icon-arrow:not(.arrow) {
     }
 
     .big-logo {
-        font-size: 21vw;
+        font-size: clamp(48px, 15vw, 75px);
         margin: 18px 0;
     }
 
