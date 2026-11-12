@@ -199,20 +199,19 @@ main:focus {
     gap: 11px;
     width: max-content;
     min-height: 44px;
-    border-radius: 12px;
     transform-origin: left center;
-    transition: transform 240ms cubic-bezier(.16, 1, .3, 1), background-color 240ms ease;
+    transition: transform 260ms cubic-bezier(.16, 1, .3, 1);
 }
 
 .brand:hover,
 .brand:focus-visible {
-    transform: scale(1.055);
-    background-color: rgba(255, 249, 242, .08);
+    transform: translateY(-2px) scale(1.04);
 }
 
-.brand:hover .brand-name,
-.brand:focus-visible .brand-name {
-    color: #ff9b40;
+.brand:hover .brand-caption,
+.brand:focus-visible .brand-caption {
+    color: #fff;
+    transform: translateX(3px);
 }
 
 .brand-name {
@@ -220,7 +219,6 @@ main:focus {
     font-size: 28px;
     font-weight: 800;
     letter-spacing: -.055em;
-    transition: color 240ms ease;
 }
 
 .brand-caption {
@@ -230,6 +228,7 @@ main:focus {
     font-weight: 600;
     letter-spacing: .13em;
     text-transform: uppercase;
+    transition: color 260ms ease, transform 260ms cubic-bezier(.16, 1, .3, 1);
 }
 
 .navlinks {
