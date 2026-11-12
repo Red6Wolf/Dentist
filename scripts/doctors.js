@@ -5,15 +5,21 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 
 doctorDisclosures.forEach((details) => {
     const summary = details.querySelector("summary");
+    const content = details.querySelector("ul");
     let desiredOpen = details.open;
-    let currentAnimation = null;
+    let heightAnimation = null;
+    let contentAnimation = null;
 
     function finishImmediately(open) {
-        currentAnimation?.cancel();
-        currentAnimation = null;
+        heightAnimation?.cancel();
+        contentAnimation?.cancel();
+        heightAnimation = null;
+        contentAnimation = null;
         details.open = open;
+        details.classList.remove("is-closing");
         details.style.height = "";
         details.style.overflow = "";
+        content.style.opacity = "";
     }
 
     summary.addEventListener("click", (event) => {
@@ -26,29 +32,50 @@ doctorDisclosures.forEach((details) => {
         }
 
         const startHeight = details.getBoundingClientRect().height;
-        currentAnimation?.cancel();
+        heightAnimation?.cancel();
+        contentAnimation?.cancel();
 
         details.open = true;
+        details.classList.toggle("is-closing", !desiredOpen);
         details.style.height = `${startHeight}px`;
         details.style.overflow = "hidden";
 
-        const endHeight = desiredOpen ? details.scrollHeight : summary.offsetHeight;
+        const borderHeight = details.offsetHeight - details.clientHeight;
+        const endHeight = desiredOpen
+            ? details.scrollHeight + borderHeight
+            : summary.offsetHeight + borderHeight;
+
         const animation = details.animate(
             [
                 { height: `${startHeight}px` },
                 { height: `${endHeight}px` },
             ],
             {
-                duration: desiredOpen ? 380 : 280,
-                easing: "cubic-bezier(.16, 1, .3, 1)",
+                duration: desiredOpen ? 680 : 480,
+                easing: "cubic-bezier(.4, 0, .2, 1)",
             },
         );
 
-        currentAnimation = animation;
+        contentAnimation = content.animate(
+            desiredOpen
+                ? [{ opacity: 0 }, { opacity: 1 }]
+                : [{ opacity: 1 }, { opacity: 0 }],
+            {
+                duration: desiredOpen ? 460 : 240,
+                delay: desiredOpen ? 150 : 0,
+                easing: "ease-out",
+                fill: "forwards",
+            },
+        );
+
+        heightAnimation = animation;
         animation.onfinish = () => {
-            if (currentAnimation !== animation) return;
-            currentAnimation = null;
+            if (heightAnimation !== animation) return;
+            heightAnimation = null;
+            contentAnimation?.cancel();
+            contentAnimation = null;
             details.open = desiredOpen;
+            details.classList.remove("is-closing");
             details.style.height = "";
             details.style.overflow = "";
         };
