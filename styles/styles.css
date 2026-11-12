@@ -1121,6 +1121,13 @@ span.icon-arrow:not(.arrow) {
     white-space: nowrap;
 }
 
+.foot-end {
+    border-top: 1px solid #ffffff25;
+    padding-top: 12px;
+    color: #EAC9B2;
+    font: 500 11px var(--label);
+}
+
 /* Планшеты */
 
 @media(max-width:950px) {
