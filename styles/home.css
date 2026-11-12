@@ -89,63 +89,6 @@
     font-weight: 700;
 }
 
-.feature-controls {
-    position: absolute;
-    z-index: 2;
-    top: 18px;
-    right: 18px;
-    display: none;
-    align-items: center;
-    gap: 10px;
-    border-radius: 999px;
-    padding: 5px;
-    background: rgba(35, 26, 20, .82);
-    color: #fff;
-}
-
-.feature-slider.is-ready .feature-controls {
-    display: flex;
-}
-
-.feature-control {
-    width: 38px;
-    height: 38px;
-    border: 0;
-    border-radius: 50%;
-    background: transparent;
-    color: inherit;
-    cursor: pointer;
-    font-size: 20px;
-    transition: background-color 180ms ease;
-}
-
-.feature-control:hover,
-.feature-control:focus-visible {
-    background: var(--orange-deep);
-}
-
-.feature-counter {
-    min-width: 44px;
-    text-align: center;
-    font: 12px var(--mono);
-}
-
-.feature-autoplay {
-    min-height: 38px;
-    border: 0;
-    border-radius: 999px;
-    padding: 0 12px;
-    background: #fff7f0;
-    color: var(--ink);
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.feature-autoplay:hover {
-    background: #ffd8b4;
-}
-
 /* Короткий рассказ о клинике и живой апельсиновый срез. */
 
 .location-feature {
@@ -193,6 +136,10 @@
     justify-self: center;
 }
 
+.location-feature.reveal-visible .orange-scene {
+    animation: citrus-spin 16s linear infinite;
+}
+
 .orange-slice {
     position: absolute;
     top: 50%;
@@ -205,7 +152,7 @@
 
 .bubble {
     position: absolute;
-    width: clamp(76px, 9vw, 112px);
+    width: clamp(92px, 11vw, 138px);
     aspect-ratio: 1;
     border: 4px solid #f7ebe0;
     border-radius: 50%;
@@ -222,7 +169,7 @@
 
 .bubble.b2 {
     top: 13%;
-    right: -1%;
+    right: 1%;
     background-image: url('../assets/clinic/gallery-04.webp');
 }
 
@@ -239,25 +186,25 @@
 }
 
 .location-feature.reveal-visible .orange-slice {
-    animation:
-        citrus-unfold 950ms cubic-bezier(.16, 1, .3, 1) both,
-        citrus-drift 12s 950ms ease-in-out infinite alternate;
+    animation: citrus-unfold 950ms cubic-bezier(.16, 1, .3, 1) both;
 }
 
 .location-feature.reveal-visible .bubble {
-    animation: citrus-photo-arrive 700ms cubic-bezier(.16, 1, .3, 1) both;
+    animation:
+        citrus-photo-arrive 700ms cubic-bezier(.16, 1, .3, 1) both,
+        citrus-counterspin 16s linear infinite;
 }
 
 .location-feature.reveal-visible .b2 {
-    animation-delay: 120ms;
+    animation-delay: 120ms, 0ms;
 }
 
 .location-feature.reveal-visible .b3 {
-    animation-delay: 210ms;
+    animation-delay: 210ms, 0ms;
 }
 
 .location-feature.reveal-visible .b4 {
-    animation-delay: 300ms;
+    animation-delay: 300ms, 0ms;
 }
 
 @keyframes citrus-unfold {
@@ -272,13 +219,23 @@
     }
 }
 
-@keyframes citrus-drift {
+@keyframes citrus-spin {
     from {
-        transform: translate(-50%, -50%) rotate(-5deg);
+        transform: rotate(0);
     }
 
     to {
-        transform: translate(-50%, -50%) rotate(5deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes citrus-counterspin {
+    from {
+        rotate: 0deg;
+    }
+
+    to {
+        rotate: -360deg;
     }
 }
 
@@ -438,7 +395,7 @@
     }
 
     .bubble {
-        width: 72px;
+        width: 84px;
     }
 }
 
@@ -450,6 +407,10 @@
 
     .location-feature.reveal-visible .orange-slice,
     .location-feature.reveal-visible .bubble {
+        animation: none;
+    }
+
+    .location-feature.reveal-visible .orange-scene {
         animation: none;
     }
 }

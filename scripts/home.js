@@ -5,58 +5,53 @@ const featureSlider = document.querySelector(".feature-slider");
 
 if (featureSlider) {
     const slides = [...featureSlider.querySelectorAll(".feature-slide")];
-    const counter = featureSlider.querySelector(".feature-counter");
-    const previousButton = featureSlider.querySelector('[data-slide-direction="previous"]');
-    const nextButton = featureSlider.querySelector('[data-slide-direction="next"]');
-    const autoplayButton = featureSlider.querySelector(".feature-autoplay");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     let activeIndex = 0;
     let isVisible = false;
-    let isPaused = false;
+    let isHovered = false;
+    let hasFocus = false;
 
-    function showSlide(nextIndex, direction) {
+    function showNextSlide() {
+        const nextIndex = (activeIndex + 1) % slides.length;
         const incomingSlide = slides[nextIndex];
         const outgoingSlide = slides[activeIndex];
 
         if (incomingSlide === outgoingSlide) return;
 
         incomingSlide.classList.remove("is-active", "is-before");
-        incomingSlide.classList.toggle("is-before", direction < 0);
 
         // Фиксируем начальную сторону перед запуском CSS-перехода.
         incomingSlide.getBoundingClientRect();
 
         outgoingSlide.classList.remove("is-active");
-        outgoingSlide.classList.toggle("is-before", direction > 0);
+        outgoingSlide.classList.add("is-before");
         outgoingSlide.setAttribute("aria-hidden", "true");
         outgoingSlide.tabIndex = -1;
 
-        incomingSlide.classList.remove("is-before");
         incomingSlide.classList.add("is-active");
         incomingSlide.setAttribute("aria-hidden", "false");
         incomingSlide.removeAttribute("tabindex");
 
         activeIndex = nextIndex;
-        counter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
     }
 
-    function moveSlide(direction) {
-        const nextIndex = (activeIndex + direction + slides.length) % slides.length;
-        showSlide(nextIndex, direction);
-    }
-
-    previousButton.addEventListener("click", () => moveSlide(-1));
-    nextButton.addEventListener("click", () => moveSlide(1));
-
-    autoplayButton.addEventListener("click", () => {
-        isPaused = !isPaused;
-        autoplayButton.textContent = isPaused ? "Продолжить" : "Пауза";
+    featureSlider.addEventListener("pointerenter", (event) => {
+        if (event.pointerType === "mouse" || event.pointerType === "pen") {
+            isHovered = true;
+        }
     });
 
-    autoplayButton.hidden = reducedMotion.matches;
-    reducedMotion.addEventListener("change", () => {
-        autoplayButton.hidden = reducedMotion.matches;
+    featureSlider.addEventListener("pointerleave", () => {
+        isHovered = false;
+    });
+
+    featureSlider.addEventListener("focusin", () => {
+        hasFocus = true;
+    });
+
+    featureSlider.addEventListener("focusout", (event) => {
+        hasFocus = featureSlider.contains(event.relatedTarget);
     });
 
     if ("IntersectionObserver" in window) {
@@ -73,16 +68,11 @@ if (featureSlider) {
         if (
             isVisible &&
             !document.hidden &&
-            !isPaused &&
-            !(
-                featureSlider.contains(document.activeElement) &&
-                document.activeElement.matches(":focus-visible")
-            ) &&
+            !isHovered &&
+            !hasFocus &&
             !reducedMotion.matches
         ) {
-            moveSlide(1);
+            showNextSlide();
         }
-    }, 4500);
-
-    featureSlider.classList.add("is-ready");
+    }, 5000);
 }
