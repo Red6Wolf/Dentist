@@ -1,12 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 130" fill="none">
-  <path d="M56 45c-8-15-4-26 9-33 1 15-3 25-9 33ZM114 37c0-15 8-25 23-28-4 14-12 23-23 28Z" fill="#7E9962"/>
-  <path d="M56 45c15-12 29-11 40-2-15 6-28 6-40 2ZM114 37c-13-10-23-10-33-4 10 7 21 9 33 4Z" fill="#9CB67B"/>
-  <circle cx="49" cy="76" r="36" fill="#D9650B"/>
-  <circle cx="123" cy="70" r="40" fill="#EF7C19"/>
-  <path d="M25 73c6-20 19-30 34-30M95 64c7-19 21-29 39-30" stroke="#FFAD59" stroke-width="5" stroke-linecap="round"/>
-  <circle cx="84" cy="87" r="38" fill="#E4710F"/>
-  <circle cx="84" cy="87" r="32" fill="#FFE7CC"/>
-  <circle cx="84" cy="87" r="27" fill="#F79B45"/>
-  <path d="M84 60v54M57 87h54M65 68l38 38M103 68l-38 38" stroke="#FFE7CC" stroke-width="3.5"/>
-  <circle cx="84" cy="87" r="5" fill="#FFE7CC"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 155" fill="none">
+  <defs>
+    <g id="orange">
+      <circle r="26" fill="#E77A14"/>
+      <circle cx="-7" cy="-9" r="18" fill="#F6942B"/>
+      <path d="M-14-13c5-6 11-9 18-9" stroke="#FFC073" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="12" cy="8" r="2" fill="#F6AA51"/>
+      <circle cx="5" cy="15" r="1.5" fill="#F6AA51"/>
+      <circle cx="-16" cy="6" r="1.5" fill="#F6AA51"/>
+      <path d="M0-25c2-8 8-12 16-12-2 8-7 12-16 12Z" fill="#83A45F"/>
+      <path d="M0-25c-4-7-10-8-16-6 4 6 9 8 16 6Z" fill="#A8BD73"/>
+    </g>
+  </defs>
+  <use href="#orange" transform="translate(48 42) scale(.86)"/>
+  <use href="#orange" transform="translate(101 37) scale(.94)"/>
+  <use href="#orange" transform="translate(152 54) scale(.88)"/>
+  <use href="#orange" transform="translate(42 92) scale(.94)"/>
+  <use href="#orange" transform="translate(94 85) scale(1.05)"/>
+  <use href="#orange" transform="translate(145 102) scale(1.02)"/>
+  <use href="#orange" transform="translate(196 113) scale(.9)"/>
 </svg>
