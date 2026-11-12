@@ -66,7 +66,7 @@
 .booking-dialog__note {
     margin: 0;
     color: var(--muted);
-    font-size: 15px;
+    font-size: 17px;
     line-height: 1.55;
 }
 
@@ -81,7 +81,7 @@
     border-radius: 12px;
     background: var(--orange-action);
     color: #fff;
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 700;
 }
 
@@ -99,7 +99,7 @@
     gap: 14px;
     margin: 25px 0;
     color: var(--muted);
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .booking-dialog__divider::before,
@@ -125,7 +125,7 @@
 .booking-dialog__form label {
     display: grid;
     gap: 7px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
 }
 
@@ -137,7 +137,7 @@
     border-radius: 10px;
     background: #fff;
     color: var(--ink);
-    font: 500 16px var(--sans);
+    font: 500 17px var(--sans);
 }
 
 .booking-dialog__form input::placeholder {
@@ -152,7 +152,7 @@
     border-radius: 10px;
     background: var(--orange-action);
     color: #fff;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     cursor: pointer;
 }
