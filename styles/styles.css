@@ -44,6 +44,58 @@ a {
     text-decoration: none;
 }
 
+/* Текстовые ссылки слегка приближаются при наведении и фокусе. */
+.navlinks a,
+.navphone,
+.foot-col a,
+.content-link,
+.review-source-links a,
+.review-quotes a,
+.service-extra a,
+.feature-open {
+    transform-origin: left center;
+    transition: scale 180ms cubic-bezier(.16, 1, .3, 1);
+}
+
+.navphone,
+.content-link,
+.review-quotes a,
+.service-extra a {
+    display: inline-block;
+}
+
+.navlinks a:hover,
+.navlinks a:focus-visible,
+.navphone:hover,
+.navphone:focus-visible,
+.foot-col a:hover,
+.foot-col a:focus-visible,
+.content-link:hover,
+.content-link:focus-visible,
+.review-source-links a:hover,
+.review-source-links a:focus-visible,
+.review-quotes a:hover,
+.review-quotes a:focus-visible,
+.service-extra a:hover,
+.service-extra a:focus-visible,
+.feature-slide:hover .feature-open,
+.feature-slide:focus-visible .feature-open {
+    scale: 1.025;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .navlinks a,
+    .navphone,
+    .foot-col a,
+    .content-link,
+    .review-source-links a,
+    .review-quotes a,
+    .service-extra a,
+    .feature-open {
+        scale: none;
+    }
+}
+
 button {
     font: inherit;
 }
@@ -68,8 +120,8 @@ button {
 }
 
 .page {
-    width: min(1800px,calc(100% - 14px));
-    margin: 7px auto;
+    width: min(1800px, calc(100% - 8px));
+    margin: 4px auto;
 }
 
 .skip-link {
@@ -115,7 +167,7 @@ main:focus {
 /* Первый экран и навигация */
 
 .hero {
-    height: min(790px,92vh);
+    height: calc(100svh - 8px);
     min-height: 620px;
     position: relative;
     color: white;
@@ -150,15 +202,28 @@ main:focus {
 }
 
 .brand-name {
+    position: relative;
     color: var(--orange);
     font-size: 28px;
     font-weight: 800;
     letter-spacing: -.055em;
 }
 
+.brand-name::after {
+    content: '';
+    position: absolute;
+    right: 2%;
+    bottom: -5px;
+    left: 1%;
+    height: 3px;
+    border-radius: 50%;
+    background: #FFCA90;
+    transform: rotate(-1deg);
+}
+
 .brand-caption {
     margin-top: 3px;
-    color: #FFF6EC;
+    color: rgba(255, 249, 242, .8);
     font-size: 12px;
     font-weight: 600;
     letter-spacing: .13em;
@@ -1113,11 +1178,34 @@ span.icon-arrow:not(.arrow) {
     color: #F8EEE5;
 }
 
+.foot-col a {
+    position: relative;
+    width: fit-content;
+}
+
+.foot-col a::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 1px;
+    left: 0;
+    height: 2px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 220ms ease;
+}
+
+.foot-col a:hover::after,
+.foot-col a:focus-visible::after {
+    transform: scaleX(1);
+}
+
 .big-logo {
     display: flex;
     align-items: center;
     gap: .04em;
-    font-size: clamp(80px,18vw,240px);
+    font-size: clamp(80px,17vw,220px);
     line-height: .8;
     letter-spacing: -.075em;
     font-weight: 600;
@@ -1128,9 +1216,9 @@ span.icon-arrow:not(.arrow) {
 .big-logo::before {
     content: '';
     flex: none;
-    width: .3em;
-    height: .3em;
-    background: url('../assets/icons/orange-slice.svg') center / contain no-repeat;
+    width: .58em;
+    height: .45em;
+    background: url('../assets/icons/orange-cluster.svg') center / contain no-repeat;
 }
 
 .foot-end {
@@ -1174,8 +1262,8 @@ span.icon-arrow:not(.arrow) {
         grid-template-columns: 1fr;
     }
     .page {
-        width: calc(100% - 8px);
-        margin: 4px auto;
+        width: calc(100% - 4px);
+        margin: 2px auto;
     }
 
     .panel {
@@ -1186,8 +1274,7 @@ span.icon-arrow:not(.arrow) {
 /* Первый экран и навигация */
 
     .hero {
-        height: 760px;
-        height: calc(100svh - 8px);
+        height: calc(100svh - 4px);
         min-height: 620px;
         background-position: 58% center;
     }
