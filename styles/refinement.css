@@ -1,0 +1,351 @@
+/* Спокойная визуальная система для всех страниц клиники. */
+
+:root {
+    --ink: #25302b;
+    --text: #25302b;
+    --muted: #58645e;
+    --cream: #fcfcf9;
+    --sand: #f1f4ef;
+    --page-bg: #e9ede8;
+    --footer-bg: #293630;
+    --footer-text: #e4ebe4;
+    --line: #dce3dc;
+    --surface-raised: #ffffff;
+    --shadow-card: 0 14px 36px rgba(29, 50, 38, .06);
+    --space-1: 8px;
+    --space-2: 16px;
+    --space-3: 24px;
+    --space-4: 32px;
+    --space-5: 48px;
+    --space-6: 64px;
+    --radius-card: 20px;
+}
+
+.page {
+    width: min(2400px, calc(50% + 900px), calc(100% - 12px));
+    margin: 6px auto;
+}
+
+.panel {
+    margin-bottom: var(--space-1);
+    border-radius: var(--radius-card);
+}
+
+.section,
+.price-section,
+.reviews,
+.intro,
+.team,
+.subpage-section {
+    padding-top: var(--space-6);
+    padding-bottom: var(--space-6);
+}
+
+.section,
+.price-section,
+.reviews,
+.intro,
+.team {
+    padding-right: clamp(24px, 4vw, 72px);
+    padding-left: clamp(24px, 4vw, 72px);
+}
+
+.subpage-section {
+    padding-right: clamp(24px, 5vw, 88px);
+    padding-left: clamp(24px, 5vw, 88px);
+}
+
+.micro {
+    font-size: 14px;
+    letter-spacing: .065em;
+}
+
+.section-head {
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+}
+
+.section-head h2,
+.price-intro h2,
+.reviews-top h2,
+.subpage-section h2 {
+    font-weight: 650;
+    line-height: 1.08;
+    letter-spacing: -.045em;
+}
+
+.section-head p,
+.subpage-lead,
+.price-intro p,
+.loc-copy p {
+    font-size: clamp(16px, 1.15vw, 19px);
+    line-height: 1.65;
+}
+
+.subpage-hero p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Цены и услуги читаются как списки, без декоративного шума. */
+
+.service-row {
+    min-height: 82px;
+    gap: var(--space-2);
+    padding: 16px 0;
+}
+
+.service-row h3 {
+    font-size: 17px;
+    line-height: 1.3;
+}
+
+.service-row p,
+.service-row .price {
+    font-size: 15px;
+    line-height: 1.45;
+}
+
+.service-row:hover h3,
+.service-row:hover .arrow {
+    color: var(--ink);
+}
+
+.service-row:hover .arrow {
+    border-color: var(--line);
+    background: var(--sand);
+}
+
+.price-table td {
+    padding: 16px 0;
+    font-size: 16px;
+    line-height: 1.45;
+}
+
+.price-table td:last-child {
+    font-size: 16px;
+    font-weight: 650;
+}
+
+.catalog-card,
+.profile-card,
+.review-quotes figure,
+.review,
+.story-grid > div,
+.contact-panel {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    background: var(--surface-raised);
+    box-shadow: var(--shadow-card);
+}
+
+.service-catalog,
+.profiles,
+.review-quotes,
+.review-grid {
+    gap: var(--space-2);
+}
+
+.catalog-card,
+.profile-card,
+.review-quotes figure,
+.review {
+    padding: var(--space-4);
+}
+
+.catalog-card {
+    min-height: 220px;
+}
+
+.catalog-card h3 {
+    margin-top: var(--space-4);
+    font-size: clamp(21px, 2vw, 26px);
+    line-height: 1.2;
+}
+
+.catalog-card p,
+.story-grid p {
+    font-size: 16px;
+}
+
+.catalog-card .catalog-price {
+    color: var(--ink);
+    font-weight: 650;
+}
+
+.catalog-card:hover,
+.profile-card:hover,
+.review-quotes figure:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 42px rgba(29, 50, 38, .1);
+}
+
+.catalog-card,
+.profile-card,
+.review-quotes figure {
+    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.profile-card:focus-within,
+.catalog-card:focus-visible {
+    border-color: var(--orange-action);
+}
+
+.profile-heading h3 {
+    letter-spacing: -.025em;
+}
+
+.profile-heading p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.profile-details > summary {
+    min-height: 56px;
+    font-weight: 650;
+}
+
+.review-quotes blockquote {
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.6;
+}
+
+.review-quotes figcaption {
+    font-size: 15px;
+}
+
+.reviews {
+    background: var(--sand);
+}
+
+/* Кнопки сохраняют один акцент и видимый фокус с клавиатуры. */
+
+.navcta,
+.pillbtn,
+.roundbtn,
+.locbutton,
+.all-link,
+.booking-dialog__phone {
+    transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+}
+
+.navcta:hover,
+.pillbtn:hover,
+.roundbtn:hover,
+.locbutton:hover,
+.all-link:hover,
+.booking-dialog__phone:hover {
+    transform: translateY(-3px) scale(1.06);
+    box-shadow: 0 10px 22px rgba(34, 48, 41, .12);
+}
+
+.navcta:hover {
+    transform: translateY(-2px) scale(1.05);
+}
+
+.navcta:active,
+.pillbtn:active,
+.roundbtn:active,
+.locbutton:active,
+.all-link:active,
+.booking-dialog__phone:active {
+    transform: translateY(0) scale(.985);
+}
+
+.booking-dialog {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    box-shadow: 0 28px 70px rgba(22, 36, 27, .22);
+}
+
+.booking-dialog__content {
+    padding: var(--space-5);
+}
+
+.booking-dialog__close {
+    width: 44px;
+    height: 44px;
+}
+
+@media (max-width: 950px) {
+    .section,
+    .price-section,
+    .reviews,
+    .intro,
+    .team,
+    .subpage-section {
+        padding-top: var(--space-5);
+        padding-bottom: var(--space-5);
+    }
+
+    .section,
+    .price-section,
+    .reviews,
+    .intro,
+    .team,
+    .subpage-section {
+        padding-right: var(--space-4);
+        padding-left: var(--space-4);
+    }
+
+    .services,
+    .price-section {
+        gap: var(--space-3);
+    }
+}
+
+@media (max-width: 650px) {
+    .page {
+        width: calc(100% - 4px);
+        margin: 2px auto;
+    }
+
+    .panel {
+        margin-bottom: 5px;
+        border-radius: 16px;
+    }
+
+    .section,
+    .price-section,
+    .reviews,
+    .intro,
+    .team,
+    .subpage-section {
+        padding: 40px 18px;
+    }
+
+    .section-head {
+        gap: var(--space-2);
+        margin-bottom: var(--space-3);
+    }
+
+    .service-row {
+        min-height: 0;
+    }
+
+    .catalog-card,
+    .profile-card,
+    .review-quotes figure,
+    .review {
+        padding: var(--space-3);
+    }
+
+    .booking-dialog__content {
+        padding: 32px 24px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .catalog-card,
+    .profile-card,
+    .review-quotes figure,
+    .navcta,
+    .pillbtn,
+    .roundbtn,
+    .locbutton,
+    .all-link,
+    .booking-dialog__phone {
+        transition: none;
+        transform: none;
+    }
+}

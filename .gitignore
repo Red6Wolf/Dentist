@@ -24,3 +24,7 @@ dist/
 build/
 # Local design audit cache
 .impeccable/hook.cache.json
+
+# Локально установленные навыки и результаты их визуальной проверки
+.agents/skills/
+.taste-skill/

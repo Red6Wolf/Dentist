@@ -22,7 +22,8 @@ if (galleryPhotos.length > 0 && typeof HTMLDialogElement !== "undefined") {
         const image = photo.querySelector("img");
         photo.setAttribute("aria-label", `Увеличить фото: ${image.alt}`);
 
-        photo.addEventListener("click", () => {
+        photo.addEventListener("click", (event) => {
+            event.preventDefault();
             activePhoto = photo;
             largeImage.src = image.src;
             largeImage.alt = image.alt;
