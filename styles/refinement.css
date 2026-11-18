@@ -1,20 +1,20 @@
-/* Единая светлая система: поверхности, ритм, шрифты и действия. */
+/* Тёплая система семейной клиники: поверхности, ритм, шрифты и действия. */
 
 :root {
-    --ink: #26312e;
-    --text: #26312e;
-    --muted: #56635e;
-    --cream: #fdfcf9;
-    --sand: #f3f5f1;
-    --page-bg: #e9ede9;
-    --surface-raised: #ffffff;
-    --line: #d7dfd8;
-    --footer-bg: #26312e;
-    --footer-text: #e3e9e3;
-    --orange: #a0533b;
-    --orange-deep: #7d4232;
-    --orange-action: #974a35;
-    --orange-action-hover: #7e3b2a;
+    --ink: #30251f;
+    --text: #30251f;
+    --muted: #66574e;
+    --cream: #fff7ed;
+    --sand: #f7e9d9;
+    --page-bg: #efe2d4;
+    --surface-raised: #fffaf4;
+    --line: #e4d2bf;
+    --footer-bg: #382e28;
+    --footer-text: #f1dcc8;
+    --orange: #e4710f;
+    --orange-deep: #a9470a;
+    --orange-action: #ad4b08;
+    --orange-action-hover: #8c3905;
     --display: "Golos Text", Arial, sans-serif;
     --label: "Golos Text", Arial, sans-serif;
     --sans: Manrope, Arial, sans-serif;
@@ -28,8 +28,8 @@
     --radius-small: 8px;
     --radius-card: 14px;
     --radius-section: 18px;
-    --shadow-card: 0 1px 2px rgba(30, 47, 38, .04),
-        0 16px 38px rgba(30, 47, 38, .045);
+    --shadow-card: 0 1px 2px rgba(70, 42, 24, .04),
+        0 16px 38px rgba(70, 42, 24, .045);
 }
 
 body {
@@ -131,6 +131,10 @@ body {
 }
 
 .brand-name {
+    color: var(--orange-action);
+}
+
+.brand-name {
     font-size: 27px;
     font-weight: 700;
     letter-spacing: -.055em;
@@ -189,7 +193,7 @@ body {
 }
 
 .hero-accent {
-    color: inherit;
+    color: var(--orange-action);
     text-shadow: none;
 }
 
@@ -207,6 +211,11 @@ body {
     font-size: 17px;
     line-height: 1.65;
     text-shadow: none;
+}
+
+.hero-side p,
+.subpage-hero p {
+    color: var(--ink);
 }
 
 .hero-actions {
