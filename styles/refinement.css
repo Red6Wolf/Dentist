@@ -1,34 +1,50 @@
-/* Спокойная визуальная система для всех страниц клиники. */
+/* Единая светлая система: поверхности, ритм, шрифты и действия. */
 
 :root {
-    --ink: #25302b;
-    --text: #25302b;
-    --muted: #58645e;
-    --cream: #fcfcf9;
-    --sand: #f1f4ef;
-    --page-bg: #e9ede8;
-    --footer-bg: #293630;
-    --footer-text: #e4ebe4;
-    --line: #dce3dc;
+    --ink: #26312e;
+    --text: #26312e;
+    --muted: #56635e;
+    --cream: #fdfcf9;
+    --sand: #f3f5f1;
+    --page-bg: #e9ede9;
     --surface-raised: #ffffff;
-    --shadow-card: 0 14px 36px rgba(29, 50, 38, .06);
+    --line: #d7dfd8;
+    --footer-bg: #26312e;
+    --footer-text: #e3e9e3;
+    --orange: #a0533b;
+    --orange-deep: #7d4232;
+    --orange-action: #974a35;
+    --orange-action-hover: #7e3b2a;
+    --display: "Golos Text", Arial, sans-serif;
+    --label: "Golos Text", Arial, sans-serif;
+    --sans: Manrope, Arial, sans-serif;
     --space-1: 8px;
     --space-2: 16px;
     --space-3: 24px;
     --space-4: 32px;
     --space-5: 48px;
     --space-6: 64px;
-    --radius-card: 20px;
+    --space-7: 88px;
+    --radius-small: 8px;
+    --radius-card: 14px;
+    --radius-section: 18px;
+    --shadow-card: 0 1px 2px rgba(30, 47, 38, .04),
+        0 16px 38px rgba(30, 47, 38, .045);
+}
+
+body {
+    background: var(--page-bg);
 }
 
 .page {
-    width: min(2400px, calc(50% + 900px), calc(100% - 12px));
+    width: min(1800px, calc(100% - 12px));
     margin: 6px auto;
 }
 
 .panel {
     margin-bottom: var(--space-1);
-    border-radius: var(--radius-card);
+    border-radius: var(--radius-section);
+    background: var(--cream);
 }
 
 .section,
@@ -37,39 +53,29 @@
 .intro,
 .team,
 .subpage-section {
-    padding-top: var(--space-6);
-    padding-bottom: var(--space-6);
-}
-
-.section,
-.price-section,
-.reviews,
-.intro,
-.team {
-    padding-right: clamp(24px, 4vw, 72px);
-    padding-left: clamp(24px, 4vw, 72px);
-}
-
-.subpage-section {
-    padding-right: clamp(24px, 5vw, 88px);
-    padding-left: clamp(24px, 5vw, 88px);
+    padding: var(--space-7) clamp(28px, 5vw, 92px);
 }
 
 .micro {
-    font-size: 14px;
-    letter-spacing: .065em;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .045em;
 }
 
-.section-head {
+.section-head,
+.reviews-top {
     gap: var(--space-4);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-5);
 }
 
 .section-head h2,
+.teamhead h2,
 .price-intro h2,
 .reviews-top h2,
-.subpage-section h2 {
-    font-weight: 650;
+.subpage-section h2,
+.contact-info h2 {
+    font-weight: 600;
     line-height: 1.08;
     letter-spacing: -.045em;
 }
@@ -77,55 +83,420 @@
 .section-head p,
 .subpage-lead,
 .price-intro p,
-.loc-copy p {
+.loc-copy p,
+.booking-form > p {
+    color: var(--muted);
     font-size: clamp(16px, 1.15vw, 19px);
+    line-height: 1.7;
+}
+
+.loc-copy p,
+.booking-form > p {
+    color: var(--ink);
+}
+
+/* Светлый первый экран с фотографией в собственной плоскости. */
+
+.hero {
+    min-height: 720px;
+    color: var(--ink);
+    background: var(--cream);
+}
+
+.hero::before {
+    top: 94px;
+    right: 24px;
+    bottom: 24px;
+    left: auto;
+    width: 48%;
+    border-radius: var(--radius-card);
+    background: url("../assets/clinic/hero-aligner.webp") center 50% / cover no-repeat;
+}
+
+.nav {
+    top: 0;
+    right: 0;
+    left: 0;
+    min-height: 74px;
+    padding: 0 clamp(20px, 3vw, 52px);
+    border-bottom: 1px solid var(--line);
+    background: var(--cream);
+}
+
+.brand-name,
+.navlinks a,
+.navphone {
+    color: var(--ink);
+    text-shadow: none;
+}
+
+.brand-name {
+    font-size: 27px;
+    font-weight: 700;
+    letter-spacing: -.055em;
+}
+
+.brand-caption {
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: .075em;
+}
+
+.brand:hover .brand-caption,
+.brand:focus-visible .brand-caption,
+.navlinks a:hover {
+    color: var(--ink);
+}
+
+.navlinks a {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.navphone {
+    font-size: 15px;
+    font-weight: 650;
+}
+
+.navcta,
+.locbutton,
+.booking-dialog__phone {
+    background: var(--orange-action);
+    color: #fff;
+}
+
+.navcta:hover,
+.locbutton:hover,
+.booking-dialog__phone:hover {
+    background: var(--orange-action-hover);
+}
+
+.hero-copy {
+    right: auto;
+    bottom: clamp(115px, 14vh, 168px);
+    left: clamp(32px, 5vw, 94px);
+    display: block;
+    width: min(43%, 660px);
+}
+
+.hero h1 {
+    max-width: 13ch;
+    color: var(--ink);
+    font-size: clamp(49px, 4.8vw, 78px);
+    font-weight: 500;
+    line-height: 1.06;
+    letter-spacing: -.045em;
+}
+
+.hero-accent {
+    color: inherit;
+    text-shadow: none;
+}
+
+.hero-side {
+    justify-self: start;
+    max-width: 480px;
+    margin-top: var(--space-4);
+    padding: 0;
+}
+
+.hero-side p {
+    max-width: 44ch;
+    margin-bottom: var(--space-3);
+    color: var(--muted);
+    font-size: 17px;
     line-height: 1.65;
+    text-shadow: none;
+}
+
+.hero-actions {
+    gap: 12px;
+}
+
+.roundbtn {
+    min-height: 48px;
+    border: 1px solid var(--line);
+    background: var(--surface-raised);
+}
+
+.call-icon::before {
+    background: var(--ink);
+}
+
+.pillbtn {
+    min-height: 48px;
+    padding-left: 22px;
+    background: var(--orange-action);
+    color: #fff;
+    font-size: 15px;
+}
+
+.pillbtn b,
+.all-link b,
+.team-cta b,
+.call-box .pillbtn b {
+    background: rgba(255, 255, 255, .16);
+    color: currentColor;
+}
+
+.hero-bottom {
+    bottom: 30px;
+    left: clamp(32px, 5vw, 94px);
+    color: var(--muted);
+}
+
+.hero-bottom .micro {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* Внутренние страницы используют тот же светлый каркас. */
+
+.subpage-hero {
+    min-height: 680px;
+    padding: 180px clamp(32px, 5vw, 94px) 90px;
+    color: var(--ink);
+    background: var(--cream);
+}
+
+.subpage-hero::before {
+    top: 94px;
+    right: 24px;
+    bottom: 24px;
+    left: auto;
+    width: 48%;
+    border-radius: var(--radius-card);
+    background: url("../assets/clinic/office.jpeg") center / cover no-repeat;
+}
+
+.subpage-hero--clinic::before {
+    background-image: url("../assets/clinic/gallery-09.webp");
+}
+
+.subpage-hero--contact::before {
+    background-image: url("../assets/clinic/gallery-20.webp");
+}
+
+.subpage-hero--doctors::before {
+    background-image: url("../assets/clinic/consultation.jpeg");
+}
+
+.subpage-hero--services::before {
+    background-image: url("../assets/clinic/gallery-04.webp");
+}
+
+.subpage-hero > div {
+    max-width: 43%;
+}
+
+.subpage-hero h1 {
+    font-size: clamp(52px, 6vw, 88px);
+    font-weight: 550;
+    line-height: 1.05;
+    letter-spacing: -.055em;
 }
 
 .subpage-hero p {
+    max-width: 45ch;
+    color: var(--muted);
     font-size: 18px;
-    line-height: 1.6;
+    line-height: 1.65;
 }
 
-/* Цены и услуги читаются как списки, без декоративного шума. */
+/* Ритм разделов и свободная сетка для фотографий. */
+
+.intro {
+    text-align: left;
+}
+
+.intro h2 {
+    max-width: 22ch;
+    margin-right: 0;
+    margin-left: 0;
+    font-size: clamp(32px, 3.5vw, 54px);
+    font-weight: 550;
+    line-height: 1.2;
+    letter-spacing: -.04em;
+}
+
+.intro h2 span {
+    color: var(--muted);
+}
+
+.facts {
+    margin-top: var(--space-6);
+}
+
+.services {
+    gap: var(--space-5);
+}
+
+.feature-slider,
+.doctor-photo,
+.booking-photo,
+.map-card,
+.contact-entrance {
+    border-radius: var(--radius-card);
+}
+
+.feature-slide img,
+.doctor-portrait {
+    transition: transform 280ms ease;
+}
+
+.feature-slide:not(.is-active) {
+    visibility: hidden;
+    transition: transform 560ms cubic-bezier(.16, 1, .3, 1),
+        opacity 430ms ease, visibility 0s 560ms;
+}
+
+.feature-slide.is-active {
+    visibility: visible;
+}
+
+.feature-slide::after {
+    display: none;
+}
+
+.feature-caption {
+    right: 18px;
+    bottom: 18px;
+    left: 18px;
+    width: calc(100% - 36px);
+    padding: var(--space-3);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-small);
+    background: var(--cream);
+    color: var(--ink);
+}
+
+.feature-title {
+    font-size: clamp(27px, 2.7vw, 38px);
+    line-height: 1.15;
+}
+
+.feature-description,
+.feature-open {
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.feature-slide:hover img,
+.doctor-card-link:hover .doctor-portrait {
+    transform: scale(1.025);
+}
+
+.location-feature {
+    padding: var(--space-7) clamp(28px, 5vw, 92px);
+    background: var(--sand);
+}
+
+.bubble {
+    border-color: var(--sand);
+    box-shadow: 0 2px 8px rgba(38, 49, 46, .1);
+}
+
+.loc-copy h2 {
+    font-weight: 550;
+    line-height: 1.1;
+}
+
+.loc-copy p {
+    color: var(--muted);
+}
+
+.teamhead {
+    margin-bottom: var(--space-5);
+}
+
+.teamgrid {
+    gap: var(--space-4) var(--space-3);
+}
+
+.doctor-photo {
+    background: var(--sand);
+}
+
+.doctor-photo::before {
+    display: none;
+}
+
+.doctor-name {
+    font-size: 16px;
+    font-weight: 650;
+}
+
+.doctor-role {
+    color: var(--muted);
+    font-size: 13px;
+    letter-spacing: .04em;
+}
+
+/* Прайс и списки: ровные строки и табличные цифры. */
 
 .service-row {
-    min-height: 82px;
+    min-height: 86px;
     gap: var(--space-2);
-    padding: 16px 0;
+    padding: 17px 0;
 }
 
 .service-row h3 {
     font-size: 17px;
-    line-height: 1.3;
+    line-height: 1.35;
 }
 
 .service-row p,
 .service-row .price {
     font-size: 15px;
-    line-height: 1.45;
+    line-height: 1.5;
 }
 
-.service-row:hover h3,
-.service-row:hover .arrow {
-    color: var(--ink);
+.price,
+.price-table td:last-child,
+.full-price-table td:last-child,
+.catalog-price {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
 }
 
-.service-row:hover .arrow {
-    border-color: var(--line);
-    background: var(--sand);
+.price-section {
+    gap: var(--space-6);
 }
 
 .price-table td {
-    padding: 16px 0;
+    padding: 18px 0;
     font-size: 16px;
     line-height: 1.45;
 }
 
 .price-table td:last-child {
+    font-family: var(--sans);
     font-size: 16px;
-    font-weight: 650;
+    font-weight: 700;
 }
+
+.price-note {
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.full-price-table td,
+.full-price-table th,
+.directory-list li {
+    font-size: 16px;
+    line-height: 1.55;
+}
+
+.directory-list li {
+    padding: 16px 0;
+}
+
+.directory-group > summary {
+    font-size: clamp(18px, 1.55vw, 22px);
+    line-height: 1.4;
+}
+
+/* Карточки и запись: тонкая рамка, мягкая глубина, ясный фокус. */
 
 .catalog-card,
 .profile-card,
@@ -143,7 +514,7 @@
 .profiles,
 .review-quotes,
 .review-grid {
-    gap: var(--space-2);
+    gap: var(--space-3);
 }
 
 .catalog-card,
@@ -154,30 +525,29 @@
 }
 
 .catalog-card {
-    min-height: 220px;
+    min-height: 230px;
 }
 
 .catalog-card h3 {
     margin-top: var(--space-4);
-    font-size: clamp(21px, 2vw, 26px);
-    line-height: 1.2;
+    font-size: 24px;
+    line-height: 1.25;
 }
 
 .catalog-card p,
-.story-grid p {
+.story-grid p,
+.profile-heading p {
+    color: var(--muted);
     font-size: 16px;
+    line-height: 1.6;
 }
 
-.catalog-card .catalog-price {
+.catalog-card .catalog-number,
+.catalog-card .catalog-price,
+.profile-links a,
+.review-quotes a,
+.content-link {
     color: var(--ink);
-    font-weight: 650;
-}
-
-.catalog-card:hover,
-.profile-card:hover,
-.review-quotes figure:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 18px 42px rgba(29, 50, 38, .1);
 }
 
 .catalog-card,
@@ -186,76 +556,100 @@
     transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
 }
 
+.subpage-section {
+    animation: none;
+}
+
+.catalog-card:hover,
+.profile-card:hover,
+.review-quotes figure:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(30, 47, 38, .05),
+        0 20px 44px rgba(30, 47, 38, .07);
+}
+
 .profile-card:focus-within,
 .catalog-card:focus-visible {
     border-color: var(--orange-action);
 }
 
-.profile-heading h3 {
-    letter-spacing: -.025em;
-}
-
-.profile-heading p {
-    font-size: 16px;
-    line-height: 1.5;
-}
-
 .profile-details > summary {
     min-height: 56px;
+    font-size: 17px;
     font-weight: 650;
 }
 
 .review-quotes blockquote {
-    font-size: clamp(17px, 1.5vw, 20px);
-    line-height: 1.6;
+    font-size: clamp(17px, 1.45vw, 20px);
+    line-height: 1.65;
 }
 
 .review-quotes figcaption {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .reviews {
     background: var(--sand);
 }
 
-/* Кнопки сохраняют один акцент и видимый фокус с клавиатуры. */
-
-.navcta,
-.pillbtn,
-.roundbtn,
-.locbutton,
-.all-link,
-.booking-dialog__phone {
-    transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+.booking {
+    gap: var(--space-4);
+    padding: var(--space-3);
 }
 
-.navcta:hover,
-.pillbtn:hover,
-.roundbtn:hover,
-.locbutton:hover,
-.all-link:hover,
-.booking-dialog__phone:hover {
-    transform: translateY(-3px) scale(1.06);
-    box-shadow: 0 10px 22px rgba(34, 48, 41, .12);
+.booking-photo::before {
+    display: none;
 }
 
-.navcta:hover {
-    transform: translateY(-2px) scale(1.05);
+.booking-photo > div {
+    right: 20px;
+    bottom: 20px;
+    left: 20px;
+    width: fit-content;
+    max-width: calc(100% - 40px);
+    padding: 18px 22px;
+    border-radius: var(--radius-small);
+    background: var(--cream);
+    color: var(--ink);
 }
 
-.navcta:active,
-.pillbtn:active,
-.roundbtn:active,
-.locbutton:active,
-.all-link:active,
-.booking-dialog__phone:active {
-    transform: translateY(0) scale(.985);
+.booking-photo .micro {
+    color: var(--muted);
+}
+
+.booking-photo h2 {
+    font-weight: 550;
+    line-height: 1.06;
+}
+
+.booking-form {
+    padding: var(--space-4);
+}
+
+.call-box {
+    margin-top: var(--space-2);
+    padding: var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    background: var(--sand);
+    color: var(--ink);
+}
+
+.call-box .pillbtn {
+    background: var(--orange-action);
+    color: #fff;
 }
 
 .booking-dialog {
     border: 1px solid var(--line);
     border-radius: var(--radius-card);
-    box-shadow: 0 28px 70px rgba(22, 36, 27, .22);
+    background: var(--cream);
+    box-shadow: 0 2px 10px rgba(30, 47, 38, .08),
+        0 28px 76px rgba(30, 47, 38, .16);
+}
+
+.booking-dialog::backdrop {
+    background: rgba(27, 39, 33, .48);
 }
 
 .booking-dialog__content {
@@ -267,6 +661,99 @@
     height: 44px;
 }
 
+.booking-dialog__phone {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Одно поведение для всех действий и клавиатурного фокуса. */
+
+.navcta,
+.pillbtn,
+.roundbtn,
+.locbutton,
+.all-link,
+.booking-dialog__phone {
+    transition: transform 220ms ease, background-color 220ms ease,
+        border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.navcta:hover,
+.pillbtn:hover,
+.roundbtn:hover,
+.locbutton:hover,
+.all-link:hover,
+.booking-dialog__phone:hover {
+    transform: translateY(-2px) scale(1.025);
+    box-shadow: 0 7px 16px rgba(38, 49, 46, .12);
+}
+
+.navcta:active,
+.pillbtn:active,
+.roundbtn:active,
+.locbutton:active,
+.all-link:active,
+.booking-dialog__phone:active {
+    transform: translateY(0) scale(.985);
+}
+
+:focus-visible {
+    outline: 3px solid var(--orange-action);
+    outline-offset: 3px;
+    box-shadow: none;
+}
+
+.reveal-pending,
+.reveal-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+}
+
+.footer {
+    padding: var(--space-6) clamp(28px, 5vw, 92px) var(--space-3);
+    background: var(--footer-bg);
+    color: var(--cream);
+}
+
+.foot-col a::after {
+    background: #f5f6f2;
+}
+
+.big-logo:hover,
+.big-logo:focus-visible {
+    color: var(--cream);
+}
+
+@media (max-width: 1180px) {
+    .nav {
+        min-height: 116px;
+        align-items: flex-start;
+        padding-top: 12px;
+    }
+
+    .navlinks {
+        top: 62px;
+    }
+
+    .navlinks a {
+        color: var(--ink);
+        font-size: 16px;
+    }
+
+    .hero::before,
+    .subpage-hero::before {
+        top: 132px;
+    }
+
+    .hero-copy {
+        bottom: 115px;
+    }
+
+    .hero h1 {
+        font-size: clamp(42px, 5vw, 62px);
+    }
+}
+
 @media (max-width: 950px) {
     .section,
     .price-section,
@@ -274,23 +761,28 @@
     .intro,
     .team,
     .subpage-section {
-        padding-top: var(--space-5);
-        padding-bottom: var(--space-5);
-    }
-
-    .section,
-    .price-section,
-    .reviews,
-    .intro,
-    .team,
-    .subpage-section {
-        padding-right: var(--space-4);
-        padding-left: var(--space-4);
+        padding: var(--space-6) var(--space-4);
     }
 
     .services,
     .price-section {
         gap: var(--space-3);
+    }
+
+    .services {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .feature-slider {
+        min-height: 420px;
+    }
+
+    .hero-copy {
+        width: 45%;
+    }
+
+    .hero h1 {
+        font-size: clamp(38px, 5vw, 54px);
     }
 }
 
@@ -302,7 +794,122 @@
 
     .panel {
         margin-bottom: 5px;
-        border-radius: 16px;
+        border-radius: 12px;
+    }
+
+    .nav {
+        min-height: 64px;
+        padding: 0 16px;
+        align-items: center;
+    }
+
+    .brand-name {
+        font-size: 22px;
+    }
+
+    .navcta {
+        min-height: 42px;
+        padding: 9px 15px;
+        font-size: 14px;
+    }
+
+    .mobile-menu-button {
+        border: 1px solid var(--line);
+        background: var(--ink);
+        box-shadow: 0 5px 16px rgba(30, 47, 38, .18);
+    }
+
+    .mobile-menu {
+        background: var(--ink);
+        box-shadow: 0 12px 30px rgba(30, 47, 38, .18);
+    }
+
+    .hero {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: 100svh;
+    }
+
+    .hero::before {
+        top: 76px;
+        right: 14px;
+        bottom: auto;
+        left: 14px;
+        width: auto;
+        height: min(30svh, 260px);
+        background-position: center 40%;
+    }
+
+    .hero-copy {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        left: auto;
+        display: block;
+        width: auto;
+        margin: calc(76px + min(30svh, 260px) + 30px) 20px 0;
+    }
+
+    .hero h1 {
+        max-width: 14ch;
+        font-size: clamp(36px, 9.2vw, 47px);
+        line-height: 1.08;
+    }
+
+    .hero-side {
+        max-width: none;
+        margin-top: var(--space-3);
+    }
+
+    .hero-side p {
+        max-width: 38ch;
+        margin-bottom: var(--space-3);
+        font-size: 15px;
+    }
+
+    .hero-actions .roundbtn,
+    .hero-actions .pillbtn {
+        min-height: 48px;
+    }
+
+    .hero-actions .pillbtn {
+        padding-left: 16px;
+        font-size: 13px;
+    }
+
+    .hero-bottom {
+        position: static;
+        margin-top: auto;
+        padding: var(--space-4) 20px 92px 88px;
+    }
+
+    .subpage-hero {
+        display: block;
+        min-height: min(78svh, 680px);
+        padding: calc(76px + min(30svh, 260px) + 30px) 20px 56px;
+    }
+
+    .subpage-hero::before {
+        top: 76px;
+        right: 14px;
+        bottom: auto;
+        left: 14px;
+        width: auto;
+        height: min(30svh, 260px);
+    }
+
+    .subpage-hero > div {
+        max-width: none;
+    }
+
+    .subpage-hero h1 {
+        margin-top: 0;
+        font-size: clamp(38px, 9.4vw, 55px);
+    }
+
+    .subpage-hero p {
+        font-size: 16px;
     }
 
     .section,
@@ -311,7 +918,11 @@
     .intro,
     .team,
     .subpage-section {
-        padding: 40px 18px;
+        padding: var(--space-5) 20px;
+    }
+
+    .intro h2 {
+        font-size: 28px;
     }
 
     .section-head {
@@ -319,8 +930,33 @@
         margin-bottom: var(--space-3);
     }
 
+    .services,
+    .teamgrid,
+    .review-quotes,
+    .profiles {
+        gap: var(--space-2);
+    }
+
+    .service-extra a,
+    .foot-col a,
+    .map-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+    }
+
+    .service-extra {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: var(--space-3);
+    }
+
     .service-row {
         min-height: 0;
+    }
+
+    .location-feature {
+        padding: var(--space-5) 20px;
     }
 
     .catalog-card,
@@ -330,8 +966,22 @@
         padding: var(--space-3);
     }
 
+    .booking {
+        gap: var(--space-2);
+        padding: var(--space-2);
+    }
+
+    .booking-form,
+    .call-box {
+        padding: var(--space-3);
+    }
+
     .booking-dialog__content {
-        padding: 32px 24px;
+        padding: var(--space-4) var(--space-3);
+    }
+
+    .footer {
+        padding: var(--space-5) 20px var(--space-3);
     }
 }
 
@@ -344,7 +994,9 @@
     .roundbtn,
     .locbutton,
     .all-link,
-    .booking-dialog__phone {
+    .booking-dialog__phone,
+    .feature-slide img,
+    .doctor-portrait {
         transition: none;
         transform: none;
     }
