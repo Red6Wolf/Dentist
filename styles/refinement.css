@@ -95,22 +95,21 @@ body {
     color: var(--ink);
 }
 
-/* Светлый первый экран с фотографией в собственной плоскости. */
+/* Фотография занимает весь первый экран; текст читается на затемнённом фоне. */
 
 .hero {
+    height: calc(100svh - 12px);
     min-height: 720px;
-    color: var(--ink);
-    background: var(--cream);
+    color: #fffaf4;
+    background: #30251f url("../assets/clinic/hero-aligner.webp") center 50% / cover no-repeat;
 }
 
 .hero::before {
-    top: 94px;
-    right: 24px;
-    bottom: 24px;
-    left: auto;
-    width: 48%;
-    border-radius: var(--radius-card);
-    background: url("../assets/clinic/hero-aligner.webp") center 50% / cover no-repeat;
+    inset: 0;
+    width: auto;
+    border-radius: inherit;
+    background: linear-gradient(90deg, rgba(35, 27, 22, .78), rgba(35, 27, 22, .37) 74%),
+        linear-gradient(0deg, rgba(35, 27, 22, .76), transparent 57%);
 }
 
 .nav {
@@ -123,6 +122,11 @@ body {
     background: var(--cream);
 }
 
+.hero .nav {
+    border-bottom: 0;
+    background: transparent;
+}
+
 .brand-name,
 .navlinks a,
 .navphone {
@@ -130,8 +134,14 @@ body {
     text-shadow: none;
 }
 
+.hero .navlinks a,
+.hero .navphone {
+    color: #fffaf4;
+    text-shadow: 0 1px 10px rgba(20, 14, 11, .35);
+}
+
 .brand-name {
-    color: var(--orange-action);
+    color: var(--orange);
 }
 
 .brand-name {
@@ -146,10 +156,20 @@ body {
     letter-spacing: .075em;
 }
 
+.hero .brand-caption {
+    color: rgba(255, 250, 244, .86);
+}
+
 .brand:hover .brand-caption,
 .brand:focus-visible .brand-caption,
 .navlinks a:hover {
     color: var(--ink);
+}
+
+.hero .brand:hover .brand-caption,
+.hero .brand:focus-visible .brand-caption,
+.hero .navlinks a:hover {
+    color: #fffaf4;
 }
 
 .navlinks a {
@@ -176,44 +196,45 @@ body {
 }
 
 .hero-copy {
-    right: auto;
-    bottom: clamp(115px, 14vh, 168px);
-    left: clamp(32px, 5vw, 94px);
-    display: block;
-    width: min(43%, 660px);
+    right: clamp(32px, 4vw, 72px);
+    bottom: clamp(88px, 10vh, 130px);
+    left: clamp(32px, 4vw, 72px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(270px, .65fr);
+    gap: clamp(24px, 4vw, 64px);
+    width: auto;
 }
 
 .hero h1 {
-    max-width: 13ch;
-    color: var(--ink);
-    font-size: clamp(49px, 4.8vw, 78px);
+    max-width: 820px;
+    color: #fffaf4;
+    font-size: clamp(52px, 6.2vw, 98px);
     font-weight: 500;
     line-height: 1.06;
     letter-spacing: -.045em;
 }
 
 .hero-accent {
-    color: var(--orange-action);
-    text-shadow: none;
+    color: var(--orange);
+    text-shadow: 0 2px 18px rgba(20, 14, 11, .35);
 }
 
 .hero-side {
-    justify-self: start;
-    max-width: 480px;
-    margin-top: var(--space-4);
-    padding: 0;
+    justify-self: end;
+    max-width: 360px;
+    margin-top: 0;
+    padding-bottom: 5px;
 }
 
 .hero-side p {
-    max-width: 44ch;
+    max-width: 36ch;
     margin-bottom: var(--space-3);
-    color: var(--muted);
+    color: #fffaf4;
     font-size: 17px;
     line-height: 1.65;
-    text-shadow: none;
+    text-shadow: 0 1px 10px rgba(20, 14, 11, .6);
 }
 
-.hero-side p,
 .subpage-hero p {
     color: var(--ink);
 }
@@ -250,12 +271,12 @@ body {
 
 .hero-bottom {
     bottom: 30px;
-    left: clamp(32px, 5vw, 94px);
-    color: var(--muted);
+    left: clamp(32px, 4vw, 72px);
+    color: #fffaf4;
 }
 
 .hero-bottom .micro {
-    color: var(--muted);
+    color: #fffaf4;
     font-size: 13px;
 }
 
@@ -750,7 +771,7 @@ body {
 }
 
 .hero-bottom a {
-    color: var(--orange-action);
+    color: #ffb56e;
     text-decoration: underline;
     text-underline-offset: 4px;
 }
@@ -830,17 +851,16 @@ body {
         font-size: 16px;
     }
 
-    .hero::before,
     .subpage-hero::before {
         top: 132px;
     }
 
     .hero-copy {
-        bottom: 115px;
+        bottom: 105px;
     }
 
     .hero h1 {
-        font-size: clamp(42px, 5vw, 62px);
+        font-size: clamp(48px, 5.5vw, 72px);
     }
 }
 
@@ -868,11 +888,21 @@ body {
     }
 
     .hero-copy {
-        width: 45%;
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-3);
     }
 
     .hero h1 {
-        font-size: clamp(38px, 5vw, 54px);
+        font-size: clamp(48px, 7vw, 68px);
+    }
+
+    .hero-side {
+        justify-self: start;
+        max-width: 540px;
+    }
+
+    .hero-side p {
+        max-width: 52ch;
     }
 }
 
@@ -891,6 +921,11 @@ body {
         min-height: 64px;
         padding: 0 16px;
         align-items: center;
+    }
+
+    .hero .nav {
+        min-height: 64px;
+        padding-top: 0;
     }
 
     .brand-name {
@@ -915,41 +950,39 @@ body {
     }
 
     .hero {
-        display: flex;
-        flex-direction: column;
-        height: auto;
+        display: block;
+        height: 100svh;
         min-height: 100svh;
+        background-position: 57% center;
     }
 
     .hero::before {
-        top: 76px;
-        right: 14px;
-        bottom: auto;
-        left: 14px;
+        inset: 0;
         width: auto;
-        height: min(30svh, 260px);
-        background-position: center 40%;
+        height: auto;
+        background: linear-gradient(90deg, rgba(35, 27, 22, .68), rgba(35, 27, 22, .25)),
+            linear-gradient(0deg, rgba(35, 27, 22, .87), transparent 78%);
     }
 
     .hero-copy {
-        position: relative;
-        right: auto;
-        bottom: auto;
-        left: auto;
-        display: block;
+        position: absolute;
+        right: 20px;
+        bottom: 100px;
+        left: 20px;
+        display: grid;
         width: auto;
-        margin: calc(76px + min(30svh, 260px) + 30px) 20px 0;
+        margin: 0;
     }
 
     .hero h1 {
-        max-width: 14ch;
-        font-size: clamp(36px, 9.2vw, 47px);
+        max-width: none;
+        font-size: clamp(38px, 9vw, 50px);
         line-height: 1.08;
     }
 
     .hero-side {
         max-width: none;
-        margin-top: var(--space-3);
+        margin-top: 0;
     }
 
     .hero-side p {
@@ -969,9 +1002,12 @@ body {
     }
 
     .hero-bottom {
-        position: static;
-        margin-top: auto;
-        padding: var(--space-4) 20px 92px 88px;
+        position: absolute;
+        right: 18px;
+        bottom: 18px;
+        left: 20px;
+        margin: 0;
+        padding: 0 0 0 68px;
     }
 
     .subpage-hero {
