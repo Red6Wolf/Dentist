@@ -4,6 +4,9 @@ function revealAnchor() {
 
     if (!target) return;
 
+    const priceGroup = target.closest("[data-price-group]");
+    if (priceGroup) priceGroup.hidden = false;
+
     const disclosure = target.closest("details") || target.querySelector(".profile-details");
     if (!disclosure) return;
     disclosure.open = true;
@@ -42,6 +45,9 @@ function enablePriceSearch(directory) {
     const introduction = section.querySelector(".price-introduction p");
     const directoryTitle = directory.querySelector("[data-directory-title]");
     const defaultPlaceholder = input.placeholder;
+    const moreButton = section.querySelector("[data-price-more]");
+    const anchorTarget = document.getElementById(window.location.hash.slice(1));
+    let showAllGroups = Boolean(anchorTarget?.closest("[data-price-group]"));
 
     const groups = [...directory.querySelectorAll("[data-price-group]")].map((group) => {
         const title = normalizeQuery(group.querySelector("summary strong").textContent);
@@ -67,7 +73,7 @@ function enablePriceSearch(directory) {
         const filtering = Boolean(terms.length || selectedPrices);
         let visibleCount = 0;
 
-        for (const group of groups) {
+        for (const [index, group] of groups.entries()) {
             let groupCount = 0;
 
             for (const section of group.sections) {
@@ -88,7 +94,7 @@ function enablePriceSearch(directory) {
                 groupCount += sectionCount;
             }
 
-            group.element.hidden = groupCount === 0;
+            group.element.hidden = groupCount === 0 || (!filtering && !showAllGroups && index >= 5);
             group.element.open = filtering ? groupCount > 0 : group.initiallyOpen;
             visibleCount += groupCount;
         }
@@ -96,7 +102,7 @@ function enablePriceSearch(directory) {
         const serviceName = selectedPrices ? service.querySelector("span").textContent : "";
         const countLabel = filtering ? `Найдено позиций: ${visibleCount}.` : "";
         const result = visibleCount ? countLabel : "Ничего не нашли. Попробуйте другое слово или позвоните нам.";
-        directoryTitle.textContent = serviceName || (query ? "Результаты поиска" : "Все направления");
+        directoryTitle.textContent = serviceName || (query ? "Результаты поиска" : "Направления");
         directoryTitle.hidden = visibleCount === 0;
         input.placeholder = serviceName ? "Поиск в выбранном направлении" : defaultPlaceholder;
         introduction.hidden = filtering;
@@ -104,7 +110,15 @@ function enablePriceSearch(directory) {
         status.textContent = result;
         clearButton.textContent = selectedPrices ? "Посмотреть все цены" : "Очистить поиск";
         clearButton.hidden = !filtering;
+        moreButton.hidden = filtering;
+        moreButton.textContent = showAllGroups ? "Свернуть направления" : "Показать все направления";
+        moreButton.setAttribute("aria-expanded", String(showAllGroups));
     }
+
+    moreButton.addEventListener("click", () => {
+        showAllGroups = !showAllGroups;
+        filterPrices();
+    });
 
     input.addEventListener("input", filterPrices);
     clearButton.addEventListener("click", () => {
