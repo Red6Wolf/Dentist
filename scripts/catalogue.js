@@ -39,17 +39,12 @@ function enablePriceSearch(directory) {
         : null;
 
     const section = directory.closest("#prices");
-    const firstVisit = section.querySelector("[data-first-visit]");
     const introduction = section.querySelector(".price-introduction p");
     const directoryTitle = directory.querySelector("[data-directory-title]");
     const defaultPlaceholder = input.placeholder;
 
-    firstVisit.querySelectorAll("[data-amount-from]").forEach((amount) => {
-        amount.textContent = document.getElementById(amount.dataset.amountFrom).cells[1].textContent;
-    });
-
     const groups = [...directory.querySelectorAll("[data-price-group]")].map((group) => {
-        const title = normalizeQuery(group.querySelector("summary").textContent);
+        const title = normalizeQuery(group.querySelector("summary strong").textContent);
         const originalTitle = normalizeQuery(group.querySelector("table").getAttribute("aria-label"));
         const sections = [...group.querySelectorAll("tbody")].map((section) => {
             const heading = section.querySelector("[data-price-subgroup]")?.textContent ?? "";
@@ -106,7 +101,6 @@ function enablePriceSearch(directory) {
         input.placeholder = serviceName ? "Поиск в выбранном направлении" : defaultPlaceholder;
         introduction.hidden = filtering;
         section.classList.toggle("price-filtered", filtering);
-        firstVisit.hidden = filtering;
         status.textContent = result;
         clearButton.textContent = selectedPrices ? "Посмотреть все цены" : "Очистить поиск";
         clearButton.hidden = !filtering;

@@ -450,25 +450,17 @@
             <p>Выберите направление или введите название процедуры.</p>
           </div>
           <div class="price-controls" data-price-controls hidden>
-            <label for="price-search">Какую услугу вы ищете?</label>
+            <label for="price-search">Найти услугу</label>
             <div class="price-search">
-              <input id="price-search" type="search" placeholder="Например, чистка зубов" />
+              <input id="price-search" type="search" placeholder="Например, пломба или снимок" />
             </div>
             <button type="button" class="price-reset" data-price-clear hidden>Очистить поиск</button>
             <p data-price-status role="status"></p>
           </div>
-          <aside class="first-visit" data-first-visit hidden>
-            <h3>Первый визит</h3>
-            <dl>
-              <div><dt>Приём стоматолога-терапевта</dt><dd data-amount-from="p01-01"></dd></div>
-              <div><dt>Приём детского стоматолога</dt><dd data-amount-from="p01-03"></dd></div>
-              <div><dt>Приём ортодонта</dt><dd data-amount-from="p01-05"></dd></div>
-            </dl>
-          </aside>
           <div class="directory" data-price-directory>
             <h3 data-directory-title>Все направления</h3>
             <details class="directory-group" data-price-group>
-                <summary>Приём и снимки</summary>
+                <summary><span><strong>Приём и снимки</strong><small>Консультации, осмотр и диагностика</small></span></summary>
                 <table class="price-table full-price-table" aria-label="Общие">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
@@ -532,7 +524,7 @@
                 </table>
             </details>
             <details class="directory-group" data-price-group>
-                <summary>Чистка и профилактика</summary>
+                <summary><span><strong>Чистка и профилактика</strong><small>Гигиена и профилактические процедуры</small></span></summary>
                 <table class="price-table full-price-table" aria-label="Профилактика стоматологических заболеваний">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
@@ -596,7 +588,7 @@
                 </table>
             </details>
             <details class="directory-group" data-price-group>
-                <summary>Лечение зубов — терапия</summary>
+                <summary><span><strong>Лечение зубов — терапия</strong><small>Кариес и восстановление зубов</small></span></summary>
                 <table class="price-table full-price-table" aria-label="Терапия">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
@@ -656,7 +648,7 @@
                 </table>
             </details>
             <details class="directory-group" data-price-group>
-                <summary>Лечение каналов — эндодонтия</summary>
+                <summary><span><strong>Лечение каналов — эндодонтия</strong><small>Лечение корневых каналов</small></span></summary>
                 <table class="price-table full-price-table" aria-label="Эндодонтия">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
@@ -752,7 +744,7 @@
                 </table>
             </details>
             <details class="directory-group" data-price-group>
-                <summary>Хирургия</summary>
+                <summary><span><strong>Хирургия</strong><small>Удаление зубов и другие процедуры</small></span></summary>
                 <table class="price-table full-price-table" aria-label="Хирургия">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
@@ -840,7 +832,7 @@
                 </table>
             </details>
             <details class="directory-group" data-price-group>
-                <summary>Ортодонтия</summary>
+                <summary><span><strong>Ортодонтия</strong><small>Исправление прикуса и брекеты</small></span></summary>
                 <table class="price-table full-price-table" aria-label="Ортодонтия">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
@@ -1043,7 +1035,7 @@
                 </table>
             </details>
             <details class="directory-group" data-price-group>
-                <summary>Протезирование — ортопедия</summary>
+                <summary><span><strong>Протезирование — ортопедия</strong><small>Коронки и протезы</small></span></summary>
                 <table class="price-table full-price-table" aria-label="Ортопедическая стоматология">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
@@ -1161,7 +1153,7 @@
                 </table>
             </details>
             <details class="directory-group" data-price-group>
-                <summary>Имплантация</summary>
+                <summary><span><strong>Имплантация</strong><small>Установка имплантов и сопутствующие процедуры</small></span></summary>
                 <table class="price-table full-price-table" aria-label="Имплантация">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
@@ -1193,7 +1185,7 @@
                 </table>
             </details>
             <details class="directory-group" data-price-group>
-                <summary>Лечение дёсен — пародонтология</summary>
+                <summary><span><strong>Лечение дёсен — пародонтология</strong><small>Лечение дёсен и слизистой</small></span></summary>
                 <table class="price-table full-price-table" aria-label="Пародонтология">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
