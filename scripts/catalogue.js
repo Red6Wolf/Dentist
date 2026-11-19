@@ -14,6 +14,18 @@ function normalizeQuery(value) {
     return value.toLocaleLowerCase("ru").replaceAll("ё", "е").trim();
 }
 
+// Разговорные названия помогают находить соответствующие позиции прайса.
+function priceSearchTerms(term) {
+    const aliases = [
+        { startsWith: "чист", alternatives: ["гигиен"] },
+        { startsWith: "консульт", alternatives: ["прием"] },
+        { startsWith: "сним", alternatives: ["рентген", "ортопантомограмм"] },
+        { startsWith: "пломб", alternatives: ["реставрация коронковой части"] },
+    ];
+    const match = aliases.find((alias) => term.startsWith(alias.startsWith));
+    return [term, ...(match?.alternatives ?? [])];
+}
+
 function enablePriceSearch(directory) {
     const controls = document.querySelector("[data-price-controls]");
     const input = document.getElementById("price-search");
@@ -33,6 +45,7 @@ function enablePriceSearch(directory) {
             const rows = [...section.querySelectorAll("[data-price-row]")].map((row) => ({
                 element: row,
                 searchable: normalizeQuery(`${title} ${heading} ${row.textContent}`),
+                serviceName: normalizeQuery(row.cells[0]?.textContent ?? ""),
             }));
 
             return { element: section, rows };
@@ -55,7 +68,10 @@ function enablePriceSearch(directory) {
 
                 for (const row of section.rows) {
                     const matchesService = !selectedPrices || selectedPrices.has(row.element.id);
-                    const matchesSearch = terms.every((term) => row.searchable.includes(term));
+                    const matchesSearch = terms.every((term) =>
+                        row.searchable.includes(term) ||
+                        priceSearchTerms(term).slice(1).some((alternative) => row.serviceName.includes(alternative))
+                    );
                     row.element.hidden = !matchesService || !matchesSearch;
 
                     if (!row.element.hidden) sectionCount += 1;
@@ -71,9 +87,10 @@ function enablePriceSearch(directory) {
         }
 
         const serviceName = selectedPrices ? service.querySelector("span").textContent : "";
-        const countLabel = filtering ? `Найдено позиций: ${visibleCount}.` : `Позиций в прайсе: ${visibleCount}.`;
-        const result = visibleCount ? countLabel : "Ничего не найдено. Попробуйте другой запрос или сбросьте фильтр.";
+        const countLabel = filtering ? `Найдено позиций: ${visibleCount}.` : "";
+        const result = visibleCount ? countLabel : "Ничего не нашли. Попробуйте другое слово или позвоните нам.";
         status.textContent = serviceName ? `${serviceName}. ${result}` : result;
+        clearButton.hidden = !filtering;
     }
 
     input.addEventListener("input", filterPrices);

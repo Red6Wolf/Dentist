@@ -445,23 +445,19 @@
         </section>
 
         <section class="panel subpage-section" id="prices">
-          <h2>Прайс-лист</h2>
-          <p class="subpage-lead">
-            Цены перенесены из опубликованного прайса клиники. Некоторые позиции
-            оплачиваются за зуб, челюсть или отдельный этап. Актуальную стоимость
-            уточняйте при записи.
-          </p>
+          <h2>Цены</h2>
+          <p class="subpage-lead">Найдите услугу или выберите направление.</p>
           <div class="price-controls" data-price-controls hidden>
-            <label for="price-search">Найти услугу в прайсе</label>
+            <label for="price-search">Поиск услуги</label>
             <div class="price-search">
-              <input id="price-search" type="search" placeholder="Например, гигиена" />
-              <button type="button" data-price-clear>Сбросить</button>
+              <input id="price-search" type="search" placeholder="Например, снимок или чистка" />
+              <button type="button" data-price-clear hidden>Сбросить</button>
             </div>
             <p data-price-status role="status"></p>
           </div>
           <div class="directory" data-price-directory>
-            <details class="directory-group" data-price-group open>
-                <summary>Общие</summary>
+            <details class="directory-group" data-price-group>
+                <summary>Приём и снимки</summary>
                 <table class="price-table full-price-table" aria-label="Общие">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
@@ -525,7 +521,7 @@
                 </table>
             </details>
             <details class="directory-group" data-price-group>
-                <summary>Профилактика стоматологических заболеваний</summary>
+                <summary>Чистка и профилактика</summary>
                 <table class="price-table full-price-table" aria-label="Профилактика стоматологических заболеваний">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
@@ -589,7 +585,7 @@
                 </table>
             </details>
             <details class="directory-group" data-price-group>
-                <summary>Терапия</summary>
+                <summary>Лечение зубов — терапия</summary>
                 <table class="price-table full-price-table" aria-label="Терапия">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
@@ -649,7 +645,7 @@
                 </table>
             </details>
             <details class="directory-group" data-price-group>
-                <summary>Эндодонтия</summary>
+                <summary>Лечение каналов — эндодонтия</summary>
                 <table class="price-table full-price-table" aria-label="Эндодонтия">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
@@ -1036,7 +1032,7 @@
                 </table>
             </details>
             <details class="directory-group" data-price-group>
-                <summary>Ортопедическая стоматология</summary>
+                <summary>Протезирование — ортопедия</summary>
                 <table class="price-table full-price-table" aria-label="Ортопедическая стоматология">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
@@ -1186,7 +1182,7 @@
                 </table>
             </details>
             <details class="directory-group" data-price-group>
-                <summary>Пародонтология</summary>
+                <summary>Лечение дёсен — пародонтология</summary>
                 <table class="price-table full-price-table" aria-label="Пародонтология">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
@@ -1214,8 +1210,13 @@
                 </table>
             </details>
           </div>
-          <div class="page-cta">
-            <a class="locbutton" href="contact.html#booking">Позвонить для записи</a>
+          <p class="price-information">Стоимость уточняйте при записи: некоторые процедуры оплачиваются за зуб, челюсть или отдельный этап.</p>
+          <div class="price-help">
+            <div>
+              <h3>Не нашли нужную услугу?</h3>
+              <p>Позвоните — администратор поможет сориентироваться.</p>
+            </div>
+            <a class="locbutton" href="tel:+74991853333">+7 (499) 185-33-33</a>
           </div>
         </section>
       </main>
