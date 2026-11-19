@@ -340,7 +340,7 @@ body {
 }
 
 .intro h2 {
-    max-width: 22ch;
+    max-width: 27ch;
     margin-right: 0;
     margin-left: 0;
     font-size: clamp(32px, 3.5vw, 54px);
@@ -439,6 +439,15 @@ body {
     margin-bottom: var(--space-5);
 }
 
+.team-intro {
+    max-width: 55ch;
+    margin: -24px auto 32px;
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.6;
+    text-align: center;
+}
+
 .teamgrid {
     gap: var(--space-4) var(--space-3);
 }
@@ -458,11 +467,36 @@ body {
 
 .doctor-role {
     color: var(--muted);
-    font-size: 13px;
-    letter-spacing: .04em;
+    font-size: 14px;
+    letter-spacing: .02em;
 }
 
 /* Прайс и списки: ровные строки и табличные цифры. */
+
+.more-services > summary {
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    color: var(--orange-action);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.more-services > summary::after {
+    content: "+";
+    margin-left: auto;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.more-services[open] > summary::after {
+    content: "−";
+}
+
+.more-services > summary:focus-visible {
+    outline: 3px solid var(--orange-action);
+    outline-offset: 3px;
+}
 
 .service-row {
     min-height: 86px;
@@ -677,6 +711,10 @@ body {
     padding: var(--space-3);
 }
 
+.booking-photo {
+    background-image: url("../assets/clinic/gallery-09.webp");
+}
+
 .booking-photo::before {
     display: none;
 }
@@ -766,7 +804,7 @@ body {
 .doctor-fact {
     margin-top: 6px;
     color: var(--muted);
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.45;
 }
 
