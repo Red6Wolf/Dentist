@@ -445,17 +445,28 @@
         </section>
 
         <section class="panel subpage-section" id="prices">
-          <h2>Цены</h2>
-          <p class="subpage-lead">Найдите услугу или выберите направление.</p>
+          <div class="price-introduction">
+            <h2>Цены на услуги</h2>
+            <p>Выберите направление или введите название процедуры.</p>
+          </div>
           <div class="price-controls" data-price-controls hidden>
-            <label for="price-search">Поиск услуги</label>
+            <label for="price-search">Какую услугу вы ищете?</label>
             <div class="price-search">
-              <input id="price-search" type="search" placeholder="Например, снимок или чистка" />
-              <button type="button" data-price-clear hidden>Сбросить</button>
+              <input id="price-search" type="search" placeholder="Например, чистка зубов" />
             </div>
+            <button type="button" class="price-reset" data-price-clear hidden>Очистить поиск</button>
             <p data-price-status role="status"></p>
           </div>
+          <aside class="first-visit" data-first-visit hidden>
+            <h3>Первый визит</h3>
+            <dl>
+              <div><dt>Приём стоматолога-терапевта</dt><dd data-amount-from="p01-01"></dd></div>
+              <div><dt>Приём детского стоматолога</dt><dd data-amount-from="p01-03"></dd></div>
+              <div><dt>Приём ортодонта</dt><dd data-amount-from="p01-05"></dd></div>
+            </dl>
+          </aside>
           <div class="directory" data-price-directory>
+            <h3 data-directory-title>Все направления</h3>
             <details class="directory-group" data-price-group>
                 <summary>Приём и снимки</summary>
                 <table class="price-table full-price-table" aria-label="Общие">

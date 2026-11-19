@@ -17,10 +17,10 @@ function normalizeQuery(value) {
 // Разговорные названия помогают находить соответствующие позиции прайса.
 function priceSearchTerms(term) {
     const aliases = [
-        { startsWith: "чист", alternatives: ["гигиен"] },
+        { startsWith: "чист", alternatives: ["гигиен", "удаление зубных отложений"] },
         { startsWith: "консульт", alternatives: ["прием"] },
         { startsWith: "сним", alternatives: ["рентген", "ортопантомограмм"] },
-        { startsWith: "пломб", alternatives: ["реставрация коронковой части"] },
+        { startsWith: "пломб", alternatives: ["пломб", "реставрация коронковой части"] },
     ];
     const match = aliases.find((alias) => term.startsWith(alias.startsWith));
     return [term, ...(match?.alternatives ?? [])];
@@ -38,25 +38,37 @@ function enablePriceSearch(directory) {
         ? new Set(service.dataset.servicePrices.split(", "))
         : null;
 
+    const section = directory.closest("#prices");
+    const firstVisit = section.querySelector("[data-first-visit]");
+    const introduction = section.querySelector(".price-introduction p");
+    const directoryTitle = directory.querySelector("[data-directory-title]");
+    const defaultPlaceholder = input.placeholder;
+
+    firstVisit.querySelectorAll("[data-amount-from]").forEach((amount) => {
+        amount.textContent = document.getElementById(amount.dataset.amountFrom).cells[1].textContent;
+    });
+
     const groups = [...directory.querySelectorAll("[data-price-group]")].map((group) => {
-        const title = group.querySelector("summary").textContent;
+        const title = normalizeQuery(group.querySelector("summary").textContent);
+        const originalTitle = normalizeQuery(group.querySelector("table").getAttribute("aria-label"));
         const sections = [...group.querySelectorAll("tbody")].map((section) => {
             const heading = section.querySelector("[data-price-subgroup]")?.textContent ?? "";
             const rows = [...section.querySelectorAll("[data-price-row]")].map((row) => ({
                 element: row,
-                searchable: normalizeQuery(`${title} ${heading} ${row.textContent}`),
-                serviceName: normalizeQuery(row.cells[0]?.textContent ?? ""),
+                searchable: normalizeQuery(`${heading} ${row.cells[0].textContent}`),
             }));
 
             return { element: section, rows };
         });
 
-        return { element: group, initiallyOpen: group.open, sections };
+        return { element: group, title, originalTitle, initiallyOpen: group.open, sections };
     });
 
     function filterPrices() {
         const query = normalizeQuery(input.value);
-        const terms = query ? query.split(/\s+/) : [];
+        // «Чистка зубов» и «снимок зуба» также находят строки с медицинским названием.
+        const simpleQuery = query.replace(/^(чистка|снимок) зуб(?:а|ов)$/, "$1");
+        const terms = simpleQuery.split(/\s+/).filter(Boolean).map(priceSearchTerms);
         const filtering = Boolean(terms.length || selectedPrices);
         let visibleCount = 0;
 
@@ -68,9 +80,9 @@ function enablePriceSearch(directory) {
 
                 for (const row of section.rows) {
                     const matchesService = !selectedPrices || selectedPrices.has(row.element.id);
-                    const matchesSearch = terms.every((term) =>
-                        row.searchable.includes(term) ||
-                        priceSearchTerms(term).slice(1).some((alternative) => row.serviceName.includes(alternative))
+                    const matchesGroup = query === group.title || query === group.originalTitle;
+                    const matchesSearch = matchesGroup || terms.every((alternatives) =>
+                        alternatives.some((word) => row.searchable.includes(word))
                     );
                     row.element.hidden = !matchesService || !matchesSearch;
 
@@ -89,7 +101,14 @@ function enablePriceSearch(directory) {
         const serviceName = selectedPrices ? service.querySelector("span").textContent : "";
         const countLabel = filtering ? `Найдено позиций: ${visibleCount}.` : "";
         const result = visibleCount ? countLabel : "Ничего не нашли. Попробуйте другое слово или позвоните нам.";
-        status.textContent = serviceName ? `${serviceName}. ${result}` : result;
+        directoryTitle.textContent = serviceName || (query ? "Результаты поиска" : "Все направления");
+        directoryTitle.hidden = visibleCount === 0;
+        input.placeholder = serviceName ? "Поиск в выбранном направлении" : defaultPlaceholder;
+        introduction.hidden = filtering;
+        section.classList.toggle("price-filtered", filtering);
+        firstVisit.hidden = filtering;
+        status.textContent = result;
+        clearButton.textContent = selectedPrices ? "Посмотреть все цены" : "Очистить поиск";
         clearButton.hidden = !filtering;
     }
 

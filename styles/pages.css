@@ -402,46 +402,175 @@
     background: var(--sand);
 }
 
-/* Поиск и список цен остаются понятными и без дополнительного оформления. */
-#prices .price-controls {
-    max-width: 760px;
-    margin-top: 32px;
+/* Прайс: быстрый ориентир для первого визита и полный список процедур. */
+#prices {
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) minmax(0, 2fr);
+    align-items: start;
+    gap: var(--space-4) var(--space-6);
 }
 
-#prices .price-controls label {
+#prices [hidden] {
+    display: none;
+}
+
+.price-introduction p {
+    max-width: 32ch;
+    margin: 12px 0 0;
+    color: var(--muted);
     font-size: 18px;
+    line-height: 1.55;
 }
 
-#prices .price-search input,
-#prices .price-search button {
-    min-height: 52px;
-    font-size: 16px;
+#prices .price-controls,
+#prices .directory {
+    grid-column: 2;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+}
+
+#prices .directory {
+    border: 0;
+}
+
+#prices h3 {
+    margin: 0 0 16px;
+    font-family: var(--display);
+    font-size: 22px;
+    line-height: 1.25;
 }
 
 #prices .price-search input {
+    min-height: 54px;
+    padding-inline: 16px;
     background: var(--surface-raised);
+    font-size: 18px;
 }
 
-#prices .price-search button[hidden] {
-    display: none;
+.price-reset {
+    display: inline-block;
+    padding: 10px 0;
+    min-height: 44px;
+    border: 0;
+    background: transparent;
+    color: var(--orange-action);
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+}
+
+#prices .price-controls [role="status"] {
+    margin: 0;
 }
 
 #prices .price-controls [role="status"]:empty {
     display: none;
 }
 
-#prices .directory-group > summary {
-    min-height: 60px;
-    padding: 17px 4px;
+.first-visit {
+    padding: var(--space-3);
+    border-radius: var(--radius-card);
+    background: var(--sand);
 }
 
-#prices .directory-group > summary:hover {
-    color: var(--orange-action);
+.first-visit dl {
+    margin: 0;
+}
+
+.first-visit dl > div {
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+}
+
+.first-visit dl > div:last-child {
+    padding-bottom: 0;
+}
+
+.first-visit dd {
+    margin: 4px 0 0;
+    font-size: 21px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+#prices.price-filtered .directory {
+    grid-column: 1 / -1;
+}
+
+#prices .directory-group > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 12px;
+    min-height: 56px;
+    list-style: none;
+    cursor: pointer;
+}
+
+#prices summary::-webkit-details-marker {
+    display: none;
+}
+
+#prices summary::after {
+    content: "";
+    flex: 0 0 9px;
+    height: 9px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+}
+
+#prices details[open] > summary,
+#prices summary:hover {
+    background: var(--sand);
+}
+
+#prices details[open] > summary::after {
+    transform: rotate(225deg);
 }
 
 #prices .full-price-table td {
-    font-size: 16px;
-    line-height: 1.6;
+    padding: 12px 8px;
+    font-size: 17px;
+    line-height: 1.55;
+}
+
+#prices .full-price-table td:last-child {
+    width: 1%;
+    white-space: nowrap;
+}
+
+#prices .price-information,
+#prices .price-help {
+    grid-column: 1 / -1;
+    margin: 0;
+}
+
+@media (max-width: 800px) {
+    #prices {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+    }
+
+    #prices .price-controls,
+    #prices .directory {
+        grid-column: 1;
+    }
+
+    .first-visit dl > div {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .first-visit dd {
+        flex: none;
+        font-size: 18px;
+    }
 }
 
 .price-information {
