@@ -12,7 +12,7 @@ if (bookingTriggers.length > 0 && typeof HTMLDialogElement !== "undefined") {
                     <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
             </button>
-            <h2 id="booking-dialog-title">Записаться на приём</h2>
+            <h2 id="booking-dialog-title">Запись по телефону</h2>
             <p>Позвоните администратору — поможем выбрать врача и время.</p>
             <a class="booking-dialog__phone" href="tel:+74991853333">+7 (499) 185-33-33</a>
         </div>

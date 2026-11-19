@@ -500,6 +500,56 @@ body {
     padding: 16px 0;
 }
 
+.directory-list > li.has-inline-prices {
+    flex-wrap: wrap;
+}
+
+.inline-prices {
+    flex-basis: 100%;
+    width: 100%;
+    margin: 14px 0 4px;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-small);
+    background: var(--sand);
+}
+
+.inline-prices > strong {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 17px;
+}
+
+.inline-prices ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.inline-prices li {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+}
+
+.inline-prices li b {
+    flex: none;
+    font-variant-numeric: tabular-nums;
+}
+
+.inline-prices > a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    margin-top: 8px;
+    color: var(--orange-action);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
 .directory-group > summary {
     font-size: clamp(18px, 1.55vw, 22px);
     line-height: 1.4;
@@ -672,6 +722,37 @@ body {
 
 .booking-dialog__phone {
     font-variant-numeric: tabular-nums;
+}
+
+.booking-email {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    margin-top: var(--space-2);
+    padding: 10px 18px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.booking-email:hover {
+    border-color: var(--orange-action);
+    color: var(--orange-action);
+}
+
+.doctor-fact {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.hero-bottom a {
+    color: var(--orange-action);
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }
 
 /* Одно поведение для всех действий и клавиатурного фокуса. */
@@ -947,11 +1028,17 @@ body {
     }
 
     .service-extra a,
-    .foot-col a,
     .map-link {
         display: inline-flex;
         align-items: center;
         min-height: 44px;
+    }
+
+    .foot-col a {
+        display: flex;
+        width: fit-content;
+        min-height: 44px;
+        align-items: center;
     }
 
     .service-extra {

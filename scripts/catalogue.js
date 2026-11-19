@@ -94,5 +94,76 @@ function enablePriceSearch(directory) {
 const priceDirectory = document.querySelector("[data-price-directory]");
 if (priceDirectory) enablePriceSearch(priceDirectory);
 
+function enableInlinePrices() {
+    const catalogue = document.getElementById("catalogue");
+    if (!catalogue || !priceDirectory) return;
+
+    catalogue.querySelectorAll('a[href*="?service="]').forEach((link) => {
+        link.setAttribute("aria-expanded", "false");
+    });
+
+    const priceRows = new Map(
+        [...priceDirectory.querySelectorAll("[data-price-row]")].map((row) => [row.id, row])
+    );
+
+    catalogue.addEventListener("click", (event) => {
+        const link = event.target.closest('a[href*="?service="]');
+        if (!link || !catalogue.contains(link) || link.closest(".inline-prices")) return;
+
+        const item = link.closest("[data-service-prices]");
+        if (!item) return;
+
+        const prices = item.dataset.servicePrices.split(",").map((id) => priceRows.get(id.trim())).filter(Boolean);
+        if (!prices.length) return;
+
+        event.preventDefault();
+        const existing = item.querySelector(".inline-prices");
+        if (existing) {
+            existing.remove();
+            item.classList.remove("has-inline-prices");
+            link.setAttribute("aria-expanded", "false");
+            link.removeAttribute("aria-controls");
+            return;
+        }
+
+        catalogue.querySelectorAll(".inline-prices").forEach((panel) => panel.remove());
+        catalogue.querySelectorAll(".has-inline-prices").forEach((entry) => entry.classList.remove("has-inline-prices"));
+        catalogue.querySelectorAll('[aria-expanded="true"][href*="?service="]').forEach((control) => {
+            control.setAttribute("aria-expanded", "false");
+            control.removeAttribute("aria-controls");
+        });
+
+        const panel = document.createElement("div");
+        panel.className = "inline-prices";
+        panel.id = `inline-prices-${item.id}`;
+        const heading = document.createElement("strong");
+        heading.textContent = `Цены: ${item.querySelector("span")?.textContent ?? "услуга"}`;
+        panel.append(heading);
+
+        const list = document.createElement("ul");
+        prices.slice(0, 5).forEach((row) => {
+            const entry = document.createElement("li");
+            const name = document.createElement("span");
+            const amount = document.createElement("b");
+            name.textContent = row.cells[0]?.textContent.trim() ?? "";
+            amount.textContent = row.cells[1]?.textContent.trim() ?? "";
+            entry.append(name, amount);
+            list.append(entry);
+        });
+        panel.append(list);
+
+        const fullLink = document.createElement("a");
+        fullLink.href = link.href;
+        fullLink.textContent = `Весь прайс по услуге · ${prices.length} позиций`;
+        panel.append(fullLink);
+        item.append(panel);
+        item.classList.add("has-inline-prices");
+        link.setAttribute("aria-expanded", "true");
+        link.setAttribute("aria-controls", panel.id);
+    });
+}
+
+enableInlinePrices();
+
 revealAnchor();
 window.addEventListener("hashchange", revealAnchor);
