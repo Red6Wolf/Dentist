@@ -102,7 +102,7 @@ function enablePriceSearch(directory) {
         const serviceName = selectedPrices ? service.querySelector("span").textContent : "";
         const countLabel = filtering ? `Найдено позиций: ${visibleCount}.` : "";
         const result = visibleCount ? countLabel : "Ничего не нашли. Попробуйте другое слово или позвоните нам.";
-        directoryTitle.textContent = serviceName || (query ? "Результаты поиска" : "Направления");
+        directoryTitle.textContent = serviceName || (query ? "Результаты поиска" : "Полный прайс по разделам");
         directoryTitle.hidden = visibleCount === 0;
         input.placeholder = serviceName ? "Поиск в выбранном направлении" : defaultPlaceholder;
         introduction.hidden = filtering;
