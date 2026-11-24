@@ -1356,7 +1356,7 @@ span.icon-arrow:not(.arrow) {
     .mobile-menu-button {
         position: fixed;
         z-index: 100;
-        left: 16px;
+        right: max(16px, env(safe-area-inset-right));
         bottom: calc(16px + env(safe-area-inset-bottom));
         display: grid;
         width: 58px;
@@ -1386,7 +1386,7 @@ span.icon-arrow:not(.arrow) {
     .mobile-menu {
         position: fixed;
         z-index: 99;
-        left: 16px;
+        right: max(16px, env(safe-area-inset-right));
         bottom: calc(86px + env(safe-area-inset-bottom));
         display: grid;
         width: min(300px, calc(100vw - 32px));
