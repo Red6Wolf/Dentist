@@ -970,7 +970,15 @@ body {
         min-height: 64px;
         padding-top: 0;
         border-radius: 12px;
-        background: #30251f;
+        background: rgba(255, 249, 242, .94);
+    }
+
+    @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+        .hero .nav {
+            background: rgba(255, 249, 242, .05);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
     }
 
     .brand-name {
