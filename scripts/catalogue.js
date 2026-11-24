@@ -14,7 +14,8 @@ function revealAnchor() {
 }
 
 function normalizeQuery(value) {
-    return value.toLocaleLowerCase("ru").replaceAll("ё", "е").trim();
+    return value.toLocaleLowerCase("ru").replaceAll("ё", "е")
+        .replace(/отделиван/g, "отбеливан").replace(/зуб(?:ами|ов|ам|ах|а|ы|у|е)(?=\s|$)/g, "зуб").trim();
 }
 
 // Разговорные названия помогают находить соответствующие позиции прайса.
@@ -24,10 +25,71 @@ function priceSearchTerms(term) {
         { startsWith: "консульт", alternatives: ["прием"] },
         { startsWith: "сним", alternatives: ["рентген", "ортопантомограмм"] },
         { startsWith: "пломб", alternatives: ["пломб", "реставрация коронковой части"] },
+        { startsWith: "отбел", alternatives: ["отбел"] },
     ];
     const match = aliases.find((alias) => term.startsWith(alias.startsWith));
     return [term, ...(match?.alternatives ?? [])];
 }
+
+function searchMatches(query, text) {
+    const normalized = normalizeQuery(query).replace(/^(чистка|снимок|отбеливание) зуб$/, "$1");
+    const terms = normalized.split(/\s+/).filter(Boolean);
+    const searchable = normalizeQuery(text);
+    return terms.every((term) => priceSearchTerms(term).some((word) => searchable.includes(word)));
+}
+
+function attachSuggestions(input, rows) {
+    const list = document.createElement("datalist");
+    list.id = `${input.id}-suggestions`;
+    input.setAttribute("list", list.id);
+    input.insertAdjacentElement("afterend", list);
+    input.addEventListener("input", () => {
+        const query = input.value.trim();
+        list.replaceChildren();
+        if (query.length < 2) return;
+        const matches = [...new Set(rows.map((row) => row.cells[0]?.textContent.trim()).filter(Boolean))]
+            .filter((name) => searchMatches(query, name)).slice(0, 8);
+        matches.forEach((name) => {
+            const option = document.createElement("option");
+            option.value = name;
+            list.append(option);
+        });
+    });
+}
+
+function enableDetailSearch() {
+    const detail = document.querySelector(".price-detail");
+    if (!detail) return;
+    const rows = [...detail.querySelectorAll("[data-price-row]")];
+    if (!rows.length) return;
+    const controls = document.createElement("div");
+    controls.className = "price-controls price-detail-search";
+    const label = document.createElement("label");
+    label.htmlFor = "detail-price-search";
+    label.textContent = "Найти услугу";
+    const input = document.createElement("input");
+    input.id = label.htmlFor;
+    input.type = "search";
+    input.placeholder = "Например, пломба или снимок";
+    const status = document.createElement("p");
+    status.setAttribute("role", "status");
+    controls.append(label, input, status);
+    detail.querySelector(".price-group-table").before(controls);
+    attachSuggestions(input, rows);
+    input.addEventListener("input", () => {
+        let count = 0;
+        rows.forEach((row) => {
+            row.hidden = !searchMatches(input.value, row.cells[0].textContent);
+            if (!row.hidden) count += 1;
+        });
+        detail.querySelectorAll(".price-group-table").forEach((group) => {
+            group.hidden = ![...group.querySelectorAll("[data-price-row]")].some((row) => !row.hidden);
+        });
+        status.textContent = input.value.trim() ? (count ? `Найдено позиций: ${count}.` : "Ничего не нашли. Попробуйте другое слово или позвоните нам.") : "";
+    });
+}
+
+enableDetailSearch();
 
 function enablePriceSearch(directory) {
     const controls = document.querySelector("[data-price-controls]");
@@ -64,11 +126,12 @@ function enablePriceSearch(directory) {
 
         return { element: group, title, originalTitle, initiallyOpen: group.open, sections };
     });
+    attachSuggestions(input, [...directory.querySelectorAll("[data-price-row]")]);
 
     function filterPrices() {
         const query = normalizeQuery(input.value);
         // «Чистка зубов» и «снимок зуба» также находят строки с медицинским названием.
-        const simpleQuery = query.replace(/^(чистка|снимок) зуб(?:а|ов)$/, "$1");
+        const simpleQuery = query.replace(/^(чистка|снимок|отбеливание) зуб$/, "$1");
         const terms = simpleQuery.split(/\s+/).filter(Boolean).map(priceSearchTerms);
         const filtering = Boolean(terms.length || selectedPrices);
         let visibleCount = 0;
@@ -197,8 +260,10 @@ function enableInlinePrices() {
         panel.append(list);
 
         const fullLink = document.createElement("a");
-        fullLink.href = link.href;
-        fullLink.textContent = `Весь прайс по услуге · ${prices.length} позиций`;
+        const categories = { children: "children", therapy: "treatment", hygiene: "hygiene", ortho: "orthodontics", surgery: "surgery", implantology: "prosthetics", prosthetics: "prosthetics", diagnostics: "visits", periodontics: "gums", aesthetics: "treatment" };
+        const category = categories[item.closest("details")?.id] || "visits";
+        fullLink.href = `price-${category}.html`;
+        fullLink.textContent = "Все услуги и цены направления";
         panel.append(fullLink);
         item.append(panel);
         item.classList.add("has-inline-prices");
