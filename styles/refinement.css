@@ -961,7 +961,8 @@ body {
         align-items: center;
     }
 
-    .hero .nav {
+    .hero .nav,
+    .subpage-hero .nav {
         position: fixed;
         z-index: 101;
         top: 4px;
@@ -974,7 +975,8 @@ body {
     }
 
     @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
-        .hero .nav {
+        .hero .nav,
+        .subpage-hero .nav {
             background: rgba(255, 249, 242, .05);
             -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
