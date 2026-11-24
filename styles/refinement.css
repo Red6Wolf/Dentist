@@ -1239,3 +1239,114 @@ body {
         margin-top: 24px;
     }
 }
+
+
+/* Фиксированная ширина текста не меняется при раскрытии кнопки звонка. */
+@media (min-width: 951px) {
+    .hero-side {
+        width: 400px;
+        max-width: none;
+    }
+
+    .hero-actions .pillbtn {
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .hero-actions {
+        min-width: 0;
+    }
+}
+
+
+/* Фотографии клиники окружают неподвижное содержимое апельсина. */
+.location-feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+    padding: clamp(40px, 6vw, 80px) 24px;
+}
+
+.orange-wrap {
+    width: min(100%, 760px);
+}
+
+.orange-scene {
+    width: 100%;
+}
+
+.orange-slice {
+    opacity: .48;
+}
+
+.bubble.b5 {
+    top: 36%;
+    left: 0;
+    background-image: url("../assets/clinic/gallery-08.webp");
+}
+
+.bubble.b6 {
+    top: 42%;
+    right: 0;
+    background-image: url("../assets/clinic/gallery-09.webp");
+}
+
+.orange-content {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    width: min(66%, 490px);
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+
+.orange-content h2 {
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(26px, 3.6vw, 48px);
+    line-height: 1.15;
+    letter-spacing: -.035em;
+}
+
+.orange-content p {
+    margin: 14px 0 0;
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+.orange-content .orange-about {
+    position: static;
+    margin-top: 20px;
+    transform: none;
+}
+
+@media (max-width: 650px) {
+    .location-feature {
+        padding: 48px 14px;
+    }
+
+    .orange-content {
+        width: 69%;
+    }
+
+    .orange-content h2 {
+        font-size: clamp(21px, 5.7vw, 30px);
+    }
+
+    .orange-content p {
+        font-size: 14px;
+    }
+
+    .orange-content .orange-about {
+        min-height: 44px;
+        margin-top: 12px;
+        padding: 9px 16px;
+        font-size: 14px;
+    }
+
+    .orange-scene .bubble {
+        width: clamp(56px, 19vw, 84px);
+    }
+}
