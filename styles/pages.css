@@ -1084,3 +1084,86 @@
 #prices.price-filtered .price-images-note {
     display: none;
 }
+
+/* Карточки направлений с крупными фотографиями и понятными переходами. */
+#prices .price-category-grid {
+    max-width: 1120px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+}
+
+#prices .price-category {
+    display: flex;
+    min-width: 0;
+    border-radius: 16px;
+    transition: border-color 180ms ease, transform 180ms ease;
+}
+
+#prices .price-category img {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+}
+
+#prices .price-category__body {
+    gap: 10px;
+    padding: 24px;
+    font-size: 17px;
+}
+
+#prices .price-category__body strong {
+    font-size: 23px;
+    line-height: 1.25;
+}
+
+#prices .price-category__action {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    min-height: 44px;
+    padding-top: 8px;
+}
+
+#prices .price-category:focus-visible {
+    outline: 3px solid var(--orange-action);
+    outline-offset: 4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    #prices .price-category:hover {
+        transform: translateY(-3px);
+    }
+}
+
+#prices .price-category:active {
+    transform: scale(.99);
+}
+
+@media (max-width: 650px) {
+    #prices .price-category-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    #prices .price-category__body {
+        padding: 20px;
+    }
+
+    #prices .price-category__body strong {
+        font-size: 21px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #prices .price-category {
+        transition: none;
+    }
+
+    #prices .price-category:hover,
+    #prices .price-category:active {
+        transform: none;
+    }
+}
