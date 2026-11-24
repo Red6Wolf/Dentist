@@ -16,6 +16,10 @@ if (navigation) {
     menu.id = "mobile-navigation";
     menu.setAttribute("aria-label", "Разделы сайта");
     menu.innerHTML = sourceLinks.innerHTML;
+    const homeLink = document.createElement("a");
+    homeLink.href = navigation.querySelector(".brand").href;
+    homeLink.textContent = "Главная";
+    menu.prepend(homeLink);
     button.setAttribute("aria-controls", menu.id);
 
     document.body.append(button, menu);

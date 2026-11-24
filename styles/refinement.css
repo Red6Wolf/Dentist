@@ -1179,30 +1179,6 @@ body {
     justify-self: center;
 }
 
-.orange-about {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 2;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    min-height: 52px;
-    padding: 12px 20px;
-    border-radius: 999px;
-    background: var(--orange-action);
-    color: #fff;
-    font-size: 16px;
-    font-weight: 700;
-    text-decoration: none;
-    transform: translate(-50%, -50%);
-}
-
-.orange-about:hover,
-.orange-about:focus-visible {
-    background: var(--orange-action-hover);
-}
-
 .team-cta a {
     min-height: 52px;
     padding: 8px 9px 8px 22px;
