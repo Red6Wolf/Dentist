@@ -962,8 +962,15 @@ body {
     }
 
     .hero .nav {
+        position: fixed;
+        z-index: 101;
+        top: 4px;
+        left: 4px;
+        right: 4px;
         min-height: 64px;
         padding-top: 0;
+        border-radius: 12px;
+        background: #30251f;
     }
 
     .brand-name {
@@ -1035,6 +1042,9 @@ body {
     }
 
     .hero-actions .pillbtn {
+        flex: 0 1 auto;
+        justify-content: center;
+        gap: 12px;
         padding-left: 16px;
         font-size: 13px;
     }
