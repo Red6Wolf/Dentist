@@ -1136,7 +1136,9 @@
 
 @media (hover: hover) and (pointer: fine) {
     #prices .price-category:hover {
-        transform: scale(1.02);
+        position: relative;
+        z-index: 1;
+        transform: scale(1.04);
     }
 }
 
