@@ -127,6 +127,10 @@ body {
     background: transparent;
 }
 
+.nav-address {
+    display: none;
+}
+
 .brand-name,
 .navlinks a,
 .navphone {
@@ -988,47 +992,32 @@ body {
     }
 
     .nav-identity {
+        display: grid;
+        justify-items: start;
+        gap: 2px;
         min-width: 0;
+        padding: 6px 0;
     }
 
     .nav-identity .brand {
-        min-height: 44px;
-        gap: 8px;
+        min-height: 26px;
     }
 
-    .nav-identity .brand::after {
-        content: "";
-        flex: 0 0 22px;
-        width: 22px;
-        height: 22px;
-        background: url("../assets/icons/orange-slice.svg") center / contain no-repeat;
+    .nav-address {
+        display: inline-flex;
+        align-items: center;
+        min-height: 23px;
+        color: #382820;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.3;
+        text-decoration: none;
+        white-space: nowrap;
     }
 
-    .hero .nav::after,
-    .subpage-hero .nav::after {
-        content: "";
-        position: absolute;
-        right: 16px;
-        bottom: 0;
-        left: 16px;
-        height: 2px;
-        border-radius: 2px;
-        background: var(--orange-action);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 180ms ease;
-    }
-
-    .hero .nav--scrolled::after,
-    .subpage-hero .nav--scrolled::after {
-        opacity: .75;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .hero .nav::after,
-        .subpage-hero .nav::after {
-            transition: none;
-        }
+    .hero .nav:not(.nav--on-light) .nav-address {
+        color: #fffaf4;
+        text-shadow: 0 1px 4px rgba(25, 16, 10, .9);
     }
 
     .navcta {

@@ -27,6 +27,10 @@ if (navigation) {
 
     function updateNavigationScroll() {
         navigation.classList.toggle("nav--scrolled", window.scrollY > 24);
+        const hero = navigation.closest(".hero");
+        if (hero) {
+            navigation.classList.toggle("nav--on-light", hero.getBoundingClientRect().bottom <= 68);
+        }
     }
 
     window.addEventListener("scroll", updateNavigationScroll, { passive: true });
