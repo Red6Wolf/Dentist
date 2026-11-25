@@ -1,0 +1,123 @@
+"""Обновляет статический прайс из scripts/prices.json."""
+
+import argparse
+import json
+import re
+from html import escape
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+PRICE_DATA = Path(__file__).with_name("prices.json")
+COLUMNS = '<thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>'
+
+
+def table(group):
+    lines = [f'<table class="price-table full-price-table" aria-label="{escape(group["label"])}">']
+    lines.append(f"    {COLUMNS}")
+    for section in group["sections"]:
+        lines.append("    <tbody>")
+        if section["title"]:
+            title = escape(section["title"])
+            lines.append(f'        <tr data-price-subgroup><th scope="rowgroup" colspan="2">{title}</th></tr>')
+        for row in section["rows"]:
+            lines.extend([
+                f'        <tr id="{row["id"]}" data-price-row>',
+                f'            <td>{escape(row["name"])}</td>',
+                f'            <td>{escape(row["price"])}</td>',
+                "        </tr>",
+            ])
+        lines.append("    </tbody>")
+    lines.append("</table>")
+    return "\n".join(lines)
+
+
+def indent(markup, width):
+    return "\n".join(" " * width + line for line in markup.splitlines())
+
+
+def directory_table(group):
+    title = escape(group["title"])
+    return (
+        f'<details class="directory-group" data-price-group data-price-page="{group["page"]}">\n'
+        f"    <summary><span><strong>{title}</strong></span></summary>\n"
+        f"{indent(table(group), 4)}\n"
+        "</details>"
+    )
+
+
+def detail_table(group, show_heading):
+    title = escape(group["title"])
+    heading = f"  <h2>{title}</h2>\n" if show_heading else ""
+    return (
+        '<section class="price-group-table">\n'
+        f"{heading}{indent(table(group), 6)}\n"
+        "</section>"
+    )
+
+
+def update(path, key, html, check):
+    path = ROOT / path
+    original = path.read_text()
+    begin = f"<!-- prices:{key}:start -->"
+    end = f"<!-- prices:{key}:end -->"
+    pattern = re.compile(rf"^([ ]*){begin}\n.*?^\1{end}", re.MULTILINE | re.DOTALL)
+
+    def render(match):
+        pad = match.group(1)
+        return f"{pad}{begin}\n{indent(html, len(pad))}\n{pad}{end}"
+
+    updated, matches = pattern.subn(render, original)
+    if matches != 1:
+        raise ValueError(f"{path.name}: ожидается один блок {key}")
+    if updated == original:
+        return True
+    if check:
+        print(f"Нужно обновить {path.relative_to(ROOT)}")
+    else:
+        path.write_text(updated)
+    return not check
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--check", action="store_true", help="Проверить HTML без записи")
+    args = parser.parse_args()
+    data = json.loads(PRICE_DATA.read_text())
+    groups = data["groups"]
+    rows = {}
+    by_page = {}
+    for group in groups:
+        by_page.setdefault(group["page"], []).append(group)
+        for section in group["sections"]:
+            for row in section["rows"]:
+                if row["id"] in rows:
+                    raise ValueError(f'Повторяется ID цены {row["id"]}')
+                rows[row["id"]] = row
+
+    for view in data["views"]:
+        view_group = {
+            "title": view["title"],
+            "label": view["label"],
+            "sections": [{"title": "", "rows": [rows[row_id] for row_id in view["rows"]]}],
+        }
+        by_page.setdefault(view["page"], []).append(view_group)
+    expected_pages = {path.name for path in (ROOT / "pages").glob("price-*.html")}
+    if set(by_page) != expected_pages:
+        raise ValueError("Набор страниц прайса не совпадает с данными")
+
+    preview = "\n".join(
+        f'<tr>\n  <td>{escape(entry["name"])}</td>\n  <td>{escape(rows[entry["id"]]["price"])}</td>\n</tr>'
+        for entry in data["preview"]
+    )
+    results = [
+        update("index.html", "preview", preview, args.check),
+        update("pages/services.html", "directory", "\n".join(map(directory_table, groups)), args.check),
+    ]
+    for page, page_groups in by_page.items():
+        markup = "\n".join(detail_table(group, len(page_groups) > 1) for group in page_groups)
+        results.append(update(f"pages/{page}", "detail", markup, args.check))
+    return 0 if all(results) else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

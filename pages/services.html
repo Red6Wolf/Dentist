@@ -15,17 +15,16 @@
       rel="stylesheet"
     />
     <link rel="canonical" href="https://stomatologiya-apelsin.ru/pages/services.html" />
-    <link rel="preload" as="image" href="../assets/clinic/gallery-04.webp" />
-    <link rel="stylesheet" href="../styles/styles.css?v=menu-right-20261124" />
+    <link rel="stylesheet" href="../styles/styles.css?v=audit-20261125" />
     <link rel="stylesheet" href="../styles/pages.css?v=2" />
-    <link rel="stylesheet" href="../styles/refinement.css?v=address-text-20261125" />
+    <link rel="stylesheet" href="../styles/refinement.css?v=audit-20261125" />
     <link rel="stylesheet" href="../styles/price-transitions.css" />
   </head>
 
   <body>
     <div class="page">
       <a class="skip-link" href="#main-content">Перейти к содержимому</a>
-      <header class="panel subpage-hero subpage-hero--services">
+      <header class="panel subpage-hero subpage-hero--compact">
         <nav class="nav" aria-label="Основная навигация">
           <div class="nav-identity">
             <a class="brand" href="../index.html">
@@ -46,7 +45,7 @@
           </div>
         </nav>
         <div>
-          <h1>Услуги<br />для всей семьи</h1>
+          <h1>Услуги и цены</h1>
           <p>
             Детская и взрослая стоматология, профилактика, ортодонтия,
             протезирование, диагностика и хирургия.
@@ -57,7 +56,7 @@
         <section class="panel subpage-section" id="prices">
           <div class="price-introduction">
             <h2>Цены на услуги</h2>
-            <p>Выберите направление, чтобы посмотреть услуги и цены.</p>
+            <p>Введите название услуги или выберите направление.</p>
           </div>
           <div class="price-controls" data-price-controls hidden>
             <label for="price-search">Найти услугу</label>
@@ -69,73 +68,90 @@
           </div>
           <div class="price-category-grid">
               <a class="price-category" href="price-visits.html">
-                <img src="../assets/services/visits-v2.webp" alt="" loading="lazy" width="640" height="420" />
+                <span class="price-category__media">
+                  <img src="../assets/services/visits-v2.webp" alt="" loading="lazy" width="640" height="420" />
+                </span>
                 <span class="price-category__body">
                   <strong>Приём и снимки</strong>
                   <span>Консультации и диагностика</span>
-                  <span class="price-category__action">Услуги и цены <span aria-hidden="true">→</span></span>
+                  <span class="price-category__action">Услуги и цены <b class="icon-arrow" aria-hidden="true"></b></span>
                 </span>
               </a>
               <a class="price-category" href="price-hygiene.html">
-                <img src="../assets/services/hygiene-v3.webp" alt="" loading="lazy" width="640" height="420" />
+                <span class="price-category__media">
+                  <img src="../assets/services/hygiene-v3.webp" alt="" loading="lazy" width="640" height="420" />
+                </span>
                 <span class="price-category__body">
                   <strong>Чистка и профилактика</strong>
                   <span>Профессиональная гигиена и профилактика</span>
-                  <span class="price-category__action">Услуги и цены <span aria-hidden="true">→</span></span>
+                  <span class="price-category__action">Услуги и цены <b class="icon-arrow" aria-hidden="true"></b></span>
                 </span>
               </a>
               <a class="price-category" href="price-treatment.html">
-                <img src="../assets/services/treatment-v3.webp" alt="" loading="lazy" width="640" height="420" />
+                <span class="price-category__media">
+                  <img src="../assets/services/treatment-v3.webp" alt="" loading="lazy" width="640" height="420" />
+                </span>
                 <span class="price-category__body">
                   <strong>Лечение зубов</strong>
                   <span>Лечение зубов и корневых каналов</span>
-                  <span class="price-category__action">Услуги и цены <span aria-hidden="true">→</span></span>
+                  <span class="price-category__action">Услуги и цены <b class="icon-arrow" aria-hidden="true"></b></span>
                 </span>
               </a>
               <a class="price-category" href="price-surgery.html">
-                <img src="../assets/services/surgery-v3.webp" alt="" loading="lazy" width="640" height="420" />
+                <span class="price-category__media">
+                  <img src="../assets/services/surgery-v3.webp" alt="" loading="lazy" width="640" height="420" />
+                </span>
                 <span class="price-category__body">
                   <strong>Хирургия</strong>
                   <span>Удаление зубов и хирургические процедуры</span>
-                  <span class="price-category__action">Услуги и цены <span aria-hidden="true">→</span></span>
+                  <span class="price-category__action">Услуги и цены <b class="icon-arrow" aria-hidden="true"></b></span>
                 </span>
               </a>
               <a class="price-category" href="price-orthodontics.html">
-                <img src="../assets/services/orthodontics-v4.webp" alt="" loading="lazy" width="640" height="420" />
+                <span class="price-category__media">
+                  <img src="../assets/services/orthodontics-v4.webp" alt="" loading="lazy" width="640" height="420" />
+                </span>
                 <span class="price-category__body">
                   <strong>Исправление прикуса</strong>
                   <span>Консультации и ортодонтическое лечение</span>
-                  <span class="price-category__action">Услуги и цены <span aria-hidden="true">→</span></span>
+                  <span class="price-category__action">Услуги и цены <b class="icon-arrow" aria-hidden="true"></b></span>
                 </span>
               </a>
               <a class="price-category" href="price-prosthetics.html">
-                <img src="../assets/services/prosthetics-v3.webp" alt="" loading="lazy" width="640" height="420" />
+                <span class="price-category__media">
+                  <img src="../assets/services/prosthetics-v3.webp" alt="" loading="lazy" width="640" height="420" />
+                </span>
                 <span class="price-category__body">
                   <strong>Протезирование и имплантация</strong>
                   <span>Коронки, протезы и имплантация</span>
-                  <span class="price-category__action">Услуги и цены <span aria-hidden="true">→</span></span>
+                  <span class="price-category__action">Услуги и цены <b class="icon-arrow" aria-hidden="true"></b></span>
                 </span>
               </a>
               <a class="price-category" href="price-gums.html">
-                <img src="../assets/services/gums-v3.webp" alt="" loading="lazy" width="640" height="420" />
+                <span class="price-category__media">
+                  <img src="../assets/services/gums-v3.webp" alt="" loading="lazy" width="640" height="420" />
+                </span>
                 <span class="price-category__body">
                   <strong>Лечение дёсен</strong>
                   <span>Процедуры для дёсен и слизистой</span>
-                  <span class="price-category__action">Услуги и цены <span aria-hidden="true">→</span></span>
+                  <span class="price-category__action">Услуги и цены <b class="icon-arrow" aria-hidden="true"></b></span>
                 </span>
               </a>
               <a class="price-category" href="price-children.html">
-                <img src="../assets/services/children-v3.webp" alt="" loading="lazy" width="640" height="420" />
+                <span class="price-category__media">
+                  <img src="../assets/services/children-v3.webp" alt="" loading="lazy" width="640" height="420" />
+                </span>
                 <span class="price-category__body">
                   <strong>Детская стоматология</strong>
                   <span>Приём и лечение молочных зубов</span>
-                  <span class="price-category__action">Услуги и цены <span aria-hidden="true">→</span></span>
+                  <span class="price-category__action">Услуги и цены <b class="icon-arrow" aria-hidden="true"></b></span>
                 </span>
               </a>
           </div>
-          <div class="directory" data-price-directory>
+          <div class="directory" id="price-directory" data-price-directory>
             <h3 data-directory-title>Полный прайс по разделам</h3>
-            <details class="directory-group" data-price-group>
+            <!-- prices:directory:start -->
+            <details class="directory-group" data-price-group data-price-page="price-visits.html">
                 <summary><span><strong>Приём и снимки</strong></span></summary>
                 <table class="price-table full-price-table" aria-label="Общие">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
@@ -199,7 +215,7 @@
                     </tbody>
                 </table>
             </details>
-            <details class="directory-group" data-price-group>
+            <details class="directory-group" data-price-group data-price-page="price-hygiene.html">
                 <summary><span><strong>Чистка и профилактика</strong></span></summary>
                 <table class="price-table full-price-table" aria-label="Профилактика стоматологических заболеваний">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
@@ -263,7 +279,7 @@
                     </tbody>
                 </table>
             </details>
-            <details class="directory-group" data-price-group>
+            <details class="directory-group" data-price-group data-price-page="price-treatment.html">
                 <summary><span><strong>Лечение зубов — терапия</strong></span></summary>
                 <table class="price-table full-price-table" aria-label="Терапия">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
@@ -323,7 +339,7 @@
                     </tbody>
                 </table>
             </details>
-            <details class="directory-group" data-price-group>
+            <details class="directory-group" data-price-group data-price-page="price-treatment.html">
                 <summary><span><strong>Лечение каналов — эндодонтия</strong></span></summary>
                 <table class="price-table full-price-table" aria-label="Эндодонтия">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
@@ -419,7 +435,7 @@
                     </tbody>
                 </table>
             </details>
-            <details class="directory-group" data-price-group>
+            <details class="directory-group" data-price-group data-price-page="price-surgery.html">
                 <summary><span><strong>Хирургия</strong></span></summary>
                 <table class="price-table full-price-table" aria-label="Хирургия">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
@@ -507,7 +523,7 @@
                     </tbody>
                 </table>
             </details>
-            <details class="directory-group" data-price-group>
+            <details class="directory-group" data-price-group data-price-page="price-orthodontics.html">
                 <summary><span><strong>Ортодонтия</strong></span></summary>
                 <table class="price-table full-price-table" aria-label="Ортодонтия">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
@@ -710,7 +726,7 @@
                     </tbody>
                 </table>
             </details>
-            <details class="directory-group" data-price-group>
+            <details class="directory-group" data-price-group data-price-page="price-prosthetics.html">
                 <summary><span><strong>Протезирование — ортопедия</strong></span></summary>
                 <table class="price-table full-price-table" aria-label="Ортопедическая стоматология">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
@@ -828,7 +844,7 @@
                     </tbody>
                 </table>
             </details>
-            <details class="directory-group" data-price-group>
+            <details class="directory-group" data-price-group data-price-page="price-prosthetics.html">
                 <summary><span><strong>Имплантация</strong></span></summary>
                 <table class="price-table full-price-table" aria-label="Имплантация">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
@@ -860,7 +876,7 @@
                     </tbody>
                 </table>
             </details>
-            <details class="directory-group" data-price-group>
+            <details class="directory-group" data-price-group data-price-page="price-gums.html">
                 <summary><span><strong>Лечение дёсен — пародонтология</strong></span></summary>
                 <table class="price-table full-price-table" aria-label="Пародонтология">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
@@ -888,12 +904,13 @@
                     </tbody>
                 </table>
             </details>
+            <!-- prices:directory:end -->
           </div>
-          <button class="price-more" type="button" data-price-more hidden aria-expanded="false">Показать все направления</button>
+          <button class="price-more" type="button" data-price-more hidden aria-controls="price-directory" aria-expanded="false">Открыть полный прайс</button>
           <p class="price-information">Стоимость уточняйте при записи: некоторые процедуры оплачиваются за зуб, челюсть или отдельный этап.</p>
           <div class="price-help">
             <div>
-              <h3>Не нашли нужную услугу?</h3>
+              <h3>Уточнить стоимость</h3>
               <p>Позвоните — администратор поможет сориентироваться.</p>
             </div>
             <a class="locbutton" href="tel:+74991853333">+7 (499) 185-33-33</a>
@@ -1348,8 +1365,7 @@
         <div class="foot-end">© 2026 Семейная стоматология «Апельсин»</div>
       </footer>
     </div>
-    <script src="../scripts/catalogue.js" defer></script>
-    <script src="../scripts/navigation.js?v=address-nav-20261125" defer></script>
-    <script src="../scripts/scroll.js" defer></script>
+    <script src="../scripts/catalogue.js?v=audit-20261125" defer></script>
+    <script src="../scripts/navigation.js?v=audit-20261125" defer></script>
   </body>
 </html>

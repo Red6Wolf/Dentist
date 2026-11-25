@@ -65,7 +65,6 @@
 }
 .subpage-section {
     padding: 72px 6%;
-    animation: page-section-in 0.65s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 .subpage-section + .subpage-section {
     border-top: 1px solid var(--line);
@@ -321,35 +320,27 @@
 }
 
 .price-controls {
-    max-width: 640px;
-    margin-top: 30px;
+    width: min(100%, 680px);
+    margin: 24px 0 0;
 }
 
 .price-controls label {
     display: block;
     margin-bottom: 8px;
-    font-weight: 650;
-}
-
-.price-search {
-    display: flex;
-    gap: 8px;
-}
-
-.price-search input,
-.price-search button {
-    min-height: 44px;
-    padding: 9px 12px;
-    border: 1px solid var(--muted);
-    border-radius: 10px;
-    color: var(--ink);
-    background: var(--cream);
-    font: inherit;
+    font-size: 17px;
+    font-weight: 700;
 }
 
 .price-search input {
-    flex: 1 1 auto;
-    min-width: 0;
+    width: 100%;
+    min-height: 52px;
+    padding: 10px 14px;
+    border: 1px solid var(--muted);
+    border-radius: var(--radius-small);
+    background: var(--surface-raised);
+    color: var(--ink);
+    font: inherit;
+    font-size: 17px;
 }
 
 .price-search input::placeholder,
@@ -357,15 +348,13 @@
     color: var(--muted);
 }
 
-.price-search button {
-    background: var(--sand);
-    cursor: pointer;
+.price-controls [role="status"] {
+    margin: 8px 0 0;
+    line-height: 1.5;
 }
 
-.price-controls [role="status"] {
-    margin: 10px 0 0;
-    min-height: 1.5em;
-    line-height: 1.5;
+.price-controls [role="status"]:empty {
+    margin: 0;
 }
 
 .full-price-table {
@@ -407,69 +396,15 @@
     display: none;
 }
 
-.price-introduction,
-#prices .price-controls,
-#prices .directory,
-#prices .price-information,
-#prices .price-help {
-    max-width: 960px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .price-introduction p {
-    margin: 12px 0 0;
+    margin: 8px 0 0;
     color: var(--muted);
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.55;
-}
-
-@media (min-width: 1001px) {
-    #prices .price-introduction,
-    #prices .price-controls,
-    #prices .price-category-grid {
-        margin-left: 0;
-    }
-}
-
-.price-detail .price-detail-search {
-    max-width: 960px;
-    margin: 32px auto 0;
-}
-
-.price-detail-search input {
-    width: 100%;
-    min-height: 56px;
-    padding: 12px 16px;
-    border: 1px solid var(--muted);
-    border-radius: 10px;
-    color: var(--ink);
-    background: var(--surface-raised);
-    font: inherit;
-    font-size: 18px;
-}
-
-.price-detail-search [role="status"]:empty {
-    display: none;
 }
 
 .price-detail [hidden] {
     display: none;
-}
-
-#prices .price-controls {
-    margin-top: 32px;
-}
-
-#prices .price-controls label {
-    font-size: 18px;
-}
-
-#prices .price-search input {
-    min-height: 56px;
-    padding: 12px 16px;
-    background: var(--surface-raised);
-    font-size: 18px;
 }
 
 .price-reset {
@@ -482,10 +417,6 @@
     text-decoration: underline;
     text-underline-offset: 4px;
     cursor: pointer;
-}
-
-#prices .price-controls [role="status"]:empty {
-    display: none;
 }
 
 #prices .directory {
@@ -563,7 +494,7 @@
 #prices .price-more {
     display: block;
     min-height: 48px;
-    margin: 12px auto 0;
+    margin: 20px 0 0;
     padding: 10px 18px;
     border: 1px solid var(--line);
     border-radius: 10px;
@@ -597,7 +528,7 @@
     background: var(--sand);
 }
 
-.price-help h3 {
+.price-help :is(h2, h3) {
     margin: 0 0 8px;
     font-size: 20px;
 }
@@ -685,7 +616,6 @@
     border-right: 2px solid var(--orange-deep);
     border-bottom: 2px solid var(--orange-deep);
     transform: rotate(45deg);
-    transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .profile-details[open]:not(.is-closing) > summary::after {
@@ -784,9 +714,10 @@
     transition: transform 240ms ease;
 }
 
-.gallery-photo:hover img,
-.gallery-photo:focus-visible img {
-    transform: scale(1.04);
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .gallery-photo:hover img {
+        transform: scale(1.025);
+    }
 }
 
 .gallery-viewer {
@@ -844,10 +775,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .gallery-photo img {
-        transition: none;
-    }
-
     .gallery-viewer[open] {
         animation: none;
     }
@@ -868,23 +795,6 @@
 
 .document-facts dd {
     margin: 0;
-}
-
-@keyframes page-section-in {
-    from {
-        opacity: 0;
-        transform: translateY(16px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .subpage-section {
-        animation: none;
-    }
 }
 
 @media (max-width: 700px) {
@@ -944,46 +854,53 @@
     }
 }
 
-/* Направления цен и страницы отдельных групп услуг. */
+/* Направления и таблицы цен. */
+
 .price-category-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 24px;
-    max-width: 960px;
-    margin: 32px auto 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 24px 0 0;
 }
 
 .price-category {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 40%) minmax(0, 1fr);
+    min-height: 196px;
     border: 1px solid var(--line);
     border-radius: var(--radius-card);
+    overflow: hidden;
     background: var(--surface-raised);
     color: var(--ink);
-    text-decoration: none;
+    transition: border-color 160ms ease;
+}
+
+.price-category__media {
+    position: relative;
+    min-height: 100%;
 }
 
 .price-category img {
-    display: block;
+    position: absolute;
+    inset: 0;
     width: 100%;
-    aspect-ratio: 3 / 2;
+    height: 100%;
     object-fit: cover;
 }
 
 .price-category__body {
     display: flex;
-    flex: 1;
     flex-direction: column;
-    gap: 8px;
-    padding: 20px;
-    font-size: 16px;
-    line-height: 1.5;
+    gap: 6px;
+    min-width: 0;
+    padding: clamp(14px, 2vw, 24px);
+    font-size: 15px;
+    line-height: 1.45;
 }
 
 .price-category__body strong {
-    font-size: 20px;
-    line-height: 1.3;
+    font-size: clamp(17px, 1.8vw, 22px);
+    line-height: 1.25;
 }
 
 .price-category__body > span:not(.price-category__action) {
@@ -991,12 +908,24 @@
 }
 
 .price-category__action {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
     margin-top: auto;
-    padding-top: 12px;
+    padding-top: 10px;
     color: var(--orange-action);
     font-weight: 700;
-    text-decoration: underline;
-    text-underline-offset: 4px;
+}
+
+.price-category__action .icon-arrow,
+.contact-route .icon-arrow,
+.hero-price-link .icon-arrow {
+    display: inline-grid;
+    width: 16px;
+    height: 16px;
+    place-items: center;
+    flex: none;
 }
 
 .price-category:hover,
@@ -1004,64 +933,62 @@
     border-color: var(--orange-action);
 }
 
-.price-search-intro {
-    max-width: 960px;
-    margin: 48px auto 0;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1.5;
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .price-category {
+        transition: transform 180ms cubic-bezier(.23, 1, .32, 1), border-color 160ms ease;
+    }
+
+    .price-category:hover {
+        transform: translateY(-2px);
+    }
 }
 
-#prices.price-filtered .price-category-grid,
-#prices.price-filtered .price-search-intro {
-    display: none;
+.price-detail h1 {
+    margin: 0;
+    max-width: 23ch;
+    font: 550 clamp(2.1rem, 4.4vw, 4.25rem)/1.1 var(--display);
+    letter-spacing: -.04em;
 }
 
-.price-detail {
-    max-width: none;
-}
-
-.price-detail > h2,
-.price-detail > p,
-.price-group-table,
-.price-detail .price-help,
-.price-back {
-    max-width: 960px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.price-back {
-    display: block;
+.price-back,
+.price-specialists,
+.contact-route {
+    display: inline-flex;
+    align-items: center;
     width: fit-content;
-    margin-bottom: 32px;
-    margin-left: max(0px, calc((100% - 960px) / 2));
-    color: var(--orange-action);
+    min-height: 44px;
+    gap: 8px;
     font-weight: 700;
-    text-decoration: underline;
-    text-underline-offset: 4px;
+}
+
+.price-back {
+    margin-bottom: 10px;
+}
+
+.price-specialists {
+    margin-top: 4px;
 }
 
 .price-detail > p {
-    margin-top: 16px;
+    margin-top: 10px;
+    max-width: 72ch;
     color: var(--muted);
-    font-size: 17px;
-    line-height: 1.6;
+    line-height: 1.55;
 }
 
 .price-group-table {
-    margin-top: 40px;
+    margin-top: 22px;
 }
 
 .price-group-table h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
+    margin: 0 0 12px;
+    font-size: 23px;
     line-height: 1.3;
+    letter-spacing: -.025em;
 }
 
 .price-group-table .full-price-table td {
-    font-size: 17px;
-    line-height: 1.55;
+    line-height: 1.5;
 }
 
 .price-group-table .full-price-table td:last-child {
@@ -1069,152 +996,24 @@
 }
 
 .price-detail .price-help {
-    margin-top: 48px;
+    margin-top: 32px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 650px) {
     .price-category-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 16px;
-    }
-}
-
-@media (max-width: 560px) {
-    .price-category-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
     }
 
     .price-category {
-        display: grid;
-        grid-template-columns: minmax(105px, 36%) minmax(0, 1fr);
+        grid-template-columns: minmax(0, 36%) minmax(0, 1fr);
+        min-height: 144px;
     }
 
-    .price-category img {
-        height: 100%;
-        min-height: 170px;
-        aspect-ratio: auto;
-    }
-
-    .price-category__body {
-        padding: 16px;
-        font-size: 15px;
-    }
-
-    .price-category__body strong {
-        font-size: 18px;
-    }
-}
-
-
-/* Карточки направлений с крупными фотографиями и понятными переходами. */
-#prices .price-category-grid {
-    max-width: 1120px;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px;
-}
-
-#prices .price-category {
-    display: grid;
-    grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
-    min-width: 0;
-    border-radius: 16px;
-    transition: border-color 180ms ease, transform 180ms ease;
-}
-
-#prices .price-category img {
-    width: 100%;
-    height: 100%;
-    min-height: 220px;
-    aspect-ratio: auto;
-    object-fit: cover;
-}
-
-#prices .price-category__body {
-    min-width: 0;
-    gap: 8px;
-    padding: 24px 22px;
-    font-size: 16px;
-}
-
-#prices .price-category__body strong {
-    font-size: 21px;
-    line-height: 1.3;
-}
-
-#prices .price-category__action {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    width: fit-content;
-    min-height: 44px;
-    padding: 10px 0 0;
-    text-decoration: none;
-    line-height: 1.3;
-}
-
-#prices .price-category__action span {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 36px;
-    border: 1px solid currentColor;
-    border-radius: 18px;
-    font-family: Arial, sans-serif;
-    font-size: 25px;
-    line-height: 1;
-}
-
-#prices .price-category:focus-visible {
-    outline: 3px solid var(--orange-action);
-    outline-offset: 4px;
-}
-
-@media (hover: hover) and (pointer: fine) {
-    #prices .price-category:hover {
-        position: relative;
-        z-index: 1;
-        transform: scale(1.04);
-    }
-}
-
-#prices .price-category:active {
-    transform: scale(.99);
-}
-
-@media (max-width: 1000px) {
-    #prices .price-category-grid {
-        grid-template-columns: 1fr;
-        max-width: 720px;
-        gap: 16px;
-    }
-}
-
-@media (max-width: 560px) {
-    #prices .price-category {
-        grid-template-columns: minmax(110px, 36%) minmax(0, 1fr);
-    }
-
-    #prices .price-category img {
-        min-height: 190px;
-    }
-    #prices .price-category__body {
-        padding: 18px 16px;
-        font-size: 15px;
-    }
-
-    #prices .price-category__body strong {
-        font-size: 18px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    #prices .price-category {
-        transition: none;
-    }
-
-    #prices .price-category:hover,
-    #prices .price-category:active {
-        transform: none;
+    .price-detail .price-group-table td:last-child,
+    .price-detail .price-group-table thead th:last-child,
+    #prices .full-price-table td:last-child,
+    #prices .full-price-table thead th:last-child {
+        padding-inline-end: 55px;
     }
 }
