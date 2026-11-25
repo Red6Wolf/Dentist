@@ -187,15 +187,13 @@ body {
 }
 
 .navcta,
-.locbutton,
-.booking-dialog__phone {
+.locbutton {
     background: var(--orange-action);
     color: #fff;
 }
 
 .navcta:hover,
-.locbutton:hover,
-.booking-dialog__phone:hover {
+.locbutton:hover {
     background: var(--orange-action-hover);
 }
 
@@ -762,31 +760,6 @@ body {
     color: #fff;
 }
 
-.booking-dialog {
-    border: 1px solid var(--line);
-    border-radius: var(--radius-card);
-    background: var(--cream);
-    box-shadow: 0 2px 10px rgba(30, 47, 38, .08),
-        0 28px 76px rgba(30, 47, 38, .16);
-}
-
-.booking-dialog::backdrop {
-    background: rgba(27, 39, 33, .48);
-}
-
-.booking-dialog__content {
-    padding: var(--space-5);
-}
-
-.booking-dialog__close {
-    width: 44px;
-    height: 44px;
-}
-
-.booking-dialog__phone {
-    font-variant-numeric: tabular-nums;
-}
-
 .booking-email {
     display: inline-flex;
     min-height: 48px;
@@ -824,8 +797,7 @@ body {
 .pillbtn,
 .roundbtn,
 .locbutton,
-.all-link,
-.booking-dialog__phone {
+.all-link {
     transition: transform 220ms ease, background-color 220ms ease,
         border-color 220ms ease, box-shadow 220ms ease;
 }
@@ -834,8 +806,7 @@ body {
 .pillbtn:hover,
 .roundbtn:hover,
 .locbutton:hover,
-.all-link:hover,
-.booking-dialog__phone:hover {
+.all-link:hover {
     transform: translateY(-2px) scale(1.025);
     box-shadow: 0 7px 16px rgba(38, 49, 46, .12);
 }
@@ -844,8 +815,7 @@ body {
 .pillbtn:active,
 .roundbtn:active,
 .locbutton:active,
-.all-link:active,
-.booking-dialog__phone:active {
+.all-link:active {
     transform: translateY(0) scale(.985);
 }
 
@@ -1199,10 +1169,6 @@ body {
         padding: var(--space-3);
     }
 
-    .booking-dialog__content {
-        padding: var(--space-4) var(--space-3);
-    }
-
     .footer {
         padding: var(--space-5) 20px var(--space-3);
     }
@@ -1217,7 +1183,6 @@ body {
     .roundbtn,
     .locbutton,
     .all-link,
-    .booking-dialog__phone,
     .feature-slide img,
     .doctor-portrait {
         transition: none;
