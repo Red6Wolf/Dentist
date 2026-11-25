@@ -15,17 +15,16 @@
       rel="stylesheet"
     />
     <link rel="canonical" href="https://stomatologiya-apelsin.ru/pages/contact.html" />
-    <link rel="preload" as="image" href="../assets/clinic/gallery-20.webp" />
-    <link rel="stylesheet" href="../styles/styles.css?v=audit-20261125" />
-    <link rel="stylesheet" href="../styles/pages.css?v=audit-20261125" />
-    <link rel="stylesheet" href="../styles/home.css?v=audit-20261125" />
-    <link rel="stylesheet" href="../styles/refinement.css?v=audit-20261125" />
+    <link rel="stylesheet" href="../styles/styles.css?v=patient-flow" />
+    <link rel="stylesheet" href="../styles/pages.css?v=patient-flow" />
+    <link rel="stylesheet" href="../styles/home.css?v=patient-flow" />
+    <link rel="stylesheet" href="../styles/refinement.css?v=patient-flow" />
   </head>
 
   <body>
     <div class="page">
       <a class="skip-link" href="#main-content">Перейти к содержимому</a>
-      <header class="panel subpage-hero subpage-hero--contact">
+      <header class="panel subpage-hero subpage-hero--compact subpage-hero--navigation">
         <nav class="nav" aria-label="Основная навигация">
           <div class="nav-identity">
             <a class="brand" href="../index.html">
@@ -45,51 +44,41 @@
             <a class="navcta" href="tel:+74991853333">Позвонить</a>
           </div>
         </nav>
-        <div>
-          <h1>Контакты и запись</h1>
-          <p>Позвоните администратору — подберём врача и удобное время.</p>
-        </div>
       </header>
       <main class="subpage-main" id="main-content" tabindex="-1">
-        <section class="panel subpage-section">
+        <section class="panel subpage-section contact-section">
           <div class="contact-layout">
-            <div class="contact-panel">
-              <h2>Как нас найти</h2>
-              <dl>
-                <dt>Адрес</dt>
-                <dd>
-                  129345, Москва, Тайнинская улица, 17, корпус 1
-                  <a class="content-link contact-route"
-                     href="https://yandex.ru/maps/org/semeynaya_stomatologiya_apelsin/1796694882/"
-                     target="_blank" rel="noopener noreferrer">Открыть в Яндекс Картах <span class="icon-arrow" aria-hidden="true"></span></a>
-                </dd>
-                <dt>Метро</dt>
-                <dd>Медведково · Бабушкинская</dd>
-                <dt>Телефон</dt>
-                <dd><a href="tel:+74991853333">+7 (499) 185-33-33</a></dd>
-                <dt>Электронная почта</dt>
-                <dd><a class="content-link" href="mailto:info@stomatologiya-apelsin.ru">info@stomatologiya-apelsin.ru</a></dd>
-                <dt>ВКонтакте</dt>
-                <dd><a class="content-link" href="https://vk.com/apelstom">Группа клиники</a></dd>
-                <dt>Часы</dt>
-                <dd>Пн–Пт 09:00–21:00 <br />Сб–Вс 10:00–19:00</dd>
+            <div class="contact-primary">
+              <h1>Контакты и запись</h1>
+              <p class="contact-address">Москва, Тайнинская улица, 17, корпус 1</p>
+              <p class="contact-metro">Медведково · Бабушкинская</p>
+              <dl class="contact-hours" aria-label="Часы работы">
+                <div><dt>Пн–Пт</dt><dd>09:00–21:00</dd></div>
+                <div><dt>Сб–Вс</dt><dd>10:00–19:00</dd></div>
               </dl>
-            </div>
-            <div class="contact-media">
-              <div class="map-card map-card--yandex">
-                <iframe
-                  title="Яндекс Карты: стоматология Апельсин, Тайнинская улица, 17, корпус 1"
-                  src="https://yandex.ru/map-widget/v1/?ll=37.68524%2C55.885121&amp;z=17&amp;pt=37.68524%2C55.885121%2Cpm2rdl"
-                  loading="lazy"
-                  allowfullscreen
-                ></iframe>
+              <div class="contact-actions">
+                <a class="locbutton" href="tel:+74991853333" aria-label="Позвонить в клинику: +7 (499) 185-33-33">
+                  +7 (499) 185-33-33
+                </a>
+                <a class="all-link" href="https://yandex.ru/maps/org/semeynaya_stomatologiya_apelsin/1796694882/"
+                   target="_blank" rel="noopener noreferrer">
+                  Открыть маршрут <b class="icon-arrow" aria-hidden="true"></b>
+                </a>
               </div>
-              <figure class="contact-entrance">
-                <img src="../assets/clinic/gallery-16.webp" alt="Вход в клинику со стороны Тайнинской улицы"
-                    loading="lazy" decoding="async" />
-                <figcaption>Вход в клинику</figcaption>
-              </figure>
             </div>
+            <figure class="contact-entrance">
+              <img src="../assets/clinic/gallery-16.webp" alt="Вход в клинику со стороны Тайнинской улицы"
+                   decoding="async" />
+              <figcaption>Вход в клинику со стороны Тайнинской улицы</figcaption>
+            </figure>
+          </div>
+          <div class="map-card map-card--yandex">
+            <iframe
+              title="Яндекс Карты: стоматология Апельсин, Тайнинская улица, 17, корпус 1"
+              src="https://yandex.ru/map-widget/v1/?ll=37.68524%2C55.885121&amp;z=17&amp;pt=37.68524%2C55.885121%2Cpm2rdl"
+              loading="lazy"
+              allowfullscreen
+            ></iframe>
           </div>
         </section>
         <section class="panel subpage-section" id="booking">
@@ -105,7 +94,8 @@
           </div>
           <p class="subpage-lead">
             Можно также
-            <a class="content-link" id="booking-email" href="mailto:info@stomatologiya-apelsin.ru?subject=Запись%20на%20приём">написать на электронную почту</a>.
+            <a class="content-link" id="booking-email" href="mailto:info@stomatologiya-apelsin.ru?subject=Запись%20на%20приём">написать на электронную почту</a>
+            или открыть <a class="content-link" href="https://vk.com/apelstom">группу клиники ВКонтакте</a>.
           </p>
         </section>
       </main>
@@ -162,7 +152,7 @@
         <div class="foot-end">© 2026 Семейная стоматология «Апельсин»</div>
       </footer>
     </div>
-    <script src="../scripts/navigation.js?v=audit-20261125" defer></script>
+    <script src="../scripts/navigation.js?v=patient-flow" defer></script>
     <script src="../scripts/contact.js" defer></script>
   </body>
 </html>

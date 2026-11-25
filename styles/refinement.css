@@ -312,14 +312,6 @@ body {
     background: url("../assets/clinic/office.jpeg") center / cover no-repeat;
 }
 
-.subpage-hero--clinic::before {
-    background-image: url("../assets/clinic/gallery-09.webp");
-}
-
-.subpage-hero--contact::before {
-    background-image: url("../assets/clinic/gallery-20.webp");
-}
-
 .subpage-hero--doctors::before {
     background-image: url("../assets/clinic/consultation.jpeg");
 }
@@ -609,13 +601,6 @@ body {
 .review-quotes figure,
 .review,
 .story-grid > div,
-.contact-panel {
-    border: 1px solid var(--line);
-    border-radius: var(--radius-card);
-    background: var(--surface-raised);
-    box-shadow: var(--shadow-card);
-}
-
 .service-catalog,
 .profiles,
 .review-quotes,
@@ -876,6 +861,10 @@ body {
             -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
         }
+    }
+
+    .hero .nav--hero-edge {
+        background: #30251f;
     }
 
     .brand-name {
@@ -1179,5 +1168,181 @@ body {
     .price-detail,
     .inline-prices {
         min-width: 0;
+    }
+}
+
+
+/* Текущий раздел и отклик кнопок. */
+
+.navlinks a[aria-current] {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+}
+
+.mobile-menu a[aria-current] {
+    background: rgba(255, 249, 242, .13);
+}
+
+.navcta:active,
+.locbutton:active {
+    background: #783508;
+}
+
+.mobile-menu-button:active {
+    background: #554237;
+}
+
+/* Приём, маршрут и интерьер клиники. */
+
+.subpage-hero--clinic {
+    display: block;
+    min-height: 0;
+    padding: 100px clamp(24px, 5vw, 92px) 32px;
+}
+
+.subpage-hero--clinic::before {
+    display: none;
+}
+
+.subpage-hero .clinic-hero-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+    align-items: center;
+    gap: clamp(24px, 5vw, 84px);
+    max-width: none;
+}
+
+.clinic-hero-content h1,
+.contact-primary h1 {
+    margin: 0;
+    font: 550 clamp(2.25rem, 5.2vw, 5rem)/1.04 var(--display);
+    letter-spacing: -.04em;
+    text-wrap: balance;
+}
+
+.clinic-hero-content img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-card);
+}
+
+.clinic-intro-links,
+.contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 18px;
+    margin-top: 20px;
+}
+
+.clinic-intro-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+.contact-section {
+    padding-top: clamp(24px, 4vw, 56px);
+}
+
+.contact-section .contact-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(20px, 4vw, 64px);
+    align-items: center;
+}
+
+.contact-primary h1 {
+    font-size: clamp(2.25rem, 5vw, 4.5rem);
+}
+
+.contact-address {
+    margin: 20px 0 6px;
+    font-size: clamp(17px, 1.8vw, 22px);
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.contact-metro {
+    margin: 0;
+    color: var(--muted);
+}
+
+.contact-hours {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    margin: 20px 0 0;
+}
+
+.contact-hours > div {
+    display: flex;
+    gap: 8px;
+}
+
+.contact-hours dt {
+    font-weight: 700;
+}
+
+.contact-hours dd {
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.contact-actions .locbutton,
+.contact-actions .all-link {
+    min-height: 44px;
+    margin: 0;
+}
+
+.contact-section .contact-entrance {
+    min-height: 0;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    margin: 0;
+}
+
+.contact-section .map-card {
+    min-height: clamp(240px, 35vw, 380px);
+    margin-top: 24px;
+}
+
+.profile-specialty + .profile-specialty {
+    margin-top: var(--space-5);
+}
+
+.profile-specialty > h3 {
+    margin: 0 0 16px;
+    font: 650 clamp(1.4rem, 3vw, 2rem)/1.2 var(--display);
+    letter-spacing: -.025em;
+}
+
+.profile-specialty .profiles {
+    margin-top: 0;
+}
+
+@media (min-width: 651px) and (max-width: 1180px) {
+    .subpage-hero--clinic {
+        padding-top: 138px;
+    }
+}
+
+@media (max-width: 650px) {
+    .subpage-hero--clinic {
+        padding: 98px 20px 22px;
+    }
+
+    .subpage-hero .clinic-hero-content,
+    .contact-section .contact-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .clinic-hero-content img {
+        aspect-ratio: 16 / 9;
+    }
+
+    .contact-section .map-card {
+        min-height: 310px;
     }
 }

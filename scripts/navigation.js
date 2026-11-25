@@ -53,11 +53,43 @@ if (navigation) {
     });
     mobileLayout.addEventListener("change", () => setMenu(false));
 
+    const navigationLinks = [...sourceLinks.children, ...menu.children];
+
+    function markCurrentPage() {
+        const page = location.pathname.split("/").pop() || "index.html";
+        const prices = page.startsWith("price-") ||
+            (page === "services.html" && /^#(?:prices$|p\d+-\d+$)/.test(location.hash));
+        for (const link of navigationLinks) {
+            const url = new URL(link.href);
+            const destination = url.pathname.split("/").pop() || "index.html";
+            const current = prices
+                ? url.hash === "#prices"
+                : destination === page && url.hash !== "#prices";
+            if (current) link.setAttribute("aria-current", prices ? "location" : "page");
+            else link.removeAttribute("aria-current");
+        }
+    }
+
+    markCurrentPage();
+    window.addEventListener("hashchange", markCurrentPage);
+
     const hero = navigation.closest(".hero");
-    if (hero && "IntersectionObserver" in window) {
-        const heroObserver = new IntersectionObserver(([entry]) => {
-            navigation.classList.toggle("nav--on-light", !entry.isIntersecting);
-        }, { rootMargin: "-70px 0px 0px" });
-        heroObserver.observe(hero);
+    if (hero) {
+        let frame = 0;
+        function updateHeroNavigation() {
+            frame = 0;
+            if (!mobileLayout.matches) return;
+            const heroBottom = hero.getBoundingClientRect().bottom;
+            const bounds = navigation.getBoundingClientRect();
+            navigation.classList.toggle("nav--on-light", heroBottom <= bounds.top);
+            navigation.classList.toggle("nav--hero-edge", heroBottom > bounds.top && heroBottom < bounds.bottom);
+        }
+
+        window.addEventListener("scroll", () => {
+            if (mobileLayout.matches && !frame) frame = requestAnimationFrame(updateHeroNavigation);
+        }, { passive: true });
+        window.addEventListener("resize", updateHeroNavigation);
+        window.addEventListener("pageshow", updateHeroNavigation);
+        updateHeroNavigation();
     }
 }

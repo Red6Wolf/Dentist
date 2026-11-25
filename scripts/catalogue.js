@@ -21,6 +21,26 @@ const priceAliases = [
     [/^стоматолог/, ["стоматолог"]],
 ];
 
+// Для частых запросов совпадение должно быть в названии процедуры.
+const commonSearches = [
+    [
+        /^(?:удалить|удаление) зуб(?:а|ов|ы)?$/,
+        /^удаление (?:подвижного молочного|неподвижного молочного|постоянного|ретинированного)/,
+    ],
+    [
+        /^(?:поставить |установить )?пломб[ау]$/,
+        /^реставрация коронковой части зуба|с учетом светоотверждаемой пломбы/,
+    ],
+    [
+        /^(?:(?:прием|консультация) (?:ребенка|детского стоматолога)|детский (?:прием|стоматолог))$/,
+        /^прием врача детского стоматолога/,
+    ],
+    [
+        /^чистка(?: зуб(?:ов|а)?)?$/,
+        /гигиена полости рта|^удаление .* отложений/,
+    ],
+];
+
 function normalizePriceText(value) {
     return value.toLocaleLowerCase("ru").replaceAll("ё", "е")
         .replace(/[^а-яa-z0-9]+/g, " ").trim();
@@ -48,7 +68,7 @@ function indexPriceGroup(group) {
         const heading = section.querySelector("[data-price-subgroup]")?.textContent ?? "";
         const rows = [...section.querySelectorAll("[data-price-row]")].map((row) => {
             const name = row.cells[0].textContent.trim();
-            return { element: row, name, searchText: normalizePriceText(context + " " + heading + " " + name) };
+            return { element: row, name, normalizedName: normalizePriceText(name), searchText: normalizePriceText(context + " " + heading + " " + name) };
         });
         return { element: section, rows };
     });
@@ -67,15 +87,20 @@ function createSuggestions(input) {
     };
 }
 
-function filterPriceGroups(groups, terms, selectedIds) {
+function filterPriceGroups(groups, query, selectedIds) {
+    const terms = searchTerms(query);
+    const normalized = normalizePriceText(query);
+    const exactSearch = commonSearches.find(([pattern]) => pattern.test(normalized));
     const names = [];
     for (const group of groups) {
         let groupCount = 0;
         for (const section of group.sections) {
             let sectionCount = 0;
             for (const row of section.rows) {
-                const visible = (!selectedIds || selectedIds.has(row.element.id)) &&
-                    rowMatches(terms, row.searchText);
+                const matches = exactSearch
+                    ? exactSearch[1].test(row.normalizedName)
+                    : rowMatches(terms, row.searchText);
+                const visible = (!selectedIds || selectedIds.has(row.element.id)) && matches;
                 row.element.hidden = !visible;
                 if (visible) {
                     names.push(row.name);
@@ -104,7 +129,7 @@ function enableDetailSearch(detail) {
 
     function filter() {
         const terms = searchTerms(input.value);
-        const names = filterPriceGroups(groups, terms, null);
+        const names = filterPriceGroups(groups, input.value, null);
         status.textContent = terms.length ? priceStatus(names.length) : "";
         clearButton.hidden = !input.value;
         updateSuggestions(input.value.trim().length >= 2 ? names : []);
@@ -143,14 +168,14 @@ function enablePriceSearch(directory) {
     function filter() {
         const terms = searchTerms(input.value);
         const filtering = Boolean(terms.length || selectedIds);
-        const names = filterPriceGroups(groups, terms, selectedIds);
+        const names = filterPriceGroups(groups, input.value, selectedIds);
         if (filtering || wasFiltering) {
             for (const { element } of groups) {
                 element.open = filtering && !element.hidden;
             }
         }
         wasFiltering = filtering;
-        categoryGrid.hidden = filtering;
+        categoryGrid.hidden = filtering || showDirectory;
         directory.hidden = filtering ? names.length === 0 : !showDirectory;
         directoryTitle.textContent = selectedIds
             ? service.querySelector("span").textContent
@@ -159,7 +184,7 @@ function enablePriceSearch(directory) {
         clearButton.textContent = selectedIds ? "Показать все цены" : "Очистить поиск";
         clearButton.hidden = !input.value && !selectedIds;
         moreButton.hidden = filtering;
-        moreButton.textContent = showDirectory ? "Скрыть полный прайс" : "Открыть полный прайс";
+        moreButton.textContent = showDirectory ? "Вернуться к направлениям" : "Открыть полный прайс";
         moreButton.setAttribute("aria-expanded", String(showDirectory));
         updateSuggestions(input.value.trim().length >= 2 ? names : []);
     }
