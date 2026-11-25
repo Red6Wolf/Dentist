@@ -25,6 +25,13 @@ if (navigation) {
     document.body.append(button, menu);
     navigation.classList.add("nav--enhanced");
 
+    function updateNavigationScroll() {
+        navigation.classList.toggle("nav--scrolled", window.scrollY > 24);
+    }
+
+    window.addEventListener("scroll", updateNavigationScroll, { passive: true });
+    updateNavigationScroll();
+
     function closeMenu() {
         button.setAttribute("aria-expanded", "false");
         button.setAttribute("aria-label", "Открыть меню");
