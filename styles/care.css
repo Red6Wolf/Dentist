@@ -139,3 +139,46 @@
 .care-example .care-total {
     max-width: 900px;
 }
+
+/* Сканы документов доступны сразу и увеличиваются в общем просмотрщике. */
+.license-hint {
+    margin-top: 24px;
+    color: var(--muted);
+}
+
+.license-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.license-gallery figure {
+    min-width: 0;
+    margin: 0;
+}
+
+.license-gallery .license-photo {
+    padding: 10px;
+    border: 1px solid var(--line);
+    background: var(--surface-raised);
+}
+
+.license-photo img {
+    aspect-ratio: 873 / 1200;
+    object-fit: contain;
+    border-radius: 2px;
+    background: #fff;
+}
+
+.license-gallery figcaption {
+    margin-top: 12px;
+    font-size: 15px;
+    line-height: 1.45;
+}
+
+@media (max-width: 650px) {
+    .license-gallery {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

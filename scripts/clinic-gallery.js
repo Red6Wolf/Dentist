@@ -1,6 +1,6 @@
-const galleryPhotos = [...document.querySelectorAll(".gallery-photo")];
+const allGalleryPhotos = [...document.querySelectorAll(".gallery-photo")];
 
-if (galleryPhotos.length > 0 && typeof HTMLDialogElement !== "undefined") {
+if (allGalleryPhotos.length > 0 && typeof HTMLDialogElement !== "undefined") {
     const viewer = document.createElement("dialog");
     viewer.className = "gallery-viewer";
     viewer.setAttribute("aria-label", "Фотографии клиники");
@@ -32,6 +32,7 @@ if (galleryPhotos.length > 0 && typeof HTMLDialogElement !== "undefined") {
     const previousButton = viewer.querySelector("[data-gallery-prev]");
     const nextButton = viewer.querySelector("[data-gallery-next]");
     const closeButton = viewer.querySelector(".gallery-viewer__close");
+    let galleryPhotos = allGalleryPhotos;
     let opener = null;
     let activeIndex = 0;
     let activeRequest = 0;
@@ -58,16 +59,22 @@ if (galleryPhotos.length > 0 && typeof HTMLDialogElement !== "undefined") {
         }
     }
 
-    galleryPhotos.forEach((photo, index) => {
+    allGalleryPhotos.forEach((photo) => {
         const thumbnail = photo.querySelector("img");
         photo.setAttribute("aria-label", "Увеличить фото: " + thumbnail.alt);
         photo.addEventListener("click", (event) => {
             if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
             event.preventDefault();
+            const group = photo.closest(".license-gallery, .clinic-gallery");
+            galleryPhotos = allGalleryPhotos.filter((item) =>
+                item.closest(".license-gallery, .clinic-gallery") === group
+            );
+            viewer.setAttribute("aria-label", photo.classList.contains("license-photo")
+                ? "Лицензия и приложение" : "Фотографии клиники");
             opener = photo;
             viewer.classList.toggle("gallery-viewer--pointer", event.detail > 0);
             viewer.showModal();
-            showPhoto(index);
+            showPhoto(galleryPhotos.indexOf(photo));
         });
     });
 

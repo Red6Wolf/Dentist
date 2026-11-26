@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="../styles/styles.css?v=patient-flow" />
     <link rel="stylesheet" href="../styles/pages.css?v=separate-prices" />
     <link rel="stylesheet" href="../styles/refinement.css?v=patient-care" />
-    <link rel="stylesheet" href="../styles/care.css?v=hover-pause" />
+    <link rel="stylesheet" href="../styles/care.css?v=license-photos" />
   </head>
 
   <body>
@@ -195,11 +195,33 @@
               <li>Специализированная помощь: неврология, ортодонтия, детская стоматология, стоматология общей практики, ортопедическая, терапевтическая и хирургическая стоматология.</li>
             </ul>
           </details>
-          <ul class="document-list">
-            <li><a class="content-link" href="../assets/licenses/license-2.webp">Лицензия — лицевая сторона</a></li>
-            <li><a class="content-link" href="../assets/licenses/license-3.webp">Лицензия — оборотная сторона</a></li>
-            <li><a class="content-link" href="../assets/licenses/license-1.webp">Приложение № 1</a></li>
-          </ul>
+          <p class="license-hint">Нажмите на документ, чтобы увеличить.</p>
+          <div class="license-gallery">
+            <figure>
+              <a class="gallery-photo license-photo" href="../assets/licenses/license-2.webp">
+                <img src="../assets/licenses/license-2.webp"
+                     alt="Лицензия — лицевая сторона" width="873" height="1200"
+                     loading="lazy" decoding="async" />
+              </a>
+              <figcaption>Лицензия — лицевая сторона</figcaption>
+            </figure>
+            <figure>
+              <a class="gallery-photo license-photo" href="../assets/licenses/license-3.webp">
+                <img src="../assets/licenses/license-3.webp"
+                     alt="Лицензия — оборотная сторона" width="873" height="1200"
+                     loading="lazy" decoding="async" />
+              </a>
+              <figcaption>Лицензия — оборотная сторона</figcaption>
+            </figure>
+            <figure>
+              <a class="gallery-photo license-photo" href="../assets/licenses/license-1.webp">
+                <img src="../assets/licenses/license-1.webp"
+                     alt="Приложение № 1" width="873" height="1200"
+                     loading="lazy" decoding="async" />
+              </a>
+              <figcaption>Приложение № 1</figcaption>
+            </figure>
+          </div>
         </section>
         <section class="panel subpage-section" id="offers">
           <h2>Рассрочка</h2>
@@ -267,6 +289,6 @@
       </footer>
     </div>
     <script src="../scripts/navigation.js?v=patient-care" defer></script>
-    <script src="../scripts/clinic-gallery.js?v=patient-flow" defer></script>
+    <script src="../scripts/clinic-gallery.js?v=license-photos" defer></script>
   </body>
 </html>
