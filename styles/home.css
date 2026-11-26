@@ -1,13 +1,98 @@
-/* Карточка детской стоматологии на главной. */
+/* Слайдер направлений на главной. */
+
+.feature-slider {
+    position: relative;
+    display: grid;
+    min-width: 0;
+}
+
+.feature-slides {
+    display: grid;
+    min-width: 0;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+    background: var(--sand);
+}
+
+.feature-slide[hidden],
+.feature-slider-controls[hidden],
+.feature-slider-controls button[hidden] {
+    display: none;
+}
+
+.feature-slider-controls {
+    position: absolute;
+    z-index: 2;
+    top: 14px;
+    right: 14px;
+    display: flex;
+    gap: 6px;
+}
+
+.feature-slider-controls button {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--surface-raised);
+    color: var(--ink);
+    cursor: pointer;
+}
+
+.feature-slider-controls button:active {
+    background: var(--sand);
+}
+
+.feature-slider-chevron {
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(45deg);
+}
+
+[data-slider-prev] .feature-slider-chevron {
+    transform: rotate(225deg);
+}
+
+.feature-slider-playback {
+    width: 10px;
+    height: 12px;
+    border-inline: 2px solid currentColor;
+}
+
+[data-slider-pause].is-paused .feature-slider-playback {
+    width: 0;
+    height: 0;
+    border: 0;
+    border-block: 6px solid transparent;
+    border-left: 9px solid currentColor;
+}
+
+.feature-slider-status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
 
 .feature-slide {
     position: relative;
+    grid-area: 1 / 1;
     display: block;
     min-height: 470px;
     overflow: hidden;
     border-radius: var(--radius-card);
     background: var(--sand);
     color: var(--ink);
+}
+
+.feature-slide:focus-visible {
+    outline-offset: -4px;
 }
 
 .feature-slide img {
@@ -142,6 +227,31 @@
     right: 16%;
     bottom: 0;
     background-image: url('../assets/clinic/gallery-19.webp');
+}
+
+/* Срез и фотографии вращаются вместе, фотографии остаются вертикальными. */
+@media (prefers-reduced-motion: no-preference) {
+    .orange-scene {
+        --citrus-rotation-duration: 40s;
+        animation: citrus-spin var(--citrus-rotation-duration) linear infinite paused;
+    }
+
+    .orange-scene .bubble {
+        animation: citrus-counterspin var(--citrus-rotation-duration) linear infinite paused;
+    }
+
+    .orange-wrap.is-visible .orange-scene,
+    .orange-wrap.is-visible .bubble {
+        animation-play-state: running;
+    }
+}
+
+@keyframes citrus-spin {
+    to { rotate: 360deg; }
+}
+
+@keyframes citrus-counterspin {
+    to { rotate: -360deg; }
 }
 
 /* Настоящая карта и фотография входа на главной и странице контактов. */

@@ -18,7 +18,7 @@
     <link rel="preload" as="image" href="assets/clinic/hero-aligner.webp" />
     <link rel="stylesheet" href="styles/styles.css?v=patient-flow" />
     <link rel="stylesheet" href="styles/pages.css?v=button-hover" />
-    <link rel="stylesheet" href="styles/home.css?v=patient-flow" />
+    <link rel="stylesheet" href="styles/home.css?v=service-carousel" />
     <link rel="stylesheet" href="styles/refinement.css?v=button-hover" />
     <script type="application/ld+json">
       {
@@ -111,14 +111,54 @@
             </a>
           </div>
           <div class="services">
-            <a class="feature-slide" href="pages/price-children.html">
-              <img src="assets/clinic/gallery-13.webp" alt="" loading="lazy" decoding="async" />
-              <div class="feature-caption">
-                <h3 class="feature-title">Детская стоматология</h3>
-                <span class="feature-description">Приём, профилактика и лечение молочных зубов</span>
-                <span class="feature-open">Услуги и цены <span class="icon-arrow" aria-hidden="true"></span></span>
+            <div class="feature-slider" role="region" aria-label="Направления стоматологии">
+              <div class="feature-slider-controls" hidden>
+                <button type="button" data-slider-prev aria-label="Предыдущее направление">
+                  <span class="feature-slider-chevron" aria-hidden="true"></span>
+                </button>
+                <button type="button" data-slider-pause aria-label="Приостановить смену слайдов">
+                  <span class="feature-slider-playback" aria-hidden="true"></span>
+                </button>
+                <button type="button" data-slider-next aria-label="Следующее направление">
+                  <span class="feature-slider-chevron" aria-hidden="true"></span>
+                </button>
               </div>
-            </a>
+              <div class="feature-slides">
+                <a class="feature-slide" href="pages/price-children.html">
+                  <img src="assets/clinic/gallery-13.webp" alt="" loading="lazy" decoding="async" />
+                  <div class="feature-caption">
+                    <h3 class="feature-title">Детская стоматология</h3>
+                    <span class="feature-description">Приём, профилактика и лечение молочных зубов</span>
+                    <span class="feature-open">Услуги и цены <span class="icon-arrow" aria-hidden="true"></span></span>
+                  </div>
+                </a>
+                <a class="feature-slide" href="pages/price-treatment.html" hidden>
+                  <img src="assets/clinic/gallery-04.webp" alt="" loading="lazy" decoding="async" />
+                  <div class="feature-caption">
+                    <h3 class="feature-title">Лечение зубов</h3>
+                    <span class="feature-description">Лечение кариеса и пульпита, восстановление зубов</span>
+                    <span class="feature-open">Услуги и цены <span class="icon-arrow" aria-hidden="true"></span></span>
+                  </div>
+                </a>
+                <a class="feature-slide" href="pages/price-orthodontics.html" hidden>
+                  <img src="assets/clinic/gallery-09.webp" alt="" loading="lazy" decoding="async" />
+                  <div class="feature-caption">
+                    <h3 class="feature-title">Ортодонтия</h3>
+                    <span class="feature-description">Диагностика прикуса, брекеты и наблюдение у ортодонта</span>
+                    <span class="feature-open">Услуги и цены <span class="icon-arrow" aria-hidden="true"></span></span>
+                  </div>
+                </a>
+                <a class="feature-slide" href="pages/price-prosthetics.html" hidden>
+                  <img src="assets/clinic/consultation.jpeg" alt="" loading="lazy" decoding="async" />
+                  <div class="feature-caption">
+                    <h3 class="feature-title">Имплантация</h3>
+                    <span class="feature-description">План лечения и восстановление утраченных зубов</span>
+                    <span class="feature-open">Услуги и цены <span class="icon-arrow" aria-hidden="true"></span></span>
+                  </div>
+                </a>
+              </div>
+              <p class="feature-slider-status" role="status"></p>
+            </div>
             <div>
               <div class="service-list">
                 <a class="service-row" href="pages/price-children.html">
@@ -230,12 +270,12 @@
           </div>
           <div class="orange-wrap">
             <div class="orange-scene" aria-hidden="true">
-            <img class="orange-slice" src="assets/illustrations/orange-cross-section.svg" alt="" />
-            <div class="bubble b1"></div>
-            <div class="bubble b2"></div>
-            <div class="bubble b3"></div>
-            <div class="bubble b4"></div>
-          </div>
+              <img class="orange-slice" src="assets/illustrations/orange-cross-section.svg" alt="" />
+              <div class="bubble b1"></div>
+              <div class="bubble b2"></div>
+              <div class="bubble b3"></div>
+              <div class="bubble b4"></div>
+            </div>
           </div>
         </section>
         <!-- Команда клиники -->
@@ -551,5 +591,6 @@
       </footer>
     </div>
     <script src="scripts/navigation.js?v=patient-flow" defer></script>
+    <script src="scripts/home.js?v=service-carousel" defer></script>
   </body>
 </html>
