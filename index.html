@@ -18,8 +18,8 @@
     <link rel="preload" as="image" href="assets/clinic/hero-aligner.webp" />
     <link rel="stylesheet" href="styles/styles.css?v=patient-flow" />
     <link rel="stylesheet" href="styles/pages.css?v=separate-prices" />
-    <link rel="stylesheet" href="styles/home.css?v=service-carousel" />
-    <link rel="stylesheet" href="styles/refinement.css?v=button-hover" />
+    <link rel="stylesheet" href="styles/home.css?v=visit-art" />
+    <link rel="stylesheet" href="styles/refinement.css?v=nav-hours" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -62,7 +62,7 @@
               <span class="brand-name">Апельсин</span>
               <span class="brand-caption">стоматология</span>
             </a>
-            <a class="nav-address" href="pages/contact.html" aria-label="Как добраться: Тайнинская улица, 17, корпус 1">Тайнинская, 17к1</a>
+            <a class="nav-address" href="pages/contact.html" aria-label="Адрес и часы работы клиники">Тайнинская, 17к1<span class="nav-hours">Пн–Пт 9–21 · Сб–Вс 10–19</span></a>
           </div>
           <div class="navlinks">
             <a href="pages/services.html">Услуги</a>
@@ -93,9 +93,10 @@
             <a class="content-link" href="pages/contact.html">Москва, Тайнинская, 17к1</a>
             <span>Медведково · Бабушкинская</span>
           </div>
-          <div>
+          <div class="visit-strip__hours">
             <strong>Принимаем ежедневно</strong>
-            <span>Пн–Пт 09:00–21:00 · Сб–Вс 10:00–19:00</span>
+            <span><b>Пн–Пт</b> 09:00–21:00</span>
+            <span><b>Сб–Вс</b> 10:00–19:00</span>
           </div>
           <a class="content-link visit-strip__reviews" href="#reviews">Отзывы пациентов</a>
         </section>
@@ -112,17 +113,6 @@
           </div>
           <div class="services">
             <div class="feature-slider" role="region" aria-label="Направления стоматологии">
-              <div class="feature-slider-controls" hidden>
-                <button type="button" data-slider-prev aria-label="Предыдущее направление">
-                  <span class="feature-slider-chevron" aria-hidden="true"></span>
-                </button>
-                <button type="button" data-slider-pause aria-label="Приостановить смену слайдов">
-                  <span class="feature-slider-playback" aria-hidden="true"></span>
-                </button>
-                <button type="button" data-slider-next aria-label="Следующее направление">
-                  <span class="feature-slider-chevron" aria-hidden="true"></span>
-                </button>
-              </div>
               <div class="feature-slides">
                 <a class="feature-slide" href="pages/price-children.html">
                   <img src="assets/clinic/gallery-13.webp" alt="" loading="lazy" decoding="async" />
@@ -157,7 +147,6 @@
                   </div>
                 </a>
               </div>
-              <p class="feature-slider-status" role="status"></p>
             </div>
             <div>
               <div class="service-list">
@@ -259,26 +248,6 @@
           </div>
         </section>
         <!-- Расположение клиники -->
-        <section class="panel location-feature" id="clinic">
-          <div class="loc-copy">
-            <h2>Наша клиника на Тайнинской</h2>
-            <p>Посмотрите кабинеты, детскую зону и вход со стороны Тайнинской улицы.</p>
-            <a class="locbutton" href="pages/clinic.html">
-              Посмотреть клинику
-              <b class="icon-arrow" aria-hidden="true"></b>
-            </a>
-          </div>
-          <div class="orange-wrap">
-            <div class="orange-scene" aria-hidden="true">
-              <img class="orange-slice" src="assets/illustrations/orange-cross-section.svg" alt="" />
-              <div class="bubble b1"></div>
-              <div class="bubble b2"></div>
-              <div class="bubble b3"></div>
-              <div class="bubble b4"></div>
-            </div>
-          </div>
-        </section>
-        <!-- Команда клиники -->
         <section class="panel team" id="team">
           <div class="teamhead">
             <h2>Врачи клиники</h2>
@@ -384,6 +353,26 @@
           </div>
         </section>
         <!-- Прайс-лист -->
+        <section class="panel location-feature" id="clinic">
+          <div class="loc-copy">
+            <h2>Наша клиника на Тайнинской</h2>
+            <p>Посмотрите кабинеты, детскую зону и вход со стороны Тайнинской улицы.</p>
+            <a class="locbutton" href="pages/clinic.html">
+              Посмотреть клинику
+              <b class="icon-arrow" aria-hidden="true"></b>
+            </a>
+          </div>
+          <div class="orange-wrap">
+            <div class="orange-scene" aria-hidden="true">
+              <img class="orange-slice" src="assets/illustrations/orange-cross-section.svg" alt="" />
+              <div class="bubble b1"></div>
+              <div class="bubble b2"></div>
+              <div class="bubble b3"></div>
+              <div class="bubble b4"></div>
+            </div>
+          </div>
+        </section>
+        <!-- Команда клиники -->
         <section class="panel price-section" id="prices">
           <div class="price-intro">
             <h2>Цены</h2>
@@ -591,6 +580,6 @@
       </footer>
     </div>
     <script src="scripts/navigation.js?v=separate-prices" defer></script>
-    <script src="scripts/home.js?v=service-carousel" defer></script>
+    <script src="scripts/home.js?v=autoplay" defer></script>
   </body>
 </html>

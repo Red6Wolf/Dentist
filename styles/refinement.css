@@ -1364,3 +1364,25 @@ body {
         min-height: 310px;
     }
 }
+
+/* Адрес и расписание в мобильной шапке. */
+.nav-hours {
+    display: block;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -.02em;
+}
+
+@media (max-width: 650px) {
+    .nav-address {
+        display: block;
+        white-space: normal;
+        font-size: 11px;
+        line-height: 1.35;
+    }
+
+    .nav-identity {
+        min-width: 0;
+    }
+}
