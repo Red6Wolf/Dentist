@@ -1,13 +1,5 @@
 const slider = document.querySelector(".feature-slider");
 const orange = document.querySelector(".orange-wrap");
-const motionToggle = document.querySelector("[data-motion-toggle]");
-let motionStopped = false;
-try {
-    motionStopped = localStorage.getItem("apelsin-motion-paused") === "true";
-} catch {
-    // Недоступное хранилище не мешает управлению анимацией.
-}
-document.body.classList.toggle("motion-stopped", motionStopped);
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 if (slider) {
@@ -54,7 +46,7 @@ if (slider) {
 
     function scheduleAutoplay() {
         window.clearTimeout(timer);
-        if (motionStopped || !visible || document.hidden || pointerOver || hasFocus || reducedMotion.matches) return;
+        if (!visible || document.hidden || pointerOver || hasFocus || reducedMotion.matches) return;
 
         slides[(active + 1) % slides.length].querySelector("img").loading = "eager";
         timer = window.setTimeout(() => {
@@ -95,7 +87,6 @@ if (slider) {
         observer.observe(slider);
     }
 
-    window.addEventListener("apelsin-motion-change", updateMotionPreference);
     reducedMotion.addEventListener("change", updateMotionPreference);
     updateMotionPreference();
 }
@@ -109,27 +100,4 @@ if (orange) {
     } else {
         orange.classList.add("is-visible");
     }
-}
-
-
-// Выбор сохраняется между посещениями и управляет слайдером и апельсином.
-if (motionToggle) {
-    function updateMotionButton() {
-        motionToggle.textContent = motionStopped ? "Включить анимацию" : "Остановить анимацию";
-        motionToggle.setAttribute("aria-pressed", String(motionStopped));
-        motionToggle.hidden = reducedMotion.matches;
-    }
-    motionToggle.addEventListener("click", () => {
-        motionStopped = !motionStopped;
-        document.body.classList.toggle("motion-stopped", motionStopped);
-        try {
-            localStorage.setItem("apelsin-motion-paused", String(motionStopped));
-        } catch {
-            // Текущий выбор продолжает действовать без сохранения.
-        }
-        updateMotionButton();
-        window.dispatchEvent(new Event("apelsin-motion-change"));
-    });
-    reducedMotion.addEventListener("change", updateMotionButton);
-    updateMotionButton();
 }
