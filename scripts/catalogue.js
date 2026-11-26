@@ -152,10 +152,11 @@ function enablePriceSearch(directory) {
     const status = controls.querySelector("[data-price-status]");
     const clearButton = controls.querySelector("[data-price-clear]");
     const moreButton = section.querySelector("[data-price-more]");
-    const categoryGrid = section.querySelector(".price-category-grid");
+    const overview = section.querySelector("[data-price-overview]");
     const directoryTitle = directory.querySelector("[data-directory-title]");
     const url = new URL(location.href);
-    const service = document.getElementById("service-" + url.searchParams.get("service"));
+    const serviceIndex = section.querySelector("#price-service-index");
+    const service = serviceIndex.content.getElementById("service-" + url.searchParams.get("service"));
     let selectedIds = service?.dataset.servicePrices
         ? new Set(service.dataset.servicePrices.split(",").map((id) => id.trim()))
         : null;
@@ -175,16 +176,16 @@ function enablePriceSearch(directory) {
             }
         }
         wasFiltering = filtering;
-        categoryGrid.hidden = filtering || showDirectory;
+        overview.hidden = filtering || showDirectory;
         directory.hidden = filtering ? names.length === 0 : !showDirectory;
         directoryTitle.textContent = selectedIds
-            ? service.querySelector("span").textContent
+            ? service.textContent
             : filtering ? "Результаты поиска" : "Полный прайс";
         status.textContent = filtering ? priceStatus(names.length) : "";
         clearButton.textContent = selectedIds ? "Показать все цены" : "Очистить поиск";
         clearButton.hidden = !input.value && !selectedIds;
         moreButton.hidden = filtering;
-        moreButton.textContent = showDirectory ? "Вернуться к направлениям" : "Открыть полный прайс";
+        moreButton.textContent = showDirectory ? "Свернуть полный прайс" : "Открыть полный прайс";
         moreButton.setAttribute("aria-expanded", String(showDirectory));
         updateSuggestions(input.value.trim().length >= 2 ? names : []);
     }
@@ -219,16 +220,21 @@ function enablePriceSearch(directory) {
     filter();
 }
 
-function enableInlinePrices(catalogue, directory) {
-    const priceRows = new Map(
-        [...directory.querySelectorAll("[data-price-row]")].map((row) => [row.id, row])
-    );
+function enableInlinePrices(catalogue) {
+    let priceRowsRequest;
+
+    async function loadPriceRows() {
+        const response = await fetch("prices.html");
+        if (!response.ok) throw new Error("Не удалось загрузить прайс");
+        const page = new DOMParser().parseFromString(await response.text(), "text/html");
+        return new Map([...page.querySelectorAll("[data-price-row]")].map((row) => [row.id, row]));
+    }
 
     for (const link of catalogue.querySelectorAll('a[href*="?service="]')) {
         link.setAttribute("aria-expanded", "false");
     }
 
-    catalogue.addEventListener("click", (event) => {
+    catalogue.addEventListener("click", async (event) => {
         const link = event.target.closest('a[href*="?service="]');
         if (!link || link.closest(".inline-prices") ||
             event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -236,16 +242,34 @@ function enableInlinePrices(catalogue, directory) {
         const item = link.closest("[data-service-prices]");
         if (!item) return;
 
-        const rows = item.dataset.servicePrices.split(",")
-            .map((id) => priceRows.get(id.trim())).filter(Boolean);
-        if (!rows.length) return;
         event.preventDefault();
+        if (link.hasAttribute("aria-busy")) return;
 
         const existing = item.querySelector(".inline-prices");
         if (existing) {
             existing.remove();
+            item.classList.remove("has-inline-prices");
             link.setAttribute("aria-expanded", "false");
             link.removeAttribute("aria-controls");
+            return;
+        }
+
+        link.setAttribute("aria-busy", "true");
+        let rows;
+        try {
+            priceRowsRequest ??= loadPriceRows();
+            const priceRows = await priceRowsRequest;
+            rows = item.dataset.servicePrices.split(",")
+                .map((id) => priceRows.get(id.trim())).filter(Boolean);
+        } catch {
+            priceRowsRequest = undefined;
+            location.assign(link.href);
+            return;
+        } finally {
+            link.removeAttribute("aria-busy");
+        }
+        if (!rows.length) {
+            location.assign(link.href);
             return;
         }
 
@@ -277,6 +301,7 @@ function enableInlinePrices(catalogue, directory) {
         }
 
         panel.append(heading, list, fullLink);
+        item.classList.add("has-inline-prices");
         item.append(panel);
         link.setAttribute("aria-expanded", "true");
         link.setAttribute("aria-controls", panel.id);
@@ -287,9 +312,23 @@ const detail = document.querySelector(".price-detail");
 if (detail) enableDetailSearch(detail);
 
 const priceDirectory = document.querySelector("[data-price-directory]");
-if (priceDirectory) {
-    enablePriceSearch(priceDirectory);
-    enableInlinePrices(document.getElementById("catalogue"), priceDirectory);
+if (priceDirectory) enablePriceSearch(priceDirectory);
+
+const catalogue = document.getElementById("catalogue");
+if (catalogue) {
+    function forwardPriceLink() {
+        const url = new URL(location.href);
+        if (url.searchParams.has("service") || /^#(?:prices|p\d+-\d+)$/.test(url.hash)) {
+            const prices = new URL("prices.html", url);
+            prices.search = url.search;
+            prices.hash = url.hash;
+            location.replace(prices);
+        }
+    }
+
+    forwardPriceLink();
+    window.addEventListener("hashchange", forwardPriceLink);
+    enableInlinePrices(catalogue);
 }
 
 revealAnchor();

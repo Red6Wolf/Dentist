@@ -57,15 +57,11 @@ if (navigation) {
 
     function markCurrentPage() {
         const page = location.pathname.split("/").pop() || "index.html";
-        const prices = page.startsWith("price-") ||
-            (page === "services.html" && /^#(?:prices$|p\d+-\d+$)/.test(location.hash));
+        const activePage = page.startsWith("price-") ? "prices.html" : page;
         for (const link of navigationLinks) {
             const url = new URL(link.href);
             const destination = url.pathname.split("/").pop() || "index.html";
-            const current = prices
-                ? url.hash === "#prices"
-                : destination === page && url.hash !== "#prices";
-            if (current) link.setAttribute("aria-current", prices ? "location" : "page");
+            if (destination === activePage) link.setAttribute("aria-current", activePage === page ? "page" : "location");
             else link.removeAttribute("aria-current");
         }
     }

@@ -4,11 +4,56 @@ import argparse
 import json
 import re
 from html import escape
+from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PRICE_DATA = Path(__file__).with_name("prices.json")
 COLUMNS = '<thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>'
+COMMON_PRICES = [
+    ("p01-01", "Первичный приём стоматолога-терапевта"),
+    ("p01-03", "Первичный приём детского стоматолога"),
+    ("p01-12", "Прицельный снимок зуба"),
+    ("p02-01", "Комплексная чистка (ультразвук, Air-Flow, полировка)"),
+]
+
+
+class ServicePriceIndex(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.entries = []
+        self.item = None
+        self.in_name = False
+
+    def handle_starttag(self, tag, attributes):
+        attributes = dict(attributes)
+        if tag == "li" and "data-service-prices" in attributes:
+            self.item = [attributes["id"], attributes["data-service-prices"], ""]
+        if self.item and tag == "span":
+            self.in_name = True
+
+    def handle_data(self, data):
+        if self.in_name:
+            self.item[2] += data
+
+    def handle_endtag(self, tag):
+        if tag == "span":
+            self.in_name = False
+        if tag == "li" and self.item:
+            self.entries.append(self.item)
+            self.item = None
+
+
+def service_price_index(rows):
+    parser = ServicePriceIndex()
+    parser.feed((ROOT / "pages/services.html").read_text())
+    parser.close()
+    entries = []
+    for service_id, prices, name in parser.entries:
+        if any(row_id.strip() not in rows for row_id in prices.split(",")):
+            raise ValueError(f"Неизвестная позиция прайса у услуги {service_id}")
+        entries.append(f'<span id="{escape(service_id)}" data-service-prices="{escape(prices)}">{escape(name.strip())}</span>')
+    return "\n".join(entries)
 
 
 def table(group):
@@ -111,8 +156,14 @@ def main():
     )
     results = [
         update("index.html", "preview", preview, args.check),
-        update("pages/services.html", "directory", "\n".join(map(directory_table, groups)), args.check),
+        update("pages/prices.html", "directory", "\n".join(map(directory_table, groups)), args.check),
+        update("pages/prices.html", "service-index", service_price_index(rows), args.check),
     ]
+    common = "\n".join(
+        f'<tr>\n  <th scope="row">{escape(name)}</th>\n  <td>{escape(rows[row_id]["price"])}</td>\n</tr>'
+        for row_id, name in COMMON_PRICES
+    )
+    results.append(update("pages/prices.html", "common", common, args.check))
     for page, page_groups in by_page.items():
         markup = "\n".join(detail_table(group, len(page_groups) > 1) for group in page_groups)
         results.append(update(f"pages/{page}", "detail", markup, args.check))
