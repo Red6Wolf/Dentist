@@ -269,30 +269,6 @@ body {
     outline-color: #fffaf4;
 }
 
-.visit-strip {
-    display: grid;
-    grid-template-columns: 1fr 1fr auto;
-    align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-3) clamp(20px, 5vw, 92px);
-}
-
-.visit-strip > div {
-    display: grid;
-    gap: 5px;
-}
-
-.visit-strip span {
-    color: var(--muted);
-    font-size: 15px;
-}
-
-.visit-strip a {
-    width: fit-content;
-    padding-block: 6px;
-    font-weight: 700;
-}
-
 /* Внутренние страницы используют тот же светлый каркас. */
 
 .subpage-hero {
@@ -954,11 +930,6 @@ body {
     .hero-price-link {
         font-size: 14px;
         padding-inline: 14px;
-    }
-
-    .visit-strip {
-        grid-template-columns: 1fr;
-        gap: 12px;
     }
 
     .hero::before {
