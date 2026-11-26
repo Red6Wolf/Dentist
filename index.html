@@ -18,8 +18,8 @@
     <link rel="preload" as="image" href="assets/clinic/hero-aligner.webp" />
     <link rel="stylesheet" href="styles/styles.css?v=patient-flow" />
     <link rel="stylesheet" href="styles/pages.css?v=separate-prices" />
-    <link rel="stylesheet" href="styles/home.css?v=visit-art" />
-    <link rel="stylesheet" href="styles/refinement.css?v=patient-care" />
+    <link rel="stylesheet" href="styles/home.css?v=orange-schedule" />
+    <link rel="stylesheet" href="styles/refinement.css?v=button-alignment" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -50,7 +50,7 @@
         ]
       }
     </script>
-    <link rel="stylesheet" href="styles/care.css?v=hover-pause" />
+    <link rel="stylesheet" href="styles/care.css?v=first-visit-link" />
   </head>
   <body>
     <div class="page">
@@ -83,7 +83,12 @@
         <div class="hero-copy">
           <h1>Семейная стоматология <span>на Тайнинской</span></h1>
           <p>Принимаем взрослых и детей каждый день. Лечение, профилактика и ортодонтия в одной клинике.</p>
-          <p><a class="hero-visit-link" href="pages/first-visit.html">Первый визит без неизвестности</a></p>
+          <div class="hero-visit-note">
+            <a class="hero-visit-link" href="pages/first-visit.html">
+              <span><strong>Первый приём</strong><span>Что обсудить с врачом</span></span>
+              <b class="icon-arrow" aria-hidden="true"></b>
+            </a>
+          </div>
           <div class="hero-actions">
             <a class="pillbtn" href="tel:+74991853333">Позвонить для записи</a>
             <a class="hero-price-link" href="pages/prices.html">
@@ -94,16 +99,20 @@
       </header>
       <main id="main-content" tabindex="-1">
         <section class="panel visit-strip" aria-label="Адрес, часы работы и отзывы">
-          <div>
+          <div class="visit-strip__address">
             <a class="content-link" href="pages/contact.html">Москва, Тайнинская, 17к1</a>
             <span>Медведково · Бабушкинская</span>
+            <a class="visit-strip__route" href="pages/contact.html">Как добраться <b class="icon-arrow" aria-hidden="true"></b></a>
           </div>
           <div class="visit-strip__hours">
-            <strong>Принимаем ежедневно</strong>
-            <span><b>Пн–Пт</b> 09:00–21:00</span>
-            <span><b>Сб–Вс</b> 10:00–19:00</span>
+            <img src="assets/illustrations/orange-cross-section.svg" alt="" width="1000" height="1000" />
+            <div class="visit-strip__schedule">
+              <strong>Каждый день</strong>
+              <span><b>Пн–Пт</b> 09:00–21:00</span>
+              <span><b>Сб–Вс</b> 10:00–19:00</span>
+            </div>
           </div>
-          <a class="content-link visit-strip__reviews" href="#reviews">Отзывы пациентов</a>
+          <a class="visit-strip__reviews" href="#reviews">Отзывы пациентов <b class="icon-arrow" aria-hidden="true"></b></a>
         </section>
         <!-- Услуги и цены по направлениям -->
         <section class="panel section" id="services">
