@@ -881,10 +881,6 @@ body {
         }
     }
 
-    .hero .nav--hero-edge {
-        background: #30251f;
-    }
-
     .brand-name {
         font-size: 22px;
     }
@@ -1413,10 +1409,6 @@ body {
         }
     }
 
-    .hero .nav--hero-edge {
-        background: #30251f;
-    }
-
     .hero .nav--on-light :is(.navlinks a, .navphone, .brand-caption) {
         color: var(--ink);
         text-shadow: none;
@@ -1426,5 +1418,21 @@ body {
 @media (min-width: 651px) and (max-width: 1180px) {
     html {
         scroll-padding-top: 138px;
+    }
+}
+
+/* Равномерный полупрозрачный материал без вспышки на границе первого экрана. */
+.nav--enhanced {
+    transition: background-color 240ms ease;
+}
+
+.hero .nav--enhanced :is(.navlinks a, .navphone, .brand-caption, .nav-address) {
+    transition: color 240ms ease, text-shadow 240ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nav--enhanced,
+    .hero .nav--enhanced :is(.navlinks a, .navphone, .brand-caption, .nav-address) {
+        transition: none;
     }
 }

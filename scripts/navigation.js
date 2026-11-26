@@ -76,8 +76,7 @@ if (navigation) {
             frame = 0;
             const heroBottom = hero.getBoundingClientRect().bottom;
             const bounds = navigation.getBoundingClientRect();
-            navigation.classList.toggle("nav--on-light", heroBottom <= bounds.top);
-            navigation.classList.toggle("nav--hero-edge", heroBottom > bounds.top && heroBottom < bounds.bottom);
+            navigation.classList.toggle("nav--on-light", heroBottom <= bounds.top + bounds.height / 2);
         }
 
         window.addEventListener("scroll", () => {
