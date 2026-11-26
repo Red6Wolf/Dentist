@@ -354,3 +354,28 @@
     height: 14px;
     flex: none;
 }
+
+.clinic-hours {
+    display: grid;
+    gap: 8px;
+    width: min(100%, 300px);
+    margin: 24px 0 18px;
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+}
+
+.clinic-hours > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.clinic-hours dt {
+    font-weight: 650;
+}
+
+.clinic-hours dd {
+    margin: 0;
+}
