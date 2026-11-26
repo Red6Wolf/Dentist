@@ -760,6 +760,24 @@ body {
     transition: background-color 160ms ease, border-color 160ms ease;
 }
 
+/* Наведение даёт короткий отклик, не меняя размеры в сетке. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    :is(button, summary, .navcta, .pillbtn, .locbutton, .all-link, .hero-price-link,
+        .map-link, .booking-email, .team-cta a, .popular-services a, .price-category) {
+        transition: background-color 160ms ease, border-color 160ms ease,
+            scale 160ms cubic-bezier(.23, 1, .32, 1);
+    }
+
+    :where(button, summary, .navcta, .pillbtn, .locbutton, .all-link, .hero-price-link,
+        .map-link, .booking-email, .team-cta a, .popular-services a, .price-category):hover:not(:disabled, [aria-disabled="true"]) {
+        scale: 1.035;
+    }
+
+    :is(.price-category, summary):hover:not([aria-disabled="true"]) {
+        scale: 1.015;
+    }
+}
+
 :focus-visible {
     outline: 3px solid var(--orange-action);
     outline-offset: 3px;
