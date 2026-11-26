@@ -1386,3 +1386,45 @@ body {
         min-width: 0;
     }
 }
+
+/* Закреплённая навигация на компьютерах и планшетах. */
+@media (min-width: 651px) {
+    html {
+        scroll-padding-top: 96px;
+    }
+
+    .hero .nav--enhanced,
+    .subpage-hero .nav--enhanced {
+        position: fixed;
+        z-index: 101;
+        top: 6px;
+        left: max(6px, calc((100% - 1800px) / 2));
+        right: max(6px, calc((100% - 1800px) / 2));
+        border-radius: 16px;
+        background: rgba(255, 249, 242, .94);
+    }
+
+    @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+        .hero .nav--enhanced,
+        .subpage-hero .nav--enhanced {
+            background: rgba(255, 249, 242, .05);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+    }
+
+    .hero .nav--hero-edge {
+        background: #30251f;
+    }
+
+    .hero .nav--on-light :is(.navlinks a, .navphone, .brand-caption) {
+        color: var(--ink);
+        text-shadow: none;
+    }
+}
+
+@media (min-width: 651px) and (max-width: 1180px) {
+    html {
+        scroll-padding-top: 138px;
+    }
+}

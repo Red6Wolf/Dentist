@@ -74,7 +74,6 @@ if (navigation) {
         let frame = 0;
         function updateHeroNavigation() {
             frame = 0;
-            if (!mobileLayout.matches) return;
             const heroBottom = hero.getBoundingClientRect().bottom;
             const bounds = navigation.getBoundingClientRect();
             navigation.classList.toggle("nav--on-light", heroBottom <= bounds.top);
@@ -82,7 +81,7 @@ if (navigation) {
         }
 
         window.addEventListener("scroll", () => {
-            if (mobileLayout.matches && !frame) frame = requestAnimationFrame(updateHeroNavigation);
+            if (!frame) frame = requestAnimationFrame(updateHeroNavigation);
         }, { passive: true });
         window.addEventListener("resize", updateHeroNavigation);
         window.addEventListener("pageshow", updateHeroNavigation);
