@@ -1436,3 +1436,44 @@ body {
         transition: none;
     }
 }
+
+/* Расписание под телефоном в десктопной шапке. */
+.nav-contact {
+    display: grid;
+    justify-items: end;
+    gap: 2px;
+}
+
+.nav-contact .navphone {
+    padding: 0;
+}
+
+.nav-contact-hours {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.3;
+    white-space: nowrap;
+}
+
+.hero .nav-contact-hours {
+    color: #fffaf4;
+    text-shadow: 0 1px 10px rgba(20, 14, 11, .35);
+    transition: color 240ms ease, text-shadow 240ms ease;
+}
+
+.hero .nav--on-light .nav-contact-hours {
+    color: var(--ink);
+    text-shadow: none;
+}
+
+@media (max-width: 650px) {
+    .nav-contact {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero .nav-contact-hours {
+        transition: none;
+    }
+}
