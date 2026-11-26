@@ -87,3 +87,21 @@ if (navigation) {
         updateHeroNavigation();
     }
 }
+
+// События доступны подключённой системе аналитики через dataLayer.
+function trackPatientAction(name, properties = {}) {
+    window.dataLayer ??= [];
+    window.dataLayer.push({ event: name, ...properties });
+}
+document.addEventListener("click", (event) => {
+    const link = event.target.closest("a[href]");
+    if (!link) return;
+    if (link.protocol === "tel:") {
+        trackPatientAction("clinic_call_click", { page: location.pathname });
+    } else if (/doctors\.html/.test(link.pathname)) {
+        trackPatientAction("clinic_doctor_view", { doctor: link.hash.slice(1) });
+    } else if (/first-visit\.html/.test(link.pathname)) {
+        trackPatientAction("clinic_first_visit_view");
+    }
+});
+document.addEventListener("clinic-search-empty", () => trackPatientAction("clinic_search_empty"));

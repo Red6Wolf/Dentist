@@ -123,6 +123,28 @@ def update(path, key, html, check):
     return not check
 
 
+def care_prices(rows, selected):
+    entries = "".join(
+        f'<tr><th scope="row">{escape(rows[key]["name"])}</th><td>{escape(rows[key]["price"])}</td></tr>'
+        for key in selected
+    )
+    return f'<table class="price-common"><caption>Отдельные позиции прайса</caption><tbody>{entries}</tbody></table>'
+
+
+def cost_examples(rows):
+    examples = [
+        ("Комплексная гигиена", ["p02-01"], "В названии позиции указаны ультразвук, Air-Flow и полировка. Дополнительные процедуры обсудите с врачом."),
+        ("Лечение пульпита молочного зуба в два посещения", ["p04-04", "p04-05"], "В обеих позициях прайса учтена светоотверждаемая пломба. Диагностику и другие необходимые процедуры уточните отдельно."),
+        ("Лечение пульпита молочного зуба в три посещения", ["p04-06", "p04-07", "p04-08"], "Это другой сценарий лечения. Число посещений определяет врач. Диагностика и дополнительные процедуры могут оплачиваться отдельно."),
+    ]
+    cards = []
+    for title, keys, note in examples:
+        amount = sum(int(re.sub(r"\D", "", rows[key]["price"])) for key in keys)
+        total = f"{amount:,}".replace(",", " ") + " ₽"
+        cards.append(f'<article class="care-example"><h3>{title}</h3>{care_prices(rows, keys)}<p class="care-total">Сумма указанных позиций <strong>{total}</strong></p><p>{note}</p></article>')
+    return '<div class="care-examples">' + "\n".join(cards) + '</div>'
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="Проверить HTML без записи")
@@ -164,6 +186,13 @@ def main():
         for row_id, name in COMMON_PRICES
     )
     results.append(update("pages/prices.html", "common", common, args.check))
+    results.append(update("pages/prices.html", "examples", cost_examples(rows), args.check))
+    for page, key, selected in [
+        ("implantation.html", "implantation", ["p01-09", "p07-04", "p07-16", "p08-01"]),
+        ("veneers.html", "veneers", ["p01-09", "p07-08"]),
+        ("orthodontics.html", "orthodontics", ["p01-05", "p06-14", "p06-15"]),
+    ]:
+        results.append(update(f"pages/{page}", key, care_prices(rows, selected), args.check))
     for page, page_groups in by_page.items():
         markup = "\n".join(detail_table(group, len(page_groups) > 1) for group in page_groups)
         results.append(update(f"pages/{page}", "detail", markup, args.check))

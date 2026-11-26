@@ -182,6 +182,9 @@ function enablePriceSearch(directory) {
             ? service.textContent
             : filtering ? "Результаты поиска" : "Полный прайс";
         status.textContent = filtering ? priceStatus(names.length) : "";
+        if (filtering && names.length === 0) {
+            document.dispatchEvent(new Event("clinic-search-empty"));
+        }
         clearButton.textContent = selectedIds ? "Показать все цены" : "Очистить поиск";
         clearButton.hidden = !input.value && !selectedIds;
         moreButton.hidden = filtering;
@@ -277,7 +280,7 @@ function enableInlinePrices(catalogue) {
         panel.className = "inline-prices";
         panel.id = "inline-prices-" + item.id;
         const heading = document.createElement("strong");
-        heading.textContent = "Цены: " + item.querySelector("span").textContent;
+        heading.textContent = "Позиции прайса — " + item.querySelector("span").textContent;
 
         const list = document.createElement("ul");
         for (const row of rows.slice(0, 5)) {
@@ -300,7 +303,9 @@ function enableInlinePrices(catalogue) {
             fullLink.textContent = "Все цены по услуге";
         }
 
-        panel.append(heading, list, fullLink);
+        const note = document.createElement("p");
+        note.textContent = "Отдельные процедуры могут быть частью лечения. Полный состав и стоимость уточните после осмотра.";
+        panel.append(heading, list, note, fullLink);
         item.classList.add("has-inline-prices");
         item.append(panel);
         link.setAttribute("aria-expanded", "true");

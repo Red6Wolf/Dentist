@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="styles/styles.css?v=patient-flow" />
     <link rel="stylesheet" href="styles/pages.css?v=separate-prices" />
     <link rel="stylesheet" href="styles/home.css?v=visit-art" />
-    <link rel="stylesheet" href="styles/refinement.css?v=desktop-hours" />
+    <link rel="stylesheet" href="styles/refinement.css?v=patient-care" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -50,6 +50,7 @@
         ]
       }
     </script>
+    <link rel="stylesheet" href="styles/care.css?v=patient-care" />
   </head>
   <body>
     <div class="page">
@@ -82,6 +83,7 @@
         <div class="hero-copy">
           <h1>Семейная стоматология <span>на Тайнинской</span></h1>
           <p>Принимаем взрослых и детей каждый день. Лечение, профилактика и ортодонтия в одной клинике.</p>
+          <p><a class="hero-visit-link" href="pages/first-visit.html">Первый визит без неизвестности</a></p>
           <div class="hero-actions">
             <a class="pillbtn" href="tel:+74991853333">Позвонить для записи</a>
             <a class="hero-price-link" href="pages/prices.html">
@@ -114,6 +116,7 @@
               <b class="icon-arrow" aria-hidden="true"></b>
             </a>
           </div>
+          <button class="motion-toggle" type="button" data-motion-toggle hidden aria-pressed="false">Остановить анимацию</button>
           <div class="services">
             <div class="feature-slider" role="region" aria-label="Направления стоматологии">
               <div class="feature-slides">
@@ -133,7 +136,7 @@
                     <span class="feature-open">Услуги и цены <span class="icon-arrow" aria-hidden="true"></span></span>
                   </div>
                 </a>
-                <a class="feature-slide" href="pages/price-orthodontics.html" hidden>
+                <a class="feature-slide" href="pages/orthodontics.html" hidden>
                   <img src="assets/clinic/gallery-09.webp" alt="" loading="lazy" decoding="async" />
                   <div class="feature-caption">
                     <h3 class="feature-title">Ортодонтия</h3>
@@ -141,7 +144,7 @@
                     <span class="feature-open">Услуги и цены <span class="icon-arrow" aria-hidden="true"></span></span>
                   </div>
                 </a>
-                <a class="feature-slide" href="pages/price-prosthetics.html" hidden>
+                <a class="feature-slide" href="pages/implantation.html" hidden>
                   <img src="assets/clinic/consultation.jpeg" alt="" loading="lazy" decoding="async" />
                   <div class="feature-caption">
                     <h3 class="feature-title">Имплантация</h3>
@@ -177,7 +180,7 @@
 
                   <span class="arrow icon-arrow" aria-hidden="true"></span>
                 </a>
-                <a class="service-row" href="pages/price-orthodontics.html">
+                <a class="service-row" href="pages/orthodontics.html">
                   <div>
                     <h3>Ортодонтия</h3>
                     <p>Исправление прикуса · Брекеты</p>
@@ -185,7 +188,7 @@
 
                   <span class="arrow icon-arrow" aria-hidden="true"></span>
                 </a>
-                <a class="service-row" href="pages/price-prosthetics.html">
+                <a class="service-row" href="pages/implantation.html">
                   <div>
                     <h3>Имплантация</h3>
                     <p>Восстановление утраченных зубов</p>
@@ -443,26 +446,31 @@
             <figure>
               <blockquote>«Хорошие врачи и приятный менеджер»</blockquote>
               <figcaption>CIEGO · <time datetime="2025-11-24">24 ноября 2025</time>
-              </figcaption>
+               <a class="content-link" href="https://yandex.ru/maps/org/apelsin/1796694882/reviews/" target="_blank" rel="noreferrer">Яндекс Карты</a></figcaption>
             </figure>
             <figure>
               <blockquote>«Зубы лечим всей семьёй, у ортодонта наблюдаемся тоже.»</blockquote>
               <figcaption>Мальямкин · <time datetime="2025-07-29">29 июля 2025</time>
-              </figcaption>
+               <a class="content-link" href="https://yandex.ru/maps/org/apelsin/1796694882/reviews/" target="_blank" rel="noreferrer">Яндекс Карты</a></figcaption>
             </figure>
             <figure>
               <blockquote>«Отличная стоматология. По рекомендации привела сюда детей»</blockquote>
               <figcaption>Анна · <time datetime="2025-09-21">21 сентября 2025</time>
-              </figcaption>
+               <a class="content-link" href="https://yandex.ru/maps/org/apelsin/1796694882/reviews/" target="_blank" rel="noreferrer">Яндекс Карты</a></figcaption>
             </figure>
             <figure>
               <blockquote>«Очень красивая клиника, все в стиле апельсинок»</blockquote>
               <figcaption>Александра · <time datetime="2025-02-02">2 февраля 2025</time>
-              </figcaption>
+               <a class="content-link" href="https://yandex.ru/maps/org/apelsin/1796694882/reviews/" target="_blank" rel="noreferrer">Яндекс Карты</a></figcaption>
             </figure>
           </div>
         </section>
         <!-- Связь с администратором -->
+        <section class="panel section care-section">
+          <h2>Первый визит начинается с ваших вопросов</h2>
+          <p>Что будет на приёме, когда обсуждать стоимость и как рассказать врачу о тревоге — подготовьтесь заранее.</p>
+          <div class="care-actions"><a class="locbutton" href="pages/first-visit.html">Подготовиться к первому визиту</a><a class="content-link" href="pages/prices.html#examples">Примеры стоимости</a></div>
+        </section>
         <section class="panel booking" id="booking">
           <div class="booking-photo">
             <div>
@@ -560,6 +568,10 @@
           </div>
           <div class="foot-col">
             <div class="micro">Информация</div>
+            <a href="pages/first-visit.html">Первый визит</a>
+            <a href="pages/implantation.html">Имплантация</a>
+            <a href="pages/veneers.html">Виниры</a>
+            <a href="pages/orthodontics.html">Исправление прикуса</a>
             <a href="pages/prices.html">Стоимость услуг</a>
             <a href="#reviews">Отзывы пациентов</a>
             <a href="pages/clinic.html#gallery">Фотографии клиники</a>
@@ -582,7 +594,7 @@
         <div class="foot-end">© 2026 Семейная стоматология «Апельсин»</div>
       </footer>
     </div>
-    <script src="scripts/navigation.js?v=soft-fixed-nav" defer></script>
-    <script src="scripts/home.js?v=autoplay" defer></script>
+    <script src="scripts/navigation.js?v=patient-care" defer></script>
+    <script src="scripts/home.js?v=motion-control" defer></script>
   </body>
 </html>
