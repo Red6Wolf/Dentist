@@ -141,11 +141,6 @@
 }
 
 /* Сканы документов доступны сразу и увеличиваются в общем просмотрщике. */
-.license-hint {
-    margin-top: 24px;
-    color: var(--muted);
-}
-
 .license-gallery {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
