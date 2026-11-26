@@ -165,6 +165,7 @@
 }
 
 .license-photo img {
+    height: auto;
     aspect-ratio: 873 / 1200;
     object-fit: contain;
     border-radius: 2px;
