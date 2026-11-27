@@ -155,11 +155,10 @@ function enablePriceSearch(directory) {
                 element.querySelector("summary strong").textContent + ", позиций: " + count);
         }
         wasFiltering = filtering;
-        section.querySelector("[data-price-highlights]").hidden = filtering;
         directory.hidden = names.length === 0;
         directoryTitle.textContent = selectedIds ? service.textContent
             : direction.value ? direction.selectedOptions[0].textContent
-            : input.value.trim() ? "Результаты поиска" : "Цены по направлениям";
+            : input.value.trim() ? "Результаты поиска" : "Все процедуры";
         status.textContent = filtering ? priceStatus(names.length) : "Позиций в прайсе: " + names.length + ". Раскройте нужный раздел.";
         clearButton.hidden = !filtering;
         clearButton.textContent = "Сбросить фильтры";
