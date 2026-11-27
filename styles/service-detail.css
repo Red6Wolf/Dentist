@@ -64,8 +64,31 @@
     display: inline-flex;
     align-items: center;
     min-height: 44px;
+    padding: 8px 12px;
+    border-radius: 10px;
     color: var(--ink);
+    text-decoration: none;
     text-underline-offset: 5px;
+    transition: color 160ms ease-out, background-color 160ms ease-out;
+}
+
+.service-section-nav a:focus-visible,
+.service-section-nav a:active {
+    color: var(--orange-action);
+    background-color: var(--sand);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .service-section-nav a:hover {
+        color: var(--orange-action);
+        background-color: var(--sand);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .service-section-nav a {
+        transition: none;
+    }
 }
 
 .service-reading > section {
