@@ -230,6 +230,16 @@ def main():
         update("pages/prices.html", "directory", "\n".join(map(directory_table, groups)), args.check),
         update("pages/prices.html", "service-index", service_price_index(rows), args.check),
     ]
+    common = "\n".join(
+        f'<tr>\n  <th scope="row">{escape(name)}</th>\n  <td>{escape(rows[row_id]["price"])}</td>\n</tr>'
+        for row_id, name in [
+            ("p01-01", "Первичный приём стоматолога-терапевта"),
+            ("p01-03", "Первичный приём детского стоматолога"),
+            ("p01-12", "Прицельный снимок зуба"),
+            ("p02-01", "Комплексная чистка (ультразвук, Air-Flow, полировка)"),
+        ]
+    )
+    results.append(update("pages/prices.html", "common", common, args.check))
     results.append(update("pages/prices.html", "examples", cost_examples(rows), args.check))
     for page, key, selected in [
         ("implantation.html", "implantation", ["p01-09", "p07-04", "p07-16", "p08-01"]),

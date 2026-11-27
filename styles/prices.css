@@ -56,3 +56,19 @@
         margin-top: 24px;
     }
 }
+
+.price-highlights {
+    margin-top: 32px;
+}
+
+.price-highlights h2 {
+    margin-bottom: 16px;
+}
+
+.price-highlights .price-common {
+    width: 100%;
+}
+
+.price-highlights .price-common :is(th, td) {
+    padding-block: 18px;
+}
