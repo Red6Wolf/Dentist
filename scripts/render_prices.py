@@ -153,7 +153,7 @@ def care_prices(rows, selected):
         f'<tr><th scope="row">{escape(rows[key]["name"])}</th><td>{escape(rows[key]["price"])}</td></tr>'
         for key in selected
     )
-    return f'<table class="price-common"><caption>Отдельные позиции прайса</caption><tbody>{entries}</tbody></table>'
+    return f'<table class="price-common" data-consultation-prices><caption>Отдельные позиции прайса</caption><tbody>{entries}</tbody></table>'
 
 
 def cost_examples(rows):
@@ -246,6 +246,8 @@ def main():
                 results.append(False)
             else:
                 path.write_text(markup)
+    from render_service_pages import render
+    results.append(render(args.check))
     return 0 if all(results) else 1
 
 

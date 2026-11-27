@@ -57,7 +57,8 @@ if (navigation) {
 
     function markCurrentPage() {
         const page = location.pathname.split("/").pop() || "index.html";
-        const activePage = page.startsWith("price-") ? "prices.html" : page;
+        const activePage = page.startsWith("price-") ? "prices.html"
+            : document.querySelector("[data-consultation-note]") ? "services.html" : page;
         for (const link of navigationLinks) {
             const url = new URL(link.href);
             const destination = url.pathname.split("/").pop() || "index.html";

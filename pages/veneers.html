@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../styles/refinement.css?v=compact-location" />
     <link rel="stylesheet" href="../styles/price-transitions.css" />
     <link rel="stylesheet" href="../styles/care.css?v=first-visit-link" />
+    <link rel="stylesheet" href="../styles/service-detail.css" />
   </head>
   <body>
     <div class="page">
@@ -79,9 +80,11 @@
           <h1 class="care-title">
             Виниры
           </h1>
+          <p class="service-context" data-service-context hidden></p>
           <p class="subpage-lead">
             Обсудите с врачом желаемые изменения улыбки и возможные способы их достижения.
           </p>
+          <div class="care-actions"><a class="locbutton" href="tel:+74991853333">Позвонить для записи</a><a class="service-price-link" href="#service-cost">Посмотреть стоимость</a></div>
         </section>
         <section class="panel subpage-section care-section">
           <h2>
@@ -115,14 +118,14 @@
           </ol>
         </section>
         <section class="panel subpage-section care-section">
-          <h2>
+          <h2 id="service-cost">
             Стоимость и её состав
           </h2>
           <p>
             Ниже — отдельные позиции действующего прайса. Общая стоимость зависит от согласованного плана.
           </p>
           <!-- prices:veneers:start -->
-          <table class="price-common"><caption>Отдельные позиции прайса</caption><tbody><tr><th scope="row">Прием врача стоматолога-ортопеда первичный</th><td>1 000 ₽</td></tr><tr><th scope="row">Винир E-MAX</th><td>27 000 ₽</td></tr></tbody></table>
+          <table class="price-common" data-consultation-prices><caption>Отдельные позиции прайса</caption><tbody><tr><th scope="row">Прием врача стоматолога-ортопеда первичный</th><td>1 000 ₽</td></tr><tr><th scope="row">Винир E-MAX</th><td>27 000 ₽</td></tr></tbody></table>
           <!-- prices:veneers:end -->
           <a class="content-link" href="prices.html?direction=prosthetics#p07-08">
             Все позиции направления
@@ -171,6 +174,29 @@
             Позвонить администратору
           </a>
         </section>
+        <!-- consultation:start -->
+<section class="panel subpage-section consultation-note" id="consultation" data-consultation-note>
+  <h2>Подготовиться к консультации</h2>
+  <p>Отметьте свои вопросы. Сохраните памятку и держите её под рукой во время звонка или приёма.</p>
+  <form data-consultation-form hidden>
+    <fieldset>
+      <legend>Что вы хотите уточнить?</legend>
+      <label class="consultation-option"><input type="checkbox" value="Какие варианты подходят для моей задачи?" /><span>Какие варианты подходят для моей задачи?</span></label>
+<label class="consultation-option"><input type="checkbox" value="Из каких этапов складывается стоимость?" /><span>Из каких этапов складывается стоимость?</span></label>
+<label class="consultation-option"><input type="checkbox" value="Что нужно уточнить о подготовке и посещениях?" /><span>Что нужно уточнить о подготовке и посещениях?</span></label>
+<label class="consultation-option"><input type="checkbox" value="Что обсудить, если я тревожусь перед лечением?" /><span>Что обсудить, если я тревожусь перед лечением?</span></label>
+<label class="consultation-option"><input type="checkbox" value="Как подготовиться к первому посещению?" /><span>Как подготовиться к первому посещению?</span></label>
+    </fieldset>
+    <div class="consultation-actions">
+      <button type="button" class="consultation-copy" data-consultation-copy>Скопировать памятку</button>
+      <button type="button" class="consultation-download" data-consultation-download>Скачать памятку .txt</button>
+    </div>
+    <p class="consultation-status" data-consultation-status role="status" aria-live="polite"></p>
+  </form>
+  <noscript><p>Вопросы для консультации перечислены выше. Их можно записать и обсудить с администратором.</p></noscript>
+  <a class="locbutton" href="tel:+74991853333">Позвонить администратору</a>
+</section>
+        <!-- consultation:end -->
       </main>
       <footer class="panel footer">
         <div class="foot-cols">
@@ -287,6 +313,8 @@
         </div>
       </footer>
     </div>
+    <script src="../scripts/service-routes.js" defer></script>
+    <script src="../scripts/consultation.js" defer></script>
     <script src="../scripts/navigation.js?v=patient-care" defer>
     </script>
   </body>

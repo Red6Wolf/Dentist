@@ -432,3 +432,25 @@
     width: 0;
     height: 0;
 }
+
+/* Конкретная процедура открывает отдельную страницу. */
+.services-card .directory-list .service-name-link {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.5;
+    text-decoration: none;
+}
+
+.services-card .directory-list .service-name-link:hover {
+    color: var(--orange-action);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.services-card .directory-list .service-name-link .services-chevron {
+    align-self: center;
+}

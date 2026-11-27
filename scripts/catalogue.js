@@ -207,90 +207,6 @@ function enablePriceSearch(directory) {
     restore();
 }
 
-function enableInlinePrices(catalogue) {
-    let priceRowsRequest;
-
-    async function loadPriceRows() {
-        const response = await fetch("prices.html");
-        if (!response.ok) throw new Error("Не удалось загрузить прайс");
-        const page = new DOMParser().parseFromString(await response.text(), "text/html");
-        return new Map([...page.querySelectorAll("[data-price-row]")].map((row) => [row.id, row]));
-    }
-
-    for (const link of catalogue.querySelectorAll('a[href*="?service="]')) {
-        link.setAttribute("aria-expanded", "false");
-    }
-
-    catalogue.addEventListener("click", async (event) => {
-        const link = event.target.closest('a[href*="?service="]');
-        if (!link || link.closest(".inline-prices") ||
-            event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-
-        const item = link.closest("[data-service-prices]");
-        if (!item) return;
-
-        event.preventDefault();
-        if (link.hasAttribute("aria-busy")) return;
-
-        const existing = item.querySelector(".inline-prices");
-        if (existing) {
-            existing.remove();
-            item.classList.remove("has-inline-prices");
-            link.setAttribute("aria-expanded", "false");
-            link.removeAttribute("aria-controls");
-            return;
-        }
-
-        link.setAttribute("aria-busy", "true");
-        let rows;
-        try {
-            priceRowsRequest ??= loadPriceRows();
-            const priceRows = await priceRowsRequest;
-            rows = item.dataset.servicePrices.split(",")
-                .map((id) => priceRows.get(id.trim())).filter(Boolean);
-        } catch {
-            priceRowsRequest = undefined;
-            location.assign(link.href);
-            return;
-        } finally {
-            link.removeAttribute("aria-busy");
-        }
-        if (!rows.length) {
-            location.assign(link.href);
-            return;
-        }
-
-        const panel = document.createElement("div");
-        panel.className = "inline-prices";
-        panel.id = "inline-prices-" + item.id;
-        const heading = document.createElement("strong");
-        heading.textContent = "Позиции прайса — " + (item.querySelector("[data-service-name]") || item.querySelector("span")).textContent;
-
-        const list = document.createElement("ul");
-        for (const row of rows.slice(0, 5)) {
-            const entry = document.createElement("li");
-            const name = document.createElement("span");
-            const amount = document.createElement("b");
-            name.textContent = row.cells[0].textContent.trim();
-            amount.textContent = row.cells[1].textContent.trim();
-            entry.append(name, amount);
-            list.append(entry);
-        }
-
-        const fullLink = document.createElement("a");
-        fullLink.href = link.href;
-        fullLink.textContent = "Все цены по услуге";
-
-        const note = document.createElement("p");
-        note.textContent = "Отдельные процедуры могут быть частью лечения. Полный состав и стоимость уточните после осмотра.";
-        panel.append(heading, list, note, fullLink);
-        item.classList.add("has-inline-prices");
-        item.append(panel);
-        link.setAttribute("aria-expanded", "true");
-        link.setAttribute("aria-controls", panel.id);
-    });
-}
-
 const priceDirectory = document.querySelector("[data-price-directory]");
 if (priceDirectory) enablePriceSearch(priceDirectory);
 
@@ -308,7 +224,6 @@ if (catalogue) {
 
     forwardPriceLink();
     window.addEventListener("hashchange", forwardPriceLink);
-    enableInlinePrices(catalogue);
 }
 
 revealAnchor();

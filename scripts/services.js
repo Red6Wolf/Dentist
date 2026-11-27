@@ -159,7 +159,8 @@ if (servicesCatalogue) {
             const source = document.getElementById(id);
             const item = document.createElement("li");
             const link = document.createElement("a");
-            link.href = "#" + id;
+            const serviceId = id.replace("service-", "");
+            link.href = window.clinicServiceRoutes[serviceId].page + "?service=" + serviceId;
             link.textContent = source.querySelector("span").textContent;
             const arrow = document.createElement("span");
             arrow.className = "services-chevron";
@@ -199,17 +200,19 @@ if (servicesCatalogue) {
         option.textContent = direction.title;
         scope.append(option);
 
-        const disclosure = document.createElement("details");
-        disclosure.className = "services-procedures";
-        const procedureSummary = document.createElement("summary");
-        procedureSummary.textContent = "Отдельные процедуры и цены";
-        const list = document.createElement("ul");
-        list.className = "services-results";
-        for (const entry of entries.filter((entry) => entry.price && entry.directions.includes(direction.id))) {
-            list.append(resultRow(entry));
+        for (const item of group.querySelectorAll(".directory-list > li")) {
+            const serviceId = item.id.replace("service-", "");
+            const route = window.clinicServiceRoutes[serviceId];
+            const link = document.createElement("a");
+            link.className = "service-name-link";
+            link.href = route.page + "?service=" + serviceId;
+            link.textContent = route.name;
+            const arrow = document.createElement("span");
+            arrow.className = "services-chevron";
+            arrow.setAttribute("aria-hidden", "true");
+            link.append(arrow);
+            item.replaceChildren(link);
         }
-        disclosure.append(procedureSummary, list);
-        document.getElementById(direction.id).append(disclosure);
     }
 
     function resultRow(entry) {
@@ -233,18 +236,14 @@ if (servicesCatalogue) {
             action.setAttribute("aria-label", entry.name + " — " + entry.price + ". Открыть в прайсе");
             item.append(action);
         } else {
-            item.id = "result-" + entry.id;
-            if (entry.source.dataset.servicePrices) {
-                item.dataset.servicePrices = entry.source.dataset.servicePrices;
-            }
-            const actions = document.createElement("div");
-            actions.className = "services-result__actions";
-            for (const original of entry.source.querySelectorAll(":scope > a")) {
-                const link = original.cloneNode(true);
-                if (item.dataset.servicePrices) link.setAttribute("aria-expanded", "false");
-                actions.append(link);
-            }
-            item.append(actions);
+            const serviceId = entry.id.replace("service-", "");
+            const route = window.clinicServiceRoutes[serviceId];
+            const link = document.createElement("a");
+            link.href = route.page + "?service=" + serviceId;
+            link.className = "content-link";
+            link.textContent = "Об услуге";
+            link.setAttribute("aria-label", "Подробнее: " + entry.name);
+            item.append(link);
         }
         return item;
     }
