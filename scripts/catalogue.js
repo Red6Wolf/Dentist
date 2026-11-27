@@ -87,7 +87,7 @@ function createSuggestions(input) {
     };
 }
 
-function filterPriceGroups(groups, query, selectedIds) {
+function filterPriceGroups(groups, query, selectedIds, direction = "") {
     const terms = searchTerms(query);
     const normalized = normalizePriceText(query);
     const exactSearch = commonSearches.find(([pattern]) => pattern.test(normalized));
@@ -100,7 +100,8 @@ function filterPriceGroups(groups, query, selectedIds) {
                 const matches = exactSearch
                     ? exactSearch[1].test(row.normalizedName)
                     : rowMatches(terms, row.searchText);
-                const visible = (!selectedIds || selectedIds.has(row.element.id)) && matches;
+                const inDirection = !direction || row.element.dataset.directions.split(",").includes(direction);
+                const visible = inDirection && (!selectedIds || selectedIds.has(row.element.id)) && matches;
                 row.element.hidden = !visible;
                 if (visible) {
                     names.push(row.name);
@@ -119,108 +120,91 @@ function priceStatus(count) {
     return count ? "Найдено позиций: " + count + "." : "Ничего не нашли. Попробуйте другое название услуги.";
 }
 
-function enableDetailSearch(detail) {
-    const controls = detail.querySelector("[data-price-controls]");
-    const input = controls.querySelector("input");
-    const clearButton = controls.querySelector("[data-price-clear]");
-    const status = controls.querySelector("[data-price-status]");
-    const groups = [...detail.querySelectorAll(".price-group-table")].map(indexPriceGroup);
-    const updateSuggestions = createSuggestions(input);
-
-    function filter() {
-        const terms = searchTerms(input.value);
-        const names = filterPriceGroups(groups, input.value, null);
-        status.textContent = terms.length ? priceStatus(names.length) : "";
-        clearButton.hidden = !input.value;
-        updateSuggestions(input.value.trim().length >= 2 ? names : []);
-    }
-
-    controls.hidden = false;
-    input.addEventListener("input", filter);
-    clearButton.addEventListener("click", () => {
-        input.value = "";
-        filter();
-        input.focus();
-    });
-    filter();
-}
-
 function enablePriceSearch(directory) {
     const section = directory.closest("#prices");
     const controls = section.querySelector("[data-price-controls]");
     const input = controls.querySelector("input");
+    const direction = controls.querySelector("select");
     const status = controls.querySelector("[data-price-status]");
     const clearButton = controls.querySelector("[data-price-clear]");
-    const moreButton = section.querySelector("[data-price-more]");
-    const overview = section.querySelector("[data-price-overview]");
     const directoryTitle = directory.querySelector("[data-directory-title]");
-    const url = new URL(location.href);
-    const serviceIndex = section.querySelector("#price-service-index");
-    const service = serviceIndex.content.getElementById("service-" + url.searchParams.get("service"));
-    let selectedIds = service?.dataset.servicePrices
-        ? new Set(service.dataset.servicePrices.split(",").map((id) => id.trim()))
-        : null;
-    const anchorTarget = document.getElementById(location.hash.slice(1));
-    let showDirectory = Boolean(anchorTarget?.closest("[data-price-group]"));
     const groups = [...directory.querySelectorAll("[data-price-group]")].map(indexPriceGroup);
     const updateSuggestions = createSuggestions(input);
+    let selectedIds = null;
+    let service = null;
     let wasFiltering = false;
 
-    function filter() {
-        const terms = searchTerms(input.value);
-        const filtering = Boolean(terms.length || selectedIds);
-        const names = filterPriceGroups(groups, input.value, selectedIds);
-        if (filtering || wasFiltering) {
-            for (const { element } of groups) {
-                element.open = filtering && !element.hidden;
-            }
-        }
-        wasFiltering = filtering;
-        overview.hidden = filtering || showDirectory;
-        directory.hidden = filtering ? names.length === 0 : !showDirectory;
-        directoryTitle.textContent = selectedIds
-            ? service.textContent
-            : filtering ? "Результаты поиска" : "Полный прайс";
-        status.textContent = filtering ? priceStatus(names.length) : "";
-        if (filtering && names.length === 0) {
-            document.dispatchEvent(new Event("clinic-search-empty"));
-        }
-        clearButton.textContent = selectedIds ? "Показать все цены" : "Очистить поиск";
-        clearButton.hidden = !input.value && !selectedIds;
-        moreButton.hidden = filtering;
-        moreButton.textContent = showDirectory ? "Свернуть полный прайс" : "Открыть полный прайс";
-        moreButton.setAttribute("aria-expanded", String(showDirectory));
-        updateSuggestions(input.value.trim().length >= 2 ? names : []);
+    function readLocation() {
+        const url = new URL(location.href);
+        input.value = url.searchParams.get("q") || "";
+        direction.value = url.searchParams.get("direction") || "";
+        const index = section.querySelector("#price-service-index").content;
+        service = index.getElementById("service-" + url.searchParams.get("service"));
+        selectedIds = service?.dataset.servicePrices
+            ? new Set(service.dataset.servicePrices.split(",").map(id => id.trim()))
+            : null;
     }
 
-    moreButton.addEventListener("click", () => {
-        showDirectory = !showDirectory;
-        filter();
-    });
-
-    input.addEventListener("input", filter);
-    window.addEventListener("hashchange", () => {
-        const row = document.getElementById(location.hash.slice(1));
-        if (!row?.matches("[data-price-row]")) return;
-        input.value = "";
-        selectedIds = null;
-        showDirectory = true;
-        filter();
-    });
-    clearButton.addEventListener("click", () => {
-        input.value = "";
-        selectedIds = null;
-        if (url.searchParams.has("service")) {
-            url.searchParams.delete("service");
+    function filter(updateUrl = false) {
+        const filtering = Boolean(input.value.trim() || selectedIds || direction.value);
+        const names = filterPriceGroups(groups, input.value, selectedIds, direction.value);
+        for (const { element } of groups) {
+            if (filtering || wasFiltering) element.open = filtering && !element.hidden;
+            const count = element.querySelectorAll("[data-price-row]:not([hidden])").length;
+            element.querySelector("summary").setAttribute("aria-label",
+                element.querySelector("summary strong").textContent + ", позиций: " + count);
+        }
+        wasFiltering = filtering;
+        directory.hidden = names.length === 0;
+        directoryTitle.textContent = selectedIds ? service.textContent
+            : direction.value ? direction.selectedOptions[0].textContent
+            : input.value.trim() ? "Результаты поиска" : "Все процедуры";
+        status.textContent = filtering ? priceStatus(names.length) : "Позиций в прайсе: " + names.length + ". Раскройте нужный раздел.";
+        clearButton.hidden = !filtering;
+        clearButton.textContent = "Сбросить фильтры";
+        updateSuggestions(input.value.trim().length >= 2 ? names : []);
+        if (filtering && names.length === 0) document.dispatchEvent(new Event("clinic-search-empty"));
+        if (updateUrl) {
+            const url = new URL(location.href);
+            for (const [key, value] of [["q", input.value], ["direction", direction.value]]) {
+                if (value) url.searchParams.set(key, value);
+                else url.searchParams.delete(key);
+            }
+            if (!selectedIds) url.searchParams.delete("service");
             url.hash = "prices";
             history.replaceState(null, "", url);
         }
+    }
+
+    function restore() {
+        readLocation();
+        // Прямая ссылка на строку должна показать её даже при старом фильтре.
+        const row = document.getElementById(location.hash.slice(1));
+        if (row?.matches("[data-price-row]")) {
+            input.value = "";
+            selectedIds = null;
+            if (direction.value && !row.dataset.directions.split(",").includes(direction.value)) direction.value = "";
+        }
         filter();
+        revealAnchor();
+    }
+
+    input.addEventListener("input", () => filter(true));
+    direction.addEventListener("change", () => {
+        selectedIds = null;
+        filter(true);
+    });
+    clearButton.addEventListener("click", () => {
+        input.value = "";
+        direction.value = "";
+        selectedIds = null;
+        filter(true);
         input.focus();
     });
-
+    window.addEventListener("hashchange", restore);
+    window.addEventListener("popstate", restore);
     controls.hidden = false;
-    filter();
+    restore();
 }
 
 function enableInlinePrices(catalogue) {
@@ -293,15 +277,9 @@ function enableInlinePrices(catalogue) {
             list.append(entry);
         }
 
-        const relatedPages = new Set(rows.map((row) => row.closest("[data-price-page]").dataset.pricePage));
         const fullLink = document.createElement("a");
-        if (relatedPages.size === 1) {
-            fullLink.href = [...relatedPages][0] + "#" + rows[0].id;
-            fullLink.textContent = "Открыть прайс направления";
-        } else {
-            fullLink.href = link.href;
-            fullLink.textContent = "Все цены по услуге";
-        }
+        fullLink.href = link.href;
+        fullLink.textContent = "Все цены по услуге";
 
         const note = document.createElement("p");
         note.textContent = "Отдельные процедуры могут быть частью лечения. Полный состав и стоимость уточните после осмотра.";
@@ -312,9 +290,6 @@ function enableInlinePrices(catalogue) {
         link.setAttribute("aria-controls", panel.id);
     });
 }
-
-const detail = document.querySelector(".price-detail");
-if (detail) enableDetailSearch(detail);
 
 const priceDirectory = document.querySelector("[data-price-directory]");
 if (priceDirectory) enablePriceSearch(priceDirectory);

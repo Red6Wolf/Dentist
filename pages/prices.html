@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../styles/pages.css?v=separate-prices" />
     <link rel="stylesheet" href="../styles/refinement.css?v=compact-location" />
     <link rel="stylesheet" href="../styles/price-transitions.css" />
+    <link rel="stylesheet" href="../styles/prices.css" />
     <link rel="stylesheet" href="../styles/care.css?v=first-visit-link" />
   </head>
 
@@ -52,120 +53,99 @@
       <main class="subpage-main" id="main-content" tabindex="-1">
         <section class="panel subpage-section" id="prices" aria-labelledby="prices-title">
           <div class="price-introduction">
-            <h1 id="prices-title">Найдите стоимость услуги</h1>
-            <p>Введите название услуги или выберите направление.</p>
+            <h1 id="prices-title">Цены на услуги</h1>
+            <p>Найдите процедуру по названию или выберите направление — цены появятся здесь.</p>
           </div>
           <div class="price-controls" data-price-controls hidden>
-            <label for="price-search">Найти услугу</label>
-            <div class="price-search">
-              <input id="price-search" type="search" placeholder="Например, чистка или снимок" />
+            <div class="price-fields">
+              <div>
+                <label for="price-search">Название процедуры</label>
+                <div class="price-search">
+                  <input id="price-search" type="search" placeholder="Например, чистка или снимок" />
+                </div>
+              </div>
+              <div>
+                <label for="price-direction">Направление</label>
+                <select id="price-direction">
+                  <option value="">Все направления</option>
+                  <option value="therapy">Лечение зубов</option>
+                  <option value="children">Детская стоматология</option>
+                  <option value="hygiene">Гигиена и профилактика</option>
+                  <option value="surgery">Хирургия</option>
+                  <option value="ortho">Исправление прикуса</option>
+                  <option value="implantology">Имплантация</option>
+                  <option value="prosthetics">Протезирование</option>
+                  <option value="periodontics">Лечение дёсен</option>
+                  <option value="aesthetics">Эстетика зубов</option>
+                  <option value="diagnostics">Приём и диагностика</option>
+                </select>
+              </div>
             </div>
             <button type="button" class="price-reset" data-price-clear hidden>Очистить поиск</button>
             <p data-price-status role="status"></p>
           </div>
           <p><a class="content-link" href="#examples">Посмотреть примеры стоимости</a></p>
-          <button class="price-more" type="button" data-price-more hidden aria-controls="price-directory" aria-expanded="false">Открыть полный прайс</button>
-          <div class="price-overview" data-price-overview>
-            <section aria-labelledby="common-prices-title">
-              <h2 id="common-prices-title">Часто спрашивают</h2>
-              <table class="price-common" aria-labelledby="common-prices-title">
-                <tbody>
-                  <!-- prices:common:start -->
-                  <tr>
-                    <th scope="row">Первичный приём стоматолога-терапевта</th>
-                    <td>1 000 ₽</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Первичный приём детского стоматолога</th>
-                    <td>1 000 ₽</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Прицельный снимок зуба</th>
-                    <td>650 ₽</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Комплексная чистка (ультразвук, Air-Flow, полировка)</th>
-                    <td>7 450 ₽</td>
-                  </tr>
-                  <!-- prices:common:end -->
-                </tbody>
-              </table>
-            </section>
-            <section aria-labelledby="price-directions-title">
-              <h2 id="price-directions-title">Цены по направлениям</h2>
-              <ul class="price-directions">
-                <li><a href="price-visits.html">Приём и снимки<span class="icon-arrow" aria-hidden="true"></span></a></li>
-                <li><a href="price-hygiene.html">Чистка и профилактика<span class="icon-arrow" aria-hidden="true"></span></a></li>
-                <li><a href="price-treatment.html">Лечение зубов<span class="icon-arrow" aria-hidden="true"></span></a></li>
-                <li><a href="price-surgery.html">Хирургия<span class="icon-arrow" aria-hidden="true"></span></a></li>
-                <li><a href="price-orthodontics.html">Исправление прикуса<span class="icon-arrow" aria-hidden="true"></span></a></li>
-                <li><a href="price-prosthetics.html">Протезирование и имплантация<span class="icon-arrow" aria-hidden="true"></span></a></li>
-                <li><a href="price-gums.html">Лечение дёсен<span class="icon-arrow" aria-hidden="true"></span></a></li>
-                <li><a href="price-children.html">Детская стоматология<span class="icon-arrow" aria-hidden="true"></span></a></li>
-              </ul>
-            </section>
-          </div>
           <div class="directory" id="price-directory" data-price-directory>
-            <h2 data-directory-title>Полный прайс по разделам</h2>
+            <h2 data-directory-title>Все процедуры</h2>
             <!-- prices:directory:start -->
             <details class="directory-group" data-price-group data-price-page="price-visits.html">
                 <summary><span><strong>Приём и снимки</strong></span></summary>
                 <table class="price-table full-price-table" aria-label="Общие">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
-                        <tr id="p01-01" data-price-row>
+                        <tr id="p01-01" data-price-row data-directions="diagnostics">
                             <td>Прием врача стоматолога-терапевта первичный</td>
                             <td>1 000 ₽</td>
                         </tr>
-                        <tr id="p01-02" data-price-row>
+                        <tr id="p01-02" data-price-row data-directions="diagnostics">
                             <td>Прием врача стоматолога-терапевта повторный</td>
                             <td>800 ₽</td>
                         </tr>
-                        <tr id="p01-03" data-price-row>
+                        <tr id="p01-03" data-price-row data-directions="children,diagnostics">
                             <td>Прием врача детского стоматолога-терапевта первичный</td>
                             <td>1 000 ₽</td>
                         </tr>
-                        <tr id="p01-04" data-price-row>
+                        <tr id="p01-04" data-price-row data-directions="children,diagnostics">
                             <td>Прием врача детского стоматолога-терапевта повторный</td>
                             <td>800 ₽</td>
                         </tr>
-                        <tr id="p01-05" data-price-row>
+                        <tr id="p01-05" data-price-row data-directions="diagnostics">
                             <td>Прием врача стоматолога-ортодонта первичный</td>
                             <td>1 150 ₽</td>
                         </tr>
-                        <tr id="p01-06" data-price-row>
+                        <tr id="p01-06" data-price-row data-directions="diagnostics">
                             <td>Прием врача стоматолога-ортодонта повторный</td>
                             <td>900 ₽</td>
                         </tr>
-                        <tr id="p01-07" data-price-row>
+                        <tr id="p01-07" data-price-row data-directions="diagnostics">
                             <td>Прием врача стоматолога-хирурга первичный</td>
                             <td>1 000 ₽</td>
                         </tr>
-                        <tr id="p01-08" data-price-row>
+                        <tr id="p01-08" data-price-row data-directions="diagnostics">
                             <td>Прием врача стоматолога-хирурга повторный</td>
                             <td>800 ₽</td>
                         </tr>
-                        <tr id="p01-09" data-price-row>
+                        <tr id="p01-09" data-price-row data-directions="diagnostics">
                             <td>Прием врача стоматолога-ортопеда первичный</td>
                             <td>1 000 ₽</td>
                         </tr>
-                        <tr id="p01-10" data-price-row>
+                        <tr id="p01-10" data-price-row data-directions="diagnostics">
                             <td>Прием врача стоматолога-ортопеда повторный</td>
                             <td>800 ₽</td>
                         </tr>
-                        <tr id="p01-11" data-price-row>
+                        <tr id="p01-11" data-price-row data-directions="diagnostics">
                             <td>Профилактический осмотр врача стоматолога</td>
                             <td>800 ₽</td>
                         </tr>
-                        <tr id="p01-12" data-price-row>
+                        <tr id="p01-12" data-price-row data-directions="diagnostics">
                             <td>Рентген прицельный</td>
                             <td>650 ₽</td>
                         </tr>
-                        <tr id="p01-13" data-price-row>
+                        <tr id="p01-13" data-price-row data-directions="diagnostics">
                             <td>Телерентгенограмма (снимок в боковой проекции)</td>
                             <td>1 800 ₽</td>
                         </tr>
-                        <tr id="p01-14" data-price-row>
+                        <tr id="p01-14" data-price-row data-directions="diagnostics">
                             <td>Ортопантомограмма (панорамный снимок челюсти)</td>
                             <td>1 800 ₽</td>
                         </tr>
@@ -177,59 +157,59 @@
                 <table class="price-table full-price-table" aria-label="Профилактика стоматологических заболеваний">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
-                        <tr id="p02-01" data-price-row>
+                        <tr id="p02-01" data-price-row data-directions="hygiene">
                             <td>Комплексная гигиена полости рта (ультразвук + Air-Flow + полировка)</td>
                             <td>7 450 ₽</td>
                         </tr>
-                        <tr id="p02-02" data-price-row>
+                        <tr id="p02-02" data-price-row data-directions="children,hygiene">
                             <td>Комплексная гигиена полости рта (ультразвук + Air-Flow + полировка) Дети</td>
                             <td>5 800 ₽</td>
                         </tr>
-                        <tr id="p02-03" data-price-row>
+                        <tr id="p02-03" data-price-row data-directions="hygiene">
                             <td>Комплексная гигиена полости рта (ультразвук + Air-Flow + полировка) с ремотерапией</td>
                             <td>7 950 ₽</td>
                         </tr>
-                        <tr id="p02-04" data-price-row>
+                        <tr id="p02-04" data-price-row data-directions="hygiene">
                             <td>Профессиональная гигиена полости рта (ультразвук + полировка)</td>
                             <td>5 300 ₽</td>
                         </tr>
-                        <tr id="p02-05" data-price-row>
+                        <tr id="p02-05" data-price-row data-directions="hygiene">
                             <td>Профессиональная гигиена полости рта (щетка + паста)</td>
                             <td>3 500 ₽</td>
                         </tr>
-                        <tr id="p02-06" data-price-row>
+                        <tr id="p02-06" data-price-row data-directions="hygiene">
                             <td>Удаление наддесневых и поддесневых отложений (1 зуб) ультразвуковое</td>
                             <td>450 ₽</td>
                         </tr>
-                        <tr id="p02-07" data-price-row>
+                        <tr id="p02-07" data-price-row data-directions="hygiene">
                             <td>Удаление наддесневых и поддесневых отложений (1 зуб) Air Flow</td>
                             <td>500 ₽</td>
                         </tr>
-                        <tr id="p02-08" data-price-row>
+                        <tr id="p02-08" data-price-row data-directions="hygiene">
                             <td>Глубокое фторирование эмали зуба (1 зуб)</td>
                             <td>850 ₽</td>
                         </tr>
-                        <tr id="p02-09" data-price-row>
+                        <tr id="p02-09" data-price-row data-directions="hygiene">
                             <td>Серебрение 1 зуба Сафорайд</td>
                             <td>550 ₽</td>
                         </tr>
-                        <tr id="p02-10" data-price-row>
+                        <tr id="p02-10" data-price-row data-directions="hygiene">
                             <td>Глубокое фторирование эмали зуба (1 челюсть)</td>
                             <td>1 550 ₽</td>
                         </tr>
-                        <tr id="p02-11" data-price-row>
+                        <tr id="p02-11" data-price-row data-directions="hygiene">
                             <td>Герметизация фиссур 1 зуба</td>
                             <td>2 700 ₽</td>
                         </tr>
-                        <tr id="p02-12" data-price-row>
+                        <tr id="p02-12" data-price-row data-directions="hygiene">
                             <td>Глубокое фторирование и ремотерапия после проф. гигиены для гипер чуствительных зубов</td>
                             <td>1 500 ₽</td>
                         </tr>
-                        <tr id="p02-13" data-price-row>
+                        <tr id="p02-13" data-price-row data-directions="hygiene">
                             <td>Профессиональная гигиена полости рта (Air-Flow + полировка)</td>
                             <td>6 450 ₽</td>
                         </tr>
-                        <tr id="p02-14" data-price-row>
+                        <tr id="p02-14" data-price-row data-directions="children,hygiene">
                             <td>Профессиональная гигиена полости рта (Air-Flow + полировка) дети</td>
                             <td>5 450 ₽</td>
                         </tr>
@@ -241,55 +221,55 @@
                 <table class="price-table full-price-table" aria-label="Терапия">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
-                        <tr id="p03-01" data-price-row>
+                        <tr id="p03-01" data-price-row data-directions="children,therapy">
                             <td>Лечение кариеса молочного зуба</td>
                             <td>4 050 ₽</td>
                         </tr>
-                        <tr id="p03-02" data-price-row>
+                        <tr id="p03-02" data-price-row data-directions="therapy">
                             <td>Снятие пломбы</td>
                             <td>450 ₽</td>
                         </tr>
-                        <tr id="p03-03" data-price-row>
+                        <tr id="p03-03" data-price-row data-directions="therapy">
                             <td>Формирование одной кариозной полости зуба</td>
                             <td>500 ₽</td>
                         </tr>
-                        <tr id="p03-04" data-price-row>
+                        <tr id="p03-04" data-price-row data-directions="therapy">
                             <td>Удаление фрактуры зуба</td>
                             <td>1 500 ₽</td>
                         </tr>
-                        <tr id="p03-05" data-price-row>
+                        <tr id="p03-05" data-price-row data-directions="therapy">
                             <td>Реставрация коронковой части зуба светоотверждаемыми материалами 1 категории сложности</td>
                             <td>6 400 ₽</td>
                         </tr>
-                        <tr id="p03-06" data-price-row>
+                        <tr id="p03-06" data-price-row data-directions="therapy">
                             <td>Реставрация коронковой части зуба светоотверждающими материалами 2 категории сложности</td>
                             <td>7 400 ₽</td>
                         </tr>
-                        <tr id="p03-07" data-price-row>
+                        <tr id="p03-07" data-price-row data-directions="therapy">
                             <td>Реставрация коронковой части зуба светоотверждающими материалами 3 категории сложности</td>
                             <td>8 700 ₽</td>
                         </tr>
-                        <tr id="p03-08" data-price-row>
+                        <tr id="p03-08" data-price-row data-directions="therapy">
                             <td>Медикаментозная, химическая обработка кариозной полости</td>
                             <td>550 ₽</td>
                         </tr>
-                        <tr id="p03-09" data-price-row>
+                        <tr id="p03-09" data-price-row data-directions="therapy">
                             <td>Лечение кариеса и его осложнений с изоляционной системой</td>
                             <td>1 500 ₽</td>
                         </tr>
-                        <tr id="p03-10" data-price-row>
+                        <tr id="p03-10" data-price-row data-directions="therapy">
                             <td>Шинирование в области одного зуба</td>
                             <td>2 550 ₽</td>
                         </tr>
-                        <tr id="p03-11" data-price-row>
+                        <tr id="p03-11" data-price-row data-directions="therapy">
                             <td>Шинирование в области 4х зубов Армсплит</td>
                             <td>6 000 ₽</td>
                         </tr>
-                        <tr id="p03-12" data-price-row>
+                        <tr id="p03-12" data-price-row data-directions="therapy">
                             <td>Шинирование в области 6-ти зубов Армсплит</td>
                             <td>7 800 ₽</td>
                         </tr>
-                        <tr id="p03-13" data-price-row>
+                        <tr id="p03-13" data-price-row data-directions="therapy">
                             <td>Лечение кариеса методом ICON</td>
                             <td>5 900 ₽</td>
                         </tr>
@@ -301,91 +281,91 @@
                 <table class="price-table full-price-table" aria-label="Эндодонтия">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
-                        <tr id="p04-01" data-price-row>
+                        <tr id="p04-01" data-price-row data-directions="therapy">
                             <td>Извлечение инородного тела из канала</td>
                             <td>2 500 ₽</td>
                         </tr>
-                        <tr id="p04-02" data-price-row>
+                        <tr id="p04-02" data-price-row data-directions="therapy">
                             <td>Пломбировка 1 канала пастой</td>
                             <td>1 000 ₽</td>
                         </tr>
-                        <tr id="p04-03" data-price-row>
+                        <tr id="p04-03" data-price-row data-directions="aesthetics,therapy">
                             <td>Внутриканальное отбеливание</td>
                             <td>1 650 ₽</td>
                         </tr>
-                        <tr id="p04-04" data-price-row>
+                        <tr id="p04-04" data-price-row data-directions="children,therapy">
                             <td>Лечение пульпита молочного зуба в 2 посещения с учетом светоотверждаемой пломбы: первое посещение</td>
                             <td>3 300 ₽</td>
                         </tr>
-                        <tr id="p04-05" data-price-row>
+                        <tr id="p04-05" data-price-row data-directions="children,therapy">
                             <td>Лечение пульпита молочного зуба в 2 посещения с учетом светоотверждаемой пломбы: второе посещение</td>
                             <td>4 000 ₽</td>
                         </tr>
-                        <tr id="p04-06" data-price-row>
+                        <tr id="p04-06" data-price-row data-directions="children,therapy">
                             <td>Лечение пульпита молочного зуба в 3 посещения с учетом светоотверждаемой пломбы: первое посещение</td>
                             <td>1 450 ₽</td>
                         </tr>
-                        <tr id="p04-07" data-price-row>
+                        <tr id="p04-07" data-price-row data-directions="children,therapy">
                             <td>Лечение пульпита молочного зуба в 3 посещения с учетом светоотверждаемой пломбы: второе посещение</td>
                             <td>2 450 ₽</td>
                         </tr>
-                        <tr id="p04-08" data-price-row>
+                        <tr id="p04-08" data-price-row data-directions="children,therapy">
                             <td>Лечение пульпита молочного зуба в 3 посещения с учетом светоотверждаемой пломбы: третье посещение</td>
                             <td>3 400 ₽</td>
                         </tr>
-                        <tr id="p04-09" data-price-row>
+                        <tr id="p04-09" data-price-row data-directions="therapy">
                             <td>Экстирпация пульпы 1 канал</td>
                             <td>1 000 ₽</td>
                         </tr>
-                        <tr id="p04-10" data-price-row>
+                        <tr id="p04-10" data-price-row data-directions="therapy">
                             <td>Инструментальная и медикаментозная обработка (расширение) корневого канала первичная</td>
                             <td>1 000 ₽</td>
                         </tr>
-                        <tr id="p04-11" data-price-row>
+                        <tr id="p04-11" data-price-row data-directions="therapy">
                             <td>Инструментальная и медикаментозная обработка корневого канала с применением NiTi/бор машины</td>
                             <td>1 900 ₽</td>
                         </tr>
-                        <tr id="p04-12" data-price-row>
+                        <tr id="p04-12" data-price-row data-directions="therapy">
                             <td>Медикаментозная обработка корневого 1 канала при пульпите первичная</td>
                             <td>900 ₽</td>
                         </tr>
-                        <tr id="p04-13" data-price-row>
+                        <tr id="p04-13" data-price-row data-directions="therapy">
                             <td>Медикаментозная обработка корневого 1 канала при пульпите повторная</td>
                             <td>600 ₽</td>
                         </tr>
-                        <tr id="p04-14" data-price-row>
+                        <tr id="p04-14" data-price-row data-directions="therapy">
                             <td>Медикаментозная обработка корневого 1 канала при периодонтите первичная</td>
                             <td>950 ₽</td>
                         </tr>
-                        <tr id="p04-15" data-price-row>
+                        <tr id="p04-15" data-price-row data-directions="therapy">
                             <td>Медикаментозная обработка корневого 1 канала при периодонтите повторная</td>
                             <td>600 ₽</td>
                         </tr>
-                        <tr id="p04-16" data-price-row>
+                        <tr id="p04-16" data-price-row data-directions="therapy">
                             <td>Распломбировка корневого канала 1 степени сложности</td>
                             <td>2 000 ₽</td>
                         </tr>
-                        <tr id="p04-17" data-price-row>
+                        <tr id="p04-17" data-price-row data-directions="therapy">
                             <td>Распломбировка корневого канала 2 степени сложности</td>
                             <td>2 300 ₽</td>
                         </tr>
-                        <tr id="p04-18" data-price-row>
+                        <tr id="p04-18" data-price-row data-directions="therapy">
                             <td>Пломбировка 1 канала гуттаперча</td>
                             <td>1 800 ₽</td>
                         </tr>
-                        <tr id="p04-19" data-price-row>
+                        <tr id="p04-19" data-price-row data-directions="therapy">
                             <td>Временная пломбировка канала препаратами Са: каласепт /септомиксин</td>
                             <td>1 700 ₽</td>
                         </tr>
-                        <tr id="p04-20" data-price-row>
+                        <tr id="p04-20" data-price-row data-directions="therapy">
                             <td>Временная пломбировка канала препаратом BioRoot RCS</td>
                             <td>2 000 ₽</td>
                         </tr>
-                        <tr id="p04-21" data-price-row>
+                        <tr id="p04-21" data-price-row data-directions="therapy">
                             <td>Наложение девитализирующей пасты</td>
                             <td>600 ₽</td>
                         </tr>
-                        <tr id="p04-22" data-price-row>
+                        <tr id="p04-22" data-price-row data-directions="therapy">
                             <td>Подготовка корневого канала под вкладку/анкерный штифт</td>
                             <td>600 ₽</td>
                         </tr>
@@ -397,83 +377,83 @@
                 <table class="price-table full-price-table" aria-label="Хирургия">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
-                        <tr id="p05-01" data-price-row>
+                        <tr id="p05-01" data-price-row data-directions="surgery">
                             <td>Пластика уздечки языка</td>
                             <td>5 500 ₽</td>
                         </tr>
-                        <tr id="p05-02" data-price-row>
+                        <tr id="p05-02" data-price-row data-directions="surgery">
                             <td>Пластика уздечки верхней губы</td>
                             <td>5 500 ₽</td>
                         </tr>
-                        <tr id="p05-03" data-price-row>
+                        <tr id="p05-03" data-price-row data-directions="surgery">
                             <td>Вестибулопластика</td>
                             <td>9 000 ₽</td>
                         </tr>
-                        <tr id="p05-04" data-price-row>
+                        <tr id="p05-04" data-price-row data-directions="surgery">
                             <td>Пластика уздечки языка лазером FonaLase</td>
                             <td>7 300 ₽</td>
                         </tr>
-                        <tr id="p05-05" data-price-row>
+                        <tr id="p05-05" data-price-row data-directions="surgery">
                             <td>Пластика уздечки верхней губы лазером FonaLase</td>
                             <td>7 300 ₽</td>
                         </tr>
-                        <tr id="p05-06" data-price-row>
+                        <tr id="p05-06" data-price-row data-directions="children,surgery">
                             <td>Удаление подвижного молочного зуба (включая аппликационную анестезию)</td>
                             <td>1 950 ₽</td>
                         </tr>
-                        <tr id="p05-07" data-price-row>
+                        <tr id="p05-07" data-price-row data-directions="children,surgery">
                             <td>Удаление неподвижного молочного зуба</td>
                             <td>3 100 ₽</td>
                         </tr>
-                        <tr id="p05-08" data-price-row>
+                        <tr id="p05-08" data-price-row data-directions="surgery">
                             <td>Удаление постоянного зуба 1 степени сложности (подвижные)</td>
                             <td>3 100 ₽</td>
                         </tr>
-                        <tr id="p05-09" data-price-row>
+                        <tr id="p05-09" data-price-row data-directions="surgery">
                             <td>Удаление постоянного зуба 2 степени сложности</td>
                             <td>4 400 ₽</td>
                         </tr>
-                        <tr id="p05-10" data-price-row>
+                        <tr id="p05-10" data-price-row data-directions="surgery">
                             <td>Удаление постоянного зуба 3 степени сложности (с разъединением корней)</td>
                             <td>5 500 ₽</td>
                         </tr>
-                        <tr id="p05-11" data-price-row>
+                        <tr id="p05-11" data-price-row data-directions="surgery">
                             <td>Перевязка гнойных ран, дренирование/снятие дренажа</td>
                             <td>1 000 ₽</td>
                         </tr>
-                        <tr id="p05-12" data-price-row>
+                        <tr id="p05-12" data-price-row data-directions="surgery">
                             <td>Кюретаж лунки, удаление патологических грануляций</td>
                             <td>500 ₽</td>
                         </tr>
-                        <tr id="p05-13" data-price-row>
+                        <tr id="p05-13" data-price-row data-directions="surgery">
                             <td>Лечение альвеолита, кюретаж, ревизия лунки с медобработкой</td>
                             <td>1 500 ₽</td>
                         </tr>
-                        <tr id="p05-14" data-price-row>
+                        <tr id="p05-14" data-price-row data-directions="surgery">
                             <td>Удаление ретинированного, дистопированного, сверхкомплектного зуба 1 степени сложности</td>
                             <td>6 700 ₽</td>
                         </tr>
-                        <tr id="p05-15" data-price-row>
+                        <tr id="p05-15" data-price-row data-directions="surgery">
                             <td>Удаление ретинированного, дистопированного, сверхкомплектного зуба 2 степени сложности</td>
                             <td>7 800 ₽</td>
                         </tr>
-                        <tr id="p05-16" data-price-row>
+                        <tr id="p05-16" data-price-row data-directions="surgery">
                             <td>Удаление ретинированного, дистопированного, сверхкомплектного зуба 3 степени сложности</td>
                             <td>9 400 ₽</td>
                         </tr>
-                        <tr id="p05-17" data-price-row>
+                        <tr id="p05-17" data-price-row data-directions="surgery">
                             <td>Наложение/снятие шва на слизистую оболочку полости рта</td>
                             <td>400 ₽</td>
                         </tr>
-                        <tr id="p05-18" data-price-row>
+                        <tr id="p05-18" data-price-row data-directions="surgery">
                             <td>Лечение перикоронита, иссечение капюшона лазером FonaLase</td>
                             <td>2 900 ₽</td>
                         </tr>
-                        <tr id="p05-19" data-price-row>
+                        <tr id="p05-19" data-price-row data-directions="surgery">
                             <td>Лечение перикоронита (промывание, рассечение и/или иссечение капюшона)</td>
                             <td>1 600 ₽</td>
                         </tr>
-                        <tr id="p05-20" data-price-row>
+                        <tr id="p05-20" data-price-row data-directions="surgery">
                             <td>Первичная хирургическая/медикаментозная обработка травматической раны полости рта</td>
                             <td>2 100 ₽</td>
                         </tr>
@@ -486,197 +466,197 @@
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
                         <tr data-price-subgroup><th scope="rowgroup" colspan="2">Диагностическое обследование</th></tr>
-                        <tr id="p06-01" data-price-row>
+                        <tr id="p06-01" data-price-row data-directions="ortho">
                             <td>Расчет и составление плана лечения на основе ОПТГ</td>
                             <td>800 ₽</td>
                         </tr>
-                        <tr id="p06-02" data-price-row>
+                        <tr id="p06-02" data-price-row data-directions="ortho">
                             <td>Расчет и составление плана лечения на основе ТРГ</td>
                             <td>3 000 ₽</td>
                         </tr>
                     </tbody>
                     <tbody>
                         <tr data-price-subgroup><th scope="rowgroup" colspan="2">Лечение на съемной аппаратуре</th></tr>
-                        <tr id="p06-03" data-price-row>
+                        <tr id="p06-03" data-price-row data-directions="ortho">
                             <td>Аппарат Френкеля</td>
                             <td>34 100 ₽</td>
                         </tr>
-                        <tr id="p06-04" data-price-row>
+                        <tr id="p06-04" data-price-row data-directions="ortho">
                             <td>Аппарат для быстрого небного расширения</td>
                             <td>22 900 ₽</td>
                         </tr>
-                        <tr id="p06-05" data-price-row>
+                        <tr id="p06-05" data-price-row data-directions="ortho">
                             <td>Приварка искусственного зуба на пластинку</td>
                             <td>600 ₽</td>
                         </tr>
-                        <tr id="p06-06" data-price-row>
+                        <tr id="p06-06" data-price-row data-directions="ortho">
                             <td>Аппарат Твин-блок</td>
                             <td>39 000 ₽</td>
                         </tr>
-                        <tr id="p06-07" data-price-row>
+                        <tr id="p06-07" data-price-row data-directions="ortho">
                             <td>Преортодонтический аппарат LM-активатор</td>
                             <td>16 000 ₽</td>
                         </tr>
-                        <tr id="p06-08" data-price-row>
+                        <tr id="p06-08" data-price-row data-directions="ortho">
                             <td>Трейнер Т4К</td>
                             <td>14 200 ₽</td>
                         </tr>
-                        <tr id="p06-09" data-price-row>
+                        <tr id="p06-09" data-price-row data-directions="ortho">
                             <td>Трейнер преортодонтический Infant</td>
                             <td>13 350 ₽</td>
                         </tr>
-                        <tr id="p06-10" data-price-row>
+                        <tr id="p06-10" data-price-row data-directions="ortho">
                             <td>Аппарат HAAS, Marco Rossa c винтом Хайрекс</td>
                             <td>41 250 ₽</td>
                         </tr>
-                        <tr id="p06-11" data-price-row>
+                        <tr id="p06-11" data-price-row data-directions="ortho">
                             <td>Аппарат Гербста</td>
                             <td>78 900 ₽</td>
                         </tr>
                     </tbody>
                     <tbody>
                         <tr data-price-subgroup><th scope="rowgroup" colspan="2">Лечебные ортодонтические услуги</th></tr>
-                        <tr id="p06-12" data-price-row>
+                        <tr id="p06-12" data-price-row data-directions="ortho">
                             <td>Фиксация металлической кнопки</td>
                             <td>2 500 ₽</td>
                         </tr>
-                        <tr id="p06-14" data-price-row>
+                        <tr id="p06-14" data-price-row data-directions="ortho">
                             <td>Фиксация металлической брекет-системы (1 челюсть)</td>
                             <td>25 000 ₽</td>
                         </tr>
-                        <tr id="p06-15" data-price-row>
+                        <tr id="p06-15" data-price-row data-directions="ortho">
                             <td>Фиксация керамической брекет-системы (1 челюсть)</td>
                             <td>27 000 ₽</td>
                         </tr>
-                        <tr id="p06-16" data-price-row>
+                        <tr id="p06-16" data-price-row data-directions="ortho">
                             <td>Снятие брекета (1 зуб)</td>
                             <td>700 ₽</td>
                         </tr>
-                        <tr id="p06-17" data-price-row>
+                        <tr id="p06-17" data-price-row data-directions="ortho">
                             <td>Комплексное снятие металлической брекет-системы (1 челюсть)</td>
                             <td>26 500 ₽</td>
                         </tr>
-                        <tr id="p06-18" data-price-row>
+                        <tr id="p06-18" data-price-row data-directions="ortho">
                             <td>Комплексное снятие керамической брекет-системы (1 челюсть)</td>
                             <td>28 500 ₽</td>
                         </tr>
-                        <tr id="p06-19" data-price-row>
+                        <tr id="p06-19" data-price-row data-directions="ortho">
                             <td>Снятие металлической брекет-системы (1 челюсть) и фиксация ретейнера</td>
                             <td>17 900 ₽</td>
                         </tr>
-                        <tr id="p06-20" data-price-row>
+                        <tr id="p06-20" data-price-row data-directions="ortho">
                             <td>Стоимость брекет системы (керамической)</td>
                             <td>44 700 ₽</td>
                         </tr>
-                        <tr id="p06-21" data-price-row>
+                        <tr id="p06-21" data-price-row data-directions="ortho">
                             <td>Стоимость брекет системы (металлической)</td>
                             <td>35 700 ₽</td>
                         </tr>
-                        <tr id="p06-22" data-price-row>
+                        <tr id="p06-22" data-price-row data-directions="ortho">
                             <td>Стоимость брекет-системы самолигирующ (металл) на одну челюсть</td>
                             <td>26 100 ₽</td>
                         </tr>
-                        <tr id="p06-23" data-price-row>
+                        <tr id="p06-23" data-price-row data-directions="ortho">
                             <td>Стоимость брекет-системы (керамической) самолигирующ</td>
                             <td>58 900 ₽</td>
                         </tr>
-                        <tr id="p06-24" data-price-row>
+                        <tr id="p06-24" data-price-row data-directions="ortho">
                             <td>Лингвальная дуга/Небный бюгель</td>
                             <td>40 900 ₽</td>
                         </tr>
                     </tbody>
                     <tbody>
                         <tr data-price-subgroup><th scope="rowgroup" colspan="2">Ретенционные аппараты после окончания ортодонтического лечения</th></tr>
-                        <tr id="p06-25" data-price-row>
+                        <tr id="p06-25" data-price-row data-directions="ortho">
                             <td>Срочная ретенционная каппа</td>
                             <td>14 300 ₽</td>
                         </tr>
-                        <tr id="p06-26" data-price-row>
+                        <tr id="p06-26" data-price-row data-directions="ortho">
                             <td>Фиксация ретейнера</td>
                             <td>7 900 ₽</td>
                         </tr>
-                        <tr id="p06-27" data-price-row>
+                        <tr id="p06-27" data-price-row data-directions="ortho">
                             <td>Каппа ретенционная</td>
                             <td>13 500 ₽</td>
                         </tr>
-                        <tr id="p06-28" data-price-row>
+                        <tr id="p06-28" data-price-row data-directions="ortho">
                             <td>Фиксация ортодонтического кольца</td>
                             <td>2 500 ₽</td>
                         </tr>
-                        <tr id="p06-29" data-price-row>
+                        <tr id="p06-29" data-price-row data-directions="ortho">
                             <td>Избирательное пришлифовывание</td>
                             <td>350 ₽</td>
                         </tr>
-                        <tr id="p06-30" data-price-row>
+                        <tr id="p06-30" data-price-row data-directions="ortho">
                             <td>Фиксация несъемного ортодонтического аппарата</td>
                             <td>5 000 ₽</td>
                         </tr>
-                        <tr id="p06-31" data-price-row>
+                        <tr id="p06-31" data-price-row data-directions="ortho">
                             <td>Снятие ортодонтического аппарата (2 кольца)</td>
                             <td>2 500 ₽</td>
                         </tr>
                     </tbody>
                     <tbody>
                         <tr data-price-subgroup><th scope="rowgroup" colspan="2">Лечение на несъемной аппаратуре: брекет-системе</th></tr>
-                        <tr id="p06-33" data-price-row>
+                        <tr id="p06-33" data-price-row data-directions="ortho">
                             <td>Коррекция брекет-системы одного зубного ряда/сегмента</td>
                             <td>4 200 ₽</td>
                         </tr>
-                        <tr id="p06-34" data-price-row>
+                        <tr id="p06-34" data-price-row data-directions="ortho">
                             <td>Коррекция брекет-системы 1 категории</td>
                             <td>4 700 ₽</td>
                         </tr>
-                        <tr id="p06-35" data-price-row>
+                        <tr id="p06-35" data-price-row data-directions="ortho">
                             <td>Коррекция брекет-системы 2 категории</td>
                             <td>5 700 ₽</td>
                         </tr>
-                        <tr id="p06-36" data-price-row>
+                        <tr id="p06-36" data-price-row data-directions="ortho">
                             <td>Коррекция брекет-системы 3 категории</td>
                             <td>6 100 ₽</td>
                         </tr>
-                        <tr id="p06-37" data-price-row>
+                        <tr id="p06-37" data-price-row data-directions="ortho">
                             <td>Коррекция брекет-системы 4 категории</td>
                             <td>7 900 ₽</td>
                         </tr>
                     </tbody>
                     <tbody>
                         <tr data-price-subgroup><th scope="rowgroup" colspan="2">Лечение на элайнерах подростки</th></tr>
-                        <tr id="p06-38" data-price-row>
+                        <tr id="p06-38" data-price-row data-directions="ortho">
                             <td>Полный курс</td>
                             <td>220 000 ₽</td>
                         </tr>
-                        <tr id="p06-39" data-price-row>
+                        <tr id="p06-39" data-price-row data-directions="ortho">
                             <td>Виртуальный 3D план (анализ ОПТГ и ТРГ)</td>
                             <td>40 000 ₽</td>
                         </tr>
-                        <tr id="p06-40" data-price-row>
+                        <tr id="p06-40" data-price-row data-directions="ortho">
                             <td>Безлимитный курс (анализ КТ)</td>
                             <td>250 000 ₽</td>
                         </tr>
-                        <tr id="p06-41" data-price-row>
+                        <tr id="p06-41" data-price-row data-directions="ortho">
                             <td>Элайнеры кейс подростки 1 этап</td>
                             <td>150 000 ₽</td>
                         </tr>
-                        <tr id="p06-42" data-price-row>
+                        <tr id="p06-42" data-price-row data-directions="ortho">
                             <td>Элайнеры кейс подростки 2 этап</td>
                             <td>140 000 ₽</td>
                         </tr>
-                        <tr id="p06-43" data-price-row>
+                        <tr id="p06-43" data-price-row data-directions="ortho">
                             <td>Элайнеры кейс подростки 3 этап</td>
                             <td>100 000 ₽</td>
                         </tr>
                     </tbody>
                     <tbody>
                         <tr data-price-subgroup><th scope="rowgroup" colspan="2">Лечение на элайнерах взрослые</th></tr>
-                        <tr id="p06-44" data-price-row>
+                        <tr id="p06-44" data-price-row data-directions="ortho">
                             <td>Элайнеры кейс взрослые 1 этап</td>
                             <td>200 000 ₽</td>
                         </tr>
-                        <tr id="p06-45" data-price-row>
+                        <tr id="p06-45" data-price-row data-directions="ortho">
                             <td>Элайнеры кейс взрослые 2 этап</td>
                             <td>180 000 ₽</td>
                         </tr>
-                        <tr id="p06-46" data-price-row>
+                        <tr id="p06-46" data-price-row data-directions="ortho">
                             <td>Элайнеры кейс взрослые 3 этап</td>
                             <td>100 000 ₽</td>
                         </tr>
@@ -688,113 +668,113 @@
                 <table class="price-table full-price-table" aria-label="Ортопедическая стоматология">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
-                        <tr id="p07-01" data-price-row>
+                        <tr id="p07-01" data-price-row data-directions="prosthetics">
                             <td>Снятие штампованной коронки</td>
                             <td>500 ₽</td>
                         </tr>
-                        <tr id="p07-02" data-price-row>
+                        <tr id="p07-02" data-price-row data-directions="prosthetics">
                             <td>Нейлоновый протез</td>
                             <td>39 800 ₽</td>
                         </tr>
-                        <tr id="p07-03" data-price-row>
+                        <tr id="p07-03" data-price-row data-directions="prosthetics">
                             <td>Закрытие шахты коронки с опорой на имплант</td>
                             <td>1 500 ₽</td>
                         </tr>
-                        <tr id="p07-04" data-price-row>
+                        <tr id="p07-04" data-price-row data-directions="prosthetics">
                             <td>Коронка из диоксида циркония на имплант (штраумн)</td>
                             <td>45 000 ₽</td>
                         </tr>
-                        <tr id="p07-05" data-price-row>
+                        <tr id="p07-05" data-price-row data-directions="prosthetics">
                             <td>Снятие металлокерамической/литой коронки</td>
                             <td>1 150 ₽</td>
                         </tr>
-                        <tr id="p07-06" data-price-row>
+                        <tr id="p07-06" data-price-row data-directions="prosthetics">
                             <td>Фиксация коронки стеклоиномерным цементом</td>
                             <td>1 700 ₽</td>
                         </tr>
-                        <tr id="p07-07" data-price-row>
+                        <tr id="p07-07" data-price-row data-directions="prosthetics">
                             <td>Цельно-циркониевая коронка</td>
                             <td>21 100 ₽</td>
                         </tr>
-                        <tr id="p07-08" data-price-row>
+                        <tr id="p07-08" data-price-row data-directions="aesthetics,prosthetics">
                             <td>Винир E-MAX</td>
                             <td>27 000 ₽</td>
                         </tr>
-                        <tr id="p07-09" data-price-row>
+                        <tr id="p07-09" data-price-row data-directions="prosthetics">
                             <td>Бюгельный протез</td>
                             <td>43 700 ₽</td>
                         </tr>
-                        <tr id="p07-10" data-price-row>
+                        <tr id="p07-10" data-price-row data-directions="prosthetics">
                             <td>Бюгельный протез с замком</td>
                             <td>46 300 ₽</td>
                         </tr>
-                        <tr id="p07-11" data-price-row>
+                        <tr id="p07-11" data-price-row data-directions="prosthetics">
                             <td>Полный съемный Акриловый протез на 1 челюсть</td>
                             <td>29 900 ₽</td>
                         </tr>
-                        <tr id="p07-12" data-price-row>
+                        <tr id="p07-12" data-price-row data-directions="prosthetics">
                             <td>Частично-съемный акриловый протез</td>
                             <td>25 100 ₽</td>
                         </tr>
-                        <tr id="p07-13" data-price-row>
+                        <tr id="p07-13" data-price-row data-directions="prosthetics">
                             <td>Шинирующий бюгельный протез</td>
                             <td>50 000 ₽</td>
                         </tr>
-                        <tr id="p07-14" data-price-row>
+                        <tr id="p07-14" data-price-row data-directions="prosthetics">
                             <td>Приварка зуба</td>
                             <td>3 500 ₽</td>
                         </tr>
-                        <tr id="p07-15" data-price-row>
+                        <tr id="p07-15" data-price-row data-directions="prosthetics">
                             <td>Полный съемный протез Акри Фри</td>
                             <td>49 000 ₽</td>
                         </tr>
-                        <tr id="p07-16" data-price-row>
+                        <tr id="p07-16" data-price-row data-directions="prosthetics">
                             <td>Коронка из диоксида циркония на имплант (OSSTEM)</td>
                             <td>41 100 ₽</td>
                         </tr>
-                        <tr id="p07-17" data-price-row>
+                        <tr id="p07-17" data-price-row data-directions="prosthetics">
                             <td>Металлокерамическая коронка на импланте</td>
                             <td>31 100 ₽</td>
                         </tr>
-                        <tr id="p07-18" data-price-row>
+                        <tr id="p07-18" data-price-row data-directions="prosthetics">
                             <td>Перебазировка съемного протеза</td>
                             <td>5 100 ₽</td>
                         </tr>
-                        <tr id="p07-19" data-price-row>
+                        <tr id="p07-19" data-price-row data-directions="prosthetics">
                             <td>Цельно-циркониевая коронка с облицовкой</td>
                             <td>25 000 ₽</td>
                         </tr>
-                        <tr id="p07-20" data-price-row>
+                        <tr id="p07-20" data-price-row data-directions="prosthetics">
                             <td>Бюгельный протез Квадротти</td>
                             <td>41 300 ₽</td>
                         </tr>
-                        <tr id="p07-21" data-price-row>
+                        <tr id="p07-21" data-price-row data-directions="prosthetics">
                             <td>Приварка кламера</td>
                             <td>3 500 ₽</td>
                         </tr>
-                        <tr id="p07-22" data-price-row>
+                        <tr id="p07-22" data-price-row data-directions="prosthetics">
                             <td>Временная коронка на имплант</td>
                             <td>8 000 ₽</td>
                         </tr>
-                        <tr id="p07-23" data-price-row>
+                        <tr id="p07-23" data-price-row data-directions="prosthetics">
                             <td>Изготовление индивидуального абатмента</td>
                             <td>5 000 ₽</td>
                         </tr>
-                        <tr id="p07-24" data-price-row>
+                        <tr id="p07-24" data-price-row data-directions="prosthetics">
                             <td>Абатмент</td>
                             <td>3 000 ₽</td>
                         </tr>
                     </tbody>
                     <tbody>
                         <tr data-price-subgroup><th scope="rowgroup" colspan="2">Рентген</th></tr>
-                        <tr id="p07-25" data-price-row>
+                        <tr id="p07-25" data-price-row data-directions="prosthetics">
                             <td>ОПТГ</td>
                             <td>1 800 ₽</td>
                         </tr>
                     </tbody>
                     <tbody>
                         <tr data-price-subgroup><th scope="rowgroup" colspan="2">Стоимость брекет системы</th></tr>
-                        <tr id="p07-26" data-price-row>
+                        <tr id="p07-26" data-price-row data-directions="prosthetics">
                             <td>Брекет система (1 зуб)</td>
                             <td>1 900 ₽</td>
                         </tr>
@@ -806,27 +786,27 @@
                 <table class="price-table full-price-table" aria-label="Имплантация">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
-                        <tr id="p08-01" data-price-row>
+                        <tr id="p08-01" data-price-row data-directions="implantology,prosthetics">
                             <td>Установка формирователя десны</td>
                             <td>3 000 ₽</td>
                         </tr>
-                        <tr id="p08-02" data-price-row>
+                        <tr id="p08-02" data-price-row data-directions="implantology,prosthetics">
                             <td>Закрытый синус-лифтинг</td>
                             <td>25 000 ₽</td>
                         </tr>
-                        <tr id="p08-03" data-price-row>
+                        <tr id="p08-03" data-price-row data-directions="implantology,prosthetics">
                             <td>Установка микроимпланта</td>
                             <td>15 000 ₽</td>
                         </tr>
-                        <tr id="p08-04" data-price-row>
+                        <tr id="p08-04" data-price-row data-directions="implantology,prosthetics">
                             <td>Повторная установка микроимпланта</td>
                             <td>3 500 ₽</td>
                         </tr>
-                        <tr id="p08-05" data-price-row>
+                        <tr id="p08-05" data-price-row data-directions="implantology,prosthetics">
                             <td>Синуслифтинг в области одного импланта</td>
                             <td>50 000 ₽</td>
                         </tr>
-                        <tr id="p08-06" data-price-row>
+                        <tr id="p08-06" data-price-row data-directions="implantology,prosthetics">
                             <td>Синуслифтинг в области одного сегмента</td>
                             <td>75 000 ₽</td>
                         </tr>
@@ -838,23 +818,23 @@
                 <table class="price-table full-price-table" aria-label="Пародонтология">
                     <thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>
                     <tbody>
-                        <tr id="p09-01" data-price-row>
+                        <tr id="p09-01" data-price-row data-directions="periodontics">
                             <td>Медикаментозная обработка слизистой полости (стоматит)</td>
                             <td>900 ₽</td>
                         </tr>
-                        <tr id="p09-02" data-price-row>
+                        <tr id="p09-02" data-price-row data-directions="periodontics">
                             <td>Закрытый кюретаж пародонтального кармана в области 1 зуба</td>
                             <td>1 550 ₽</td>
                         </tr>
-                        <tr id="p09-03" data-price-row>
+                        <tr id="p09-03" data-price-row data-directions="periodontics">
                             <td>Антисептическая и/или медикаментозная обработка пародонтального кармана в области 1 зуба</td>
                             <td>800 ₽</td>
                         </tr>
-                        <tr id="p09-04" data-price-row>
+                        <tr id="p09-04" data-price-row data-directions="periodontics">
                             <td>Наложение самоклеющейся лечебной повязки при заболеваниях пародонта и слизистой оболочки</td>
                             <td>900 ₽</td>
                         </tr>
-                        <tr id="p09-05" data-price-row>
+                        <tr id="p09-05" data-price-row data-directions="periodontics">
                             <td>Лечение воспалительных заболеваний слизистой оболочки</td>
                             <td>1 100 ₽</td>
                         </tr>

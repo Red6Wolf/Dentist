@@ -10,12 +10,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 PRICE_DATA = Path(__file__).with_name("prices.json")
 COLUMNS = '<thead><tr><th scope="col">Услуга</th><th scope="col">Цена</th></tr></thead>'
-COMMON_PRICES = [
-    ("p01-01", "Первичный приём стоматолога-терапевта"),
-    ("p01-03", "Первичный приём детского стоматолога"),
-    ("p01-12", "Прицельный снимок зуба"),
-    ("p02-01", "Комплексная чистка (ультразвук, Air-Flow, полировка)"),
-]
 
 
 class ServicePriceIndex(HTMLParser):
@@ -56,6 +50,47 @@ def service_price_index(rows):
     return "\n".join(entries)
 
 
+PAGE_DIRECTIONS = {
+    "price-visits.html": "diagnostics",
+    "price-hygiene.html": "hygiene",
+    "price-treatment.html": "therapy",
+    "price-surgery.html": "surgery",
+    "price-orthodontics.html": "ortho",
+    "price-prosthetics.html": "prosthetics",
+    "price-gums.html": "periodontics",
+    "price-children.html": "children",
+}
+CHILDREN = {"p01-03", "p01-04", "p03-01", "p04-04", "p04-05", "p04-06", "p04-07", "p04-08", "p05-06", "p05-07"}
+
+
+def row_directions(group, row):
+    directions = {PAGE_DIRECTIONS[group["page"]]}
+    if group["title"] == "Имплантация":
+        directions.add("implantology")
+    if row["id"] in CHILDREN | {"p02-02", "p02-14"}:
+        directions.add("children")
+    if row["id"] in {"p04-03", "p07-08"}:
+        directions.add("aesthetics")
+    return ",".join(sorted(directions))
+
+
+def legacy_page(page):
+    destination = "prices.html?direction=" + PAGE_DIRECTIONS[page]
+    return f'''<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Цены — Апельсин</title>
+    <link rel="canonical" href="https://stomatologiya-apelsin.ru/pages/prices.html" />
+    <script src="../scripts/price-redirect.js" defer></script>
+  </head>
+  <body data-price-destination="{destination}">
+    <p><a href="{destination}">Перейти к ценам выбранного направления</a></p>
+  </body>
+</html>
+'''
+
 def table(group):
     lines = [f'<table class="price-table full-price-table" aria-label="{escape(group["label"])}">']
     lines.append(f"    {COLUMNS}")
@@ -66,7 +101,7 @@ def table(group):
             lines.append(f'        <tr data-price-subgroup><th scope="rowgroup" colspan="2">{title}</th></tr>')
         for row in section["rows"]:
             lines.extend([
-                f'        <tr id="{row["id"]}" data-price-row>',
+                f'        <tr id="{row["id"]}" data-price-row data-directions="{row_directions(group, row)}">',
                 f'            <td>{escape(row["name"])}</td>',
                 f'            <td>{escape(row["price"])}</td>',
                 "        </tr>",
@@ -87,16 +122,6 @@ def directory_table(group):
         f"    <summary><span><strong>{title}</strong></span></summary>\n"
         f"{indent(table(group), 4)}\n"
         "</details>"
-    )
-
-
-def detail_table(group, show_heading):
-    title = escape(group["title"])
-    heading = f"  <h2>{title}</h2>\n" if show_heading else ""
-    return (
-        '<section class="price-group-table">\n'
-        f"{heading}{indent(table(group), 6)}\n"
-        "</section>"
     )
 
 
@@ -146,35 +171,20 @@ def cost_examples(rows):
 
 
 def procedure_index(groups):
-    directions = {
-        "price-visits.html": "diagnostics",
-        "price-hygiene.html": "hygiene",
-        "price-treatment.html": "therapy",
-        "price-surgery.html": "surgery",
-        "price-orthodontics.html": "ortho",
-        "price-prosthetics.html": "prosthetics",
-        "price-gums.html": "periodontics",
-    }
-    children = {"p01-03", "p01-04", "p03-01", "p04-04", "p04-05", "p04-06", "p04-07", "p04-08", "p05-06", "p05-07"}
     lines = []
     for group in groups:
         for section in group["sections"]:
             for row in section["rows"]:
-                direction = directions[group["page"]]
-                related = {direction}
-                page = group["page"]
+                direction = PAGE_DIRECTIONS[group["page"]]
                 if group["title"] == "Имплантация":
                     direction = "implantology"
-                if row["id"] in children:
-                    direction, page = "children", "price-children.html"
+                if row["id"] in CHILDREN:
+                    direction = "children"
                 if row["id"] in {"p04-03", "p07-08"}:
                     direction = "aesthetics"
-                related.add(direction)
-                if row["id"] in {"p02-02", "p02-14"}:
-                    related.add("children")
-                related_ids = ",".join(sorted(related))
+                related_ids = row_directions(group, row)
                 lines.extend([
-                    f'<a href="{page}#{row["id"]}" data-direction="{direction}" data-directions="{related_ids}" data-procedure-id="{row["id"]}">',
+                    f'<a href="prices.html?direction={direction}#{row["id"]}" data-direction="{direction}" data-directions="{related_ids}" data-procedure-id="{row["id"]}">',
                     f'  <span>{escape(row["name"])}</span>',
                     f'  <b>{escape(row["price"])}</b>',
                     '</a>',
@@ -203,6 +213,7 @@ def main():
             "title": view["title"],
             "label": view["label"],
             "sections": [{"title": "", "rows": [rows[row_id] for row_id in view["rows"]]}],
+            "page": view["page"],
         }
         by_page.setdefault(view["page"], []).append(view_group)
     expected_pages = {path.name for path in (ROOT / "pages").glob("price-*.html")}
@@ -219,11 +230,6 @@ def main():
         update("pages/prices.html", "directory", "\n".join(map(directory_table, groups)), args.check),
         update("pages/prices.html", "service-index", service_price_index(rows), args.check),
     ]
-    common = "\n".join(
-        f'<tr>\n  <th scope="row">{escape(name)}</th>\n  <td>{escape(rows[row_id]["price"])}</td>\n</tr>'
-        for row_id, name in COMMON_PRICES
-    )
-    results.append(update("pages/prices.html", "common", common, args.check))
     results.append(update("pages/prices.html", "examples", cost_examples(rows), args.check))
     for page, key, selected in [
         ("implantation.html", "implantation", ["p01-09", "p07-04", "p07-16", "p08-01"]),
@@ -231,9 +237,15 @@ def main():
         ("orthodontics.html", "orthodontics", ["p01-05", "p06-14", "p06-15"]),
     ]:
         results.append(update(f"pages/{page}", key, care_prices(rows, selected), args.check))
-    for page, page_groups in by_page.items():
-        markup = "\n".join(detail_table(group, len(page_groups) > 1) for group in page_groups)
-        results.append(update(f"pages/{page}", "detail", markup, args.check))
+    for page in by_page:
+        path = ROOT / "pages" / page
+        markup = legacy_page(page)
+        if path.read_text() != markup:
+            if args.check:
+                print(f"Нужно обновить {path.relative_to(ROOT)}")
+                results.append(False)
+            else:
+                path.write_text(markup)
     return 0 if all(results) else 1
 
 
