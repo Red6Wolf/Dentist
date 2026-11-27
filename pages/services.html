@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../styles/refinement.css?v=compact-location" />
     <link rel="stylesheet" href="../styles/price-transitions.css" />
     <link rel="stylesheet" href="../styles/care.css?v=first-visit-link" />
-    <link rel="stylesheet" href="../styles/services.css?v=services-navigator" />
+    <link rel="stylesheet" href="../styles/services.css?v=cards-services-navigator" />
   </head>
 
   <body>
@@ -70,14 +70,7 @@
           </form>
           <p class="services-status" data-service-status role="status" aria-live="polite"></p>
           <div class="services-browser">
-            <nav class="services-directions" aria-label="Направления стоматологии" data-service-directions hidden></nav>
             <div class="services-content" data-service-content>
-              <button type="button" class="services-back content-link" data-service-back hidden>Все направления</button>
-              <div class="services-direction-heading" data-direction-heading hidden>
-                <h2 id="service-direction-title" tabindex="-1" data-direction-title></h2>
-                <p data-direction-description></p>
-                <div class="services-direction-links" data-direction-links></div>
-              </div>
               <ul class="services-results" id="service-search-results" data-service-results hidden></ul>
               <div class="directory">
                 <details class="directory-group" id="children">
@@ -1172,7 +1165,7 @@
       </footer>
     </div>
     <script src="../scripts/catalogue.js?v=services-navigator" defer></script>
-    <script src="../scripts/services.js?v=services-navigator" defer></script>
+    <script src="../scripts/services.js?v=cards-services-navigator" defer></script>
     <script src="../scripts/navigation.js?v=patient-care" defer></script>
   </body>
 </html>

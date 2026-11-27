@@ -68,25 +68,30 @@ if (servicesCatalogue) {
             price: "prices.html?direction=diagnostics",
         },
     ];
+    const order = ["therapy", "prosthetics", "implantology", "children", "hygiene", "ortho", "surgery", "periodontics", "aesthetics", "diagnostics"];
+    directions.sort((first, second) => order.indexOf(first.id) - order.indexOf(second.id));
+    const previews = {
+        therapy: ["service-1438", "service-3740", "service-1421"],
+        prosthetics: ["service-4101", "service-4003", "service-4079"],
+        implantology: ["service-986", "service-3820", "service-1473"],
+        children: ["service-3751", "service-3881", "service-4054"],
+        hygiene: ["service-3039", "service-4073", "service-4093"],
+        ortho: ["service-994", "service-3969", "service-3877"],
+        surgery: ["service-993", "service-4040", "service-3876"],
+        periodontics: ["service-3730", "service-1287", "service-4110"],
+        aesthetics: ["service-983", "service-990", "service-3041"],
+        diagnostics: ["service-3850", "service-3946", "service-992"],
+    };
     const searchForm = servicesCatalogue.querySelector("[data-services-search]");
     const input = searchForm.querySelector("input");
     const scope = searchForm.querySelector("select");
     const clear = servicesCatalogue.querySelector("[data-service-clear]");
     const status = servicesCatalogue.querySelector("[data-service-status]");
-    const navigation = servicesCatalogue.querySelector("[data-service-directions]");
-    const content = servicesCatalogue.querySelector("[data-service-content]");
-    const back = servicesCatalogue.querySelector("[data-service-back]");
-    const heading = servicesCatalogue.querySelector("[data-direction-heading]");
-    const title = servicesCatalogue.querySelector("[data-direction-title]");
-    const description = servicesCatalogue.querySelector("[data-direction-description]");
-    const links = servicesCatalogue.querySelector("[data-direction-links]");
     const results = servicesCatalogue.querySelector("[data-service-results]");
     const directory = servicesCatalogue.querySelector(".directory");
     const procedures = [...servicesCatalogue.querySelector("#service-procedures").content.querySelectorAll("a")];
-    const mobile = matchMedia("(max-width: 800px)");
     const groups = directions.map((direction) => document.getElementById(direction.id));
     const entries = [];
-    let selected = "";
     let limit = 20;
 
     const more = document.createElement("button");
@@ -130,18 +135,64 @@ if (servicesCatalogue) {
     }
 
     for (const direction of directions) {
-        const link = document.createElement("a");
-        link.href = "#" + direction.id;
-        link.dataset.direction = direction.id;
-        const name = document.createElement("strong");
+        const group = document.getElementById(direction.id);
+        const card = document.createElement("article");
+        card.className = "services-card";
+        card.dataset.direction = direction.id;
+        const heading = document.createElement("div");
+        heading.className = "services-card__heading";
+        const image = document.createElement("span");
+        image.className = "services-card__image";
+        image.setAttribute("aria-hidden", "true");
+        const imageIndex = order.indexOf(direction.id);
+        image.style.backgroundPosition = (imageIndex % 5 * 25) + "% " + (Math.floor(imageIndex / 5) * 100) + "%";
+        const name = document.createElement("h2");
+        name.id = "heading-" + direction.id;
         name.textContent = direction.title;
-        const examples = document.createElement("span");
-        examples.textContent = direction.description;
-        const arrow = document.createElement("b");
-        arrow.className = "icon-arrow";
-        arrow.setAttribute("aria-hidden", "true");
-        link.append(name, examples, arrow);
-        navigation.append(link);
+        card.setAttribute("aria-labelledby", name.id);
+        const description = document.createElement("p");
+        description.textContent = direction.description + ".";
+        heading.append(name, description, image);
+        const preview = document.createElement("ul");
+        preview.className = "services-card__preview";
+        for (const id of previews[direction.id]) {
+            const source = document.getElementById(id);
+            const item = document.createElement("li");
+            const link = document.createElement("a");
+            link.href = "#" + id;
+            link.textContent = source.querySelector("span").textContent;
+            const arrow = document.createElement("span");
+            arrow.className = "services-chevron";
+            arrow.setAttribute("aria-hidden", "true");
+            link.append(arrow);
+            item.append(link);
+            preview.append(item);
+        }
+        const summary = group.querySelector(":scope > summary");
+        summary.textContent = "Все услуги направления";
+        summary.setAttribute("aria-label", "Все услуги направления «" + direction.title + "»");
+        group.classList.add("services-card__details");
+        group.addEventListener("toggle", () => {
+            summary.textContent = group.open ? "Свернуть список" : "Все услуги направления";
+            summary.setAttribute("aria-label", (group.open ? "Свернуть список «" : "Все услуги направления «") + direction.title + "»");
+        });
+        const actions = document.createElement("div");
+        actions.className = "services-card__actions";
+        const price = document.createElement("a");
+        price.href = direction.price;
+        price.className = "content-link";
+        price.textContent = "Цены по направлению";
+        actions.append(price);
+        if (direction.guide) {
+            const guide = document.createElement("a");
+            guide.href = direction.guide;
+            guide.className = "content-link";
+            guide.textContent = direction.id === "children" ? "Первый визит с ребёнком" : "Подробнее о лечении";
+            actions.append(guide);
+        }
+        group.append(actions);
+        card.append(heading, preview, group);
+        directory.append(card);
 
         const option = document.createElement("option");
         option.value = direction.id;
@@ -150,14 +201,14 @@ if (servicesCatalogue) {
 
         const disclosure = document.createElement("details");
         disclosure.className = "services-procedures";
-        const summary = document.createElement("summary");
-        summary.textContent = "Отдельные процедуры и цены";
+        const procedureSummary = document.createElement("summary");
+        procedureSummary.textContent = "Отдельные процедуры и цены";
         const list = document.createElement("ul");
         list.className = "services-results";
         for (const entry of entries.filter((entry) => entry.price && entry.directions.includes(direction.id))) {
             list.append(resultRow(entry));
         }
-        disclosure.append(summary, list);
+        disclosure.append(procedureSummary, list);
         document.getElementById(direction.id).append(disclosure);
     }
 
@@ -223,44 +274,10 @@ if (servicesCatalogue) {
 
     function render() {
         const searching = Boolean(input.value.trim());
-        const active = directionFor(selected);
-        const showSelection = !searching && Boolean(active);
-        navigation.hidden = searching && mobile.matches;
-        const highlightedDirection = searching ? scope.value : selected;
-        for (const link of navigation.children) {
-            if (link.dataset.direction === highlightedDirection) link.setAttribute("aria-current", "true");
-            else link.removeAttribute("aria-current");
-        }
-        for (const group of groups) {
-            group.hidden = searching || group.id !== selected;
-            group.open = group.id === selected;
-        }
-        directory.hidden = !showSelection;
-        heading.hidden = !showSelection;
+        directory.hidden = searching;
         results.hidden = !searching;
-        content.hidden = mobile.matches && !searching && !active;
-        back.hidden = !mobile.matches || (!searching && !active);
         clear.hidden = !searching;
-        servicesCatalogue.classList.toggle("services-showing-content", mobile.matches && (searching || Boolean(active)));
-        if (showSelection) {
-            title.textContent = active.title;
-            description.textContent = active.description + ".";
-            links.replaceChildren();
-            if (active.guide) {
-                const guide = document.createElement("a");
-                guide.href = active.guide;
-                guide.className = "content-link";
-                guide.textContent = "Подробнее о лечении";
-                if (selected === "children") guide.textContent = "Первый визит с ребёнком";
-                if (selected === "aesthetics") guide.textContent = "О винирах";
-                links.append(guide);
-            }
-            const price = document.createElement("a");
-            price.className = "content-link";
-            price.href = active.price;
-            price.textContent = "Цены по направлению";
-            links.append(price);
-        }
+        searchForm.classList.toggle("is-searching", searching);
         if (searching) {
             const matches = matchingEntries();
             results.replaceChildren(...matches.slice(0, limit).map(resultRow));
@@ -288,7 +305,7 @@ if (servicesCatalogue) {
             url.searchParams.set("q", input.value.trim());
             if (scope.value) url.searchParams.set("direction", scope.value);
         }
-        url.hash = selected || "catalogue";
+        url.hash = "catalogue";
         if (push) history.pushState(null, "", url);
         else history.replaceState(null, "", url);
     }
@@ -298,39 +315,30 @@ if (servicesCatalogue) {
         input.value = url.searchParams.get("q") || "";
         const target = document.getElementById(url.hash.slice(1));
         const anchoredDirection = target?.closest(".directory-group")?.id || "";
-        selected = anchoredDirection || (mobile.matches ? "" : "therapy");
         scope.value = input.value.trim()
             ? (directionFor(url.searchParams.get("direction")) ? url.searchParams.get("direction") : "")
-            : anchoredDirection;
+            : "";
         limit = 20;
         render();
-        if (target?.matches(".directory-list > li") && !input.value.trim()) {
-            requestAnimationFrame(() => target.scrollIntoView({ block: "start" }));
+        if (anchoredDirection && !input.value.trim()) {
+            document.getElementById(anchoredDirection).open = true;
+            requestAnimationFrame(() => {
+                const scrollTarget = target.matches(".directory-group") ? target.closest(".services-card") : target;
+                scrollTarget.scrollIntoView({ block: "start" });
+                if (target.matches(".directory-list > li")) {
+                    target.setAttribute("tabindex", "-1");
+                    target.focus({ preventScroll: true });
+                }
+            });
         }
     }
 
-    navigation.addEventListener("click", (event) => {
-        const link = event.target.closest("a");
-        if (!link || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-        event.preventDefault();
-        selected = link.dataset.direction;
-        scope.value = selected;
-        input.value = "";
-        limit = 20;
-        render();
-        writeLocation(true);
-        if (mobile.matches) {
-            content.scrollIntoView({ block: "start" });
-            title.focus({ preventScroll: true });
-        }
-    });
     input.addEventListener("input", () => {
         limit = 20;
         render();
         writeLocation();
     });
     scope.addEventListener("change", () => {
-        selected = scope.value || (mobile.matches ? "" : "therapy");
         limit = 20;
         render();
         writeLocation();
@@ -341,15 +349,6 @@ if (servicesCatalogue) {
         writeLocation();
         input.focus();
     });
-    back.addEventListener("click", () => {
-        selected = "";
-        scope.value = "";
-        input.value = "";
-        render();
-        writeLocation(true);
-        navigation.scrollIntoView({ block: "start" });
-        navigation.querySelector("a").focus({ preventScroll: true });
-    });
     more.addEventListener("click", () => {
         const previousLimit = limit;
         limit += 20;
@@ -359,9 +358,7 @@ if (servicesCatalogue) {
     searchForm.addEventListener("submit", (event) => event.preventDefault());
     window.addEventListener("popstate", readLocation);
     window.addEventListener("hashchange", readLocation);
-    mobile.addEventListener("change", render);
     searchForm.hidden = false;
-    navigation.hidden = false;
     servicesCatalogue.classList.add("services-ready");
     readLocation();
 }
