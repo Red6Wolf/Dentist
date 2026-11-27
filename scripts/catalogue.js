@@ -280,7 +280,7 @@ function enableInlinePrices(catalogue) {
         panel.className = "inline-prices";
         panel.id = "inline-prices-" + item.id;
         const heading = document.createElement("strong");
-        heading.textContent = "Позиции прайса — " + item.querySelector("span").textContent;
+        heading.textContent = "Позиции прайса — " + (item.querySelector("[data-service-name]") || item.querySelector("span")).textContent;
 
         const list = document.createElement("ul");
         for (const row of rows.slice(0, 5)) {

@@ -145,6 +145,43 @@ def cost_examples(rows):
     return '<div class="care-examples">' + "\n".join(cards) + '</div>'
 
 
+def procedure_index(groups):
+    directions = {
+        "price-visits.html": "diagnostics",
+        "price-hygiene.html": "hygiene",
+        "price-treatment.html": "therapy",
+        "price-surgery.html": "surgery",
+        "price-orthodontics.html": "ortho",
+        "price-prosthetics.html": "prosthetics",
+        "price-gums.html": "periodontics",
+    }
+    children = {"p01-03", "p01-04", "p03-01", "p04-04", "p04-05", "p04-06", "p04-07", "p04-08", "p05-06", "p05-07"}
+    lines = []
+    for group in groups:
+        for section in group["sections"]:
+            for row in section["rows"]:
+                direction = directions[group["page"]]
+                related = {direction}
+                page = group["page"]
+                if group["title"] == "Имплантация":
+                    direction = "implantology"
+                if row["id"] in children:
+                    direction, page = "children", "price-children.html"
+                if row["id"] in {"p04-03", "p07-08"}:
+                    direction = "aesthetics"
+                related.add(direction)
+                if row["id"] in {"p02-02", "p02-14"}:
+                    related.add("children")
+                related_ids = ",".join(sorted(related))
+                lines.extend([
+                    f'<a href="{page}#{row["id"]}" data-direction="{direction}" data-directions="{related_ids}" data-procedure-id="{row["id"]}">',
+                    f'  <span>{escape(row["name"])}</span>',
+                    f'  <b>{escape(row["price"])}</b>',
+                    '</a>',
+                ])
+    return "\n".join(lines)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="Проверить HTML без записи")
@@ -177,6 +214,7 @@ def main():
         for entry in data["preview"]
     )
     results = [
+        update("pages/services.html", "procedures", procedure_index(groups), args.check),
         update("index.html", "preview", preview, args.check),
         update("pages/prices.html", "directory", "\n".join(map(directory_table, groups)), args.check),
         update("pages/prices.html", "service-index", service_price_index(rows), args.check),

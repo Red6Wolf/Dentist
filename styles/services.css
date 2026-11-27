@@ -1,0 +1,383 @@
+/* Навигатор услуг наследует тёплые поверхности и шрифты сайта. */
+.services-heading h1 {
+    margin: 0;
+    font: 700 clamp(32px, 4.5vw, 58px)/1.08 var(--display);
+    letter-spacing: -.04em;
+}
+
+.services-heading p {
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.services-catalogue {
+    padding-top: clamp(28px, 4vw, 48px);
+}
+
+.services-catalogue [hidden] {
+    display: none;
+}
+
+.services-search {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    align-items: end;
+    gap: 12px 24px;
+    margin: 28px 0 0;
+}
+
+.services-search label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 650;
+    font-size: 16px;
+}
+
+.services-search :is(input, select) {
+    width: 100%;
+    min-width: 0;
+    min-height: 52px;
+    border: 1px solid var(--muted);
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: var(--ink);
+    background: var(--surface-raised);
+    font: 400 17px/1.4 var(--sans);
+}
+
+.services-search select {
+    padding-right: 28px;
+}
+
+.services-search input::placeholder {
+    color: var(--muted);
+    opacity: 1;
+}
+
+.services-search .price-reset {
+    grid-column: 1 / -1;
+    justify-self: start;
+    padding: 6px 0;
+}
+
+.services-status {
+    margin: 20px 0 0;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.services-status:empty {
+    margin: 0;
+}
+
+.services-browser {
+    margin-top: 28px;
+}
+
+.services-ready .services-browser {
+    display: grid;
+    grid-template-columns: 310px minmax(0, 1fr);
+    gap: clamp(28px, 4vw, 56px);
+    align-items: start;
+}
+
+.services-directions {
+    position: sticky;
+    top: 96px;
+    max-height: calc(100svh - 112px);
+    overflow-y: auto;
+    padding: 2px;
+    scrollbar-width: thin;
+}
+
+.services-directions a {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 16px;
+    gap: 4px 12px;
+    padding: 14px 16px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    color: var(--ink);
+    text-decoration: none;
+    line-height: 1.4;
+    transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.services-directions .icon-arrow {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: center;
+    width: 16px;
+    height: 16px;
+}
+
+.services-directions strong {
+    grid-column: 1;
+    font-size: 17px;
+    font-weight: 650;
+}
+
+.services-directions span {
+    grid-column: 1;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.services-directions a[aria-current] {
+    background: var(--sand);
+    border-color: var(--line);
+}
+
+.services-directions a:hover {
+    background: var(--sand);
+}
+
+.services-content {
+    min-width: 0;
+    scroll-margin-top: 12px;
+}
+
+.services-direction-heading {
+    margin-bottom: 22px;
+}
+
+.services-direction-heading h2 {
+    margin: 0;
+    font-size: clamp(25px, 2.5vw, 34px);
+    line-height: 1.2;
+    letter-spacing: -.03em;
+}
+
+.services-direction-heading p {
+    margin: 10px 0;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.services-direction-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+}
+
+.services-direction-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+.services-ready .directory {
+    margin-top: 0;
+    border: 0;
+}
+
+.services-ready .directory-group {
+    border: 0;
+}
+
+.services-ready .directory-group > summary {
+    display: none;
+}
+
+/* Общие названия направлений остаются в поиске и по старым якорям. */
+.services-ready .directory-list > [data-service-overview]:not(:target) {
+    display: none;
+}
+
+.services-ready .directory-list > li {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 20px;
+    padding: 18px 0;
+}
+
+.services-ready .directory-list > li > span {
+    flex: 1 1 240px;
+    min-width: 0;
+    font-size: 17px;
+    font-weight: 550;
+}
+
+.services-ready .directory-list a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.services-results {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.services-results .services-result {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px 24px;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+}
+
+.services-result__copy {
+    display: grid;
+    gap: 5px;
+    min-width: 0;
+}
+
+.services-result__copy small {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.services-result__copy > span {
+    font-size: 17px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.services-result__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    justify-content: end;
+}
+
+.services-result a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+.services-result__price {
+    font-weight: 700;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.services-result .inline-prices {
+    grid-column: 1 / -1;
+}
+
+.services-procedures {
+    margin-top: 24px;
+    border-top: 1px solid var(--line);
+}
+
+.services-procedures > summary {
+    padding: 18px 0;
+    font-weight: 650;
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.services-procedures .services-result__copy small {
+    display: none;
+}
+
+.services-back,
+.services-more {
+    min-height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 16px;
+    color: var(--ink);
+    background: var(--surface-raised);
+    font: inherit;
+    cursor: pointer;
+}
+
+.services-back {
+    margin-bottom: 22px;
+}
+
+.services-more {
+    margin-top: 20px;
+}
+
+.services-assistance {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px 32px;
+}
+
+.services-assistance h2 {
+    max-width: 26ch;
+    margin: 0;
+    font-size: clamp(24px, 2.5vw, 34px);
+    line-height: 1.2;
+}
+
+.services-assistance p {
+    max-width: 58ch;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.services-assistance .care-actions {
+    margin: 0;
+}
+
+@media (min-width: 801px) and (max-width: 1180px) {
+    .services-directions {
+        top: 140px;
+        max-height: calc(100svh - 158px);
+    }
+
+    .services-ready .services-browser {
+        grid-template-columns: 260px minmax(0, 1fr);
+        gap: 24px;
+    }
+}
+
+@media (max-width: 800px) {
+    .services-search,
+    .services-ready .services-browser {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .services-directions {
+        position: static;
+        max-height: none;
+        overflow: visible;
+    }
+
+    .services-directions a {
+        border: 0;
+        border-bottom: 1px solid var(--line);
+        border-radius: 0;
+        padding: 16px 0;
+    }
+
+    .services-directions a[aria-current] {
+        background: transparent;
+    }
+
+    .services-ready:not(.services-showing-content) .services-search__scope,
+    .services-showing-content .services-directions {
+        display: none;
+    }
+
+    .services-ready .services-browser {
+        margin-top: 24px;
+    }
+
+    .services-results .services-result {
+        gap: 10px 16px;
+    }
+
+    .services-result__actions {
+        grid-column: 1 / -1;
+        justify-content: start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .services-directions a {
+        transition: none;
+    }
+}

@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="../styles/refinement.css?v=compact-location" />
     <link rel="stylesheet" href="../styles/price-transitions.css" />
     <link rel="stylesheet" href="../styles/care.css?v=first-visit-link" />
+    <link rel="stylesheet" href="../styles/services.css?v=services-navigator" />
   </head>
 
   <body>
@@ -50,424 +51,1066 @@
         </nav>
       </header>
       <main class="subpage-main" id="main-content" tabindex="-1">
-        <section class="panel subpage-section service-start" aria-labelledby="services-title">
-          <div class="service-introduction">
-            <div>
-              <h1 id="services-title">Чем мы можем помочь</h1>
-              <p>Стоматология для взрослых и детей на Тайнинской.</p>
+        <section class="panel subpage-section services-catalogue" id="catalogue" aria-labelledby="services-title">
+          <div class="services-heading">
+            <h1 id="services-title">Услуги клиники</h1>
+            <p>Найдите процедуру или выберите направление.</p>
+          </div>
+          <form class="services-search" role="search" data-services-search hidden>
+            <div class="services-search__field">
+              <label for="service-search">Какая услуга вам нужна?</label>
+              <input id="service-search" type="search" autocomplete="off"
+                     placeholder="Например, ретейнер" />
             </div>
-            <a class="content-link service-catalogue-link" href="#catalogue">Все направления</a>
+            <div class="services-search__scope">
+              <label for="service-scope">Где искать</label>
+              <select id="service-scope"><option value="">Во всех услугах</option></select>
+            </div>
+            <button type="button" class="price-reset" data-service-clear hidden>Очистить поиск</button>
+          </form>
+          <p class="services-status" data-service-status role="status" aria-live="polite"></p>
+          <div class="services-browser">
+            <nav class="services-directions" aria-label="Направления стоматологии" data-service-directions hidden></nav>
+            <div class="services-content" data-service-content>
+              <button type="button" class="services-back content-link" data-service-back hidden>Все направления</button>
+              <div class="services-direction-heading" data-direction-heading hidden>
+                <h2 id="service-direction-title" tabindex="-1" data-direction-title></h2>
+                <p data-direction-description></p>
+                <div class="services-direction-links" data-direction-links></div>
+              </div>
+              <ul class="services-results" id="service-search-results" data-service-results hidden></ul>
+              <div class="directory">
+                <details class="directory-group" id="children">
+                    <summary>Детская стоматология</summary>
+                    <ul class="directory-list">
+                        <li id="service-984" data-service-overview data-service-prices="p03-01, p04-04, p04-05, p04-06, p04-07, p04-08, p01-03, p01-04, p05-06, p05-07">
+                            <span>Детская стоматология</span>
+                            <a class="content-link" href="prices.html?service=984#prices"
+                                aria-label="Показать цены: Детская стоматология">Показать цены</a>
+                        </li>
+                        <li id="service-3751" data-service-prices="p03-01, p04-04, p04-05, p04-06, p04-07, p04-08">
+                            <span>Лечение молочных зубов</span>
+                            <a class="content-link" href="prices.html?service=3751#prices"
+                                aria-label="Показать цены: Лечение молочных зубов">Показать цены</a>
+                        </li>
+                        <li id="service-3881"><span>Пломбирование молочных зубов</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-4054" data-service-prices="p05-06, p05-07">
+                            <span>Удаление молочного зуба</span>
+                            <a class="content-link" href="prices.html?service=4054#prices"
+                                aria-label="Показать цены: Удаление молочного зуба">Показать цены</a>
+                        </li>
+                    </ul>
+                </details>
+                <details class="directory-group" id="therapy">
+                    <summary>Лечение зубов и эндодонтия</summary>
+                    <ul class="directory-list">
+                        <li id="service-982" data-service-overview data-service-prices="p03-01, p03-02, p03-03, p03-08, p03-09, p03-13, p04-02, p04-09, p04-10, p04-11, p04-12, p04-13, p04-14, p04-15, p04-18, p04-19, p04-20, p04-21, p04-22">
+                            <span>Базовая стоматология</span>
+                            <a class="content-link" href="prices.html?service=982#prices"
+                                aria-label="Показать цены: Базовая стоматология">Показать цены</a>
+                        </li>
+                        <li id="service-1421" data-service-prices="p03-05, p03-06, p03-07">
+                            <span>Восстановление зуба</span>
+                            <a class="content-link" href="prices.html?service=1421#prices"
+                                aria-label="Показать цены: Восстановление зуба">Показать цены</a>
+                        </li>
+                        <li id="service-1438" data-service-prices="p03-05, p03-06, p03-07, p03-13, p03-03, p03-08, p03-09">
+                            <span>Лечение кариеса</span>
+                            <a class="content-link" href="prices.html?service=1438#prices"
+                                aria-label="Показать цены: Лечение кариеса">Показать цены</a>
+                        </li>
+                        <li id="service-3740" data-service-prices="p04-10, p04-11, p04-12, p04-13, p04-14, p04-15, p04-18">
+                            <span>Лечение корневых каналов</span>
+                            <a class="content-link" href="prices.html?service=3740#prices"
+                                aria-label="Показать цены: Лечение корневых каналов">Показать цены</a>
+                        </li>
+                        <li id="service-1442" data-service-prices="p04-14, p04-15, p04-18, p04-19, p04-20">
+                            <span>Лечение периодонтита</span>
+                            <a class="content-link" href="prices.html?service=1442#prices"
+                                aria-label="Показать цены: Лечение периодонтита">Показать цены</a>
+                        </li>
+                        <li id="service-1323" data-service-prices="p01-01, p01-02, p01-11, p04-02, p04-09, p04-10, p04-11, p04-12, p04-13, p04-14, p04-15, p04-18, p04-19, p04-20, p04-21, p04-22">
+                            <span>Лечение пульпита</span>
+                            <a class="content-link" href="prices.html?service=1323#prices"
+                                aria-label="Показать цены: Лечение пульпита">Показать цены</a>
+                        </li>
+                        <li id="service-3819"><span>Наращивание зубов</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-3040" data-service-prices="p04-02, p04-09, p04-10, p04-11, p04-12, p04-13, p04-14, p04-15, p04-18, p04-19, p04-20, p04-21, p04-22">
+                            <span>Эндодонтия</span>
+                            <a class="content-link" href="prices.html?service=3040#prices"
+                                aria-label="Показать цены: Эндодонтия">Показать цены</a>
+                        </li>
+                    </ul>
+                </details>
+                <details class="directory-group" id="hygiene">
+                    <summary>Гигиена и профилактика</summary>
+                    <ul class="directory-list">
+                        <li id="service-1427" data-service-prices="p02-11">
+                            <span>Герметизация фиссур</span>
+                            <a class="content-link" href="prices.html?service=1427#prices"
+                                aria-label="Показать цены: Герметизация фиссур">Показать цены</a>
+                        </li>
+                        <li id="service-3566" data-service-prices="p02-08, p02-10, p02-12">
+                            <span>Восстановление зубной эмали</span>
+                            <a class="content-link" href="prices.html?service=3566#prices"
+                                aria-label="Показать цены: Восстановление зубной эмали">Показать цены</a>
+                        </li>
+                        <li id="service-3941" data-service-prices="p02-08, p02-10, p02-12">
+                            <span>Реминерализация зубов</span>
+                            <a class="content-link" href="prices.html?service=3941#prices"
+                                aria-label="Показать цены: Реминерализация зубов">Показать цены</a>
+                        </li>
+                        <li id="service-4093" data-service-prices="p02-08, p02-10, p02-12">
+                            <span>Фторирование зубов</span>
+                            <a class="content-link" href="prices.html?service=4093#prices"
+                                aria-label="Показать цены: Фторирование зубов">Показать цены</a>
+                        </li>
+                        <li id="service-4073" data-service-prices="p02-06">
+                            <span>Ультразвуковая чистка зубов</span>
+                            <a class="content-link" href="prices.html?service=4073#prices"
+                                aria-label="Показать цены: Ультразвуковая чистка зубов">Показать цены</a>
+                        </li>
+                        <li id="service-4108" data-service-prices="p02-13, p02-14, p02-07">
+                            <span>Чистка air flow</span>
+                            <a class="content-link" href="prices.html?service=4108#prices"
+                                aria-label="Показать цены: Чистка air flow">Показать цены</a>
+                        </li>
+                        <li id="service-3039" data-service-prices="p02-01, p02-02, p02-03, p02-04, p02-05, p02-06, p02-07, p02-08, p02-10, p02-11, p02-12, p02-13, p02-14">
+                            <span>Чистка зубов</span>
+                            <a class="content-link" href="prices.html?service=3039#prices"
+                                aria-label="Показать цены: Чистка зубов">Показать цены</a>
+                        </li>
+                    </ul>
+                </details>
+                <details class="directory-group" id="ortho">
+                    <summary>Ортодонтия</summary>
+                    <ul class="directory-list">
+                        <li id="service-3569" data-service-overview data-service-prices="p06-03, p06-04, p06-06, p06-07, p06-08, p06-09, p06-10, p06-11, p06-14, p06-15, p06-17, p06-18, p06-19, p06-20, p06-21, p06-22, p06-23, p06-24, p06-25, p06-26, p06-27, p06-33, p06-34, p06-35, p06-36, p06-37, p06-38, p06-41, p06-42, p06-43, p06-44, p06-45, p06-46, p07-26">
+                            <span>Выравнивание зубов</span>
+                            <a class="content-link" href="prices.html?service=3569#prices"
+                                aria-label="Показать цены: Выравнивание зубов">Показать цены</a>
+                        </li>
+                        <li id="service-987" data-service-overview data-service-prices="p06-03, p06-04, p06-06, p06-07, p06-08, p06-09, p06-10, p06-11, p06-14, p06-15, p06-17, p06-18, p06-19, p06-20, p06-21, p06-22, p06-23, p06-24, p06-25, p06-26, p06-27, p06-30, p06-33, p06-34, p06-35, p06-36, p06-37, p06-38, p06-41, p06-42, p06-43, p06-44, p06-45, p06-46, p07-26">
+                            <span>Исправление прикуса</span>
+                            <a class="content-link" href="prices.html?service=987#prices"
+                                aria-label="Показать цены: Исправление прикуса">Показать цены</a>
+                        </li>
+                        <li id="service-3034" data-service-overview data-service-prices="p06-03, p06-04, p06-06, p06-07, p06-08, p06-09, p06-10, p06-11, p06-14, p06-15, p06-17, p06-18, p06-19, p06-20, p06-21, p06-22, p06-23, p06-24, p06-25, p06-26, p06-27, p06-30, p06-33, p06-34, p06-35, p06-36, p06-37, p07-26">
+                            <span>Ортодонтия</span>
+                            <a class="content-link" href="prices.html?service=3034#prices"
+                                aria-label="Показать цены: Ортодонтия">Показать цены</a>
+                        </li>
+                        <li id="service-3877" data-service-prices="p06-03, p06-06">
+                            <span>Пластинка на зубы</span>
+                            <a class="content-link" href="prices.html?service=3877#prices"
+                                aria-label="Показать цены: Пластинка на зубы">Показать цены</a>
+                        </li>
+                        <li id="service-3969" data-service-prices="p06-19, p06-25, p06-26, p06-27">
+                            <span>Ретейнер</span>
+                            <a class="content-link" href="prices.html?service=3969#prices"
+                                aria-label="Показать цены: Ретейнер">Показать цены</a>
+                        </li>
+                        <li id="service-4021" data-service-prices="p06-08, p06-09">
+                            <span>Трейнер для зубов</span>
+                            <a class="content-link" href="prices.html?service=4021#prices"
+                                aria-label="Показать цены: Трейнер для зубов">Показать цены</a>
+                        </li>
+                        <li id="service-994" data-service-prices="p06-14, p06-15, p06-17, p06-18, p06-20, p06-21, p06-22, p06-23, p06-33, p06-34, p06-35, p06-36, p06-37, p07-26">
+                            <span>Установка брекетов</span>
+                            <a class="content-link" href="prices.html?service=994#prices"
+                                aria-label="Показать цены: Установка брекетов">Показать цены</a>
+                        </li>
+                    </ul>
+                </details>
+                <details class="directory-group" id="surgery">
+                    <summary>Хирургия и острые состояния</summary>
+                    <ul class="directory-list">
+                        <li id="service-1420" data-service-prices="p05-03">
+                            <span>Вестибулопластика</span>
+                            <a class="content-link" href="prices.html?service=1420#prices"
+                                aria-label="Показать цены: Вестибулопластика">Показать цены</a>
+                        </li>
+                        <li id="service-3212" data-service-prices="p01-01, p01-02, p01-07, p01-08, p01-11">
+                            <span>Лечение зуба мудрости</span>
+                            <a class="content-link" href="prices.html?service=3212#prices"
+                                aria-label="Показать цены: Лечение зуба мудрости">Показать цены</a>
+                        </li>
+                        <li id="service-3733" data-service-prices="p01-07, p01-08">
+                            <span>Лечение кисты зуба</span>
+                            <a class="content-link" href="prices.html?service=3733#prices"
+                                aria-label="Показать цены: Лечение кисты зуба">Показать цены</a>
+                        </li>
+                        <li id="service-1272"><span>Лечение остеомиелита челюстей</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-1273" data-service-prices="p01-01, p01-02, p01-07, p01-08, p01-11, p04-09, p04-21, p05-08, p05-09, p05-10">
+                            <span>Лечение острой зубной боли</span>
+                            <a class="content-link" href="prices.html?service=1273#prices"
+                                aria-label="Показать цены: Лечение острой зубной боли">Показать цены</a>
+                        </li>
+                        <li id="service-1293"><span>Лечение перелома челюсти</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-3033"><span>Неотложная помощь в стоматологии</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-3871" data-service-prices="p05-03">
+                            <span>Пластика десны</span>
+                            <a class="content-link" href="prices.html?service=3871#prices"
+                                aria-label="Показать цены: Пластика десны">Показать цены</a>
+                        </li>
+                        <li id="service-3875" data-service-prices="p05-02, p05-05">
+                            <span>Пластика уздечки губ</span>
+                            <a class="content-link" href="prices.html?service=3875#prices"
+                                aria-label="Показать цены: Пластика уздечки губ">Показать цены</a>
+                        </li>
+                        <li id="service-3876" data-service-prices="p05-01, p05-04">
+                            <span>Пластика уздечки языка</span>
+                            <a class="content-link" href="prices.html?service=3876#prices"
+                                aria-label="Показать цены: Пластика уздечки языка">Показать цены</a>
+                        </li>
+                        <li id="service-3937"><span>Резекция зуба</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-4040"><span>Удаление зуба мудрости</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-993" data-service-prices="p03-04, p05-06, p05-07, p05-08, p05-09, p05-10, p05-14, p05-15, p05-16">
+                            <span>Удаление зубов</span>
+                            <a class="content-link" href="prices.html?service=993#prices"
+                                aria-label="Показать цены: Удаление зубов">Показать цены</a>
+                        </li>
+                        <li id="service-4046"><span>Удаление кисты зуба</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-3038" data-service-overview data-service-prices="p05-03, p05-18, p05-19, p08-02, p08-05, p08-06">
+                            <span>Хирургическая стоматология</span>
+                            <a class="content-link" href="prices.html?service=3038#prices"
+                                aria-label="Показать цены: Хирургическая стоматология">Показать цены</a>
+                        </li>
+                        <li id="service-1008"><span>Челюстно-лицевая хирургия</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                    </ul>
+                </details>
+                <details class="directory-group" id="implantology">
+                    <summary>Имплантация</summary>
+                    <ul class="directory-list">
+                        <li id="service-986"><span>Имплантация зубов</span><a class="content-link" href="implantation.html">Этапы и стоимость</a></li>
+                        <li id="service-3634"><span>Имплантация зубов под ключ</span><a class="content-link" href="implantation.html">Уточнить на консультации</a></li>
+                        <li id="service-3820" data-service-prices="p08-02, p08-05, p08-06">
+                            <span>Наращивание костной ткани</span>
+                            <a class="content-link" href="prices.html?service=3820#prices"
+                                aria-label="Показать цены: Наращивание костной ткани">Показать цены</a>
+                        </li>
+                        <li id="service-1473" data-service-prices="p08-02">
+                            <span>Синуслифтинг</span>
+                            <a class="content-link" href="prices.html?service=1473#prices"
+                                aria-label="Показать цены: Синуслифтинг">Показать цены</a>
+                        </li>
+                        <li id="service-4080" data-service-prices="p08-01">
+                            <span>Установка формирователя десны</span>
+                            <a class="content-link" href="prices.html?service=4080#prices"
+                                aria-label="Показать цены: Установка формирователя десны">Показать цены</a>
+                        </li>
+                    </ul>
+                </details>
+                <details class="directory-group" id="prosthetics">
+                    <summary>Протезирование и лаборатория</summary>
+                    <ul class="directory-list">
+                        <li id="service-1418" data-service-prices="p07-09, p07-10, p07-13, p07-20">
+                            <span>Бюгельный протез</span>
+                            <a class="content-link" href="prices.html?service=1418#prices"
+                                aria-label="Показать цены: Бюгельный протез">Показать цены</a>
+                        </li>
+                        <li id="service-985" data-service-prices="p06-05, p07-14, p07-18, p07-21">
+                            <span>Зуботехническая лаборатория</span>
+                            <a class="content-link" href="prices.html?service=985#prices"
+                                aria-label="Показать цены: Зуботехническая лаборатория">Показать цены</a>
+                        </li>
+                        <li id="service-989" data-service-prices="p07-17">
+                            <span>Металлокерамическая коронка на импланте</span>
+                            <a class="content-link" href="prices.html?service=989#prices"
+                                aria-label="Показать цены: Металлокерамика">Показать цены</a>
+                        </li>
+                        <li id="service-3812"><span>Микропротезирование</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-3822" data-service-prices="p07-02">
+                            <span>Нейлоновый протез</span>
+                            <a class="content-link" href="prices.html?service=3822#prices"
+                                aria-label="Показать цены: Нейлоновый протез">Показать цены</a>
+                        </li>
+                        <li id="service-3826"><span>Несъемный зубной протез</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-3942" data-service-prices="p06-05, p07-14, p07-18, p07-21">
+                            <span>Ремонт зубных протезов</span>
+                            <a class="content-link" href="prices.html?service=3942#prices"
+                                aria-label="Показать цены: Ремонт зубных протезов">Показать цены</a>
+                        </li>
+                        <li id="service-4002"><span>Съемное протезирование Акри-Фри</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-4003" data-service-prices="p07-02, p07-09, p07-10, p07-11, p07-12, p07-13, p07-15, p07-20">
+                            <span>Съемный зубной протез</span>
+                            <a class="content-link" href="prices.html?service=4003#prices"
+                                aria-label="Показать цены: Съемный зубной протез">Показать цены</a>
+                        </li>
+                        <li id="service-3558"><span>Установка вкладки под коронку</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-1497"><span>Установка временных коронок</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-4079"><span>Установка зубных мостов</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-1498"><span>Установка кератических вкладок</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-4101" data-service-prices="p07-07, p07-19">
+                            <span>Циркониевая коронка</span>
+                            <a class="content-link" href="prices.html?service=4101#prices"
+                                aria-label="Показать цены: Циркониевая коронка">Показать цены</a>
+                        </li>
+                    </ul>
+                </details>
+                <details class="directory-group" id="diagnostics">
+                    <summary>Диагностика</summary>
+                    <ul class="directory-list">
+                        <li id="service-956"><span>Диагностический центр</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-3850" data-service-prices="p01-14">
+                            <span>Панорамный снимок зубов</span>
+                            <a class="content-link" href="prices.html?service=3850#prices"
+                                aria-label="Показать цены: Панорамный снимок зубов">Показать цены</a>
+                        </li>
+                        <li id="service-3946" data-service-prices="p01-12, p01-14, p01-13">
+                            <span>Рентген зуба</span>
+                            <a class="content-link" href="prices.html?service=3946#prices"
+                                aria-label="Показать цены: Рентген зуба">Показать цены</a>
+                        </li>
+                        <li id="service-992" data-service-overview data-service-prices="p01-12, p01-13, p01-14">
+                            <span>Рентгенологическая диагностика</span>
+                            <a class="content-link" href="prices.html?service=992#prices"
+                                aria-label="Показать цены: Рентгенологическая диагностика">Показать цены</a>
+                        </li>
+                    </ul>
+                </details>
+                <details class="directory-group" id="periodontics">
+                    <summary>Лечение дёсен и слизистой</summary>
+                    <ul class="directory-list">
+                        <li id="service-1110" data-service-prices="p09-05">
+                            <span>Лечение афтозного стоматита</span>
+                            <a class="content-link" href="prices.html?service=1110#prices"
+                                aria-label="Показать цены: Лечение афтозного стоматита">Показать цены</a>
+                        </li>
+                        <li id="service-3718" data-service-prices="p09-05">
+                            <span>Лечение воспалительных заболеваний</span>
+                            <a class="content-link" href="prices.html?service=3718#prices"
+                                aria-label="Показать цены: Лечение воспалительных заболеваний">Показать цены</a>
+                        </li>
+                        <li id="service-1147"><span>Лечение гингивита</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-3730" data-service-prices="p09-02, p09-03, p09-04">
+                            <span>Лечение десен</span>
+                            <a class="content-link" href="prices.html?service=3730#prices"
+                                aria-label="Показать цены: Лечение десен">Показать цены</a>
+                        </li>
+                        <li id="service-1287" data-service-prices="p09-02, p09-03">
+                            <span>Лечение пародонтита</span>
+                            <a class="content-link" href="prices.html?service=1287#prices"
+                                aria-label="Показать цены: Лечение пародонтита">Показать цены</a>
+                        </li>
+                        <li id="service-1288" data-service-prices="p03-10, p03-11, p03-12">
+                            <span>Лечение пародонтоза</span>
+                            <a class="content-link" href="prices.html?service=1288#prices"
+                                aria-label="Показать цены: Лечение пародонтоза">Показать цены</a>
+                        </li>
+                        <li id="service-1368" data-service-prices="p09-05">
+                            <span>Лечение стоматита</span>
+                            <a class="content-link" href="prices.html?service=1368#prices"
+                                aria-label="Показать цены: Лечение стоматита">Показать цены</a>
+                        </li>
+                        <li id="service-3035" data-service-overview data-service-prices="p03-10, p03-11, p03-12, p06-29, p09-02, p09-03, p09-04">
+                            <span>Пародонтология</span>
+                            <a class="content-link" href="prices.html?service=3035#prices"
+                                aria-label="Показать цены: Пародонтология">Показать цены</a>
+                        </li>
+                        <li id="service-4110" data-service-prices="p03-10, p03-11, p03-12">
+                            <span>Шинирование зубов</span>
+                            <a class="content-link" href="prices.html?service=4110#prices"
+                                aria-label="Показать цены: Шинирование зубов">Показать цены</a>
+                        </li>
+                    </ul>
+                </details>
+                <details class="directory-group" id="aesthetics">
+                    <summary>Эстетическая стоматология</summary>
+                    <ul class="directory-list">
+                        <li id="service-3031"><span>Лазерная стоматология</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-990" data-service-prices="p04-03">
+                            <span>Внутриканальное отбеливание</span>
+                            <a class="content-link" href="prices.html?service=990#prices"
+                                aria-label="Показать цены: Отбеливание зубов">Показать цены</a>
+                        </li>
+                        <li id="service-1463"><span>Отбеливание зубов лазером</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
+                        <li id="service-983" data-service-prices="p07-08">
+                            <span>Установка виниров</span>
+                            <a class="content-link" href="prices.html?service=983#prices"
+                                aria-label="Показать цены: Установка виниров">Показать цены</a>
+                            <a class="content-link" href="veneers.html">О лечении</a>
+                        </li>
+                        <li id="service-3041" data-service-overview data-service-prices="p04-03, p07-08">
+                            <span>Эстетическая стоматология</span>
+                            <a class="content-link" href="prices.html?service=3041#prices"
+                                aria-label="Показать цены: Эстетическая стоматология">Показать цены</a>
+                        </li>
+                    </ul>
+                </details>
+                <div id="clinic-services"><span id="service-5166"></span><span id="service-965"></span></div>
+              </div>
+            </div>
           </div>
-          <div class="care-actions"><a class="content-link" href="first-visit.html">Первый визит и тревога перед лечением</a><a class="content-link" href="implantation.html">Имплантация</a><a class="content-link" href="veneers.html">Виниры</a></div>
-          <div class="price-category-grid service-intents">
-            <a class="price-category" href="price-children.html">
-              <span class="price-category__media">
-                <img src="../assets/services/children-v3.webp" alt="" width="640" height="420" loading="lazy" />
-              </span>
-              <span class="price-category__body">
-                <strong>Записать ребёнка к стоматологу</strong>
-                <span>Осмотр, профилактика и лечение молочных зубов.</span>
-                <span class="price-category__action">Посмотреть цены <b class="icon-arrow" aria-hidden="true"></b></span>
-              </span>
+          <template id="service-procedures">
+            <!-- prices:procedures:start -->
+            <a href="price-visits.html#p01-01" data-direction="diagnostics" data-directions="diagnostics" data-procedure-id="p01-01">
+              <span>Прием врача стоматолога-терапевта первичный</span>
+              <b>1 000 ₽</b>
             </a>
-            <a class="price-category" href="price-treatment.html">
-              <span class="price-category__media">
-                <img src="../assets/services/treatment-v3.webp" alt="" width="640" height="420" loading="lazy" />
-              </span>
-              <span class="price-category__body">
-                <strong>Вылечить зуб</strong>
-                <span>Лечение кариеса и каналов, восстановление зуба.</span>
-                <span class="price-category__action">Посмотреть цены <b class="icon-arrow" aria-hidden="true"></b></span>
-              </span>
+            <a href="price-visits.html#p01-02" data-direction="diagnostics" data-directions="diagnostics" data-procedure-id="p01-02">
+              <span>Прием врача стоматолога-терапевта повторный</span>
+              <b>800 ₽</b>
             </a>
-            <a class="price-category" href="price-hygiene.html">
-              <span class="price-category__media">
-                <img src="../assets/services/hygiene-v3.webp" alt="" width="640" height="420" loading="lazy" />
-              </span>
-              <span class="price-category__body">
-                <strong>Сделать чистку зубов</strong>
-                <span>Удаление налёта и зубного камня, профессиональная гигиена.</span>
-                <span class="price-category__action">Посмотреть цены <b class="icon-arrow" aria-hidden="true"></b></span>
-              </span>
+            <a href="price-children.html#p01-03" data-direction="children" data-directions="children,diagnostics" data-procedure-id="p01-03">
+              <span>Прием врача детского стоматолога-терапевта первичный</span>
+              <b>1 000 ₽</b>
             </a>
-            <a class="price-category" href="orthodontics.html">
-              <span class="price-category__media">
-                <img src="../assets/services/orthodontics-v4.webp" alt="" width="640" height="420" loading="lazy" />
-              </span>
-              <span class="price-category__body">
-                <strong>Исправить прикус</strong>
-                <span>Консультация ортодонта, брекеты и элайнеры.</span>
-                <span class="price-category__action">Посмотреть цены <b class="icon-arrow" aria-hidden="true"></b></span>
-              </span>
+            <a href="price-children.html#p01-04" data-direction="children" data-directions="children,diagnostics" data-procedure-id="p01-04">
+              <span>Прием врача детского стоматолога-терапевта повторный</span>
+              <b>800 ₽</b>
             </a>
-          </div>
+            <a href="price-visits.html#p01-05" data-direction="diagnostics" data-directions="diagnostics" data-procedure-id="p01-05">
+              <span>Прием врача стоматолога-ортодонта первичный</span>
+              <b>1 150 ₽</b>
+            </a>
+            <a href="price-visits.html#p01-06" data-direction="diagnostics" data-directions="diagnostics" data-procedure-id="p01-06">
+              <span>Прием врача стоматолога-ортодонта повторный</span>
+              <b>900 ₽</b>
+            </a>
+            <a href="price-visits.html#p01-07" data-direction="diagnostics" data-directions="diagnostics" data-procedure-id="p01-07">
+              <span>Прием врача стоматолога-хирурга первичный</span>
+              <b>1 000 ₽</b>
+            </a>
+            <a href="price-visits.html#p01-08" data-direction="diagnostics" data-directions="diagnostics" data-procedure-id="p01-08">
+              <span>Прием врача стоматолога-хирурга повторный</span>
+              <b>800 ₽</b>
+            </a>
+            <a href="price-visits.html#p01-09" data-direction="diagnostics" data-directions="diagnostics" data-procedure-id="p01-09">
+              <span>Прием врача стоматолога-ортопеда первичный</span>
+              <b>1 000 ₽</b>
+            </a>
+            <a href="price-visits.html#p01-10" data-direction="diagnostics" data-directions="diagnostics" data-procedure-id="p01-10">
+              <span>Прием врача стоматолога-ортопеда повторный</span>
+              <b>800 ₽</b>
+            </a>
+            <a href="price-visits.html#p01-11" data-direction="diagnostics" data-directions="diagnostics" data-procedure-id="p01-11">
+              <span>Профилактический осмотр врача стоматолога</span>
+              <b>800 ₽</b>
+            </a>
+            <a href="price-visits.html#p01-12" data-direction="diagnostics" data-directions="diagnostics" data-procedure-id="p01-12">
+              <span>Рентген прицельный</span>
+              <b>650 ₽</b>
+            </a>
+            <a href="price-visits.html#p01-13" data-direction="diagnostics" data-directions="diagnostics" data-procedure-id="p01-13">
+              <span>Телерентгенограмма (снимок в боковой проекции)</span>
+              <b>1 800 ₽</b>
+            </a>
+            <a href="price-visits.html#p01-14" data-direction="diagnostics" data-directions="diagnostics" data-procedure-id="p01-14">
+              <span>Ортопантомограмма (панорамный снимок челюсти)</span>
+              <b>1 800 ₽</b>
+            </a>
+            <a href="price-hygiene.html#p02-01" data-direction="hygiene" data-directions="hygiene" data-procedure-id="p02-01">
+              <span>Комплексная гигиена полости рта (ультразвук + Air-Flow + полировка)</span>
+              <b>7 450 ₽</b>
+            </a>
+            <a href="price-hygiene.html#p02-02" data-direction="hygiene" data-directions="children,hygiene" data-procedure-id="p02-02">
+              <span>Комплексная гигиена полости рта (ультразвук + Air-Flow + полировка) Дети</span>
+              <b>5 800 ₽</b>
+            </a>
+            <a href="price-hygiene.html#p02-03" data-direction="hygiene" data-directions="hygiene" data-procedure-id="p02-03">
+              <span>Комплексная гигиена полости рта (ультразвук + Air-Flow + полировка) с ремотерапией</span>
+              <b>7 950 ₽</b>
+            </a>
+            <a href="price-hygiene.html#p02-04" data-direction="hygiene" data-directions="hygiene" data-procedure-id="p02-04">
+              <span>Профессиональная гигиена полости рта (ультразвук + полировка)</span>
+              <b>5 300 ₽</b>
+            </a>
+            <a href="price-hygiene.html#p02-05" data-direction="hygiene" data-directions="hygiene" data-procedure-id="p02-05">
+              <span>Профессиональная гигиена полости рта (щетка + паста)</span>
+              <b>3 500 ₽</b>
+            </a>
+            <a href="price-hygiene.html#p02-06" data-direction="hygiene" data-directions="hygiene" data-procedure-id="p02-06">
+              <span>Удаление наддесневых и поддесневых отложений (1 зуб) ультразвуковое</span>
+              <b>450 ₽</b>
+            </a>
+            <a href="price-hygiene.html#p02-07" data-direction="hygiene" data-directions="hygiene" data-procedure-id="p02-07">
+              <span>Удаление наддесневых и поддесневых отложений (1 зуб) Air Flow</span>
+              <b>500 ₽</b>
+            </a>
+            <a href="price-hygiene.html#p02-08" data-direction="hygiene" data-directions="hygiene" data-procedure-id="p02-08">
+              <span>Глубокое фторирование эмали зуба (1 зуб)</span>
+              <b>850 ₽</b>
+            </a>
+            <a href="price-hygiene.html#p02-09" data-direction="hygiene" data-directions="hygiene" data-procedure-id="p02-09">
+              <span>Серебрение 1 зуба Сафорайд</span>
+              <b>550 ₽</b>
+            </a>
+            <a href="price-hygiene.html#p02-10" data-direction="hygiene" data-directions="hygiene" data-procedure-id="p02-10">
+              <span>Глубокое фторирование эмали зуба (1 челюсть)</span>
+              <b>1 550 ₽</b>
+            </a>
+            <a href="price-hygiene.html#p02-11" data-direction="hygiene" data-directions="hygiene" data-procedure-id="p02-11">
+              <span>Герметизация фиссур 1 зуба</span>
+              <b>2 700 ₽</b>
+            </a>
+            <a href="price-hygiene.html#p02-12" data-direction="hygiene" data-directions="hygiene" data-procedure-id="p02-12">
+              <span>Глубокое фторирование и ремотерапия после проф. гигиены для гипер чуствительных зубов</span>
+              <b>1 500 ₽</b>
+            </a>
+            <a href="price-hygiene.html#p02-13" data-direction="hygiene" data-directions="hygiene" data-procedure-id="p02-13">
+              <span>Профессиональная гигиена полости рта (Air-Flow + полировка)</span>
+              <b>6 450 ₽</b>
+            </a>
+            <a href="price-hygiene.html#p02-14" data-direction="hygiene" data-directions="children,hygiene" data-procedure-id="p02-14">
+              <span>Профессиональная гигиена полости рта (Air-Flow + полировка) дети</span>
+              <b>5 450 ₽</b>
+            </a>
+            <a href="price-children.html#p03-01" data-direction="children" data-directions="children,therapy" data-procedure-id="p03-01">
+              <span>Лечение кариеса молочного зуба</span>
+              <b>4 050 ₽</b>
+            </a>
+            <a href="price-treatment.html#p03-02" data-direction="therapy" data-directions="therapy" data-procedure-id="p03-02">
+              <span>Снятие пломбы</span>
+              <b>450 ₽</b>
+            </a>
+            <a href="price-treatment.html#p03-03" data-direction="therapy" data-directions="therapy" data-procedure-id="p03-03">
+              <span>Формирование одной кариозной полости зуба</span>
+              <b>500 ₽</b>
+            </a>
+            <a href="price-treatment.html#p03-04" data-direction="therapy" data-directions="therapy" data-procedure-id="p03-04">
+              <span>Удаление фрактуры зуба</span>
+              <b>1 500 ₽</b>
+            </a>
+            <a href="price-treatment.html#p03-05" data-direction="therapy" data-directions="therapy" data-procedure-id="p03-05">
+              <span>Реставрация коронковой части зуба светоотверждаемыми материалами 1 категории сложности</span>
+              <b>6 400 ₽</b>
+            </a>
+            <a href="price-treatment.html#p03-06" data-direction="therapy" data-directions="therapy" data-procedure-id="p03-06">
+              <span>Реставрация коронковой части зуба светоотверждающими материалами 2 категории сложности</span>
+              <b>7 400 ₽</b>
+            </a>
+            <a href="price-treatment.html#p03-07" data-direction="therapy" data-directions="therapy" data-procedure-id="p03-07">
+              <span>Реставрация коронковой части зуба светоотверждающими материалами 3 категории сложности</span>
+              <b>8 700 ₽</b>
+            </a>
+            <a href="price-treatment.html#p03-08" data-direction="therapy" data-directions="therapy" data-procedure-id="p03-08">
+              <span>Медикаментозная, химическая обработка кариозной полости</span>
+              <b>550 ₽</b>
+            </a>
+            <a href="price-treatment.html#p03-09" data-direction="therapy" data-directions="therapy" data-procedure-id="p03-09">
+              <span>Лечение кариеса и его осложнений с изоляционной системой</span>
+              <b>1 500 ₽</b>
+            </a>
+            <a href="price-treatment.html#p03-10" data-direction="therapy" data-directions="therapy" data-procedure-id="p03-10">
+              <span>Шинирование в области одного зуба</span>
+              <b>2 550 ₽</b>
+            </a>
+            <a href="price-treatment.html#p03-11" data-direction="therapy" data-directions="therapy" data-procedure-id="p03-11">
+              <span>Шинирование в области 4х зубов Армсплит</span>
+              <b>6 000 ₽</b>
+            </a>
+            <a href="price-treatment.html#p03-12" data-direction="therapy" data-directions="therapy" data-procedure-id="p03-12">
+              <span>Шинирование в области 6-ти зубов Армсплит</span>
+              <b>7 800 ₽</b>
+            </a>
+            <a href="price-treatment.html#p03-13" data-direction="therapy" data-directions="therapy" data-procedure-id="p03-13">
+              <span>Лечение кариеса методом ICON</span>
+              <b>5 900 ₽</b>
+            </a>
+            <a href="price-treatment.html#p04-01" data-direction="therapy" data-directions="therapy" data-procedure-id="p04-01">
+              <span>Извлечение инородного тела из канала</span>
+              <b>2 500 ₽</b>
+            </a>
+            <a href="price-treatment.html#p04-02" data-direction="therapy" data-directions="therapy" data-procedure-id="p04-02">
+              <span>Пломбировка 1 канала пастой</span>
+              <b>1 000 ₽</b>
+            </a>
+            <a href="price-treatment.html#p04-03" data-direction="aesthetics" data-directions="aesthetics,therapy" data-procedure-id="p04-03">
+              <span>Внутриканальное отбеливание</span>
+              <b>1 650 ₽</b>
+            </a>
+            <a href="price-children.html#p04-04" data-direction="children" data-directions="children,therapy" data-procedure-id="p04-04">
+              <span>Лечение пульпита молочного зуба в 2 посещения с учетом светоотверждаемой пломбы: первое посещение</span>
+              <b>3 300 ₽</b>
+            </a>
+            <a href="price-children.html#p04-05" data-direction="children" data-directions="children,therapy" data-procedure-id="p04-05">
+              <span>Лечение пульпита молочного зуба в 2 посещения с учетом светоотверждаемой пломбы: второе посещение</span>
+              <b>4 000 ₽</b>
+            </a>
+            <a href="price-children.html#p04-06" data-direction="children" data-directions="children,therapy" data-procedure-id="p04-06">
+              <span>Лечение пульпита молочного зуба в 3 посещения с учетом светоотверждаемой пломбы: первое посещение</span>
+              <b>1 450 ₽</b>
+            </a>
+            <a href="price-children.html#p04-07" data-direction="children" data-directions="children,therapy" data-procedure-id="p04-07">
+              <span>Лечение пульпита молочного зуба в 3 посещения с учетом светоотверждаемой пломбы: второе посещение</span>
+              <b>2 450 ₽</b>
+            </a>
+            <a href="price-children.html#p04-08" data-direction="children" data-directions="children,therapy" data-procedure-id="p04-08">
+              <span>Лечение пульпита молочного зуба в 3 посещения с учетом светоотверждаемой пломбы: третье посещение</span>
+              <b>3 400 ₽</b>
+            </a>
+            <a href="price-treatment.html#p04-09" data-direction="therapy" data-directions="therapy" data-procedure-id="p04-09">
+              <span>Экстирпация пульпы 1 канал</span>
+              <b>1 000 ₽</b>
+            </a>
+            <a href="price-treatment.html#p04-10" data-direction="therapy" data-directions="therapy" data-procedure-id="p04-10">
+              <span>Инструментальная и медикаментозная обработка (расширение) корневого канала первичная</span>
+              <b>1 000 ₽</b>
+            </a>
+            <a href="price-treatment.html#p04-11" data-direction="therapy" data-directions="therapy" data-procedure-id="p04-11">
+              <span>Инструментальная и медикаментозная обработка корневого канала с применением NiTi/бор машины</span>
+              <b>1 900 ₽</b>
+            </a>
+            <a href="price-treatment.html#p04-12" data-direction="therapy" data-directions="therapy" data-procedure-id="p04-12">
+              <span>Медикаментозная обработка корневого 1 канала при пульпите первичная</span>
+              <b>900 ₽</b>
+            </a>
+            <a href="price-treatment.html#p04-13" data-direction="therapy" data-directions="therapy" data-procedure-id="p04-13">
+              <span>Медикаментозная обработка корневого 1 канала при пульпите повторная</span>
+              <b>600 ₽</b>
+            </a>
+            <a href="price-treatment.html#p04-14" data-direction="therapy" data-directions="therapy" data-procedure-id="p04-14">
+              <span>Медикаментозная обработка корневого 1 канала при периодонтите первичная</span>
+              <b>950 ₽</b>
+            </a>
+            <a href="price-treatment.html#p04-15" data-direction="therapy" data-directions="therapy" data-procedure-id="p04-15">
+              <span>Медикаментозная обработка корневого 1 канала при периодонтите повторная</span>
+              <b>600 ₽</b>
+            </a>
+            <a href="price-treatment.html#p04-16" data-direction="therapy" data-directions="therapy" data-procedure-id="p04-16">
+              <span>Распломбировка корневого канала 1 степени сложности</span>
+              <b>2 000 ₽</b>
+            </a>
+            <a href="price-treatment.html#p04-17" data-direction="therapy" data-directions="therapy" data-procedure-id="p04-17">
+              <span>Распломбировка корневого канала 2 степени сложности</span>
+              <b>2 300 ₽</b>
+            </a>
+            <a href="price-treatment.html#p04-18" data-direction="therapy" data-directions="therapy" data-procedure-id="p04-18">
+              <span>Пломбировка 1 канала гуттаперча</span>
+              <b>1 800 ₽</b>
+            </a>
+            <a href="price-treatment.html#p04-19" data-direction="therapy" data-directions="therapy" data-procedure-id="p04-19">
+              <span>Временная пломбировка канала препаратами Са: каласепт /септомиксин</span>
+              <b>1 700 ₽</b>
+            </a>
+            <a href="price-treatment.html#p04-20" data-direction="therapy" data-directions="therapy" data-procedure-id="p04-20">
+              <span>Временная пломбировка канала препаратом BioRoot RCS</span>
+              <b>2 000 ₽</b>
+            </a>
+            <a href="price-treatment.html#p04-21" data-direction="therapy" data-directions="therapy" data-procedure-id="p04-21">
+              <span>Наложение девитализирующей пасты</span>
+              <b>600 ₽</b>
+            </a>
+            <a href="price-treatment.html#p04-22" data-direction="therapy" data-directions="therapy" data-procedure-id="p04-22">
+              <span>Подготовка корневого канала под вкладку/анкерный штифт</span>
+              <b>600 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-01" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-01">
+              <span>Пластика уздечки языка</span>
+              <b>5 500 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-02" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-02">
+              <span>Пластика уздечки верхней губы</span>
+              <b>5 500 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-03" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-03">
+              <span>Вестибулопластика</span>
+              <b>9 000 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-04" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-04">
+              <span>Пластика уздечки языка лазером FonaLase</span>
+              <b>7 300 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-05" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-05">
+              <span>Пластика уздечки верхней губы лазером FonaLase</span>
+              <b>7 300 ₽</b>
+            </a>
+            <a href="price-children.html#p05-06" data-direction="children" data-directions="children,surgery" data-procedure-id="p05-06">
+              <span>Удаление подвижного молочного зуба (включая аппликационную анестезию)</span>
+              <b>1 950 ₽</b>
+            </a>
+            <a href="price-children.html#p05-07" data-direction="children" data-directions="children,surgery" data-procedure-id="p05-07">
+              <span>Удаление неподвижного молочного зуба</span>
+              <b>3 100 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-08" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-08">
+              <span>Удаление постоянного зуба 1 степени сложности (подвижные)</span>
+              <b>3 100 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-09" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-09">
+              <span>Удаление постоянного зуба 2 степени сложности</span>
+              <b>4 400 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-10" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-10">
+              <span>Удаление постоянного зуба 3 степени сложности (с разъединением корней)</span>
+              <b>5 500 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-11" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-11">
+              <span>Перевязка гнойных ран, дренирование/снятие дренажа</span>
+              <b>1 000 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-12" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-12">
+              <span>Кюретаж лунки, удаление патологических грануляций</span>
+              <b>500 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-13" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-13">
+              <span>Лечение альвеолита, кюретаж, ревизия лунки с медобработкой</span>
+              <b>1 500 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-14" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-14">
+              <span>Удаление ретинированного, дистопированного, сверхкомплектного зуба 1 степени сложности</span>
+              <b>6 700 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-15" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-15">
+              <span>Удаление ретинированного, дистопированного, сверхкомплектного зуба 2 степени сложности</span>
+              <b>7 800 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-16" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-16">
+              <span>Удаление ретинированного, дистопированного, сверхкомплектного зуба 3 степени сложности</span>
+              <b>9 400 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-17" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-17">
+              <span>Наложение/снятие шва на слизистую оболочку полости рта</span>
+              <b>400 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-18" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-18">
+              <span>Лечение перикоронита, иссечение капюшона лазером FonaLase</span>
+              <b>2 900 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-19" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-19">
+              <span>Лечение перикоронита (промывание, рассечение и/или иссечение капюшона)</span>
+              <b>1 600 ₽</b>
+            </a>
+            <a href="price-surgery.html#p05-20" data-direction="surgery" data-directions="surgery" data-procedure-id="p05-20">
+              <span>Первичная хирургическая/медикаментозная обработка травматической раны полости рта</span>
+              <b>2 100 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-01" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-01">
+              <span>Расчет и составление плана лечения на основе ОПТГ</span>
+              <b>800 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-02" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-02">
+              <span>Расчет и составление плана лечения на основе ТРГ</span>
+              <b>3 000 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-03" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-03">
+              <span>Аппарат Френкеля</span>
+              <b>34 100 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-04" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-04">
+              <span>Аппарат для быстрого небного расширения</span>
+              <b>22 900 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-05" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-05">
+              <span>Приварка искусственного зуба на пластинку</span>
+              <b>600 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-06" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-06">
+              <span>Аппарат Твин-блок</span>
+              <b>39 000 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-07" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-07">
+              <span>Преортодонтический аппарат LM-активатор</span>
+              <b>16 000 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-08" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-08">
+              <span>Трейнер Т4К</span>
+              <b>14 200 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-09" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-09">
+              <span>Трейнер преортодонтический Infant</span>
+              <b>13 350 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-10" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-10">
+              <span>Аппарат HAAS, Marco Rossa c винтом Хайрекс</span>
+              <b>41 250 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-11" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-11">
+              <span>Аппарат Гербста</span>
+              <b>78 900 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-12" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-12">
+              <span>Фиксация металлической кнопки</span>
+              <b>2 500 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-14" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-14">
+              <span>Фиксация металлической брекет-системы (1 челюсть)</span>
+              <b>25 000 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-15" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-15">
+              <span>Фиксация керамической брекет-системы (1 челюсть)</span>
+              <b>27 000 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-16" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-16">
+              <span>Снятие брекета (1 зуб)</span>
+              <b>700 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-17" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-17">
+              <span>Комплексное снятие металлической брекет-системы (1 челюсть)</span>
+              <b>26 500 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-18" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-18">
+              <span>Комплексное снятие керамической брекет-системы (1 челюсть)</span>
+              <b>28 500 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-19" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-19">
+              <span>Снятие металлической брекет-системы (1 челюсть) и фиксация ретейнера</span>
+              <b>17 900 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-20" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-20">
+              <span>Стоимость брекет системы (керамической)</span>
+              <b>44 700 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-21" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-21">
+              <span>Стоимость брекет системы (металлической)</span>
+              <b>35 700 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-22" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-22">
+              <span>Стоимость брекет-системы самолигирующ (металл) на одну челюсть</span>
+              <b>26 100 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-23" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-23">
+              <span>Стоимость брекет-системы (керамической) самолигирующ</span>
+              <b>58 900 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-24" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-24">
+              <span>Лингвальная дуга/Небный бюгель</span>
+              <b>40 900 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-25" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-25">
+              <span>Срочная ретенционная каппа</span>
+              <b>14 300 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-26" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-26">
+              <span>Фиксация ретейнера</span>
+              <b>7 900 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-27" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-27">
+              <span>Каппа ретенционная</span>
+              <b>13 500 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-28" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-28">
+              <span>Фиксация ортодонтического кольца</span>
+              <b>2 500 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-29" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-29">
+              <span>Избирательное пришлифовывание</span>
+              <b>350 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-30" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-30">
+              <span>Фиксация несъемного ортодонтического аппарата</span>
+              <b>5 000 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-31" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-31">
+              <span>Снятие ортодонтического аппарата (2 кольца)</span>
+              <b>2 500 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-33" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-33">
+              <span>Коррекция брекет-системы одного зубного ряда/сегмента</span>
+              <b>4 200 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-34" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-34">
+              <span>Коррекция брекет-системы 1 категории</span>
+              <b>4 700 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-35" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-35">
+              <span>Коррекция брекет-системы 2 категории</span>
+              <b>5 700 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-36" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-36">
+              <span>Коррекция брекет-системы 3 категории</span>
+              <b>6 100 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-37" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-37">
+              <span>Коррекция брекет-системы 4 категории</span>
+              <b>7 900 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-38" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-38">
+              <span>Полный курс</span>
+              <b>220 000 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-39" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-39">
+              <span>Виртуальный 3D план (анализ ОПТГ и ТРГ)</span>
+              <b>40 000 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-40" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-40">
+              <span>Безлимитный курс (анализ КТ)</span>
+              <b>250 000 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-41" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-41">
+              <span>Элайнеры кейс подростки 1 этап</span>
+              <b>150 000 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-42" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-42">
+              <span>Элайнеры кейс подростки 2 этап</span>
+              <b>140 000 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-43" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-43">
+              <span>Элайнеры кейс подростки 3 этап</span>
+              <b>100 000 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-44" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-44">
+              <span>Элайнеры кейс взрослые 1 этап</span>
+              <b>200 000 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-45" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-45">
+              <span>Элайнеры кейс взрослые 2 этап</span>
+              <b>180 000 ₽</b>
+            </a>
+            <a href="price-orthodontics.html#p06-46" data-direction="ortho" data-directions="ortho" data-procedure-id="p06-46">
+              <span>Элайнеры кейс взрослые 3 этап</span>
+              <b>100 000 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-01" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-01">
+              <span>Снятие штампованной коронки</span>
+              <b>500 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-02" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-02">
+              <span>Нейлоновый протез</span>
+              <b>39 800 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-03" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-03">
+              <span>Закрытие шахты коронки с опорой на имплант</span>
+              <b>1 500 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-04" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-04">
+              <span>Коронка из диоксида циркония на имплант (штраумн)</span>
+              <b>45 000 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-05" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-05">
+              <span>Снятие металлокерамической/литой коронки</span>
+              <b>1 150 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-06" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-06">
+              <span>Фиксация коронки стеклоиномерным цементом</span>
+              <b>1 700 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-07" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-07">
+              <span>Цельно-циркониевая коронка</span>
+              <b>21 100 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-08" data-direction="aesthetics" data-directions="aesthetics,prosthetics" data-procedure-id="p07-08">
+              <span>Винир E-MAX</span>
+              <b>27 000 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-09" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-09">
+              <span>Бюгельный протез</span>
+              <b>43 700 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-10" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-10">
+              <span>Бюгельный протез с замком</span>
+              <b>46 300 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-11" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-11">
+              <span>Полный съемный Акриловый протез на 1 челюсть</span>
+              <b>29 900 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-12" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-12">
+              <span>Частично-съемный акриловый протез</span>
+              <b>25 100 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-13" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-13">
+              <span>Шинирующий бюгельный протез</span>
+              <b>50 000 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-14" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-14">
+              <span>Приварка зуба</span>
+              <b>3 500 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-15" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-15">
+              <span>Полный съемный протез Акри Фри</span>
+              <b>49 000 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-16" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-16">
+              <span>Коронка из диоксида циркония на имплант (OSSTEM)</span>
+              <b>41 100 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-17" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-17">
+              <span>Металлокерамическая коронка на импланте</span>
+              <b>31 100 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-18" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-18">
+              <span>Перебазировка съемного протеза</span>
+              <b>5 100 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-19" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-19">
+              <span>Цельно-циркониевая коронка с облицовкой</span>
+              <b>25 000 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-20" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-20">
+              <span>Бюгельный протез Квадротти</span>
+              <b>41 300 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-21" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-21">
+              <span>Приварка кламера</span>
+              <b>3 500 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-22" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-22">
+              <span>Временная коронка на имплант</span>
+              <b>8 000 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-23" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-23">
+              <span>Изготовление индивидуального абатмента</span>
+              <b>5 000 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-24" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-24">
+              <span>Абатмент</span>
+              <b>3 000 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-25" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-25">
+              <span>ОПТГ</span>
+              <b>1 800 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p07-26" data-direction="prosthetics" data-directions="prosthetics" data-procedure-id="p07-26">
+              <span>Брекет система (1 зуб)</span>
+              <b>1 900 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p08-01" data-direction="implantology" data-directions="implantology,prosthetics" data-procedure-id="p08-01">
+              <span>Установка формирователя десны</span>
+              <b>3 000 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p08-02" data-direction="implantology" data-directions="implantology,prosthetics" data-procedure-id="p08-02">
+              <span>Закрытый синус-лифтинг</span>
+              <b>25 000 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p08-03" data-direction="implantology" data-directions="implantology,prosthetics" data-procedure-id="p08-03">
+              <span>Установка микроимпланта</span>
+              <b>15 000 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p08-04" data-direction="implantology" data-directions="implantology,prosthetics" data-procedure-id="p08-04">
+              <span>Повторная установка микроимпланта</span>
+              <b>3 500 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p08-05" data-direction="implantology" data-directions="implantology,prosthetics" data-procedure-id="p08-05">
+              <span>Синуслифтинг в области одного импланта</span>
+              <b>50 000 ₽</b>
+            </a>
+            <a href="price-prosthetics.html#p08-06" data-direction="implantology" data-directions="implantology,prosthetics" data-procedure-id="p08-06">
+              <span>Синуслифтинг в области одного сегмента</span>
+              <b>75 000 ₽</b>
+            </a>
+            <a href="price-gums.html#p09-01" data-direction="periodontics" data-directions="periodontics" data-procedure-id="p09-01">
+              <span>Медикаментозная обработка слизистой полости (стоматит)</span>
+              <b>900 ₽</b>
+            </a>
+            <a href="price-gums.html#p09-02" data-direction="periodontics" data-directions="periodontics" data-procedure-id="p09-02">
+              <span>Закрытый кюретаж пародонтального кармана в области 1 зуба</span>
+              <b>1 550 ₽</b>
+            </a>
+            <a href="price-gums.html#p09-03" data-direction="periodontics" data-directions="periodontics" data-procedure-id="p09-03">
+              <span>Антисептическая и/или медикаментозная обработка пародонтального кармана в области 1 зуба</span>
+              <b>800 ₽</b>
+            </a>
+            <a href="price-gums.html#p09-04" data-direction="periodontics" data-directions="periodontics" data-procedure-id="p09-04">
+              <span>Наложение самоклеющейся лечебной повязки при заболеваниях пародонта и слизистой оболочки</span>
+              <b>900 ₽</b>
+            </a>
+            <a href="price-gums.html#p09-05" data-direction="periodontics" data-directions="periodontics" data-procedure-id="p09-05">
+              <span>Лечение воспалительных заболеваний слизистой оболочки</span>
+              <b>1 100 ₽</b>
+            </a>
+            <!-- prices:procedures:end -->
+          </template>
         </section>
-
-        <section class="panel subpage-section" id="catalogue">
-          <div class="section-head content-heading">
-            <h2>Услуги по направлениям</h2>
-            <a class="content-link" href="prices.html">Перейти к ценам</a>
+        <section class="panel subpage-section services-assistance">
+          <div>
+            <h2>Не знаете, какое направление выбрать?</h2>
+            <p>Расскажите администратору, что вас беспокоит. Он поможет подобрать специалиста.</p>
           </div>
-          <div class="directory">
-            <details class="directory-group" id="children">
-                <summary>Детская стоматология</summary>
-                <ul class="directory-list">
-                    <li id="service-984" data-service-prices="p03-01, p04-04, p04-05, p04-06, p04-07, p04-08, p01-03, p01-04, p05-06, p05-07">
-                        <span>Детская стоматология</span>
-                        <a class="content-link" href="prices.html?service=984#prices"
-                            aria-label="Показать цены: Детская стоматология">Показать цены</a>
-                    </li>
-                    <li id="service-3751" data-service-prices="p03-01, p04-04, p04-05, p04-06, p04-07, p04-08">
-                        <span>Лечение молочных зубов</span>
-                        <a class="content-link" href="prices.html?service=3751#prices"
-                            aria-label="Показать цены: Лечение молочных зубов">Показать цены</a>
-                    </li>
-                    <li id="service-3881"><span>Пломбирование молочных зубов</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-4054" data-service-prices="p05-06, p05-07">
-                        <span>Удаление молочного зуба</span>
-                        <a class="content-link" href="prices.html?service=4054#prices"
-                            aria-label="Показать цены: Удаление молочного зуба">Показать цены</a>
-                    </li>
-                </ul>
-            </details>
-            <details class="directory-group" id="therapy">
-                <summary>Лечение зубов и эндодонтия</summary>
-                <ul class="directory-list">
-                    <li id="service-982" data-service-prices="p03-01, p03-02, p03-03, p03-08, p03-09, p03-13, p04-02, p04-09, p04-10, p04-11, p04-12, p04-13, p04-14, p04-15, p04-18, p04-19, p04-20, p04-21, p04-22">
-                        <span>Базовая стоматология</span>
-                        <a class="content-link" href="prices.html?service=982#prices"
-                            aria-label="Показать цены: Базовая стоматология">Показать цены</a>
-                    </li>
-                    <li id="service-1421" data-service-prices="p03-05, p03-06, p03-07">
-                        <span>Восстановление зуба</span>
-                        <a class="content-link" href="prices.html?service=1421#prices"
-                            aria-label="Показать цены: Восстановление зуба">Показать цены</a>
-                    </li>
-                    <li id="service-1438" data-service-prices="p03-05, p03-06, p03-07, p03-13, p03-03, p03-08, p03-09">
-                        <span>Лечение кариеса</span>
-                        <a class="content-link" href="prices.html?service=1438#prices"
-                            aria-label="Показать цены: Лечение кариеса">Показать цены</a>
-                    </li>
-                    <li id="service-3740" data-service-prices="p04-10, p04-11, p04-12, p04-13, p04-14, p04-15, p04-18">
-                        <span>Лечение корневых каналов</span>
-                        <a class="content-link" href="prices.html?service=3740#prices"
-                            aria-label="Показать цены: Лечение корневых каналов">Показать цены</a>
-                    </li>
-                    <li id="service-1442" data-service-prices="p04-14, p04-15, p04-18, p04-19, p04-20">
-                        <span>Лечение периодонтита</span>
-                        <a class="content-link" href="prices.html?service=1442#prices"
-                            aria-label="Показать цены: Лечение периодонтита">Показать цены</a>
-                    </li>
-                    <li id="service-1323" data-service-prices="p01-01, p01-02, p01-11, p04-02, p04-09, p04-10, p04-11, p04-12, p04-13, p04-14, p04-15, p04-18, p04-19, p04-20, p04-21, p04-22">
-                        <span>Лечение пульпита</span>
-                        <a class="content-link" href="prices.html?service=1323#prices"
-                            aria-label="Показать цены: Лечение пульпита">Показать цены</a>
-                    </li>
-                    <li id="service-3819"><span>Наращивание зубов</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-3040" data-service-prices="p04-02, p04-09, p04-10, p04-11, p04-12, p04-13, p04-14, p04-15, p04-18, p04-19, p04-20, p04-21, p04-22">
-                        <span>Эндодонтия</span>
-                        <a class="content-link" href="prices.html?service=3040#prices"
-                            aria-label="Показать цены: Эндодонтия">Показать цены</a>
-                    </li>
-                </ul>
-            </details>
-            <details class="directory-group" id="hygiene">
-                <summary>Гигиена и профилактика</summary>
-                <ul class="directory-list">
-                    <li id="service-1427" data-service-prices="p02-11">
-                        <span>Герметизация фиссур</span>
-                        <a class="content-link" href="prices.html?service=1427#prices"
-                            aria-label="Показать цены: Герметизация фиссур">Показать цены</a>
-                    </li>
-                    <li id="service-3566" data-service-prices="p02-08, p02-10, p02-12">
-                        <span>Восстановление зубной эмали</span>
-                        <a class="content-link" href="prices.html?service=3566#prices"
-                            aria-label="Показать цены: Восстановление зубной эмали">Показать цены</a>
-                    </li>
-                    <li id="service-3941" data-service-prices="p02-08, p02-10, p02-12">
-                        <span>Реминерализация зубов</span>
-                        <a class="content-link" href="prices.html?service=3941#prices"
-                            aria-label="Показать цены: Реминерализация зубов">Показать цены</a>
-                    </li>
-                    <li id="service-4093" data-service-prices="p02-08, p02-10, p02-12">
-                        <span>Фторирование зубов</span>
-                        <a class="content-link" href="prices.html?service=4093#prices"
-                            aria-label="Показать цены: Фторирование зубов">Показать цены</a>
-                    </li>
-                    <li id="service-4073" data-service-prices="p02-06">
-                        <span>Ультразвуковая чистка зубов</span>
-                        <a class="content-link" href="prices.html?service=4073#prices"
-                            aria-label="Показать цены: Ультразвуковая чистка зубов">Показать цены</a>
-                    </li>
-                    <li id="service-4108" data-service-prices="p02-13, p02-14, p02-07">
-                        <span>Чистка air flow</span>
-                        <a class="content-link" href="prices.html?service=4108#prices"
-                            aria-label="Показать цены: Чистка air flow">Показать цены</a>
-                    </li>
-                    <li id="service-3039" data-service-prices="p02-01, p02-02, p02-03, p02-04, p02-05, p02-06, p02-07, p02-08, p02-10, p02-11, p02-12, p02-13, p02-14">
-                        <span>Чистка зубов</span>
-                        <a class="content-link" href="prices.html?service=3039#prices"
-                            aria-label="Показать цены: Чистка зубов">Показать цены</a>
-                    </li>
-                </ul>
-            </details>
-            <details class="directory-group" id="ortho">
-                <summary>Ортодонтия</summary>
-                <ul class="directory-list">
-                    <li id="service-3569" data-service-prices="p06-03, p06-04, p06-06, p06-07, p06-08, p06-09, p06-10, p06-11, p06-14, p06-15, p06-17, p06-18, p06-19, p06-20, p06-21, p06-22, p06-23, p06-24, p06-25, p06-26, p06-27, p06-33, p06-34, p06-35, p06-36, p06-37, p06-38, p06-41, p06-42, p06-43, p06-44, p06-45, p06-46, p07-26">
-                        <span>Выравнивание зубов</span>
-                        <a class="content-link" href="prices.html?service=3569#prices"
-                            aria-label="Показать цены: Выравнивание зубов">Показать цены</a>
-                    </li>
-                    <li id="service-987" data-service-prices="p06-03, p06-04, p06-06, p06-07, p06-08, p06-09, p06-10, p06-11, p06-14, p06-15, p06-17, p06-18, p06-19, p06-20, p06-21, p06-22, p06-23, p06-24, p06-25, p06-26, p06-27, p06-30, p06-33, p06-34, p06-35, p06-36, p06-37, p06-38, p06-41, p06-42, p06-43, p06-44, p06-45, p06-46, p07-26">
-                        <span>Исправление прикуса</span>
-                        <a class="content-link" href="prices.html?service=987#prices"
-                            aria-label="Показать цены: Исправление прикуса">Показать цены</a>
-                    </li>
-                    <li id="service-3034" data-service-prices="p06-03, p06-04, p06-06, p06-07, p06-08, p06-09, p06-10, p06-11, p06-14, p06-15, p06-17, p06-18, p06-19, p06-20, p06-21, p06-22, p06-23, p06-24, p06-25, p06-26, p06-27, p06-30, p06-33, p06-34, p06-35, p06-36, p06-37, p07-26">
-                        <span>Ортодонтия</span>
-                        <a class="content-link" href="prices.html?service=3034#prices"
-                            aria-label="Показать цены: Ортодонтия">Показать цены</a>
-                    </li>
-                    <li id="service-3877" data-service-prices="p06-03, p06-06">
-                        <span>Пластинка на зубы</span>
-                        <a class="content-link" href="prices.html?service=3877#prices"
-                            aria-label="Показать цены: Пластинка на зубы">Показать цены</a>
-                    </li>
-                    <li id="service-3969" data-service-prices="p06-19, p06-25, p06-26, p06-27">
-                        <span>Ретейнер</span>
-                        <a class="content-link" href="prices.html?service=3969#prices"
-                            aria-label="Показать цены: Ретейнер">Показать цены</a>
-                    </li>
-                    <li id="service-4021" data-service-prices="p06-08, p06-09">
-                        <span>Трейнер для зубов</span>
-                        <a class="content-link" href="prices.html?service=4021#prices"
-                            aria-label="Показать цены: Трейнер для зубов">Показать цены</a>
-                    </li>
-                    <li id="service-994" data-service-prices="p06-14, p06-15, p06-17, p06-18, p06-20, p06-21, p06-22, p06-23, p06-33, p06-34, p06-35, p06-36, p06-37, p07-26">
-                        <span>Установка брекетов</span>
-                        <a class="content-link" href="prices.html?service=994#prices"
-                            aria-label="Показать цены: Установка брекетов">Показать цены</a>
-                    </li>
-                </ul>
-            </details>
-            <details class="directory-group" id="surgery">
-                <summary>Хирургия и острые состояния</summary>
-                <ul class="directory-list">
-                    <li id="service-1420" data-service-prices="p05-03">
-                        <span>Вестибулопластика</span>
-                        <a class="content-link" href="prices.html?service=1420#prices"
-                            aria-label="Показать цены: Вестибулопластика">Показать цены</a>
-                    </li>
-                    <li id="service-3212" data-service-prices="p01-01, p01-02, p01-07, p01-08, p01-11">
-                        <span>Лечение зуба мудрости</span>
-                        <a class="content-link" href="prices.html?service=3212#prices"
-                            aria-label="Показать цены: Лечение зуба мудрости">Показать цены</a>
-                    </li>
-                    <li id="service-3733" data-service-prices="p01-07, p01-08">
-                        <span>Лечение кисты зуба</span>
-                        <a class="content-link" href="prices.html?service=3733#prices"
-                            aria-label="Показать цены: Лечение кисты зуба">Показать цены</a>
-                    </li>
-                    <li id="service-1272"><span>Лечение остеомиелита челюстей</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-1273" data-service-prices="p01-01, p01-02, p01-07, p01-08, p01-11, p04-09, p04-21, p05-08, p05-09, p05-10">
-                        <span>Лечение острой зубной боли</span>
-                        <a class="content-link" href="prices.html?service=1273#prices"
-                            aria-label="Показать цены: Лечение острой зубной боли">Показать цены</a>
-                    </li>
-                    <li id="service-1293"><span>Лечение перелома челюсти</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-3033"><span>Неотложная помощь в стоматологии</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-3871" data-service-prices="p05-03">
-                        <span>Пластика десны</span>
-                        <a class="content-link" href="prices.html?service=3871#prices"
-                            aria-label="Показать цены: Пластика десны">Показать цены</a>
-                    </li>
-                    <li id="service-3875" data-service-prices="p05-02, p05-05">
-                        <span>Пластика уздечки губ</span>
-                        <a class="content-link" href="prices.html?service=3875#prices"
-                            aria-label="Показать цены: Пластика уздечки губ">Показать цены</a>
-                    </li>
-                    <li id="service-3876" data-service-prices="p05-01, p05-04">
-                        <span>Пластика уздечки языка</span>
-                        <a class="content-link" href="prices.html?service=3876#prices"
-                            aria-label="Показать цены: Пластика уздечки языка">Показать цены</a>
-                    </li>
-                    <li id="service-3937"><span>Резекция зуба</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-4040"><span>Удаление зуба мудрости</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-993" data-service-prices="p03-04, p05-06, p05-07, p05-08, p05-09, p05-10, p05-14, p05-15, p05-16">
-                        <span>Удаление зубов</span>
-                        <a class="content-link" href="prices.html?service=993#prices"
-                            aria-label="Показать цены: Удаление зубов">Показать цены</a>
-                    </li>
-                    <li id="service-4046"><span>Удаление кисты зуба</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-3038" data-service-prices="p05-03, p05-18, p05-19, p08-02, p08-05, p08-06">
-                        <span>Хирургическая стоматология</span>
-                        <a class="content-link" href="prices.html?service=3038#prices"
-                            aria-label="Показать цены: Хирургическая стоматология">Показать цены</a>
-                    </li>
-                    <li id="service-1008"><span>Челюстно-лицевая хирургия</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                </ul>
-            </details>
-            <details class="directory-group" id="implantology">
-                <summary>Имплантация</summary>
-                <ul class="directory-list">
-                    <li id="service-986"><span>Имплантация зубов</span><a class="content-link" href="implantation.html">Этапы и стоимость</a></li>
-                    <li id="service-3634"><span>Имплантация зубов под ключ</span><a class="content-link" href="implantation.html">Уточнить на консультации</a></li>
-                    <li id="service-3820" data-service-prices="p08-02, p08-05, p08-06">
-                        <span>Наращивание костной ткани</span>
-                        <a class="content-link" href="prices.html?service=3820#prices"
-                            aria-label="Показать цены: Наращивание костной ткани">Показать цены</a>
-                    </li>
-                    <li id="service-1473" data-service-prices="p08-02">
-                        <span>Синуслифтинг</span>
-                        <a class="content-link" href="prices.html?service=1473#prices"
-                            aria-label="Показать цены: Синуслифтинг">Показать цены</a>
-                    </li>
-                    <li id="service-4080" data-service-prices="p08-01">
-                        <span>Установка формирователя десны</span>
-                        <a class="content-link" href="prices.html?service=4080#prices"
-                            aria-label="Показать цены: Установка формирователя десны">Показать цены</a>
-                    </li>
-                </ul>
-            </details>
-            <details class="directory-group" id="prosthetics">
-                <summary>Протезирование и лаборатория</summary>
-                <ul class="directory-list">
-                    <li id="service-1418" data-service-prices="p07-09, p07-10, p07-13, p07-20">
-                        <span>Бюгельный протез</span>
-                        <a class="content-link" href="prices.html?service=1418#prices"
-                            aria-label="Показать цены: Бюгельный протез">Показать цены</a>
-                    </li>
-                    <li id="service-985" data-service-prices="p06-05, p07-14, p07-18, p07-21">
-                        <span>Зуботехническая лаборатория</span>
-                        <a class="content-link" href="prices.html?service=985#prices"
-                            aria-label="Показать цены: Зуботехническая лаборатория">Показать цены</a>
-                    </li>
-                    <li id="service-989" data-service-prices="p07-17">
-                        <span>Металлокерамическая коронка на импланте</span>
-                        <a class="content-link" href="prices.html?service=989#prices"
-                            aria-label="Показать цены: Металлокерамика">Показать цены</a>
-                    </li>
-                    <li id="service-3812"><span>Микропротезирование</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-3822" data-service-prices="p07-02">
-                        <span>Нейлоновый протез</span>
-                        <a class="content-link" href="prices.html?service=3822#prices"
-                            aria-label="Показать цены: Нейлоновый протез">Показать цены</a>
-                    </li>
-                    <li id="service-3826"><span>Несъемный зубной протез</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-3942" data-service-prices="p06-05, p07-14, p07-18, p07-21">
-                        <span>Ремонт зубных протезов</span>
-                        <a class="content-link" href="prices.html?service=3942#prices"
-                            aria-label="Показать цены: Ремонт зубных протезов">Показать цены</a>
-                    </li>
-                    <li id="service-4002"><span>Съемное протезирование Акри-Фри</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-4003" data-service-prices="p07-02, p07-09, p07-10, p07-11, p07-12, p07-13, p07-15, p07-20">
-                        <span>Съемный зубной протез</span>
-                        <a class="content-link" href="prices.html?service=4003#prices"
-                            aria-label="Показать цены: Съемный зубной протез">Показать цены</a>
-                    </li>
-                    <li id="service-3558"><span>Установка вкладки под коронку</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-1497"><span>Установка временных коронок</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-4079"><span>Установка зубных мостов</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-1498"><span>Установка кератических вкладок</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-4101" data-service-prices="p07-07, p07-19">
-                        <span>Циркониевая коронка</span>
-                        <a class="content-link" href="prices.html?service=4101#prices"
-                            aria-label="Показать цены: Циркониевая коронка">Показать цены</a>
-                    </li>
-                </ul>
-            </details>
-            <details class="directory-group" id="diagnostics">
-                <summary>Диагностика</summary>
-                <ul class="directory-list">
-                    <li id="service-956"><span>Диагностический центр</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-3850" data-service-prices="p01-14">
-                        <span>Панорамный снимок зубов</span>
-                        <a class="content-link" href="prices.html?service=3850#prices"
-                            aria-label="Показать цены: Панорамный снимок зубов">Показать цены</a>
-                    </li>
-                    <li id="service-3946" data-service-prices="p01-12, p01-14, p01-13">
-                        <span>Рентген зуба</span>
-                        <a class="content-link" href="prices.html?service=3946#prices"
-                            aria-label="Показать цены: Рентген зуба">Показать цены</a>
-                    </li>
-                    <li id="service-992" data-service-prices="p01-12, p01-13, p01-14">
-                        <span>Рентгенологическая диагностика</span>
-                        <a class="content-link" href="prices.html?service=992#prices"
-                            aria-label="Показать цены: Рентгенологическая диагностика">Показать цены</a>
-                    </li>
-                </ul>
-            </details>
-            <details class="directory-group" id="periodontics">
-                <summary>Лечение дёсен и слизистой</summary>
-                <ul class="directory-list">
-                    <li id="service-1110" data-service-prices="p09-05">
-                        <span>Лечение афтозного стоматита</span>
-                        <a class="content-link" href="prices.html?service=1110#prices"
-                            aria-label="Показать цены: Лечение афтозного стоматита">Показать цены</a>
-                    </li>
-                    <li id="service-3718" data-service-prices="p09-05">
-                        <span>Лечение воспалительных заболеваний</span>
-                        <a class="content-link" href="prices.html?service=3718#prices"
-                            aria-label="Показать цены: Лечение воспалительных заболеваний">Показать цены</a>
-                    </li>
-                    <li id="service-1147"><span>Лечение гингивита</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-3730" data-service-prices="p09-02, p09-03, p09-04">
-                        <span>Лечение десен</span>
-                        <a class="content-link" href="prices.html?service=3730#prices"
-                            aria-label="Показать цены: Лечение десен">Показать цены</a>
-                    </li>
-                    <li id="service-1287" data-service-prices="p09-02, p09-03">
-                        <span>Лечение пародонтита</span>
-                        <a class="content-link" href="prices.html?service=1287#prices"
-                            aria-label="Показать цены: Лечение пародонтита">Показать цены</a>
-                    </li>
-                    <li id="service-1288" data-service-prices="p03-10, p03-11, p03-12">
-                        <span>Лечение пародонтоза</span>
-                        <a class="content-link" href="prices.html?service=1288#prices"
-                            aria-label="Показать цены: Лечение пародонтоза">Показать цены</a>
-                    </li>
-                    <li id="service-1368" data-service-prices="p09-05">
-                        <span>Лечение стоматита</span>
-                        <a class="content-link" href="prices.html?service=1368#prices"
-                            aria-label="Показать цены: Лечение стоматита">Показать цены</a>
-                    </li>
-                    <li id="service-3035" data-service-prices="p03-10, p03-11, p03-12, p06-29, p09-02, p09-03, p09-04">
-                        <span>Пародонтология</span>
-                        <a class="content-link" href="prices.html?service=3035#prices"
-                            aria-label="Показать цены: Пародонтология">Показать цены</a>
-                    </li>
-                    <li id="service-4110" data-service-prices="p03-10, p03-11, p03-12">
-                        <span>Шинирование зубов</span>
-                        <a class="content-link" href="prices.html?service=4110#prices"
-                            aria-label="Показать цены: Шинирование зубов">Показать цены</a>
-                    </li>
-                </ul>
-            </details>
-            <details class="directory-group" id="aesthetics">
-                <summary>Эстетическая стоматология</summary>
-                <ul class="directory-list">
-                    <li id="service-3031"><span>Лазерная стоматология</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-990" data-service-prices="p04-03">
-                        <span>Внутриканальное отбеливание</span>
-                        <a class="content-link" href="prices.html?service=990#prices"
-                            aria-label="Показать цены: Отбеливание зубов">Показать цены</a>
-                    </li>
-                    <li id="service-1463"><span>Отбеливание зубов лазером</span><a class="content-link" href="contact.html#booking">Уточнить на консультации</a></li>
-                    <li id="service-983" data-service-prices="p07-08">
-                        <span>Установка виниров</span>
-                        <a class="content-link" href="prices.html?service=983#prices"
-                            aria-label="Показать цены: Установка виниров">Показать цены</a>
-                        <a class="content-link" href="veneers.html">О лечении</a>
-                    </li>
-                    <li id="service-3041" data-service-prices="p04-03, p07-08">
-                        <span>Эстетическая стоматология</span>
-                        <a class="content-link" href="prices.html?service=3041#prices"
-                            aria-label="Показать цены: Эстетическая стоматология">Показать цены</a>
-                    </li>
-                </ul>
-            </details>
-            <div id="clinic-services"><span id="service-5166"></span><span id="service-965"></span></div>
+          <div class="care-actions">
+            <a class="locbutton" href="tel:+74991853333">Позвонить администратору</a>
+            <a class="content-link" href="first-visit.html">Подготовиться к первому визиту</a>
           </div>
         </section>
       </main>
@@ -528,7 +1171,8 @@
         <div class="foot-end">© 2026 Семейная стоматология «Апельсин»</div>
       </footer>
     </div>
-    <script src="../scripts/catalogue.js?v=patient-care" defer></script>
+    <script src="../scripts/catalogue.js?v=services-navigator" defer></script>
+    <script src="../scripts/services.js?v=services-navigator" defer></script>
     <script src="../scripts/navigation.js?v=patient-care" defer></script>
   </body>
 </html>
