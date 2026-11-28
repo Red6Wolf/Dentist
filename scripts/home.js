@@ -116,20 +116,23 @@ if (familyHero) {
     const description = familyHero.querySelector("[data-audience-description]");
     const image = familyHero.querySelector("[data-audience-image]");
     const serviceLink = familyHero.querySelector("[data-audience-services]");
+    const priceLink = familyHero.querySelector("[data-audience-prices]");
     const scenes = {
         adult: {
             title: "Стоматология", audienceLine: "для взрослых.", emphasis: "Рядом с вами.",
             description: "Лечение, гигиена и восстановление зубов. План и стоимость обсудите с врачом.",
             image: "assets/clinic/hero-adult-v3.webp", width: 1672, height: 941,
             alt: "Сюжетная иллюстрация: пациентка беседует со стоматологом",
-            link: "pages/services.html?audience=adult", linkText: "Услуги для взрослых"
+            link: "pages/services.html?audience=adult", linkText: "Услуги для взрослых",
+            prices: "pages/prices.html"
         },
         child: {
             title: "Стоматология", audienceLine: "для детей.", emphasis: "Рядом с вами.",
             description: "Осмотр, профилактика и лечение молочных зубов. Возраст приёма уточните при записи.",
             image: "assets/clinic/hero-child-v3.webp", width: 1672, height: 941,
             alt: "Сюжетная иллюстрация: ребёнок с мамой знакомится со стоматологом",
-            link: "pages/services.html?audience=child", linkText: "Услуги для детей"
+            link: "pages/services.html?audience=child", linkText: "Услуги для детей",
+            prices: "pages/prices.html?direction=children"
         }
     };
     let descriptionMeasure = '';
@@ -185,6 +188,7 @@ if (familyHero) {
         image.alt = scene.alt;
         serviceLink.href = scene.link;
         serviceLink.firstChild.textContent = scene.linkText + " ";
+        priceLink.href = scene.prices;
         if (animate && !reducedMotion.matches) {
             for (const element of [title, description, image]) {
                 audienceAnimation.push(element.animate(

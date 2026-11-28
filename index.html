@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="styles/pages.css?v=separate-prices" />
     <link rel="stylesheet" href="styles/home.css?v=clinic-hours" />
     <link rel="stylesheet" href="styles/refinement.css?v=compact-location" />
+    <link rel="stylesheet" href="styles/price-transitions.css" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -97,7 +98,17 @@
               <h1 data-audience-title>Стоматология<br>для взрослых.<br><span>Рядом с вами.</span></h1>
               <p class="hero-description" data-audience-description>Лечение, гигиена и восстановление зубов. План и стоимость обсудите с врачом.</p>
             </div>
-            <a class="hero-consultation" href="tel:+74991853333" aria-label="Позвонить для консультации в Апельсин">Позвонить <b class="icon-arrow" aria-hidden="true"></b></a>
+            <div class="hero-primary-actions">
+              <a
+                class="hero-consultation"
+                href="tel:+74991853333"
+                aria-label="Позвонить для консультации в Апельсин"
+              >
+                <span>Позвонить для консультации</span>
+                <b class="icon-arrow" aria-hidden="true"></b>
+              </a>
+              <a class="hero-cost-link" data-audience-prices href="pages/prices.html">Узнать стоимость</a>
+            </div>
           </div>
         </div>
         <div class="hero-family-info" aria-label="Адрес, часы и контакты клиники">
