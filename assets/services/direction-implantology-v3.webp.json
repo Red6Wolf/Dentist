@@ -1,0 +1,9 @@
+{
+  "prompt": "Use case: premium warm family dental website illustration, dental replacement and implantology. Generate ONE NEW individual square 1254x1254 image, not an edit or upscale. A beautiful polished ivory ceramic replacement molar crown standing upright on a pale cream ceramic presentation tray. Only a very small discreet smooth titanium connector is visible immediately beneath the crown, a short subtle 3 millimeter collar; the connector is mostly hidden, no exposed long screw, no aggressive threads. The crown is a pristine crafted ceramic object with gently simplified elegant cusps and a closed finished presentation, no black cavity, no rough cut, no exposed root. Calm luxurious care product still-life, not a surgery image. Warm ivory and muted peach studio palette, pale cream tabletop and softly blurred beige background, soft natural window light, refined clean gloss and delicate contact shadows. Main object occupies 55-60 percent of frame with generous clear margins, entire tray and object well within image. Pleasant polished dental care, premium restrained photorealistic product illustration with sharp native detail. No natural extracted teeth, severed teeth, roots, gums, flesh, mouths, bone, blood, surgical tools, long exposed implant screw, holes, text, logos, labels, watermark, collage or borders.",
+  "tool": "built-in image_gen.imagegen",
+  "source": "/Users/skripnikovandrei/.codex/generated_images/01a22193-cb98-7242-b281-0a41f2b835bf/exec-8c910680-48d0-4aee-8b54-2207b500256f.png",
+  "processing": "cwebp -q 88; native resolution, no resizing",
+  "width": 1254,
+  "height": 1254,
+  "asset": "direction-implantology-v3.webp"
+}

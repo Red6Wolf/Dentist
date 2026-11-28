@@ -1,0 +1,198 @@
+/* Общие размеры действий и спокойная обратная связь. */
+:root {
+    --ease-out: cubic-bezier(.23, 1, .32, 1);
+    --duration-control: 160ms;
+    --duration-panel: 200ms;
+}
+.service-page .service-intro .care-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    max-width: 640px;
+    align-items: stretch;
+}
+.service-page .service-intro .care-actions > :is(.locbutton, .service-price-link) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 0;
+    min-height: 58px;
+    height: 100%;
+    margin: 0;
+    padding: 13px 18px;
+    box-sizing: border-box;
+    font: 600 16px/1.4 var(--sans);
+    text-align: center;
+    border: 1px solid var(--orange-action);
+    border-radius: 999px;
+}
+.service-page .service-price-link::after {
+    flex: 0 0 8px;
+}
+.text-action,
+a.content-link,
+a.hero-family-visit,
+a.hero-location-link {
+    text-underline-offset: 4px;
+    transition: color var(--duration-control) ease, text-decoration-color var(--duration-control) ease, background-color var(--duration-control) ease;
+}
+@media (hover: hover) and (pointer: fine) {
+    a.text-action:hover,
+    a.content-link:hover,
+    a.hero-family-visit:hover,
+    a.hero-location-link:hover {
+        color: #913d07;
+        background-color: #f7dfc5;
+        text-decoration-color: currentColor;
+        text-decoration-thickness: 2px;
+        border-radius: 3px;
+    }
+    .footer a.text-action:hover,
+    .footer a.content-link:hover {
+        color: #ffd1a3;
+        background: transparent;
+    }
+}
+a.text-action:active,
+a.content-link:active {
+    color: var(--orange-action);
+}
+/* Контактный блок одинаков на главной и странице контактов. */
+.contact-callout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 32px 64px;
+    align-items: center;
+    padding: clamp(28px, 5vw, 64px);
+    background: var(--patient-warm);
+}
+.contact-callout h2 {
+    margin: 0 0 16px;
+    font: 650 clamp(26px, 2.8vw, 38px)/1.2 var(--display);
+    letter-spacing: -.025em;
+    max-width: 24ch;
+}
+.contact-callout p {
+    max-width: 58ch;
+    margin: 0;
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.65;
+}
+.contact-callout__actions {
+    display: grid;
+    justify-items: start;
+    gap: 16px;
+}
+.contact-callout__actions .locbutton {
+    min-height: 56px;
+    justify-content: center;
+    text-align: center;
+}
+.mega-menu {
+    transform-origin: var(--menu-origin, center top);
+}
+.nav-expand::after {
+    transition: transform var(--duration-control) var(--ease-out);
+}
+/* Подробная услуга на телефоне: сначала суть и действия, иллюстрация — компактный ориентир. */
+@media (max-width: 700px) {
+    .service-page .service-intro__heading {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+    .service-page .service-art {
+        width: 150px;
+        max-width: 100%;
+    }
+    .service-page .service-art figcaption {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+    .service-page .service-intro .care-actions {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: none;
+    }
+    .service-page .service-intro .care-actions > :is(.locbutton, .service-price-link) {
+        min-height: 56px;
+    }
+    .contact-callout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+    }
+    .contact-callout__actions {
+        justify-items: stretch;
+    }
+    .contact-callout p {
+        font-size: 17px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .text-action,
+    a.content-link,
+    .nav-expand::after {
+        transition: none;
+    }
+}
+
+/* Два ясных входа в каталог, без потери поиска и прямых ссылок. */
+.catalogue-audience {
+    margin-top: 24px;
+}
+.services-child-guide {
+    padding: 28px;
+    background: var(--patient-warm);
+    border-radius: 16px;
+}
+.services-child-guide h2 {
+    margin: 0 0 16px;
+    font: 650 25px/1.2 var(--display);
+}
+.services-child-guide p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--muted);
+}
+.child-price-link {
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    padding: 18px 0;
+    border-top: 1px solid #c5ae97;
+    font-size: 16px;
+    line-height: 1.5;
+}
+.child-price-link b {
+    flex: none;
+    white-space: nowrap;
+}
+.services-child-guide > .content-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: 16px;
+}
+@media (hover: hover) and (pointer: fine) {
+    .child-price-link:hover {
+        color: #913d07;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+}
+@media (max-width: 700px) {
+    .services-card__heading {
+        grid-template-columns: minmax(0, 1fr) 108px;
+        gap: 12px;
+    }
+    .services-card__heading h2 {
+        grid-column: 1 / -1;
+    }
+    .services-card__image {
+        grid-row: 2;
+        width: 108px;
+    }
+    .services-child-guide {
+        padding: 24px;
+    }
+}

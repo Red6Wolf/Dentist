@@ -63,9 +63,51 @@ if (navigation) {
         clearTimeout(closeTimer);
     }
 
-    function openPanel(toggle, panel, moveFocus = false) {
-        closePanels();
-        panel.hidden = false;
+    const surfaceMotion = new WeakMap();
+    const reducedNavigationMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+    function revealSurface(surface, open, animate = true) {
+        const previous = surfaceMotion.get(surface);
+        if (previous?.open === open) return;
+        const showing = !surface.hidden;
+        const computed = showing ? getComputedStyle(surface) : null;
+        const isDesktop = surface.classList.contains('mega-menu');
+        const closedTransform = isDesktop ? 'translate(-50%, -6px) scale(.985)' : 'translateY(-6px) scale(.985)';
+        const openedTransform = isDesktop ? 'translateX(-50%) scale(1)' : 'translateY(0) scale(1)';
+        const opacity = computed?.opacity || '0';
+        const transform = computed?.transform === 'none' ? openedTransform : computed?.transform;
+        previous?.animation?.cancel();
+        surface.hidden = false;
+        surface.inert = !open;
+        surface.setAttribute('aria-hidden', String(!open));
+        const state = { open, animation: null };
+        surfaceMotion.set(surface, state);
+        if (!animate || reducedNavigationMotion.matches) {
+            surface.hidden = !open;
+            return;
+        }
+        const trigger = document.querySelector('[aria-controls="' + surface.id + '"]');
+        if (trigger) {
+            const control = trigger.getBoundingClientRect();
+            const bounds = surface.getBoundingClientRect();
+            surface.style.setProperty('--menu-origin', (control.left + control.width / 2 - bounds.left) + 'px top');
+        }
+        state.animation = surface.animate([
+            { opacity: showing ? opacity : 0, transform: showing ? (transform || openedTransform) : closedTransform },
+            { opacity: open ? 1 : 0, transform: open ? openedTransform : closedTransform }
+        ], { duration: open ? 180 : 120, easing: 'cubic-bezier(.23, 1, .32, 1)', fill: 'both' });
+        state.animation.onfinish = () => {
+            if (surfaceMotion.get(surface) !== state) return;
+            surface.hidden = !open;
+            state.animation.cancel();
+            state.animation = null;
+        };
+    }
+
+    function openPanel(toggle, panel, moveFocus = false, animate = true) {
+        cancelMenuTimers();
+        closePanels(false, animate, panel);
+        revealSurface(panel, true, animate);
         toggle.setAttribute('aria-expanded', 'true');
         navigation.classList.add('nav--menu-open');
         if (moveFocus) panel.querySelector('a').focus({ preventScroll: true });
@@ -77,13 +119,14 @@ if (navigation) {
         closeTimer = setTimeout(() => {
             // Переход указателя из шапки в панель не прерывает работу клавиатурой.
             if (!panels.some(({ panel }) => !panel.hidden && panel.contains(document.activeElement))) closePanels();
-        }, 260);
+        }, 140);
     }
-    function closePanels(returnFocus = false) {
+    function closePanels(returnFocus = false, animate = true, except = null) {
         cancelMenuTimers();
         for (const { toggle, panel } of panels) {
-            if (!panel.hidden && returnFocus) toggle.focus({ preventScroll: true });
-            panel.hidden = true;
+            if (panel === except) continue;
+            if (toggle.getAttribute('aria-expanded') === 'true' && returnFocus) toggle.focus({ preventScroll: true });
+            revealSurface(panel, false, animate);
             toggle.setAttribute("aria-expanded", "false");
         }
         navigation.classList.remove("nav--menu-open");
@@ -136,14 +179,14 @@ if (navigation) {
         document.body.append(panel);
         panels.push({ toggle, panel });
         panel.classList.toggle("mega-menu--clinic", index === 2);
-        toggle.addEventListener("click", () => {
-            if (panel.hidden) openPanel(toggle, panel, true);
-            else closePanels();
+        toggle.addEventListener("click", event => {
+            if (toggle.getAttribute('aria-expanded') !== 'true') openPanel(toggle, panel, true, event.detail > 0);
+            else closePanels(false, event.detail > 0);
         });
         group.addEventListener('pointerenter', event => {
             if (!hoverPointer.matches || event.pointerType === 'touch') return;
             cancelMenuTimers();
-            openTimer = setTimeout(() => openPanel(toggle, panel), 160);
+            openTimer = setTimeout(() => openPanel(toggle, panel), 80);
         });
         group.addEventListener('pointerleave', event => {
             if (event.pointerType !== 'touch' && hoverPointer.matches) scheduleClose();
@@ -155,7 +198,7 @@ if (navigation) {
         toggle.addEventListener("keydown", event => {
             if (event.key === "ArrowDown") {
                 event.preventDefault();
-                if (panel.hidden) toggle.click();
+                if (toggle.getAttribute('aria-expanded') !== 'true') toggle.click();
                 else panel.querySelector("a").focus({ preventScroll: true });
             }
         });
@@ -175,16 +218,16 @@ if (navigation) {
         });
     }
 
-    function setMenu(open) {
+    function setMenu(open, animate = true) {
         button.setAttribute("aria-expanded", String(open));
         button.setAttribute("aria-label", open ? "Закрыть меню" : "Открыть меню");
-        menu.hidden = !open;
+        revealSurface(menu, open, animate);
         if (open) closePanels();
     }
-    setMenu(false);
+    setMenu(false, false);
     navigation.after(button, menu);
     navigation.classList.add("nav--enhanced");
-    button.addEventListener("click", () => setMenu(menu.hidden));
+    button.addEventListener("click", event => setMenu(button.getAttribute("aria-expanded") !== "true", event.detail > 0));
     menu.addEventListener("click", event => {
         if (event.target.closest("a")) setMenu(false);
     });
@@ -194,9 +237,9 @@ if (navigation) {
     });
     document.addEventListener("keydown", event => {
         if (event.key !== "Escape") return;
-        closePanels(true);
+        closePanels(true, false);
         if (!menu.hidden) {
-            setMenu(false);
+            setMenu(false, false);
             button.focus({ preventScroll: true });
         }
     });
@@ -205,8 +248,8 @@ if (navigation) {
         if (!navigation.contains(event.target) && !panels.some(({ panel }) => panel.contains(event.target))) closePanels();
     });
     window.matchMedia("(max-width: 650px)").addEventListener("change", () => {
-        closePanels();
-        setMenu(false);
+        closePanels(false, false);
+        setMenu(false, false);
     });
 
     const page = location.pathname.split("/").pop() || "index.html";

@@ -3,6 +3,7 @@ const audienceRows = [...document.querySelectorAll('#services .service-list > .s
 const featureSlides = [...document.querySelectorAll('.feature-slide')];
 const adultRows = audienceRows.map(row => ({ href: row.getAttribute('href'), title: row.querySelector('h3').textContent, description: row.querySelector('p').textContent }));
 const adultSlides = featureSlides.map(slide => ({ href: slide.getAttribute('href'), title: slide.querySelector('h3').textContent, description: slide.querySelector('.feature-description').textContent, image: slide.querySelector('img').getAttribute('src') }));
+const adultReviews = document.querySelector('.review-quotes').innerHTML;
 const adultPrices = document.querySelector('#prices tbody').innerHTML;
 const childRows = [
     { title: 'Первый детский приём', description: 'Уточнить врача, возраст приёма и подготовку', href: 'pages/children-dentistry.html' },
@@ -31,7 +32,7 @@ const variants = [
     ['#visit-intro > p', 'Возраст приёма, подходящий врач, документы и знакомство с клиникой. Не обязательно заранее выбирать лечение — начните с вопроса.'],
     ['#visit-intro .locbutton', 'Первый визит с ребёнком', 'pages/first-visit.html#children'],
     ['#booking h2', 'Обсудим детский приём'],
-    ['#booking .booking-form > p', 'Назовите администратору возраст ребёнка и повод обращения. Уточните, кто сможет его принять, как проходит первый визит и сколько стоит консультация.']
+    ['#booking [data-booking-description]', 'Назовите администратору возраст ребёнка и повод обращения. Уточните, кто сможет его принять, как проходит первый визит и сколько стоит консультация.']
 ].map(([selector, text, href]) => {
     const element = document.querySelector(selector);
     return { element, text, href, adultText: element.firstChild.textContent, adultHref: element.getAttribute('href') };
@@ -70,8 +71,8 @@ window.updateHomeAudience = audience => {
     document.querySelector('#prices tbody').innerHTML = child
         ? document.querySelector('#child-price-preview').content.querySelector('tbody').innerHTML
         : adultPrices;
-    [...document.querySelectorAll('.review-quotes figure')].forEach((quote, index) => {
-        quote.hidden = child && (index === 0 || index === 3);
-    });
+    document.querySelector('.review-quotes').innerHTML = child
+        ? document.querySelector('#child-review-quotes').innerHTML
+        : adultReviews;
     document.dispatchEvent(new Event('clinic-audience-change'));
 };

@@ -1,0 +1,9 @@
+{
+  "prompt": "Use case: premium family dental website service illustration. Generate ONE NEW square 1254x1254 image, not an edit or upscale. A friendly smooth ivory ceramic tooth mascot with two tiny dark eyes and a gentle small smile, standing beside ONE COMPLETE child toothbrush. The toothbrush must be physically complete: entire long rounded peach-colored handle, narrow connecting neck, full oval brush head, and complete regular rows of soft ivory bristles all clearly visible. Lay the whole toothbrush diagonally across the foreground with its rounded handle end toward bottom left and brush head toward upper right. Keep BOTH ends and all bristles inside frame with at least 12 percent clear margins; never crop any part of the toothbrush. Tooth mascot fits beside it and has rounded friendly feet, no anatomical roots or holes. Pleasant polished care, premium restrained product photography, warm ivory and pale peach palette, smooth pale cream tray on warm light beige studio surface, softly defocused cream background, soft window lighting, delicate shadows and crisp clean materials. Composition feels welcoming and calm, not surgical, no clinical mouth or body parts. No people, hands, text, logos, watermark, collage, panel borders, extra brushes, truncated brush, severed teeth or exposed anatomy. High native detail, no excessive blur on either object.",
+  "tool": "built-in image_gen.imagegen",
+  "source": "/Users/skripnikovandrei/.codex/generated_images/01a22193-cb98-7242-b281-0a41f2b835bf/exec-b70b3c39-5e72-4736-9e4f-adedfb0a4a78.png",
+  "processing": "cwebp -q 88; native resolution, no resizing",
+  "width": 1254,
+  "height": 1254,
+  "asset": "direction-children-v3.webp"
+}

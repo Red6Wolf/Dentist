@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="../styles/refinement.css?v=compact-location" />
     <link rel="stylesheet" href="../styles/care.css?v=first-visit-link" />
     <link rel="stylesheet" href="../styles/patient-experience.css" />
+    <link rel="stylesheet" href="../styles/experience-polish.css" />
   </head>
 
   <body>
@@ -90,23 +91,18 @@
             ></iframe>
           </div>
         </section>
-        <section class="panel subpage-section" id="booking">
-          <h2>Запись на приём</h2><p><a class="content-link" href="first-visit.html">Подготовиться к посещению</a></p>
-          <p class="subpage-lead">
-            Позвоните администратору, чтобы подобрать специалиста и время приёма.
-          </p>
-          <p class="selected-doctor" id="selected-doctor" hidden></p>
-          <div class="page-cta">
-            <a class="locbutton" href="tel:+74991853333"
-              >Позвонить администратору <b class="icon-arrow" aria-hidden="true"></b></a
-            >
-          </div>
-          <p class="subpage-lead">
-            Можно также
-            <a class="content-link" id="booking-email" href="mailto:info@stomatologiya-apelsin.ru?subject=Запись%20на%20приём">написать на электронную почту</a>
-            или открыть <a class="content-link" href="https://vk.com/apelstom">группу клиники ВКонтакте</a>.
-          </p>
-        </section>
+        <section class="panel contact-callout" id="booking" aria-labelledby="booking-title">
+  <div>
+    <h2 id="booking-title">Давайте обсудим ваш вопрос</h2>
+    <p data-booking-description>Позвоните администратору: уточните специалиста, стоимость консультации и удобное время. Не обязательно заранее выбирать процедуру.</p>
+    <p class="selected-doctor" id="selected-doctor" hidden></p>
+  </div>
+  <div class="contact-callout__actions">
+    <a class="locbutton" href="tel:+74991853333">Позвонить для консультации</a>
+    <a class="content-link" id="booking-email" href="mailto:info@stomatologiya-apelsin.ru?subject=Запись%20на%20приём">Написать на электронную почту</a>
+    <a class="content-link" href="first-visit.html">Что уточнить перед визитом</a>
+  </div>
+</section>
       </main>
       <footer class="panel footer">
         <div class="foot-cols">
@@ -176,5 +172,6 @@
     </div>
     <script src="../scripts/navigation.js?v=patient-care" defer></script>
     <script src="../scripts/contact.js" defer></script>
+    <script src="../scripts/interactions.js" defer></script>
   </body>
 </html>

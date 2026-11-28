@@ -1,0 +1,11 @@
+{
+  "prompt": "EDIT / REFRAME the supplied existing fictional editorial photo into a wide landscape dental website hero, at least 1536 pixels wide, approximately 16:9. Preserve exactly the adult woman's existing identity, age, face, wavy brown hair, cream knit sweater, grey trousers and candid relaxed expression; preserve natural skin and fabric texture and the warm cream/orange clinic mood. Crucial composition: move/reframe the SAME seated woman and her dental chair together into the LEFT 40 percent of the final image. Her complete head with hair must fall around x=22 percent, and her whole visible upper torso and both relaxed hands must stay LEFT of x=43 percent, safely away from center. Keep at least 7 percent breathing room to top/left edges, no cropped head, no face crossing center. The RIGHT 55 percent must be the extended warm neutral cream clinic room backdrop with soft window daylight, suitable to sit BEHIND an opaque cream text panel covering the entire right half. Do not put another important person or object in that right-half text area; the clinician may be only a small softly out-of-focus shoulder at the extreme far right edge, no prominent hands crossing over the woman. Continue a real coherent full-width clinic environment behind and below the text-panel zone, no circular cutout, no flat isolated portrait, no graphic layout or text panel drawn into the image. Refine framing with professional natural photography; realistic body proportions and no duplicated subjects, believable everyday clinic setting, no dental treatment, no instruments in mouth, no clinical-result claims. No text, logo, watermark, badges or lettering. The edit is a fictional story illustration, not an actual clinic patient.",
+  "tool": "built-in image_gen.imagegen",
+  "intent": "edit/reframe existing generated story illustration",
+  "reference": "assets/clinic/hero-adult-v2.webp",
+  "source": "/Users/skripnikovandrei/.codex/generated_images/01a22193-cb98-7242-b281-0a41f2b835bf/exec-c7cfc79f-ac93-4e24-9400-3156f5d6c6bd.png",
+  "processing": "cwebp -q 88; native output resolution, no resizing",
+  "width": 1672,
+  "height": 941,
+  "asset": "hero-adult-v3.webp"
+}

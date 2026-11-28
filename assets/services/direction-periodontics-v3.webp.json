@@ -1,0 +1,9 @@
+{
+  "tool": "native image_gen",
+  "prompt": "Use case: product-mockup. One standalone square high-resolution 1254x1254 premium gentle dental homecare still life, warm reassuring clean editorial product photography. Subject: a small white dental floss box with one tidy short loop of white floss, one complete soft toothbrush with a rounded cream handle and clean ivory bristles, and one complete small interdental brush with a cream handle. Arrange these neatly on a pale warm cream ceramic tray. Every tool fully inside the image with its full handle and head visible, no cropped objects. Scene: softly lit cream stone tabletop, soft apricot beige background, delicate natural window daylight and restrained shadows. Calm premium care, smooth tactile ceramic, realistic clean texture, objects roughly 65 percent of composition, uncluttered clear silhouettes. No people, no hands, no mouths, no teeth or roots or anatomical gum models, no blood, no exposed gums, no clinical close-up, no scary sharp instruments, no decay, no text or numbers or labels or logos, no watermark, no collage. Conceptual oral-care illustration, not a clinical outcome.",
+  "source": "/Users/skripnikovandrei/.codex/generated_images/01a221ac-f4a3-7672-baf3-57e834e4e07a/exec-ec9d1854-cd06-4a4b-a488-52dad4e8162a.png",
+  "output": "direction-periodontics-v3.webp",
+  "width": 1254,
+  "height": 1254,
+  "encoding": "cwebp q88"
+}

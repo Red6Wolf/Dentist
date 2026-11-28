@@ -1,0 +1,9 @@
+{
+  "tool": "native image_gen",
+  "prompt": "Use case: product-mockup. Create one standalone square high-resolution 1254x1254 premium dental aesthetics service still life, calm reassuring and attractive. Subject: an elegant dental shade guide displayed in its open rounded warm ivory cream case. Smooth polished ivory ceramic shade sample tabs form a tidy small fan/rack; the tabs are attached to complete slim handles resting in the case, recognizable as a professional color matching tool rather than loose teeth. Natural gentle ivory shades, clean smooth surfaces, beautiful controlled material highlights. One complete rounded stainless steel mouth mirror lies nearby. Scene: pale cream ceramic tabletop with subtly warm apricot background, soft window daylight, calm editorial product photography, premium care brand mood. Balanced spacious composition, objects fully inside frame, approximately 65 percent of image, rich clear real texture but no harsh yellowing. No people, no hands, no exposed mouths or gums, no severed teeth or roots, no anatomy sections, no jagged veneer fragments, no visible decay, no blood, no text or labels, no logo, no watermark. Not a collage. Conceptual subject illustration, not a clinical outcome.",
+  "source": "/Users/skripnikovandrei/.codex/generated_images/01a221ac-f4a3-7672-baf3-57e834e4e07a/exec-441e3915-d2e7-4085-a0cc-f5e46ff2ccaa.png",
+  "output": "direction-aesthetics-v3.webp",
+  "width": 1254,
+  "height": 1254,
+  "encoding": "cwebp q88"
+}

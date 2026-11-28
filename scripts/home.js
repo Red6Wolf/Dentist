@@ -118,21 +118,57 @@ if (familyHero) {
     const serviceLink = familyHero.querySelector("[data-audience-services]");
     const scenes = {
         adult: {
-            title: "Семейная стоматология.", emphasis: "Рядом с вами.",
-            description: "Лечение, профилактика и восстановление зубов на Тайнинской. Начните с консультации: обсудите свою задачу, варианты и стоимость.",
-            image: "assets/clinic/hero-adult-v2.webp", width: 1536, height: 1024,
+            title: "Стоматология", audienceLine: "для взрослых.", emphasis: "Рядом с вами.",
+            description: "Лечение, гигиена и восстановление зубов. План и стоимость обсудите с врачом.",
+            image: "assets/clinic/hero-adult-v3.webp", width: 1672, height: 941,
             alt: "Сюжетная иллюстрация: пациентка беседует со стоматологом",
-            link: "pages/services.html", linkText: "Выбрать услугу"
+            link: "pages/services.html?audience=adult", linkText: "Услуги для взрослых"
         },
         child: {
-            title: "Детская стоматология.", emphasis: "Начнём со знакомства.",
-            description: "Приём, профилактика и лечение молочных зубов. Расскажите администратору возраст ребёнка и повод обращения — уточните специалиста и порядок первого визита.",
-            image: "assets/clinic/hero-child-v2.webp", width: 1600, height: 1067,
+            title: "Стоматология", audienceLine: "для детей.", emphasis: "Рядом с вами.",
+            description: "Осмотр, профилактика и лечение молочных зубов. Возраст приёма уточните при записи.",
+            image: "assets/clinic/hero-child-v3.webp", width: 1672, height: 941,
             alt: "Сюжетная иллюстрация: ребёнок с мамой знакомится со стоматологом",
-            link: "pages/children-dentistry.html", linkText: "Услуги для детей"
+            link: "pages/services.html?audience=child", linkText: "Услуги для детей"
         }
     };
-    function showAudience(audience, updateAddress = false) {
+    let descriptionMeasure = '';
+    function alignAudienceDescriptions() {
+        const width = description.getBoundingClientRect().width;
+        const key = width + '|' + getComputedStyle(description).font;
+        if (!width || key === descriptionMeasure) return;
+        descriptionMeasure = key;
+        const probe = description.cloneNode(false);
+        probe.removeAttribute('data-audience-description');
+        Object.assign(probe.style, {
+            position: 'absolute',
+            visibility: 'hidden',
+            width: width + 'px',
+            minHeight: '0',
+            height: 'auto',
+            pointerEvents: 'none'
+        });
+        description.after(probe);
+        let height = 0;
+        for (const scene of Object.values(scenes)) {
+            probe.textContent = scene.description;
+            height = Math.max(height, probe.getBoundingClientRect().height);
+        }
+        probe.remove();
+        description.style.minHeight = Math.ceil(height) + 'px';
+    }
+    document.fonts.ready.then(() => {
+        descriptionMeasure = '';
+        alignAudienceDescriptions();
+    });
+    if ('ResizeObserver' in window) new ResizeObserver(alignAudienceDescriptions).observe(familyHero);
+    let audienceAnimation = [];
+    function showAudience(audience, updateAddress = false, animate = false) {
+        const enteringOpacity = audienceAnimation.some(animation => animation.playState === 'running')
+            ? getComputedStyle(title).opacity
+            : .4;
+        for (const animation of audienceAnimation) animation.cancel();
+        audienceAnimation = [];
         const key = audience === "child" ? "child" : "adult";
         const scene = scenes[key];
         familyHero.dataset.audience = key;
@@ -140,14 +176,23 @@ if (familyHero) {
         buttons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.audience === key)));
         const emphasis = document.createElement("span");
         emphasis.textContent = scene.emphasis;
-        title.replaceChildren(document.createTextNode(scene.title + " "), emphasis);
+        title.replaceChildren(document.createTextNode(scene.title), document.createElement("br"), document.createTextNode(scene.audienceLine), document.createElement("br"), emphasis);
         description.textContent = scene.description;
+        alignAudienceDescriptions();
         image.src = scene.image;
         image.width = scene.width;
         image.height = scene.height;
         image.alt = scene.alt;
         serviceLink.href = scene.link;
         serviceLink.firstChild.textContent = scene.linkText + " ";
+        if (animate && !reducedMotion.matches) {
+            for (const element of [title, description, image]) {
+                audienceAnimation.push(element.animate(
+                    [{ opacity: enteringOpacity }, { opacity: 1 }],
+                    { duration: 220, easing: "cubic-bezier(.23, 1, .32, 1)" }
+                ));
+            }
+        }
         if (updateAddress) {
             const url = new URL(location.href);
             url.searchParams.set("audience", key);
@@ -156,9 +201,13 @@ if (familyHero) {
             window.dataLayer.push({ event: "clinic_audience_select", audience: key });
         }
     }
+    for (const scene of Object.values(scenes)) {
+        const preload = new Image();
+        preload.src = scene.image;
+    }
     audienceSwitch.hidden = false;
-    buttons.forEach(button => button.addEventListener("click", () => {
-        if (button.getAttribute("aria-pressed") !== "true") showAudience(button.dataset.audience, true);
+    buttons.forEach(button => button.addEventListener("click", event => {
+        if (button.getAttribute("aria-pressed") !== "true") showAudience(button.dataset.audience, true, event.detail > 0);
     }));
     const readAddress = () => showAudience(new URLSearchParams(location.search).get("audience"));
     window.addEventListener("popstate", readAddress);

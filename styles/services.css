@@ -221,10 +221,6 @@
     transform: rotate(225deg);
 }
 
-.services-card:has(.services-card__details[open]) .services-card__preview {
-    display: none;
-}
-
 .services-card .directory-list {
     margin: 16px 0 0;
 }

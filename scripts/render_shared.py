@@ -52,6 +52,21 @@ def first_visit(identifier="first-visit"):
 </section>'''
 
 
+def contact_callout(prefix="", home=False):
+    return f'''<section class="panel contact-callout" id="booking" aria-labelledby="booking-title">
+  <div>
+    <h2 id="booking-title">Давайте обсудим ваш вопрос</h2>
+    <p data-booking-description>Позвоните администратору: уточните специалиста, стоимость консультации и удобное время. Не обязательно заранее выбирать процедуру.</p>
+    <p class="selected-doctor" id="selected-doctor" hidden></p>
+  </div>
+  <div class="contact-callout__actions">
+    <a class="locbutton" href="tel:+74991853333">Позвонить для консультации</a>
+    <a class="content-link" id="booking-email" href="mailto:info@stomatologiya-apelsin.ru?subject=Запись%20на%20приём">Написать на электронную почту</a>
+    <a class="content-link" href="{prefix}first-visit.html">Что уточнить перед визитом</a>
+  </div>
+</section>'''
+
+
 def callback_form():
     return '''<section class="panel callback-section" id="request" aria-labelledby="request-title">
   <div>
@@ -110,6 +125,11 @@ def render(check=False):
         if 'styles/patient-experience.css' not in result:
             css_prefix = "" if path.name == "index.html" else "../"
             result = result.replace('  </head>', f'    <link rel="stylesheet" href="{css_prefix}styles/patient-experience.css" />\n  </head>')
+        css_prefix = "" if path.name == "index.html" else "../"
+        if 'styles/experience-polish.css' not in result:
+            result = result.replace('  </head>', f'    <link rel="stylesheet" href="{css_prefix}styles/experience-polish.css" />\n  </head>')
+        if 'scripts/interactions.js' not in result:
+            result = result.replace('  </body>', f'    <script src="{css_prefix}scripts/interactions.js" defer></script>\n  </body>')
         if path.name != "index.html" and 'class="breadcrumbs"' not in result:
             title = re.search(r'<h1\b[^>]*>(.*?)</h1>', result, re.S)
             if title:

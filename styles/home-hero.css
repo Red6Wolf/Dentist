@@ -1,0 +1,364 @@
+/* Размеры первого экрана сверены с актуальным макетом ScandiK на 1440 / 1024 / 390 px. */
+@font-face {
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../assets/fonts/comfortaa-500-cyrillic.woff2') format('woff2');
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../assets/fonts/comfortaa-500-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+.hero.hero--family {
+    padding: 103px 0 0;
+    font-family: 'Manrope', var(--sans);
+}
+.hero--family .family-hero-grid {
+    position: relative;
+    display: block;
+    isolation: isolate;
+    width: 94vw;
+    height: clamp(600px, 45vw, 680px);
+    min-height: 620px;
+    margin: 0 auto;
+    border-radius: 30px;
+    overflow: hidden;
+    background: var(--cream);
+}
+.hero--family .family-hero-image {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+}
+.hero--family .family-hero-image img {
+    position: static;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left top;
+    border-radius: 0;
+}
+.hero--family[data-audience="child"] .family-hero-image img {
+    object-position: left center;
+}
+.hero--family .hero-family-copy {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    display: block;
+    width: 48%;
+    max-width: 700px;
+    margin: 0;
+    padding: 0 0 32px clamp(28px, 3.2vw, 48px);
+    border-radius: 0 0 0 32px;
+    background: var(--cream);
+    box-sizing: border-box;
+}
+.hero--family .hero-family-copy::before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle at 0 100%, transparent 30px, var(--cream) 30.5px);
+    pointer-events: none;
+}
+.hero--family .audience-switch {
+    display: inline-flex;
+    gap: 4px;
+    padding: 4px;
+    margin: 0 0 26px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface-raised);
+}
+.hero--family .audience-switch button {
+    min-height: 42px;
+    padding: 10px 22px;
+    font: 500 14px/1.5 'Manrope', var(--sans);
+    color: var(--muted);
+}
+.hero--family .audience-switch [aria-pressed="true"] {
+    color: var(--cream);
+    background: var(--orange-action);
+}
+.hero--family[data-audience="child"] .audience-switch [aria-pressed="true"] {
+    color: var(--ink);
+    background: #ffe3bd;
+}
+.hero--family .hero-family-copy .hero-note {
+    max-width: none;
+    margin: 0;
+    color: var(--orange-action);
+    font-size: 11px;
+    line-height: 1.6;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+.hero--family .hero-family-copy h1 {
+    min-height: 0;
+    max-width: none;
+    margin: 16px 0 20px;
+    color: var(--ink);
+    font: 500 clamp(40px, 4.1vw, 59px)/1.08 'Comfortaa', 'Manrope', var(--sans);
+    letter-spacing: -.025em;
+    overflow-wrap: normal;
+    text-wrap: initial;
+}
+.hero--family h1 span {
+    display: inline;
+    color: var(--orange-action);
+}
+.hero--family .hero-family-copy .hero-description {
+    max-width: 440px;
+    min-height: 3.6em;
+    margin: 0;
+    color: var(--muted);
+    font: 400 16px/1.8 'Manrope', var(--sans);
+}
+.hero--family .hero-consultation {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 36px;
+    width: 235px;
+    min-height: 54.5px;
+    padding: 16px 23px;
+    margin-top: 24px;
+    box-sizing: border-box;
+    color: white;
+    background: var(--orange-action);
+    border-radius: 14px;
+    font: 600 15px/1.5 'Manrope', var(--sans);
+    text-decoration: none;
+    transition: background-color 160ms ease, transform 160ms var(--ease-out);
+}
+.hero-consultation .icon-arrow,
+.hero-catalogue-link .icon-arrow {
+    flex: 0 0 auto;
+    transform: rotate(45deg);
+}
+.hero--family .hero-family-info {
+    display: grid;
+    grid-template-columns: 1.25fr .7fr 1fr auto;
+    gap: 24px;
+    align-items: center;
+    width: 94vw;
+    margin: 0 auto;
+    padding: 24px 0 28px;
+    border-bottom: 1px solid var(--line);
+}
+.hero-family-info > div,
+.hero-family-info > a:not(.hero-catalogue-link) {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+.hero-family-info span {
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--muted);
+}
+.hero-family-info strong {
+    font-size: 14px;
+    line-height: 1.6;
+    font-weight: 500;
+}
+.hero-hours-break {
+    display: none;
+}
+.hero-family-info strong .hero-hours-separator {
+    color: inherit;
+    font: inherit;
+}
+.hero-catalogue-link {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    min-height: 44px;
+    color: var(--orange-action);
+    font-size: 13px;
+}
+@media (hover: hover) and (pointer: fine) {
+    .hero--family .hero-consultation:hover {
+        background: var(--orange-action-hover);
+        transform: scale(1.02);
+    }
+    .hero-family-info a:hover strong,
+    .hero-catalogue-link:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+}
+.hero--family .hero-consultation:active {
+    transform: scale(.98);
+}
+@media (min-width: 1600px) {
+    .hero--family .hero-family-copy {
+        width: 46%;
+    }
+}
+@media (max-width: 1180px) and (min-width: 761px) {
+    .hero.hero--family {
+        padding-top: 142px;
+    }
+}
+@media (max-width: 1100px) and (min-width: 761px) {
+    .hero--family .family-hero-grid {
+        min-height: 560px;
+        height: 590px;
+    }
+    .hero--family .hero-family-copy {
+        width: 50%;
+        padding-left: 24px;
+    }
+    .hero--family .hero-family-copy h1 {
+        font-size: clamp(34px, 4.1vw, 45px);
+    }
+    .hero--family .hero-family-copy .hero-description {
+        font-size: 15px;
+    }
+    .hero--family .audience-switch {
+        margin-bottom: 20px;
+    }
+    .hero--family .audience-switch button {
+        padding-inline: 18px;
+    }
+    .hero--family .hero-family-info {
+        grid-template-columns: 1.2fr .7fr 1fr;
+        gap: 16px;
+    }
+    .hero-catalogue-link {
+        grid-column: 1 / -1;
+    }
+}
+@media (max-width: 760px) {
+    .hero.hero--family {
+        padding-top: 79px;
+    }
+    .hero--family .family-hero-grid {
+        display: flex;
+        flex-direction: column;
+        width: calc(100vw - 40px);
+        height: auto;
+        min-height: 0;
+        border-radius: 0;
+        overflow: visible;
+    }
+    .hero--family .family-hero-image {
+        position: static;
+        order: 1;
+        height: auto;
+        margin-top: 26px;
+        border-radius: 22px;
+        overflow: hidden;
+    }
+    .hero--family .family-hero-image img,
+    .hero--family[data-audience="child"] .family-hero-image img {
+        position: static;
+        height: auto;
+        aspect-ratio: 1.5;
+        object-fit: cover;
+        object-position: left center;
+    }
+    .hero--family .hero-family-copy {
+        position: static;
+        order: 0;
+        display: block;
+        width: 100%;
+        max-width: none;
+        padding: 0;
+        background: transparent;
+        border-radius: 0;
+    }
+    .hero--family .hero-family-copy::before {
+        display: none;
+    }
+    .hero--family .audience-switch {
+        margin-bottom: 24px;
+    }
+    .hero--family .audience-switch button {
+        padding-inline: 24px;
+    }
+    .hero--family .hero-family-copy h1 {
+        min-height: 3.45em;
+        font-size: clamp(34px, 7.3vw, 54px);
+        line-height: 1.15;
+        margin-top: 14px;
+    }
+    .hero--family .hero-family-copy .hero-description {
+        max-width: 540px;
+        min-height: 3.6em;
+        font-size: 16px;
+    }
+    .hero--family .hero-consultation {
+        margin-top: 22px;
+    }
+    .hero--family .hero-family-info {
+        width: calc(100vw - 40px);
+        grid-template-columns: 1.2fr 1fr;
+        gap: 20px 14px;
+        padding: 22px 0;
+    }
+    .hero-family-info > div {
+        justify-self: end;
+    }
+    .hero-catalogue-link {
+        grid-column: auto;
+        justify-content: end;
+        font-size: 12px;
+        gap: 8px;
+    }
+    .hero-family-info strong {
+        font-size: 13px;
+    }
+    .hero-family-info .hero-hours-break {
+        display: initial;
+    }
+    .hero-family-info .hero-hours-separator {
+        display: none;
+    }
+    .hero-family-info > div strong {
+        max-width: 140px;
+    }
+}
+@media (max-width: 400px) {
+    .hero--family .hero-family-copy h1 {
+        font-size: 34px;
+    }
+    .hero--family .hero-family-copy .hero-description {
+        font-size: 15px;
+    }
+    .hero--family .hero-consultation {
+        width: 100%;
+        gap: 16px;
+    }
+    .hero-catalogue-link {
+        font-size: 11px;
+        gap: 5px;
+    }
+    .hero-family-info strong {
+        font-size: 12px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero--family .hero-consultation,
+    .hero--family .audience-switch button {
+        transition: none;
+    }
+}

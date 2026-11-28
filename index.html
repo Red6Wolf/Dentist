@@ -15,7 +15,7 @@
       rel="stylesheet"
     />
     <link rel="canonical" href="https://stomatologiya-apelsin.ru/" />
-    <link rel="preload" as="image" href="assets/clinic/hero-adult-v2.webp" />
+    <link rel="preload" as="image" href="assets/clinic/hero-adult-v3.webp" />
     <link rel="stylesheet" href="styles/styles.css?v=patient-flow" />
     <link rel="stylesheet" href="styles/pages.css?v=separate-prices" />
     <link rel="stylesheet" href="styles/home.css?v=clinic-hours" />
@@ -52,6 +52,9 @@
     </script>
     <link rel="stylesheet" href="styles/care.css?v=first-visit-link" />
     <link rel="stylesheet" href="styles/patient-experience.css" />
+    <link rel="stylesheet" href="styles/experience-polish.css" />
+    <link rel="stylesheet" href="styles/home-hero.css" />
+    <link rel="preload" href="assets/fonts/comfortaa-500-cyrillic.woff2" as="font" type="font/woff2" crossorigin />
   </head>
   <body>
     <div class="page">
@@ -82,23 +85,27 @@
           </div>
         </nav>
         <div class="family-hero-grid">
+          <figure class="family-hero-image">
+            <img data-audience-image src="assets/clinic/hero-adult-v3.webp" width="1672" height="941" alt="Сюжетная иллюстрация: пациентка беседует со стоматологом" fetchpriority="high" decoding="async" />
+          </figure>
           <div class="hero-copy hero-family-copy">
             <div class="audience-switch" role="group" aria-label="Для кого вы ищете стоматологию" hidden>
-              <button type="button" data-audience="adult" aria-pressed="true">Взрослым</button>
               <button type="button" data-audience="child" aria-pressed="false">Детям</button>
+              <button type="button" data-audience="adult" aria-pressed="true">Взрослым</button>
             </div>
-            <h1 data-audience-title>Семейная стоматология. <span>Рядом с вами.</span></h1>
-            <p data-audience-description>Лечение, профилактика и восстановление зубов на Тайнинской. Начните с консультации: обсудите свою задачу, варианты и стоимость.</p>
-            <div class="hero-actions">
-              <a class="pillbtn" href="tel:+74991853333">Позвонить для консультации</a>
-              <a class="hero-price-link" data-audience-services href="pages/services.html">Выбрать услугу <b class="icon-arrow" aria-hidden="true"></b></a>
+            <div class="hero-message">
+              <p class="hero-note">Апельсин · семейная стоматология</p>
+              <h1 data-audience-title>Стоматология<br>для взрослых.<br><span>Рядом с вами.</span></h1>
+              <p class="hero-description" data-audience-description>Лечение, гигиена и восстановление зубов. План и стоимость обсудите с врачом.</p>
             </div>
-            <a class="hero-family-visit content-link" href="pages/first-visit.html">Как проходит первый приём</a>
-            <a class="hero-location-link" href="pages/contact.html">Тайнинская, 17к1 · Как добраться <b class="icon-arrow" aria-hidden="true"></b></a>
+            <a class="hero-consultation" href="tel:+74991853333" aria-label="Позвонить для консультации в Апельсин">Позвонить <b class="icon-arrow" aria-hidden="true"></b></a>
           </div>
-          <figure class="family-hero-image">
-            <img data-audience-image src="assets/clinic/hero-adult-v2.webp" width="1536" height="1024" alt="Сюжетная иллюстрация: пациентка беседует со стоматологом" fetchpriority="high" decoding="async" />
-          </figure>
+        </div>
+        <div class="hero-family-info" aria-label="Адрес, часы и контакты клиники">
+          <a href="pages/contact.html"><span>Москва</span><strong>Тайнинская, 17к1</strong></a>
+          <div><span>Часы работы</span><strong>Пн–Пт 09–21<span class="hero-hours-separator"> · </span><br class="hero-hours-break">Сб–Вс 10–19</strong></div>
+          <a href="tel:+74991853333"><span>Позвонить в клинику</span><strong>+7 (499) 185-33-33</strong></a>
+          <a class="hero-catalogue-link" data-audience-services href="pages/services.html?audience=adult">Услуги для взрослых <b class="icon-arrow" aria-hidden="true"></b></a>
         </div>
       </header>
       <main id="main-content" tabindex="-1">
@@ -480,33 +487,42 @@
             </figure>
           </div>
         </section>
+<template id="child-review-quotes">
+  <figure>
+    <blockquote>«Отличная стоматология. По рекомендации привела сюда детей»</blockquote>
+    <figcaption>Анна · <time datetime="2025-09-21">21 сентября 2025</time><a class="content-link" href="https://yandex.ru/maps/org/apelsin/1796694882/reviews/" target="_blank" rel="noreferrer">Яндекс · фрагмент отзыва</a></figcaption>
+  </figure>
+  <figure>
+    <blockquote>«Обе дочки доверились только Светлане Викторовне»</blockquote>
+    <figcaption>Ирина А. · <time datetime="2025-12-16">16 декабря 2025</time><a class="content-link" href="https://yandex.ru/medicine/doctor/shishkina_svetlana_4JwiFcMsE2MWV" target="_blank" rel="noreferrer">Яндекс · фрагмент отзыва</a></figcaption>
+  </figure>
+  <figure>
+    <blockquote>«Ребенок зубы лечить бежит и не боится стоматологов»</blockquote>
+    <figcaption>Ирина Яшина · <time datetime="2025-11-01">1 ноября 2025</time><a class="content-link" href="https://yandex.ru/medicine/doctor/shishkina_svetlana_4JwiFcMsE2MWV" target="_blank" rel="noreferrer">Яндекс · фрагмент отзыва</a></figcaption>
+  </figure>
+  <figure>
+    <blockquote>«Доктор всегда находит слова и подход к ребенку»</blockquote>
+    <figcaption>Анастасия Фомина · <time datetime="2021-08-11">11 августа 2021</time><a class="content-link" href="https://yandex.ru/medicine/doctor/semagina_irina_1wydTfbn75kOc" target="_blank" rel="noreferrer">Яндекс · фрагмент отзыва</a></figcaption>
+  </figure>
+</template>
         <!-- Связь с администратором -->
         <section class="panel section care-section" id="visit-intro">
           <h2>Первый визит начинается с ваших вопросов</h2>
           <p>Что будет на приёме, когда обсуждать стоимость и как рассказать врачу о тревоге — подготовьтесь заранее.</p>
           <div class="care-actions"><a class="locbutton" href="pages/first-visit.html">Подготовиться к первому визиту</a><a class="content-link" href="pages/prices.html#examples">Примеры стоимости</a></div>
         </section>
-        <section class="panel booking" id="booking">
-          <div class="booking-photo">
-            <div>
-              <h2>Запись на приём</h2>
-            </div>
-          </div>
-          <div class="booking-form">
-            <p>
-              Позвоните администратору и расскажите, что вас беспокоит.
-              Подскажем, к какому специалисту обратиться, и согласуем время приёма.
-            </p>
-            <div class="call-box">
-              <p>Запись по телефону</p>
-              <a class="pillbtn" href="tel:+74991853333">
-                <span>+7 (499) 185-33-33</span>
-                <b class="icon-arrow" aria-hidden="true"></b>
-              </a>
-            </div>
-            <a class="booking-email content-link" href="mailto:info@stomatologiya-apelsin.ru?subject=Запись%20на%20приём">Написать на электронную почту</a>
-          </div>
-        </section>
+        <section class="panel contact-callout" id="booking" aria-labelledby="booking-title">
+  <div>
+    <h2 id="booking-title">Давайте обсудим ваш вопрос</h2>
+    <p data-booking-description>Позвоните администратору: уточните специалиста, стоимость консультации и удобное время. Не обязательно заранее выбирать процедуру.</p>
+    <p class="selected-doctor" id="selected-doctor" hidden></p>
+  </div>
+  <div class="contact-callout__actions">
+    <a class="locbutton" href="tel:+74991853333">Позвонить для консультации</a>
+    <a class="content-link" id="booking-email" href="mailto:info@stomatologiya-apelsin.ru?subject=Запись%20на%20приём">Написать на электронную почту</a>
+    <a class="content-link" href="pages/first-visit.html">Что уточнить перед визитом</a>
+  </div>
+</section>
         <!-- Контакты и маршрут -->
         <section class="panel contacts" id="contacts">
           <div class="contact-info">
@@ -621,5 +637,6 @@
     <script src="scripts/navigation.js?v=patient-care" defer></script>
     <script src="scripts/home-audience.js" defer></script>
     <script src="scripts/home.js?v=hover-pause" defer></script>
+    <script src="scripts/interactions.js" defer></script>
   </body>
 </html>

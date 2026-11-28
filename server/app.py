@@ -122,7 +122,7 @@ class SiteHandler(SimpleHTTPRequestHandler):
             return parts[1].endswith(".css") or parts[1].endswith(".js")
 
         if parts[0] == "assets" and len(parts) >= 3:
-            return Path(parts[-1]).suffix.lower() in {".svg", ".webp", ".jpg", ".jpeg"}
+            return Path(parts[-1]).suffix.lower() in {".svg", ".webp", ".jpg", ".jpeg", ".woff2"}
 
         return False
 

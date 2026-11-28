@@ -173,7 +173,8 @@ def render(check=False):
         head = head.replace('/pages/services.html"', f'/pages/{slug}.html"')
         head = re.sub(r'    <link rel="stylesheet" href="../styles/services.css[^\n]+\n', '', head)
         head = re.sub(r'    <link rel="stylesheet" href="../styles/patient-experience.css" />\n', '', head)
-        head = head.replace('  </head>', '    <link rel="stylesheet" href="../styles/service-detail.css" />\n    <link rel="stylesheet" href="../styles/patient-experience.css" />\n  </head>')
+        head = re.sub(r'    <link rel="stylesheet" href="../styles/experience-polish.css" />\n', '', head)
+        head = head.replace('  </head>', '    <link rel="stylesheet" href="../styles/service-detail.css" />\n    <link rel="stylesheet" href="../styles/patient-experience.css" />\n    <link rel="stylesheet" href="../styles/experience-polish.css" />\n  </head>')
         markup = head + f'''<body>
     <div class="page">
       <a class="skip-link" href="#main-content">Перейти к содержимому</a>
@@ -187,6 +188,7 @@ def render(check=False):
     <script src="../scripts/consultation.js" defer></script>
     <script src="../scripts/callback.js" defer></script>
     <script src="../scripts/navigation.js?v=patient-care" defer></script>
+    <script src="../scripts/interactions.js" defer></script>
   </body>
 </html>
 '''

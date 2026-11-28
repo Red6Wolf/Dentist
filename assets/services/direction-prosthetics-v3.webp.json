@@ -1,0 +1,9 @@
+{
+  "prompt": "Use case: premium warm family dental website illustration, prosthetic ceramic crowns. Generate ONE NEW individual square 1254x1254 image, not an edit or upscale. Three pristine polished ivory ceramic replacement crowns arranged upright as finished crafted objects on a soft cream ceramic presentation tray: one rounded molar crown and two slightly smaller crowns. Show only smooth finished exterior surfaces and gently simplified elegant top cusps. Every crown rests upright with lower opening completely hidden against the tray. No visible holes, no hollow interiors, no rough cuts, no exposed roots, no natural extracted teeth. Make the objects feel like elegant clean ceramic healthcare products, calm and reassuring, not anatomical specimens. Warm ivory and soft muted peach studio palette, pale cream tabletop, softly defocused beige background, soft window light from left, delicate natural contact shadows, refined clean gloss. Balanced centered composition with generous margins, crowns and entire tray inside frame, sharp high native detail across main objects. No gums, flesh, mouths, bone, blood, surgical tools, severed body parts, threads or screws, flowers, towels, plants, extra decorative objects, text, labels, logos, watermark, collage or borders.",
+  "tool": "built-in image_gen.imagegen",
+  "source": "/Users/skripnikovandrei/.codex/generated_images/01a22193-cb98-7242-b281-0a41f2b835bf/exec-d76b396b-619e-45fe-bc05-cf19487289f5.png",
+  "processing": "cwebp -q 88; native resolution, no resizing",
+  "width": 1254,
+  "height": 1254,
+  "asset": "direction-prosthetics-v3.webp"
+}

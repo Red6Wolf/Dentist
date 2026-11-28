@@ -82,7 +82,21 @@ if (servicesCatalogue) {
         aesthetics: ["service-983", "service-990", "service-3041"],
         diagnostics: ["service-3850", "service-3946", "service-992"],
     };
+    let audience = 'adult';
+    const audiencePicker = document.createElement('div');
+    audiencePicker.className = 'audience-switch catalogue-audience';
+    audiencePicker.setAttribute('role', 'group');
+    audiencePicker.setAttribute('aria-label', 'Для кого нужна услуга');
+    const audienceButtons = ['adult', 'child'].map(key => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.audience = key;
+        button.textContent = key === 'adult' ? 'Взрослым' : 'Детям';
+        audiencePicker.append(button);
+        return button;
+    });
     const searchForm = servicesCatalogue.querySelector("[data-services-search]");
+    searchForm.before(audiencePicker);
     const input = searchForm.querySelector("input");
     const scope = searchForm.querySelector("select");
     const clear = servicesCatalogue.querySelector("[data-service-clear]");
@@ -173,14 +187,18 @@ if (servicesCatalogue) {
             arrow.setAttribute("aria-hidden", "true");
             link.append(arrow);
             item.append(link);
+            item.dataset.servicePreview = id;
+            source.hidden = true;
             preview.append(item);
         }
         const summary = group.querySelector(":scope > summary");
-        summary.textContent = "Все услуги направления";
+        const remaining = [...group.querySelectorAll('.directory-list > li')].filter(item => !item.hidden && !item.hasAttribute('data-service-overview')).length;
+        const closedSummary = remaining ? 'Другие услуги · ' + remaining : 'Цены и первый визит';
+        summary.textContent = closedSummary;
         summary.setAttribute("aria-label", "Все услуги направления «" + direction.title + "»");
         group.classList.add("services-card__details");
         group.addEventListener("toggle", () => {
-            summary.textContent = group.open ? "Свернуть список" : "Все услуги направления";
+            summary.textContent = group.open ? "Свернуть" : closedSummary;
             summary.setAttribute("aria-label", (group.open ? "Свернуть список «" : "Все услуги направления «") + direction.title + "»");
         });
         const actions = document.createElement("div");
@@ -220,6 +238,29 @@ if (servicesCatalogue) {
             item.replaceChildren(link);
         }
     }
+
+    const childGuide = document.createElement('aside');
+    childGuide.className = 'services-child-guide';
+    childGuide.innerHTML = '<h2>Приём и профилактика</h2><p>Начать можно с консультации. Возраст приёма и подходящего врача уточните у администратора.</p>';
+    for (const id of ['p01-03', 'p02-02', 'p02-14']) {
+        const row = window.clinicPriceRows[id];
+        if (!row) continue;
+        const link = document.createElement('a');
+        link.className = 'child-price-link';
+        link.href = 'prices.html?direction=children#' + id;
+        const name = document.createElement('span');
+        name.textContent = row.name;
+        const price = document.createElement('b');
+        price.textContent = row.price;
+        link.append(name, price);
+        childGuide.append(link);
+    }
+    const familyGuide = document.createElement('a');
+    familyGuide.className = 'content-link';
+    familyGuide.href = 'first-visit.html#children';
+    familyGuide.textContent = 'Первый визит с ребёнком';
+    childGuide.append(familyGuide);
+    directory.append(childGuide);
 
     function resultRow(entry) {
         const item = document.createElement("li");
@@ -267,6 +308,9 @@ if (servicesCatalogue) {
                 .replace(/^кюртаж[а-я]*$/, "кюрет")
         ));
         return entries.filter((entry) => {
+            const forChild = entry.directions.includes('children');
+            if (audience === 'child' && !forChild) return false;
+            if (audience === 'adult' && (entry.direction === 'children' || /детск|молочн/i.test(entry.name))) return false;
             if (scope.value && !entry.directions.includes(scope.value)) return false;
             const context = normalizePriceText(entry.name + " " + directionFor(entry.direction).title);
             return rowMatches(terms, context);
@@ -279,6 +323,14 @@ if (servicesCatalogue) {
 
     function render() {
         const searching = Boolean(input.value.trim());
+        servicesCatalogue.dataset.audience = audience;
+        audienceButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.audience === audience)));
+        for (const card of directory.querySelectorAll('.services-card')) {
+            card.hidden = audience === 'child' ? card.dataset.direction !== 'children' : card.dataset.direction === 'children';
+        }
+        childGuide.hidden = audience !== 'child';
+        scope.options[0].textContent = audience === 'child' ? 'Во всех детских услугах' : 'Во всех услугах для взрослых';
+        input.placeholder = audience === 'child' ? 'Например, молочный зуб' : 'Например, ретейнер';
         directory.hidden = searching;
         results.hidden = !searching;
         clear.hidden = !searching;
@@ -304,6 +356,7 @@ if (servicesCatalogue) {
 
     function writeLocation(push = false) {
         const url = new URL(location.href);
+        url.searchParams.set('audience', audience);
         url.searchParams.delete("q");
         url.searchParams.delete("direction");
         if (input.value.trim()) {
@@ -319,7 +372,9 @@ if (servicesCatalogue) {
         const url = new URL(location.href);
         input.value = url.searchParams.get("q") || "";
         const target = document.getElementById(url.hash.slice(1));
-        const anchoredDirection = target?.closest(".directory-group")?.id || "";
+        const anchoredDirection = target?.closest('.directory-group')?.id || target?.closest('.services-card')?.dataset.direction || '';
+        audience = anchoredDirection === 'children' || url.searchParams.get('audience') === 'child' ? 'child' : 'adult';
+        if (anchoredDirection && anchoredDirection !== 'children') audience = 'adult';
         scope.value = input.value.trim()
             ? (directionFor(url.searchParams.get("direction")) ? url.searchParams.get("direction") : "")
             : "";
@@ -328,16 +383,24 @@ if (servicesCatalogue) {
         if (anchoredDirection && !input.value.trim()) {
             document.getElementById(anchoredDirection).open = true;
             requestAnimationFrame(() => {
-                const scrollTarget = target.matches(".directory-group") ? target.closest(".services-card") : target;
+                const previewTarget = directory.querySelector('[data-service-preview="' + target.id + '"]');
+                const scrollTarget = previewTarget || (target.matches(".directory-group") ? target.closest(".services-card") : target);
                 scrollTarget.scrollIntoView({ block: "start" });
                 if (target.matches(".directory-list > li")) {
-                    target.setAttribute("tabindex", "-1");
-                    target.focus({ preventScroll: true });
+                    scrollTarget.setAttribute("tabindex", "-1");
+                    scrollTarget.focus({ preventScroll: true });
                 }
             });
         }
     }
 
+    audienceButtons.forEach(button => button.addEventListener('click', () => {
+        audience = button.dataset.audience;
+        scope.value = '';
+        limit = 20;
+        render();
+        writeLocation(true);
+    }));
     input.addEventListener("input", () => {
         limit = 20;
         render();
