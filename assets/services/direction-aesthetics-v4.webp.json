@@ -1,0 +1,9 @@
+{
+  "tool": "native image_gen",
+  "prompt": "Use case: product-mockup. Asset: one standalone square high-resolution 1254x1254 conceptual dental aesthetics illustration for a warm friendly family dental clinic website. Primary subject: a large smooth pristine ivory ceramic FRONT TOOTH crown teaching model, complete and intact with a gently rounded lower base, standing upright on a pale cream ceramic surface. Beside it, one large thin pearly ceramic veneer shell, clearly visible from a slight three-quarter angle so its curved concave inner side and delicate smooth edge can be understood. The veneer is a carefully made full front-tooth overlay matching the front model's shape, not a broken fragment. Both objects close together fill 65-75 percent of frame, immediately legible as tooth and veneer even in a 108-pixel thumbnail. Pleasant minimal premium editorial studio product photography, soft cream and apricot palette, warm peach backdrop, clear natural enamel translucency and gentle controlled highlights. Everything in the foreground is tack sharp, with clear smooth material detail and distinct silhouettes. No people, mouths, gums, exposed roots, blood, decay, cutaway, drilled or filed tooth, prepared stump, jagged edges, fragments, shade guides, dentures, labels, text, logos, watermark, blur on subject or foreground, collage, flowers or decorative clutter. Calm trustworthy conceptual illustration, not a photograph of a clinical result.",
+  "source": "/Users/skripnikovandrei/.codex/generated_images/01a221ac-f4a3-7672-baf3-57e834e4e07a/exec-0bdb07a9-efc5-4546-89a3-f658a8cb58a6.png",
+  "output": "direction-aesthetics-v4.webp",
+  "width": 1254,
+  "height": 1254,
+  "encoding": "cwebp q88"
+}

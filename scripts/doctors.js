@@ -35,7 +35,7 @@ for (const details of doctorDisclosures) {
 
         activeAnimation = details.animate(
             [{ height: startHeight + "px" }, { height: endHeight + "px" }],
-            { duration: 200, easing: "cubic-bezier(.23, 1, .32, 1)" }
+            { duration: 240, easing: "cubic-bezier(.25, .8, .25, 1)" }
         );
         activeAnimation.onfinish = () => settle(desiredOpen);
     });

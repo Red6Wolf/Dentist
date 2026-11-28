@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="../styles/experience-polish.css" />
   </head>
 
-  <body>
+  <body class="doctors-page">
     <div class="page">
       <a class="skip-link" href="#main-content">Перейти к содержимому</a>
       <header class="panel subpage-hero subpage-hero--navigation">
@@ -56,25 +56,24 @@
 <li><a href="../index.html">Главная</a></li>
 <li><span aria-current="page" data-breadcrumb-current>Врачи клиники</span></li>
 </ol></nav>
-        <section class="panel subpage-section">
-          <h1 class="care-title">Врачи клиники</h1>
-          <p class="subpage-lead">
-            Стоматологи-терапевты, ортодонты и стоматолог-хирург.
-            Записаться к выбранному врачу можно через администратора. Для ребёнка уточните, кто принимает в его возрасте.
-          </p>
-          <p><a class="content-link" href="first-visit.html#children">Первый визит с ребёнком</a></p>
+        <section class="panel subpage-section doctors-directory">
+          <div class="doctors-intro">
+            <h1 class="care-title">Врачи клиники</h1>
+            <p class="subpage-lead">Выберите специализацию и познакомьтесь с врачом. Администратор поможет уточнить время приёма.</p>
+          </div>
           <nav class="popular-services" aria-label="Выбрать специализацию">
             <a href="#therapists">Терапевты</a>
             <a href="#orthodontists">Ортодонты</a>
             <a href="#surgeons">Хирург</a>
           </nav>
+          <p class="doctors-child-note">Для ребёнка уточните возраст приёма. <a class="content-link" href="first-visit.html#children">О первом детском визите</a></p>
           <section class="profile-specialty" id="therapists" aria-labelledby="therapists-title">
             <h2 id="therapists-title">Стоматологи-терапевты</h2>
             <div class="profiles">
               <article class="profile-card" id="mukhinvv">
                   <div class="profile-heading">
                       <img src="../assets/doctors/mukhinvv.webp" width="350" height="350"
-                          alt="" loading="lazy" decoding="async" />
+                          alt="" loading="eager" decoding="async" />
                       <div>
                           <h3>Мухин Вячеслав Викторович</h3>
                           <p>Стоматолог-терапевт</p>

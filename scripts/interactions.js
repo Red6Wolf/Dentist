@@ -15,7 +15,7 @@ new MutationObserver(records => {
     }
 }).observe(document.body, { childList: true, subtree: true });
 
-// Нативные details сохраняют клавиатурное поведение; указатель раскрывает содержимое за 200 мс.
+// Нативные details сохраняют клавиатурное поведение; указатель раскрывает содержимое за 240 мс.
 const disclosureMotion = new WeakMap();
 const gentleMotion = matchMedia('(prefers-reduced-motion: reduce)');
 document.addEventListener('click', event => {
@@ -51,7 +51,7 @@ document.addEventListener('click', event => {
     disclosureMotion.set(details, state);
     state.animation = details.animate(
         [{ height: startHeight + 'px' }, { height: endHeight + 'px' }],
-        { duration: 200, easing: 'cubic-bezier(.23, 1, .32, 1)', fill: 'both' }
+        { duration: 240, easing: 'cubic-bezier(.25, .8, .25, 1)', fill: 'both' }
     );
     state.animation.onfinish = () => {
         if (disclosureMotion.get(details) !== state) return;

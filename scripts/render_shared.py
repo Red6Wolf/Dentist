@@ -53,9 +53,11 @@ def first_visit(identifier="first-visit"):
 
 
 def contact_callout(prefix="", home=False):
-    return f'''<section class="panel contact-callout" id="booking" aria-labelledby="booking-title">
+    heading = "Запишитесь на консультацию" if home else "Давайте обсудим ваш вопрос"
+    modifier = " contact-callout--booking" if home else ""
+    return f'''<section class="panel contact-callout{modifier}" id="booking" aria-labelledby="booking-title">
   <div>
-    <h2 id="booking-title">Давайте обсудим ваш вопрос</h2>
+    <h2 id="booking-title">{heading}</h2>
     <p data-booking-description>Позвоните администратору: уточните специалиста, стоимость консультации и удобное время. Не обязательно заранее выбирать процедуру.</p>
     <p class="selected-doctor" id="selected-doctor" hidden></p>
   </div>

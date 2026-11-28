@@ -1,4 +1,4 @@
-/* Размеры первого экрана сверены с актуальным макетом ScandiK на 1440 / 1024 / 390 px. */
+/* Светлое паспарту объединяет фотографию и текст, сохраняя привычную композицию. */
 @font-face {
     font-family: 'Comfortaa';
     font-style: normal;
@@ -27,19 +27,21 @@
     height: clamp(600px, 45vw, 680px);
     min-height: 620px;
     margin: 0 auto;
+    border: 1px solid #d6a577;
     border-radius: 30px;
     overflow: hidden;
     background: var(--cream);
 }
 .hero--family .family-hero-image {
     position: absolute;
-    inset: 0;
+    inset: 12px;
     z-index: 0;
     display: block;
-    width: 100%;
-    height: 100%;
+    width: calc(100% - 24px);
+    height: calc(100% - 24px);
     margin: 0;
-    border-radius: 0;
+    border-radius: 20px;
+    overflow: hidden;
 }
 .hero--family .family-hero-image img {
     position: static;
@@ -55,27 +57,17 @@
 }
 .hero--family .hero-family-copy {
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 12px;
+    top: 12px;
     z-index: 1;
     display: block;
     width: 48%;
     max-width: 700px;
     margin: 0;
-    padding: 0 0 32px clamp(28px, 3.2vw, 48px);
-    border-radius: 0 0 0 32px;
+    padding: 28px clamp(24px, 2.4vw, 36px) 30px;
+    border-radius: 20px;
     background: var(--cream);
     box-sizing: border-box;
-}
-.hero--family .hero-family-copy::before {
-    content: '';
-    position: absolute;
-    left: -30px;
-    top: 0;
-    width: 30px;
-    height: 30px;
-    background: radial-gradient(circle at 0 100%, transparent 30px, var(--cream) 30.5px);
-    pointer-events: none;
 }
 .hero--family .audience-switch {
     display: inline-flex;
@@ -100,19 +92,10 @@
     color: var(--ink);
     background: #ffe3bd;
 }
-.hero--family .hero-family-copy .hero-note {
-    max-width: none;
-    margin: 0;
-    color: var(--orange-action);
-    font-size: 11px;
-    line-height: 1.6;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-}
 .hero--family .hero-family-copy h1 {
     min-height: 0;
     max-width: none;
-    margin: 16px 0 20px;
+    margin: 0 0 20px;
     color: var(--ink);
     font: 500 clamp(40px, 4.1vw, 59px)/1.08 'Comfortaa', 'Manrope', var(--sans);
     letter-spacing: -.025em;
@@ -254,18 +237,21 @@
     .hero--family .family-hero-grid {
         display: flex;
         flex-direction: column;
-        width: calc(100vw - 40px);
+        width: calc(100vw - 24px);
         height: auto;
         min-height: 0;
-        border-radius: 0;
-        overflow: visible;
+        padding: 16px 12px 12px;
+        box-sizing: border-box;
+        border-radius: 22px;
+        overflow: hidden;
     }
     .hero--family .family-hero-image {
         position: static;
         order: 1;
+        width: 100%;
         height: auto;
-        margin-top: 26px;
-        border-radius: 22px;
+        margin-top: 24px;
+        border-radius: 14px;
         overflow: hidden;
     }
     .hero--family .family-hero-image img,
@@ -286,9 +272,6 @@
         background: transparent;
         border-radius: 0;
     }
-    .hero--family .hero-family-copy::before {
-        display: none;
-    }
     .hero--family .audience-switch {
         margin-bottom: 24px;
     }
@@ -299,7 +282,7 @@
         min-height: 3.45em;
         font-size: clamp(34px, 7.3vw, 54px);
         line-height: 1.15;
-        margin-top: 14px;
+        margin-top: 0;
     }
     .hero--family .hero-family-copy .hero-description {
         max-width: 540px;
@@ -339,7 +322,7 @@
 }
 @media (max-width: 400px) {
     .hero--family .hero-family-copy h1 {
-        font-size: 34px;
+        font-size: clamp(28px, 8.7vw, 34px);
     }
     .hero--family .hero-family-copy .hero-description {
         font-size: 15px;

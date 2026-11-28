@@ -68,12 +68,27 @@ if (navigation) {
 
     function revealSurface(surface, open, animate = true) {
         const previous = surfaceMotion.get(surface);
-        if (previous?.open === open) return;
+        if (previous?.open === open) {
+            if (!animate || reducedNavigationMotion.matches) {
+                previous.animation?.cancel();
+                previous.animation = null;
+                surface.hidden = !open;
+                surface.inert = !open;
+                surface.setAttribute('aria-hidden', String(!open));
+            }
+            return;
+        }
         const showing = !surface.hidden;
+        if (!showing && !open) {
+            surface.inert = true;
+            surface.setAttribute('aria-hidden', 'true');
+            surfaceMotion.set(surface, { open: false, animation: null });
+            return;
+        }
         const computed = showing ? getComputedStyle(surface) : null;
         const isDesktop = surface.classList.contains('mega-menu');
-        const closedTransform = isDesktop ? 'translate(-50%, -6px) scale(.985)' : 'translateY(-6px) scale(.985)';
-        const openedTransform = isDesktop ? 'translateX(-50%) scale(1)' : 'translateY(0) scale(1)';
+        const closedTransform = isDesktop ? 'translate(-50%, -3px)' : 'translateY(-3px)';
+        const openedTransform = isDesktop ? 'translateX(-50%)' : 'translateY(0)';
         const opacity = computed?.opacity || '0';
         const transform = computed?.transform === 'none' ? openedTransform : computed?.transform;
         previous?.animation?.cancel();
@@ -86,16 +101,10 @@ if (navigation) {
             surface.hidden = !open;
             return;
         }
-        const trigger = document.querySelector('[aria-controls="' + surface.id + '"]');
-        if (trigger) {
-            const control = trigger.getBoundingClientRect();
-            const bounds = surface.getBoundingClientRect();
-            surface.style.setProperty('--menu-origin', (control.left + control.width / 2 - bounds.left) + 'px top');
-        }
         state.animation = surface.animate([
             { opacity: showing ? opacity : 0, transform: showing ? (transform || openedTransform) : closedTransform },
             { opacity: open ? 1 : 0, transform: open ? openedTransform : closedTransform }
-        ], { duration: open ? 180 : 120, easing: 'cubic-bezier(.23, 1, .32, 1)', fill: 'both' });
+        ], { duration: open ? 240 : 180, easing: 'cubic-bezier(.25, .8, .25, 1)', fill: 'both' });
         state.animation.onfinish = () => {
             if (surfaceMotion.get(surface) !== state) return;
             surface.hidden = !open;
@@ -207,11 +216,11 @@ if (navigation) {
             const controls = [...panel.querySelectorAll("a")];
             if (event.shiftKey && document.activeElement === controls[0]) {
                 event.preventDefault();
-                closePanels();
+                closePanels(false, false);
                 toggle.focus();
             } else if (!event.shiftKey && document.activeElement === controls.at(-1)) {
                 event.preventDefault();
-                closePanels();
+                closePanels(false, false);
                 const headerControls = [...navigation.querySelectorAll("a, button")];
                 (headerControls[headerControls.indexOf(toggle) + 1] || toggle).focus();
             }
@@ -244,8 +253,8 @@ if (navigation) {
         }
     });
     document.addEventListener("focusin", event => {
-        if (!menu.hidden && event.target !== button && !menu.contains(event.target)) setMenu(false);
-        if (!navigation.contains(event.target) && !panels.some(({ panel }) => panel.contains(event.target))) closePanels();
+        if (!menu.hidden && event.target !== button && !menu.contains(event.target)) setMenu(false, false);
+        if (!navigation.contains(event.target) && !panels.some(({ panel }) => panel.contains(event.target))) closePanels(false, false);
     });
     window.matchMedia("(max-width: 650px)").addEventListener("change", () => {
         closePanels(false, false);

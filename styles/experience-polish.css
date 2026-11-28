@@ -90,14 +90,88 @@ a.content-link:active {
     justify-content: center;
     text-align: center;
 }
-.mega-menu {
-    transform-origin: var(--menu-origin, center top);
+.nav .brand {
+    align-items: baseline;
+    gap: 10px;
+}
+.nav .brand-name {
+    line-height: 1;
+}
+.nav .brand-caption {
+    margin: 0;
+    font: 500 13px/1.2 var(--sans);
+    letter-spacing: .01em;
+    text-transform: none;
+    transition: none;
+}
+@media (min-width: 651px) {
+    .nav .brand {
+        min-height: 0;
+    }
+}
+.contact-callout--booking {
+    background: var(--patient-peach);
+}
+/* На странице команды первым содержательным экраном становятся сами врачи. */
+.doctors-page .breadcrumbs {
+    margin-block: 14px;
+}
+.doctors-directory {
+    padding-block: 32px 48px;
+}
+.doctors-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 16px 48px;
+}
+.doctors-intro .care-title {
+    margin: 0;
+    font-size: clamp(32px, 4vw, 52px);
+}
+.doctors-intro .subpage-lead {
+    margin: 0;
+}
+.doctors-directory .popular-services {
+    margin-block: 24px 12px;
+}
+.doctors-child-note {
+    margin: 0 0 28px;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+}
+.doctors-directory .profile-specialty > h2 {
+    margin: 0 0 20px;
+    font-size: clamp(24px, 2.5vw, 32px);
+    line-height: 1.2;
+    letter-spacing: -.025em;
+}
+details {
+    overflow-anchor: none;
+}
+.services-ready .services-card__details {
+    /* Форматирование остаётся одинаковым до, во время и после обрезания высоты. */
+    display: flow-root;
 }
 .nav-expand::after {
     transition: transform var(--duration-control) var(--ease-out);
 }
 /* Подробная услуга на телефоне: сначала суть и действия, иллюстрация — компактный ориентир. */
 @media (max-width: 700px) {
+    .doctors-intro {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+    }
+    .doctors-directory {
+        padding-block: 24px 32px;
+    }
+    .doctors-directory .popular-services {
+        margin-top: 20px;
+    }
+    .doctors-child-note {
+        margin-bottom: 24px;
+    }
     .service-page .service-intro__heading {
         grid-template-columns: minmax(0, 1fr);
         gap: 20px;
