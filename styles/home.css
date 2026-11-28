@@ -379,3 +379,10 @@
 .clinic-hours dd {
     margin: 0;
 }
+
+/* В детских отзывах дата и источник читаются отдельно, без имён. */
+.review-quotes .child-review-meta {
+    display: grid;
+    justify-items: start;
+    gap: 6px;
+}

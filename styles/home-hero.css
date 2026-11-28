@@ -1,4 +1,4 @@
-/* Абрикосовая панель с округлым краем и едва заметным срезом апельсина. */
+/* Прямая текстовая панель с небольшим нижним скруглением и фоновым апельсином. */
 @font-face {
     font-family: 'Comfortaa';
     font-style: normal;
@@ -16,8 +16,6 @@
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 .hero.hero--family {
-    --hero-apricot: #fce5cb;
-    --hero-peel: #cc8b4c;
     padding: 103px 0 0;
     font-family: 'Manrope', var(--sans);
 }
@@ -62,27 +60,33 @@
     top: 12px;
     z-index: 1;
     display: block;
-    width: calc(52% - 28px);
-    max-width: 750px;
+    width: 48%;
+    max-width: 700px;
     margin: 0;
-    padding: 32px clamp(24px, 2.4vw, 36px) 32px clamp(68px, 5.6vw, 88px);
-    border: 1px solid var(--hero-peel);
-    border-radius: 140px 18px 18px 140px;
-    background: var(--hero-apricot);
+    padding: 32px clamp(24px, 2.4vw, 36px) 32px clamp(28px, 3.2vw, 48px);
+    border-radius: 0 0 0 32px;
+    background: var(--cream);
     box-sizing: border-box;
     isolation: isolate;
-    overflow: hidden;
 }
 .hero--family .hero-family-copy::before {
     content: '';
     position: absolute;
     z-index: -1;
-    right: -80px;
-    bottom: -104px;
-    width: 360px;
-    height: 360px;
-    background: url('../assets/icons/citrus-signature.svg') center / contain no-repeat;
+    inset: 0;
+    border-radius: inherit;
+    background: url('../assets/icons/citrus-signature.svg') right -94px bottom -116px / 420px 420px no-repeat;
     opacity: .04;
+    pointer-events: none;
+}
+.hero--family .hero-family-copy::after {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle at 0 100%, transparent 30px, var(--cream) 30.5px);
     pointer-events: none;
 }
 .hero--family .audience-switch {
@@ -235,7 +239,7 @@
 }
 @media (min-width: 1600px) {
     .hero--family .hero-family-copy {
-        width: calc(49% - 28px);
+        width: 46%;
     }
 }
 @media (max-width: 1180px) and (min-width: 761px) {
@@ -252,9 +256,8 @@
         height: 590px;
     }
     .hero--family .hero-family-copy {
-        width: 52%;
-        padding: 24px 24px 24px 52px;
-        border-radius: 96px 16px 16px 96px;
+        width: 50%;
+        padding: 24px;
     }
     .hero--family .hero-family-copy h1 {
         font-size: clamp(34px, 4.1vw, 45px);
@@ -322,15 +325,15 @@
         display: block;
         width: 100%;
         max-width: none;
-        padding: 20px 16px 20px 20px;
-        background: var(--hero-apricot);
-        border-radius: 40px 16px 16px 40px;
+        padding: 0;
+        border-radius: 0;
     }
     .hero--family .hero-family-copy::before {
-        right: -86px;
-        bottom: -66px;
-        width: 280px;
-        height: 280px;
+        background-position: right -96px bottom -78px;
+        background-size: 320px 320px;
+    }
+    .hero--family .hero-family-copy::after {
+        display: none;
     }
     .hero--family .audience-switch {
         margin-bottom: 24px;
@@ -388,10 +391,8 @@
 }
 @media (max-width: 400px) {
     .hero--family .hero-family-copy::before {
-        right: -80px;
-        bottom: -60px;
-        width: 240px;
-        height: 240px;
+        background-position: right -90px bottom -70px;
+        background-size: 280px 280px;
     }
     .hero--family .hero-family-copy h1 {
         font-size: clamp(28px, 8.7vw, 34px);
