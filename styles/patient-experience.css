@@ -53,7 +53,7 @@ html:has([data-service-detail]) {
     overflow-wrap: anywhere;
 }
 
-/* Первый экран — разговор и выбор сценария вместо текста поверх фотографии. */
+/* Первый экран: фотография и текстовая плоскость перекрываются в одной композиции. */
 .hero.hero--family {
     display: block;
     min-height: 0;
@@ -67,9 +67,24 @@ html:has([data-service-detail]) {
 }
 .family-hero-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(32px, 4vw, 72px);
-    align-items: center;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0;
+    align-items: stretch;
+    min-height: 680px;
+    border-radius: 16px;
+    background: var(--patient-warm);
+    isolation: isolate;
+    overflow: hidden;
+}
+.hero--family .hero-family-copy {
+    grid-column: 7 / -1;
+    grid-row: 1;
+    align-self: center;
+    z-index: 1;
+    margin-block: 32px;
+    padding: clamp(28px, 3vw, 44px);
+    border-radius: 16px 0 0 16px;
+    background: var(--cream);
 }
 .hero--family .hero-copy {
     color: var(--ink);
@@ -119,19 +134,23 @@ html:has([data-service-detail]) {
     background: var(--orange-action);
 }
 .family-hero-image {
+    position: relative;
+    grid-column: 1 / 9;
+    grid-row: 1;
     min-width: 0;
     margin: 0;
 }
 .family-hero-image img {
+    position: absolute;
+    inset: 0;
     display: block;
     width: 100%;
-    height: clamp(470px, 44vw, 650px);
+    height: 100%;
     object-fit: cover;
-    object-position: 43% center;
-    border-radius: 16px;
+    object-position: 20% center;
 }
 .hero--family[data-audience="child"] .family-hero-image img {
-    object-position: 47% center;
+    object-position: 42% center;
 }
 .family-hero-image figcaption,
 .service-art figcaption {
@@ -509,12 +528,6 @@ html:has([data-service-detail]) {
     }
 }
 @media (max-width: 900px) {
-    .family-hero-grid {
-        gap: 28px;
-    }
-    .family-hero-image img {
-        height: 540px;
-    }
     .service-page .service-intro__heading {
         grid-template-columns: minmax(0, 1fr) 220px;
         gap: 24px;
@@ -527,18 +540,9 @@ html:has([data-service-detail]) {
     .hero.hero--family {
         padding: 116px 20px 28px;
     }
-    .family-hero-grid {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 28px;
-    }
     .hero--family h1 {
         font-size: clamp(32px, 8.5vw, 43px);
         margin-block: 24px 18px;
-    }
-    .family-hero-image img {
-        height: auto;
-        aspect-ratio: 1.2;
-        object-position: center;
     }
     .hero--family .hero-actions {
         flex-direction: column;
@@ -658,38 +662,69 @@ html:has([data-service-detail]) {
     }
 }
 
-/* На телефоне фотография следует сразу за главными действиями. */
-@media (max-width: 650px) {
+/* На узком экране фото заходит под край текста, а действия остаются перед ним. */
+@media (max-width: 1000px) {
+    .family-hero-grid {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        background: var(--cream);
+        overflow: visible;
+    }
     .hero--family .hero-family-copy {
         display: contents;
     }
-    .hero--family .family-hero-grid {
-        gap: 0;
-    }
     .hero-family-copy .audience-switch {
-        justify-self: start;
         order: 0;
+        align-self: start;
     }
-    .hero-family-copy h1 {
+    .hero--family h1 {
         order: 1;
+        max-width: 22ch;
     }
-    .hero-family-copy > p {
+    .hero--family .hero-copy p {
         order: 2;
+        max-width: 54ch;
     }
-    .hero-family-copy .hero-actions {
+    .hero--family .hero-actions {
+        position: relative;
+        z-index: 1;
         order: 3;
+        width: calc(100% - 32px);
+        margin-bottom: -32px;
+        padding-bottom: 32px;
+        border-radius: 0 0 32px 0;
+        background: var(--cream);
     }
     .hero--family .family-hero-image {
+        display: block;
+        flex: none;
         order: 4;
-        margin-top: 24px;
+        width: 100%;
+        height: clamp(340px, 46vw, 440px);
+        border-radius: 16px;
+        overflow: hidden;
     }
     .hero--family .hero-family-visit {
         order: 5;
-        justify-self: start;
+        align-self: start;
     }
     .hero--family .hero-location-link {
         order: 6;
-        justify-self: start;
+        align-self: start;
+    }
+    .family-hero-image img,
+    .hero--family[data-audience="child"] .family-hero-image img {
+        object-position: center top;
+    }
+}
+@media (max-width: 650px) {
+    .hero--family .hero-actions {
+        width: calc(100% - 12px);
+        border-bottom-right-radius: 24px;
+    }
+    .hero--family .family-hero-image {
+        height: 300px;
     }
 }
 .service-page .service-section-nav a {
@@ -815,19 +850,6 @@ html:has([data-service-detail]) {
 .mega-menu-help span {
     display: block;
 }
-.family-hero-image {
-    align-self: stretch;
-    display: flex;
-    min-height: 0;
-}
-.family-hero-image img {
-    height: 100%;
-    min-height: 470px;
-    max-height: 680px;
-    object-position: 45% center;
-    border-radius: 16px 16px 80px 16px;
-}
-
 /* Заявка: короткая форма, ошибки рядом с полями, без ложного успеха. */
 .callback-section {
     display: grid;
@@ -947,15 +969,6 @@ html:has([data-service-detail]) {
     }
 }
 @media (max-width: 650px) {
-    .family-hero-image img {
-        height: auto;
-        min-height: 0;
-        max-height: none;
-        border-bottom-right-radius: 48px;
-    }
-    .hero--family .family-hero-image {
-        display: block;
-    }
     .callback-form button {
         width: 100%;
         justify-content: center;
