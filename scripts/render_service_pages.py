@@ -74,6 +74,18 @@ def write_file(path, content, check):
     return True
 
 
+def service_image_content(direction, title):
+    if direction == "aesthetics":
+        return (
+            "Сюжетная иллюстрация: улыбающаяся женщина",
+            "Сюжетная иллюстрация, не клинический результат.",
+        )
+    return (
+        f"Предметная иллюстрация: {title}",
+        "Предметная иллюстрация, не клинический результат.",
+    )
+
+
 def render(check=False):
     catalogue_path = ROOT / "pages/services.html"
     catalogue = catalogue_path.read_text()
@@ -111,6 +123,7 @@ def render(check=False):
         slug = item["slug"]
         direction = item["direction"]
         title = escape(item["title"])
+        image_alt, image_note = service_image_content(direction, title)
         doctor_target = "doctors.html" + ("#" + item["doctors"] if item["doctors"] else "")
         questions = item["questions"]
         questions_html = "\n".join(f'<li>{escape(question)}</li>' for question in questions)
@@ -127,8 +140,8 @@ def render(check=False):
       </div>
     </div>
     <figure class="service-art">
-      <img class="service-intro__image" src="../assets/services/{images[direction]}" width="1024" height="1024" alt="Предметная иллюстрация: {title}" decoding="async" />
-      <figcaption>Предметная иллюстрация, не клинический результат.</figcaption>
+      <img class="service-intro__image" src="../assets/services/{images[direction]}" width="1024" height="1024" alt="{image_alt}" decoding="async" />
+      <figcaption>{image_note}</figcaption>
     </figure>
   </div>
 </section>
@@ -199,6 +212,7 @@ def render(check=False):
         "orthodontics.html": ("ortho", "Исправление прикуса", "orthodontists"),
     }
     for page, (direction, title, specialty) in legacy.items():
+        image_alt, image_note = service_image_content(direction, title)
         path = ROOT / "pages" / page
         content = path.read_text()
         content = re.sub(r'\s*<!-- consultation:start -->.*?<!-- consultation:end -->', '', content, flags=re.S)
@@ -220,8 +234,8 @@ def render(check=False):
       <div class="care-actions"><a class="locbutton" href="tel:+74991853333">Позвонить для консультации</a><a class="service-price-link" href="#service-cost">Посмотреть стоимость</a></div>
     </div>
     <figure class="service-art">
-      <img class="service-intro__image" src="../assets/services/{images[direction]}" width="1024" height="1024" alt="Предметная иллюстрация: {title}" decoding="async" />
-      <figcaption>Предметная иллюстрация, не клинический результат.</figcaption>
+      <img class="service-intro__image" src="../assets/services/{images[direction]}" width="1024" height="1024" alt="{image_alt}" decoding="async" />
+      <figcaption>{image_note}</figcaption>
     </figure>
   </div>
 </section>'''

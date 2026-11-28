@@ -874,7 +874,7 @@ window.clinicServiceImages = {
     "ortho": "direction-ortho-v2.webp",
     "surgery": "direction-surgery-v2.webp",
     "periodontics": "direction-periodontics-v3.webp",
-    "aesthetics": "direction-aesthetics-v4.webp",
+    "aesthetics": "direction-aesthetics-v5.webp",
     "diagnostics": "direction-diagnostics-v2.webp"
 };
 window.clinicPriceRows = {

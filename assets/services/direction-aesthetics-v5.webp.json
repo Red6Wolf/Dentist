@@ -1,0 +1,10 @@
+{
+  "tool": "native image_gen",
+  "prompt": "Use case: ads-marketing. Asset: one standalone square high-resolution editorial image for the 'Dental aesthetics' service card on a warm family dental clinic website. Create an inviting photorealistic portrait of a fictional adult woman around 30, shown from upper chest to above the head, relaxed and warmly smiling with natural healthy ivory teeth. The smile is attractive and believable, with subtle individual tooth variation, not a flawless artificial veneer advertisement. Head turned only slightly, looking toward camera, face centered and large enough to read in a 108-pixel square thumbnail. A soft cream blouse, plain pale ivory background with a faint warm apricot cast, flattering soft daylight, luminous but realistic skin texture, understated premium editorial beauty photography, quiet warmth and approachability. Face and smile in crisp focus, no foreground blur, sufficient breathing room around the head, no hands near the face. No dental models, isolated teeth, veneers, instruments, clinical mouth close-up, gums, exaggerated wide-open mouth, procedures, before-and-after, text, logos, watermarks, claims, collage, frames, sparkles or beauty retouching. This is a fictional conceptual scene, not a clinical result or an actual patient. Square composition, render at the highest native resolution available.",
+  "source": "/Users/skripnikovandrei/.codex/generated_images/01a1c18f-33fc-7db3-8a9e-72a10c6c9979/exec-9fc576e0-3716-4570-aa62-e7da6a123efa.png",
+  "output": "direction-aesthetics-v5.webp",
+  "width": 1254,
+  "height": 1254,
+  "encoding": "cwebp q88",
+  "usage": "Fictional generated portrait, not an actual patient or a clinical result."
+}
