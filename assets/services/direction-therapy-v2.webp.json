@@ -1,0 +1,8 @@
+{
+  "prompt": "Use case: product-mockup. Asset type: one premium dental website service image, square 1024x1024 minimum, generated at native high resolution. Input image is a STYLE AND SUBJECT REFERENCE ATLAS ONLY. Create one individual photograph, never an atlas, grid, collage or contact sheet. Primary request: a single upright ivory molar with a small stainless steel dental mirror lying beside it. Warm ivory, cream and soft apricot editorial dental still-life on pale porous limestone, softly blurred beige background. Match the restrained light and material aesthetic of the reference atlas first tile. Large clear molar crown with anatomically convincing cusps and occlusal fissures, gently translucent enamel edges, two smooth roots, subtle natural enamel detail; refined photorealistic 3D object/product photography, not stylized plastic. Mirror has accurate polished metal, tiny knurled handle detail and realistic reflection. Full main objects inside frame with generous breathing room, central composition, low three-quarter camera angle, shallow but sufficient depth of field to keep tooth and mirror crisp. Soft natural side light, delicate shadow, calm premium dental editorial. No people, no face, no text, no watermark, no logos, no labels, no extra teeth, no implant. Genuine fine generated detail at final resolution; do not enlarge or crop a reference tile.",
+  "tool": "built-in image_gen.imagegen",
+  "source": "/Users/skripnikovandrei/.codex/generated_images/01a21f88-3e84-75c0-8e77-5cd2bcd48a9e/exec-f5616dcb-cf8d-46f3-ac43-5845aa40f476.png",
+  "reference": "assets/services/directions-atlas.webp",
+  "processing": "cwebp -q 88; native resolution, no resizing",
+  "asset": "direction-therapy-v2.webp"
+}

@@ -1,0 +1,7 @@
+{
+  "tool": "native image_gen",
+  "prompt": "Use case: product-mockup. Create one square 1254x1254 high resolution standalone premium dental service illustration for oral surgery. Subject: one ivory ceramic molar teaching model standing naturally upright, beside a single clean stainless steel dental extraction forceps resting diagonally on a folded sterile warm ivory linen cloth. Restrained realistic studio still life matching a warm cream and apricot dental object illustration series. Pale beige travertine tabletop, soft defocused warm beige background. Soft window light from upper left, enamel and brushed metal clear detailed textures, gentle natural shadows. Objects fill approximately 70 percent of frame with generous breathing room, tooth and forceps immediately recognizable. No people, no hands, no mouth, no blood, no surgery in progress, no sharp graphic details, no text, no logos, no watermark, no collage. Conceptual object illustration, not a clinical outcome.",
+  "source": "/Users/skripnikovandrei/.codex/generated_images/01a221ac-f4a3-7672-baf3-57e834e4e07a/exec-88ffd01c-aa0b-4756-8fa6-27870c0a09b6.png",
+  "output": "direction-surgery-v2.webp",
+  "encoding": "cwebp q88"
+}

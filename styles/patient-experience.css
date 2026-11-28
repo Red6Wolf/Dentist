@@ -1,7 +1,7 @@
 /* Путь пациента: выбор аудитории, навигация и различимые смысловые разделы. */
 :root {
     --patient-peach: #f7dfc5;
-    --patient-sage: #eaf0e4;
+    --patient-warm: #f2e5d5;
     --site-nav-bottom: 100px;
     --section-nav-height: 66px;
 }
@@ -163,7 +163,7 @@ html:has([data-service-detail]) {
     font-size: 16px;
     color: var(--muted);
 }
-.hero--family .nav--enhanced :is(.navlinks a, .navphone, .brand-caption, .nav-address, .nav-contact-hours) {
+.hero--family .nav :is(.navlinks a, .navphone, .brand-caption, .nav-address, .nav-contact-hours) {
     color: var(--ink);
     text-shadow: none;
 }
@@ -188,6 +188,8 @@ html:has([data-service-detail]) {
     width: 100%;
     height: auto;
     aspect-ratio: 1;
+    object-fit: cover;
+    background: none;
     margin: 0;
     border-radius: 16px;
 }
@@ -306,7 +308,7 @@ html:has([data-service-detail]) {
 .service-page .service-reading .first-visit-guide,
 .service-page > .first-visit-guide,
 .first-visit-guide {
-    background: var(--patient-sage);
+    background: var(--patient-warm);
 }
 .first-visit-guide {
     padding: clamp(32px, 4.5vw, 64px) clamp(24px, 5vw, 92px);
@@ -317,37 +319,6 @@ html:has([data-service-detail]) {
     max-width: 68ch;
     color: var(--muted);
 }
-.first-visit-steps {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 32px;
-    padding: 0;
-    margin: 36px 0;
-    list-style: none;
-}
-.first-visit-steps > li {
-    border-top: 1px solid #b9c4ad;
-    padding-top: 24px;
-}
-.visit-step-label {
-    display: block;
-    margin-bottom: 14px;
-    color: var(--muted);
-    font-size: 15px;
-    font-weight: 600;
-}
-.first-visit-steps h3 {
-    margin: 0 0 16px;
-    font-size: 22px;
-    line-height: 1.3;
-}
-.first-visit-steps ul {
-    padding-left: 22px;
-}
-.first-visit-steps li li + li {
-    margin-top: 10px;
-}
-
 /* Быстрый доступ к направлениям и информации о клинике. */
 .nav-item {
     display: flex;
@@ -538,10 +509,6 @@ html:has([data-service-detail]) {
     }
 }
 @media (max-width: 900px) {
-    .first-visit-steps {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 24px;
-    }
     .family-hero-grid {
         gap: 28px;
     }
@@ -745,4 +712,269 @@ html:has([data-service-detail]) {
 .hero .nav--surface-protected,
 .subpage-hero .nav--surface-protected {
     background: rgba(255, 249, 242, .96);
+}
+
+/* Тёплая палитра, компактные панели и заметные вторичные действия. */
+.first-visit-guide {
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    gap: clamp(28px, 5vw, 72px);
+}
+.visit-intro p {
+    max-width: 40ch;
+}
+.visit-questions details {
+    border-top: 1px solid #c5ae97;
+    padding-block: 18px;
+}
+.visit-questions details:last-child {
+    border-bottom: 1px solid #c5ae97;
+}
+.visit-questions summary {
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.4;
+    min-height: 44px;
+    align-content: center;
+}
+.visit-questions summary:is(:hover, :focus-visible) {
+    color: var(--orange-action);
+}
+.service-page .service-price-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-height: 52px;
+    padding: 13px 22px;
+    border: 1px solid var(--orange-action);
+    border-radius: 999px;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--orange-action);
+    text-decoration: none;
+    transition: transform 160ms ease-out, background-color 160ms ease-out;
+}
+.service-page .service-price-link::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+}
+@media (hover: hover) and (pointer: fine) {
+    .service-page .service-price-link:hover {
+        color: #913d07;
+        background: var(--patient-peach);
+        transform: scale(1.035);
+    }
+}
+.service-page .service-price-link:active {
+    transform: scale(.98);
+}
+.mega-menu {
+    width: min(680px, calc(100% - 40px));
+    padding: 20px;
+}
+.mega-menu--clinic {
+    width: min(580px, calc(100% - 40px));
+}
+.mega-menu-heading {
+    gap: 16px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+}
+.mega-menu-heading strong {
+    font-size: 20px;
+}
+.mega-menu-links {
+    gap: 0 12px;
+}
+.mega-menu-links a {
+    align-content: center;
+    min-height: 50px;
+    padding: 10px 12px;
+    gap: 4px;
+}
+.mega-menu-links strong {
+    font-size: 17px;
+    line-height: 1.3;
+    font-weight: 500;
+}
+.mega-menu-links span {
+    display: none;
+}
+.mega-menu-help {
+    display: block;
+    margin-top: 12px;
+    padding: 14px;
+    font-size: 15px;
+}
+.mega-menu-help span {
+    display: block;
+}
+.family-hero-image {
+    align-self: stretch;
+    display: flex;
+    min-height: 0;
+}
+.family-hero-image img {
+    height: 100%;
+    min-height: 470px;
+    max-height: 680px;
+    object-position: 45% center;
+    border-radius: 16px 16px 80px 16px;
+}
+
+/* Заявка: короткая форма, ошибки рядом с полями, без ложного успеха. */
+.callback-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(28px, 5vw, 72px);
+    padding: clamp(28px, 5vw, 72px);
+    background: var(--patient-peach);
+}
+.callback-section h2 {
+    max-width: 18ch;
+    font-size: clamp(28px, 3vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -.025em;
+}
+.callback-section p {
+    font-size: 17px;
+    line-height: 1.6;
+}
+.callback-form {
+    display: grid;
+    gap: 20px;
+    min-width: 0;
+}
+.callback-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 17px;
+    font-weight: 600;
+}
+.callback-field input {
+    width: 100%;
+    min-width: 0;
+    min-height: 54px;
+    padding: 12px 16px;
+    border: 1px solid var(--muted);
+    border-radius: 10px;
+    font: inherit;
+    font-size: 18px;
+    background: var(--cream);
+    color: var(--ink);
+}
+.callback-consent label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    min-height: 44px;
+    font-size: 15px;
+    line-height: 1.6;
+    cursor: pointer;
+}
+.callback-consent input {
+    flex: 0 0 22px;
+    width: 22px;
+    height: 22px;
+    margin: 2px 0 0;
+    accent-color: var(--orange-action);
+}
+.callback-form a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.callback-form .callback-policy {
+    margin: -8px 0 0;
+    font-size: 15px;
+}
+.callback-form .field-error {
+    margin: 8px 0 0;
+    color: #8b2818;
+    font-size: 15px;
+}
+.callback-form [aria-invalid="true"] {
+    outline: 2px solid #8b2818;
+    outline-offset: 2px;
+}
+.callback-form button {
+    justify-self: start;
+    min-height: 54px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+}
+.callback-form button:disabled {
+    cursor: wait;
+    opacity: .65;
+}
+.callback-form .callback-status {
+    padding: 16px;
+    margin: 0;
+    border: 1px solid var(--ink);
+    border-radius: 10px;
+}
+.callback-status[data-state="error"] {
+    color: #8b2818;
+    border-color: #8b2818;
+}
+.parent-guide {
+    padding: 24px 0 0;
+    margin-top: 28px;
+    border-top: 1px solid var(--line);
+}
+.parent-guide h3 {
+    font-size: 24px;
+    margin: 0 0 12px;
+}
+.parent-guide p {
+    max-width: 65ch;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--muted);
+}
+@media (max-width: 900px) {
+    .first-visit-guide,
+    .callback-section {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+    }
+}
+@media (max-width: 650px) {
+    .family-hero-image img {
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        border-bottom-right-radius: 48px;
+    }
+    .hero--family .family-hero-image {
+        display: block;
+    }
+    .callback-form button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .service-page .service-price-link {
+        transition: none;
+        transform: none;
+    }
+}
+.price-section .price-table th {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.45;
+    font-weight: 400;
+}
+.price-section .price-table tr:first-child th {
+    border-top: 1px solid var(--line);
 }

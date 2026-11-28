@@ -141,11 +141,14 @@ if (servicesCatalogue) {
         card.dataset.direction = direction.id;
         const heading = document.createElement("div");
         heading.className = "services-card__heading";
-        const image = document.createElement("span");
+        const image = document.createElement("img");
         image.className = "services-card__image";
-        image.setAttribute("aria-hidden", "true");
-        const imageIndex = order.indexOf(direction.id);
-        image.style.backgroundPosition = (imageIndex % 5 * 25) + "% " + (Math.floor(imageIndex / 5) * 100) + "%";
+        image.src = "../assets/services/" + window.clinicServiceImages[direction.id];
+        image.width = 1024;
+        image.height = 1024;
+        image.alt = "";
+        image.loading = "lazy";
+        image.decoding = "async";
         const name = document.createElement("h2");
         name.id = "heading-" + direction.id;
         name.textContent = direction.title;

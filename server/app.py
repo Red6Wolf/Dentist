@@ -13,7 +13,7 @@ from urllib.parse import unquote, urlsplit
 
 
 SITE_ROOT = Path(__file__).resolve().parent.parent
-PHONE_DIGITS = re.compile(r"\d{10,15}")
+PHONE_DIGITS = re.compile(r"[0-9]{10,15}")
 
 
 def validate_request(data):
@@ -31,14 +31,21 @@ def validate_request(data):
 
         values[field] = value.strip()
 
-    if not all(values[field] for field in ("name", "phone", "time")):
-        raise ValueError("Заполните имя, телефон и удобное время.")
+    if len(values["name"]) < 2 or not values["phone"]:
+        raise ValueError("Укажите ФИО и номер телефона.")
 
-    digits = re.sub(r"\D", "", values["phone"])
+    if any(ord(character) < 32 for value in values.values() for character in value):
+        raise ValueError("Проверьте заполнение формы.")
+
+    if data.get("consent") is not True:
+        raise ValueError("Для обратного звонка необходимо согласие на обработку персональных данных.")
+
+    digits = re.sub(r"[^0-9]", "", values["phone"])
 
     if not PHONE_DIGITS.fullmatch(digits):
         raise ValueError("Укажите номер телефона с кодом города или страны.")
 
+    values["consent"] = True
     return values
 
 
@@ -66,8 +73,9 @@ def send_callback(values):
         "Новая заявка с сайта\n\n"
         f"Имя: {values['name']}\n"
         f"Телефон: {values['phone']}\n"
-        f"Удобное время: {values['time']}\n"
+        f"Удобное время: {values['time'] or 'не указано'}\n"
         f"Врач: {values['doctor'] or 'не выбран'}\n"
+        "Согласие на обработку имени и телефона: получено (callback-v1).\n"
     )
 
     if port == 465:

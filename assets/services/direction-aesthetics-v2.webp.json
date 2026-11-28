@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen.imagegen",
+  "mode": "built-in",
+  "source_provenance": {
+    "type": "native AI image generation",
+    "source": "/Users/skripnikovandrei/.codex/generated_images/01a21f88-90f3-7613-8e2a-7bf020e18ba8/exec-907d9535-1eb9-4c49-bf22-c46f53b44cb8.png",
+    "style_reference_inspected": "assets/services/directions-atlas.webp",
+    "reference_usage": "visual style inspected; no reference pixels used",
+    "transform": "cwebp -q 88; no resizing or interpolation"
+  }
+}

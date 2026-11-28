@@ -47,6 +47,7 @@ class CallbackApiTests(unittest.TestCase):
         with patch.object(app, "send_callback") as send_callback:
             status, result = self.post({
                 "name": "Ирина",
+                "consent": True,
                 "phone": "+7 (999) 123-45-67",
                 "time": "Завтра после 16:00",
                 "doctor": "Мухин Вячеслав Викторович",
@@ -60,6 +61,7 @@ class CallbackApiTests(unittest.TestCase):
         with patch.object(app, "send_callback") as send_callback:
             status, result = self.post({
                 "name": "Ирина",
+                "consent": True,
                 "phone": "123",
                 "time": "Вечером",
             })
@@ -68,10 +70,24 @@ class CallbackApiTests(unittest.TestCase):
         self.assertIn("телефона", result["error"])
         send_callback.assert_not_called()
 
+    def test_consent_is_required_even_with_valid_contact(self):
+        for consent in (None, False, "true"):
+            with self.subTest(consent=consent), patch.object(app, "send_callback") as mailer:
+                status, _ = self.post({"name": "Анна", "phone": "+7 999 123 45 67", "consent": consent})
+                self.assertEqual(status, 400)
+                mailer.assert_not_called()
+
+    def test_name_and_phone_are_sufficient_with_consent(self):
+        with patch.object(app, "send_callback") as mailer:
+            status, _ = self.post({"name": "Анна", "phone": "+7 999 123 45 67", "consent": True})
+            self.assertEqual(status, 200)
+            self.assertTrue(mailer.call_args.args[0]["consent"])
+
     def test_unconfigured_mailer_returns_clear_error(self):
         with patch.dict("os.environ", {}, clear=True):
             status, result = self.post({
                 "name": "Ирина",
+                "consent": True,
                 "phone": "+7 999 123 45 67",
                 "time": "Вечером",
             })
@@ -91,6 +107,7 @@ class MailerTests(unittest.TestCase):
         }
         values = {
             "name": "Ирина",
+                "consent": True,
             "phone": "+7 999 123-45-67",
             "time": "После 16:00",
             "doctor": "Мухин Вячеслав Викторович",

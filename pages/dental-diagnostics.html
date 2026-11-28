@@ -66,7 +66,7 @@
       </div>
     </div>
     <figure class="service-art">
-      <span class="service-intro__image" style="background-position: 100% 100%" role="img" aria-label="Иллюстрация: Приём и диагностика"></span>
+      <img class="service-intro__image" src="../assets/services/direction-diagnostics-v2.webp" width="1024" height="1024" alt="Предметная иллюстрация: Приём и диагностика" decoding="async" />
       <figcaption>Предметная иллюстрация, не клинический результат.</figcaption>
     </figure>
   </div>
@@ -114,40 +114,57 @@
 
   </section>
   <section class="first-visit-guide" id="first-visit" aria-labelledby="first-visit-title">
-  <h2 id="first-visit-title">Первый приём в «Апельсине» — всё по порядку</h2>
-  <p class="first-visit-lead">Не обязательно знать название услуги и выбирать лечение заранее. При звонке расскажите, что беспокоит: администратор поможет уточнить специалиста и время. Порядок и стоимость приёма согласуйте при записи.</p>
-  <ol class="first-visit-steps">
-    <li>
-      <span class="visit-step-label">01 / Перед визитом</span>
-      <h3>Что взять с собой</h3>
-      <ul>
-        <li>Документ, удостоверяющий личность.</li>
-        <li>Снимки, выписки и заключения — если они есть.</li>
-        <li>Список лекарств и сведения об аллергиях.</li>
-        <li>Для ребёнка — его документы и документы законного представителя. Состав уточните при записи.</li>
-      </ul>
-      <p>Не проходите дополнительное обследование заранее без назначения: какое исследование нужно, определяет врач.</p>
-    </li>
-    <li>
-      <span class="visit-step-label">02 / На приёме</span>
-      <h3>Расскажите, что беспокоит</h3>
-      <p>Расскажите о жалобах, предыдущем опыте и пожеланиях. Если тревожитесь, скажите об этом: обсудите с врачом ощущения и возможность перерывов.</p>
-      <p>На консультации можно обсудить состояние зубов и дёсен, необходимость диагностики и возможные варианты помощи. Состав вашего приёма уточните заранее.</p>
-    </li>
-    <li>
-      <span class="visit-step-label">03 / Следующий шаг</span>
-      <h3>Понятный план вместо догадок</h3>
-      <ul>
-        <li>Что требует внимания и какие обследования нужны.</li>
-        <li>Какие варианты лечения можно рассмотреть.</li>
-        <li>В какой последовательности проходить этапы.</li>
-        <li>Что входит в расчёт стоимости и что уточняется после диагностики.</li>
-      </ul>
-      <p>Решение о процедурах принимайте после обсуждения с врачом. При звонке можно начать с вопроса о консультации.</p>
-    </li>
-  </ol>
-  <a class="locbutton" href="tel:+74991853333">Позвонить для консультации</a>
+  <div class="visit-intro">
+    <h2 id="first-visit-title">Сначала — ваш вопрос.</h2>
+    <p class="first-visit-lead">Не нужно разбираться в названиях процедур, чтобы обратиться в «Апельсин». Начните с того, что беспокоит именно вас.</p>
+    <p>«Хочу проверить зубы», «Боюсь лечения», «Ищу врача для ребёнка» — с этого уже можно начать разговор с администратором.</p>
+    <a class="content-link" href="tel:+74991853333">Обсудить первый визит</a>
+  </div>
+  <div class="visit-questions">
+    <details open>
+      <summary>Что сказать при записи?</summary>
+      <p>Расскажите, что беспокоит и к какому времени вам удобно прийти. Для ребёнка назовите возраст. Уточните, кто принимает с таким вопросом, сколько стоит консультация и что в неё входит.</p>
+      <p>Если тревожитесь, скажите об этом заранее. Обсудите с врачом свои опасения и возможность перерывов.</p>
+    </details>
+    <details>
+      <summary>Что взять с собой?</summary>
+      <p>Документ, удостоверяющий личность; имеющиеся снимки и заключения; список лекарств и сведения об аллергиях. Для ребёнка уточните документы ребёнка и законного представителя при записи.</p>
+      <p>Дополнительные снимки заранее без назначения делать не нужно: необходимое обследование определяет врач.</p>
+    </details>
+    <details>
+      <summary>О чём спросить перед лечением?</summary>
+      <p>Какие есть варианты? Зачем нужна диагностика? Что входит в расчёт, а что оплачивается отдельно? Сколько этапов предстоит?</p>
+      <p>Сохраните эти вопросы или задайте свои. Состав приёма и решение о процедурах обсудите с врачом.</p>
+    </details>
+  </div>
 </section>
+</section>
+<section class="panel callback-section" id="request" aria-labelledby="request-title">
+  <div>
+    <h2 id="request-title">Оставьте номер. Обсудим ваш вопрос.</h2>
+    <p>Администратор свяжется с вами, чтобы уточнить специалиста и время консультации. Заявка не бронирует время автоматически.</p>
+    <a class="content-link" href="tel:+74991853333">Или позвоните: +7 (499) 185-33-33</a>
+  </div>
+  <form class="callback-form" data-callback-form action="/api/callback" method="post" novalidate>
+    <div class="callback-field">
+      <label for="callback-name">ФИО</label>
+      <input id="callback-name" name="name" autocomplete="name" maxlength="80" minlength="2" required aria-describedby="callback-name-error" />
+      <p class="field-error" id="callback-name-error" hidden></p>
+    </div>
+    <div class="callback-field">
+      <label for="callback-phone">Номер телефона</label>
+      <input id="callback-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="40" placeholder="+7 (___) ___-__-__" required aria-describedby="callback-phone-error" />
+      <p class="field-error" id="callback-phone-error" hidden></p>
+    </div>
+    <div class="callback-consent">
+      <label><input type="checkbox" name="consent" required aria-describedby="callback-consent-error" /><span>Даю <a href="personal-data-consent.html" target="_blank" rel="noopener">согласие на обработку персональных данных</a> для обратного звонка.</span></label>
+      <p class="field-error" id="callback-consent-error" hidden></p>
+    </div>
+    <p class="callback-policy"><a href="privacy-policy.html" target="_blank" rel="noopener">Политика конфиденциальности</a></p>
+    <button class="locbutton" type="submit">Оставить заявку</button>
+    <p class="callback-status" role="status" aria-live="polite" tabindex="-1" hidden></p>
+    <noscript><p>Для отправки формы включите JavaScript или позвоните по номеру выше.</p></noscript>
+  </form>
 </section>
       </main>
       <footer class="panel footer">
@@ -218,6 +235,7 @@
     </div>
     <script src="../scripts/service-routes.js" defer></script>
     <script src="../scripts/consultation.js" defer></script>
+    <script src="../scripts/callback.js" defer></script>
     <script src="../scripts/navigation.js?v=patient-care" defer></script>
   </body>
 </html>

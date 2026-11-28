@@ -73,6 +73,11 @@ if (slider) {
         scheduleAutoplay();
     });
     document.addEventListener("visibilitychange", scheduleAutoplay);
+    document.addEventListener("clinic-audience-change", () => {
+        active = 0;
+        showSlide(0);
+        scheduleAutoplay();
+    });
 
     function updateMotionPreference() {
         if (reducedMotion.matches && runningAnimations.length) showSlide(0);
@@ -102,7 +107,7 @@ if (orange) {
     }
 }
 
-// Выбор аудитории меняет содержание первого экрана, не скрывая остальные услуги.
+// Выбор аудитории согласован с содержанием главной и историей браузера.
 const familyHero = document.querySelector(".hero--family");
 if (familyHero) {
     const audienceSwitch = familyHero.querySelector(".audience-switch");
@@ -131,6 +136,7 @@ if (familyHero) {
         const key = audience === "child" ? "child" : "adult";
         const scene = scenes[key];
         familyHero.dataset.audience = key;
+        window.updateHomeAudience?.(key);
         buttons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.audience === key)));
         const emphasis = document.createElement("span");
         emphasis.textContent = scene.emphasis;

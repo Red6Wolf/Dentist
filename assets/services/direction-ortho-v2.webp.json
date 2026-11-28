@@ -1,0 +1,7 @@
+{
+  "tool": "native image_gen",
+  "prompt": "Use case: product-mockup. Create one square high resolution 1254x1254 standalone premium dental service illustration for orthodontics, not a collage. Subject: a small anatomically correct U-shaped dental teaching model with upper and lower rows of ivory teeth standing naturally upright on its pink gum base; next to it on the surface a single transparent orthodontic aligner. All teeth upright with normal occlusal orientation; no rotated sideways jaw, no floating teeth. Style: restrained realistic studio product photography, matching a warm cream and apricot dental illustration series. Scene: pale beige travertine stone tabletop and softly defocused warm beige studio background, soft window light from left. Clear acrylic translucency, subtle ceramic enamel texture, gentle natural shadows. Subject fills roughly 70 percent of frame, centered, enough breathing room. No people, hands, text, labels, logos, watermark, borders or extra decorative objects. This is a conceptual object illustration, not a clinical outcome.",
+  "source": "/Users/skripnikovandrei/.codex/generated_images/01a221ac-f4a3-7672-baf3-57e834e4e07a/exec-49fbc05f-63af-4474-8fa5-f51087a71ff6.png",
+  "output": "direction-ortho-v2.webp",
+  "encoding": "cwebp q88"
+}

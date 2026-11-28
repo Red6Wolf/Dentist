@@ -5,7 +5,7 @@ import json
 import re
 from html import escape, unescape
 from pathlib import Path
-from render_shared import breadcrumbs, first_visit, render as render_shared
+from render_shared import breadcrumbs, first_visit, callback_form, render as render_shared
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_PAGES = {
@@ -86,6 +86,8 @@ def render(check=False):
     results = []
     routes = "// Маршруты и цены генерируются из каталога и scripts/prices.json.\n"
     routes += "window.clinicServiceRoutes = " + json.dumps(services, ensure_ascii=False, indent=4) + ";\n"
+    images = json.loads((ROOT / "scripts/service_images.json").read_text())
+    routes += "window.clinicServiceImages = " + json.dumps(images, ensure_ascii=False, indent=4) + ";\n"
     routes += "window.clinicPriceRows = " + json.dumps(rows, ensure_ascii=False, indent=4) + ";\n"
     results.append(write_file(ROOT / "scripts/service-routes.js", routes, check))
 
@@ -110,7 +112,6 @@ def render(check=False):
         direction = item["direction"]
         title = escape(item["title"])
         doctor_target = "doctors.html" + ("#" + item["doctors"] if item["doctors"] else "")
-        image_index = ["therapy", "prosthetics", "implantology", "children", "hygiene", "ortho", "surgery", "periodontics", "aesthetics", "diagnostics"].index(direction)
         questions = item["questions"]
         questions_html = "\n".join(f'<li>{escape(question)}</li>' for question in questions)
         body = f'''<section class="panel subpage-section service-intro">
@@ -126,7 +127,7 @@ def render(check=False):
       </div>
     </div>
     <figure class="service-art">
-      <span class="service-intro__image" style="background-position: {image_index % 5 * 25}% {image_index // 5 * 100}%" role="img" aria-label="Иллюстрация: {title}"></span>
+      <img class="service-intro__image" src="../assets/services/{images[direction]}" width="1024" height="1024" alt="Предметная иллюстрация: {title}" decoding="async" />
       <figcaption>Предметная иллюстрация, не клинический результат.</figcaption>
     </figure>
   </div>
@@ -164,7 +165,8 @@ def render(check=False):
     {doctor_preview(item["doctors"])}
   </section>
   {first_visit()}
-</section>'''
+</section>
+{callback_form()}'''
         head = catalogue.split('<body>')[0]
         head = re.sub(r'<title>.*?</title>', f'<title>{title} — Апельсин</title>', head, flags=re.S)
         head = re.sub(r'<meta\s+name="description"\s+content="[^"]*"\s*/>', f'<meta name="description" content="{title}: вопросы к консультации, цены и специалисты семейной стоматологии Апельсин." />', head)
@@ -183,21 +185,23 @@ def render(check=False):
     </div>
     <script src="../scripts/service-routes.js" defer></script>
     <script src="../scripts/consultation.js" defer></script>
+    <script src="../scripts/callback.js" defer></script>
     <script src="../scripts/navigation.js?v=patient-care" defer></script>
   </body>
 </html>
 '''
         results.append(write_file(ROOT / f"pages/{slug}.html", markup, check))
     legacy = {
-        "implantation.html": ("implantology", "Имплантация зубов", 2, ""),
-        "veneers.html": ("aesthetics", "Виниры", 8, ""),
-        "orthodontics.html": ("ortho", "Исправление прикуса", 5, "orthodontists"),
+        "implantation.html": ("implantology", "Имплантация зубов", ""),
+        "veneers.html": ("aesthetics", "Виниры", ""),
+        "orthodontics.html": ("ortho", "Исправление прикуса", "orthodontists"),
     }
-    for page, (direction, title, image_index, specialty) in legacy.items():
+    for page, (direction, title, specialty) in legacy.items():
         path = ROOT / "pages" / page
         content = path.read_text()
         content = re.sub(r'\s*<!-- consultation:start -->.*?<!-- consultation:end -->', '', content, flags=re.S)
         content = re.sub(r'\s*<!-- visit-guide:start -->.*?<!-- visit-guide:end -->', '', content, flags=re.S)
+        content = re.sub(r'\s*<!-- callback:start -->.*?<!-- callback:end -->', '', content, flags=re.S)
         content = re.sub(r'\s*<!-- specialists:start -->.*?<!-- specialists:end -->', '', content, flags=re.S)
         if 'href="../styles/service-detail.css"' not in content:
             content = content.replace('  </head>', '    <link rel="stylesheet" href="../styles/service-detail.css" />\n  </head>')
@@ -214,7 +218,7 @@ def render(check=False):
       <div class="care-actions"><a class="locbutton" href="tel:+74991853333">Позвонить для консультации</a><a class="service-price-link" href="#service-cost">Посмотреть стоимость</a></div>
     </div>
     <figure class="service-art">
-      <span class="service-intro__image" style="background-position: {image_index % 5 * 25}% {image_index // 5 * 100}%" role="img" aria-label="Иллюстрация: {title}"></span>
+      <img class="service-intro__image" src="../assets/services/{images[direction]}" width="1024" height="1024" alt="Предметная иллюстрация: {title}" decoding="async" />
       <figcaption>Предметная иллюстрация, не клинический результат.</figcaption>
     </figure>
   </div>
@@ -235,9 +239,11 @@ def render(check=False):
   {doctor_preview(specialty)}
 </section>
 <!-- specialists:end -->'''
-        content = content.replace('      </main>', doctors + '\n<!-- visit-guide:start -->\n' + first_visit() + '\n<!-- visit-guide:end -->\n      </main>')
+        content = content.replace('      </main>', doctors + '\n<!-- visit-guide:start -->\n' + first_visit() + '\n<!-- visit-guide:end -->\n<!-- callback:start -->\n' + callback_form() + '\n<!-- callback:end -->\n      </main>')
         if 'src="../scripts/consultation.js"' not in content:
             content = content.replace('    <script src="../scripts/navigation.js', '    <script src="../scripts/service-routes.js" defer></script>\n    <script src="../scripts/consultation.js" defer></script>\n    <script src="../scripts/navigation.js')
+        if 'src="../scripts/callback.js"' not in content:
+            content = content.replace('    <script src="../scripts/navigation.js', '    <script src="../scripts/callback.js" defer></script>\n    <script src="../scripts/navigation.js')
         content = content.replace("Позвонить для записи", "Позвонить для консультации")
         results.append(write_file(path, content, check))
     results.append(render_shared(check))

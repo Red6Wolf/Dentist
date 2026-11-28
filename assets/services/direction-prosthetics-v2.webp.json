@@ -1,0 +1,8 @@
+{
+  "prompt": "Use case: product-mockup. Asset type: one individual premium dental website service image, square 1024x1024 minimum, generated at native high resolution. Reference atlas is only visual style guidance; create a new individual still life, never a grid, collage or contact sheet. Subject: one lifelike ivory zirconia ceramic dental crown placed in the foreground at a slight angle so its thin lower rim and hollow inner fitting cavity are clearly visible, next to one upright anatomical molar tooth model with smooth roots. The crown must be a removable tooth-shaped ceramic cap, visibly distinct from the complete tooth model. Accurate occlusal cusp anatomy, fine ceramic/enamel translucency, tiny anatomical fissures, subtle material texture. No implant, screws, metal post or dentures. Warm cream and apricot beige editorial setting, clean pale porous limestone surface, softly blurred warm ivory background. Premium photorealistic 3D/product photograph with tactile fine details at genuine native resolution. Minimal central composition, full objects within frame with breathing room, low three-quarter camera, both objects crisp. Soft natural side light, gentle contact shadows. No people, faces, logos, text, watermark or labels. Do not upscale or extract a reference atlas tile.",
+  "tool": "built-in image_gen.imagegen",
+  "source": "/Users/skripnikovandrei/.codex/generated_images/01a21f88-3e84-75c0-8e77-5cd2bcd48a9e/exec-2575ead4-9e19-4bc5-a534-ff26dd4573ab.png",
+  "reference": "assets/services/directions-atlas.webp",
+  "processing": "cwebp -q 88; native resolution, no resizing",
+  "asset": "direction-prosthetics-v2.webp"
+}

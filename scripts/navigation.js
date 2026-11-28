@@ -54,7 +54,33 @@ if (navigation) {
     menu.append(mobileDirections);
 
     const panels = [];
+    const hoverPointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+    let openTimer = 0;
+    let closeTimer = 0;
+
+    function cancelMenuTimers() {
+        clearTimeout(openTimer);
+        clearTimeout(closeTimer);
+    }
+
+    function openPanel(toggle, panel, moveFocus = false) {
+        closePanels();
+        panel.hidden = false;
+        toggle.setAttribute('aria-expanded', 'true');
+        navigation.classList.add('nav--menu-open');
+        if (moveFocus) panel.querySelector('a').focus({ preventScroll: true });
+    }
+
+    function scheduleClose() {
+        clearTimeout(openTimer);
+        clearTimeout(closeTimer);
+        closeTimer = setTimeout(() => {
+            // Переход указателя из шапки в панель не прерывает работу клавиатурой.
+            if (!panels.some(({ panel }) => !panel.hidden && panel.contains(document.activeElement))) closePanels();
+        }, 260);
+    }
     function closePanels(returnFocus = false) {
+        cancelMenuTimers();
         for (const { toggle, panel } of panels) {
             if (!panel.hidden && returnFocus) toggle.focus({ preventScroll: true });
             panel.hidden = true;
@@ -109,13 +135,22 @@ if (navigation) {
         }
         document.body.append(panel);
         panels.push({ toggle, panel });
+        panel.classList.toggle("mega-menu--clinic", index === 2);
         toggle.addEventListener("click", () => {
-            const open = panel.hidden;
-            closePanels();
-            panel.hidden = !open;
-            toggle.setAttribute("aria-expanded", String(open));
-            navigation.classList.toggle("nav--menu-open", open);
-            if (open) panel.querySelector("a").focus({ preventScroll: true });
+            if (panel.hidden) openPanel(toggle, panel, true);
+            else closePanels();
+        });
+        group.addEventListener('pointerenter', event => {
+            if (!hoverPointer.matches || event.pointerType === 'touch') return;
+            cancelMenuTimers();
+            openTimer = setTimeout(() => openPanel(toggle, panel), 160);
+        });
+        group.addEventListener('pointerleave', event => {
+            if (event.pointerType !== 'touch' && hoverPointer.matches) scheduleClose();
+        });
+        panel.addEventListener('pointerenter', cancelMenuTimers);
+        panel.addEventListener('pointerleave', event => {
+            if (event.pointerType !== 'touch' && hoverPointer.matches) scheduleClose();
         });
         toggle.addEventListener("keydown", event => {
             if (event.key === "ArrowDown") {

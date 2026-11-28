@@ -1,0 +1,12 @@
+{
+  "prompt": "Use case: product-mockup\nAsset type: dental clinic service card, one individual square editorial photograph, 1536x1536 pixels or at least 1024x1024 native generation.\nPrimary request: refined still life illustrating periodontics: a small anatomically plausible educational demonstration model of three natural ivory teeth seated in healthy softly muted pink gum tissue, with one fine soft interdental brush and a restrained stainless steel periodontal probe lying alongside on pale warm limestone.\nScene/backdrop: seamless creamy ivory and warm apricot studio backdrop, pale honed warm stone tabletop.\nStyle/medium: high-end editorial product photography, precise sharp fine details, realistic material finish, quiet minimal composition. A single coherent photograph, not collage.\nComposition/framing: three-quarter close view, complete objects visible with breathing space around edges; small model slightly left of center and tools arranged calmly in foreground. Natural model proportions, no cross-section, no exposed tissue, no disease.\nLighting/mood: large soft window light, gentle directional shadows and subtle tactile highlights, warm calm clinical trust.\nMaterials/textures: delicate natural enamel texture and subtle translucency, matte soft gum material, fine polished metal details and soft tiny brush bristles, lightly porous stone.\nColor palette: warm ivory, cream, beige, subdued apricot pink, natural steel.\nConstraints: no people, no text, no logos, no watermark, no labels, no packaging, no extra teeth floating, no graphical overlays; one image only. New detailed native-resolution generation, not an upscale or crop.",
+  "tool": "image_gen.imagegen",
+  "mode": "built-in",
+  "source_provenance": {
+    "type": "native AI image generation",
+    "source": "/Users/skripnikovandrei/.codex/generated_images/01a21f88-90f3-7613-8e2a-7bf020e18ba8/exec-d8192982-e804-412c-819b-350d3f77b056.png",
+    "style_reference_inspected": "assets/services/directions-atlas.webp",
+    "reference_usage": "visual style inspected; no reference pixels used",
+    "transform": "cwebp -q 88; no resizing or interpolation"
+  }
+}

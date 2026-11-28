@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: product-mockup. Create one square 1254x1254 high resolution standalone premium dental service illustration for dental examination and diagnostics. Subject: one clean stainless steel dental mirror with finely knurled handle beside a modern small ivory rectangular intraoral digital X-ray sensor with smoothly rounded corners and one thin dark cable lying in a neat relaxed curve. Show only these simple diagnostic objects, no display screen or X-ray image. Restrained realistic studio product still-life matching a warm cream and apricot dental illustration series. Pale beige porous travertine tabletop, softly defocused warm beige background, soft window light from upper left, delicate natural contact shadows. Accurate metal reflections, crisp detailed polished instrument and sensor housing, objects occupy roughly 70 percent of frame, balanced centered composition with breathing room. No people, hands, teeth, mouth, writing, text, labels, logos, watermark, border, grid or collage. Conceptual object illustration, not a clinical result.",
+  "tool": "built-in image_gen.imagegen",
+  "source": "/Users/skripnikovandrei/.codex/generated_images/01a22193-cb98-7242-b281-0a41f2b835bf/exec-9e13426a-dc67-408f-9309-235f391959f0.png",
+  "processing": "cwebp -q 88; native resolution, no resizing",
+  "asset": "direction-diagnostics-v2.webp"
+}

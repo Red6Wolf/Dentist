@@ -227,6 +227,10 @@ def main():
     results = [
         update("pages/services.html", "procedures", procedure_index(groups), args.check),
         update("index.html", "preview", preview, args.check),
+        update("index.html", "child-preview", "\n".join(
+            f'<tr><th scope="row">{escape(rows[key]["name"])}</th><td>{escape(rows[key]["price"])}</td></tr>'
+            for key in ("p01-03", "p01-04", "p03-01", "p05-06")
+        ), args.check),
         update("pages/prices.html", "directory", "\n".join(map(directory_table, groups)), args.check),
         update("pages/prices.html", "service-index", service_price_index(rows), args.check),
     ]

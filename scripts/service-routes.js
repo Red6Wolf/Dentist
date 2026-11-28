@@ -865,6 +865,18 @@ window.clinicServiceRoutes = {
         ]
     }
 };
+window.clinicServiceImages = {
+    "therapy": "direction-therapy-v2.webp",
+    "prosthetics": "direction-prosthetics-v2.webp",
+    "implantology": "direction-implantology-v2.webp",
+    "children": "direction-children-v2.webp",
+    "hygiene": "direction-hygiene-v2.webp",
+    "ortho": "direction-ortho-v2.webp",
+    "surgery": "direction-surgery-v2.webp",
+    "periodontics": "direction-periodontics-v2.webp",
+    "aesthetics": "direction-aesthetics-v2.webp",
+    "diagnostics": "direction-diagnostics-v2.webp"
+};
 window.clinicPriceRows = {
     "p01-01": {
         "id": "p01-01",

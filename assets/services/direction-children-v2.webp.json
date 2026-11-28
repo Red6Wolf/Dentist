@@ -1,0 +1,8 @@
+{
+  "prompt": "Generate ONE new individual square premium dental service object illustration, at least 1024x1024, matching the warm ivory, cream, soft apricot editorial still-life style of the supplied reference atlas. The atlas is STYLE REFERENCE ONLY, do not crop, enlarge or reproduce the atlas grid. Subject: one friendly upright ivory molar toy/object with two tiny dark round eyes and a gentle small smile, beside one small natural wooden child toothbrush with clean ivory bristles. Preserve the simple smiling-tooth-with-brush idea of the fourth atlas tile. All main objects fully in frame, large but with quiet breathing room, centered composition, pale porous limestone surface, warm softly blurred beige background, soft natural side lighting, accurate dimensional product photography/photoreal 3D, high native detail on enamel, wood grain and individual bristles, sharp objects without excessive depth-of-field blur. Calm, trustworthy and welcoming family dental website. No real people, no child faces, no text, no watermark, no logo, no additional objects, no collage, no border.",
+  "tool": "built-in image_gen.imagegen",
+  "source": "/Users/skripnikovandrei/.codex/generated_images/01a22193-cb98-7242-b281-0a41f2b835bf/exec-ccf5022b-8fd9-4bf5-a856-080d16484f23.png",
+  "reference": "assets/services/directions-atlas.webp",
+  "processing": "cwebp -q 88; native resolution, no resizing",
+  "asset": "direction-children-v2.webp"
+}

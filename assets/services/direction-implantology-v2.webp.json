@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: product-mockup. Create one square 1254x1254 high resolution standalone premium dental service illustration for dental implantology. Subject: one clean upright titanium dental implant screw with abutment, standing alongside one separate ivory molar crown, a precise dental product still-life. Accurate machined titanium threads and polished abutment, anatomically convincing molar crown with natural enamel translucency. Restrained realistic studio product photography matching a warm cream and apricot dental illustration series. Pale beige travertine tabletop, softly defocused warm beige background, soft window light from upper left, delicate contact shadows. Objects fill roughly 70 percent of frame, centered with breathing room, both objects crisp and detailed. No people, hands, blood, gum surgery, labels, text, logos, watermark, border, grid or collage. Conceptual object illustration, not a clinical outcome.",
+  "tool": "built-in image_gen.imagegen",
+  "source": "/Users/skripnikovandrei/.codex/generated_images/01a22193-cb98-7242-b281-0a41f2b835bf/exec-4aab8d96-0e4e-41ca-b2f9-6672c5d87c74.png",
+  "processing": "cwebp -q 88; native resolution, no resizing",
+  "asset": "direction-implantology-v2.webp"
+}

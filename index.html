@@ -98,7 +98,6 @@
           </div>
           <figure class="family-hero-image">
             <img data-audience-image src="assets/clinic/hero-adult-v2.webp" width="1536" height="1024" alt="Сюжетная иллюстрация: пациентка беседует со стоматологом" fetchpriority="high" decoding="async" />
-            <figcaption>Сюжетная иллюстрация. Не фотография пациента клиники.</figcaption>
           </figure>
         </div>
       </header>
@@ -117,19 +116,19 @@
           <div class="services">
             <div class="feature-slider" role="region" aria-label="Направления стоматологии">
               <div class="feature-slides">
-                <a class="feature-slide" href="pages/prices.html?direction=children">
-                  <img src="assets/clinic/gallery-13.webp" alt="" loading="lazy" decoding="async" />
-                  <div class="feature-caption">
-                    <h3 class="feature-title">Детская стоматология</h3>
-                    <span class="feature-description">Приём, профилактика и лечение молочных зубов</span>
-                    <span class="feature-open">Услуги и цены <span class="icon-arrow" aria-hidden="true"></span></span>
-                  </div>
-                </a>
-                <a class="feature-slide" href="pages/prices.html?direction=therapy" hidden>
+                <a class="feature-slide" href="pages/restoration.html">
                   <img src="assets/clinic/gallery-04.webp" alt="" loading="lazy" decoding="async" />
                   <div class="feature-caption">
                     <h3 class="feature-title">Лечение зубов</h3>
-                    <span class="feature-description">Лечение кариеса и пульпита, восстановление зубов</span>
+                    <span class="feature-description">Кариес, лечение каналов и восстановление зубов</span>
+                    <span class="feature-open">Услуги и цены <span class="icon-arrow" aria-hidden="true"></span></span>
+                  </div>
+                </a>
+                <a class="feature-slide" href="pages/dental-hygiene.html" hidden>
+                  <img src="assets/clinic/gallery-09.webp" alt="" loading="lazy" decoding="async" />
+                  <div class="feature-caption">
+                    <h3 class="feature-title">Гигиена и профилактика</h3>
+                    <span class="feature-description">Профессиональная чистка и профилактические процедуры</span>
                     <span class="feature-open">Услуги и цены <span class="icon-arrow" aria-hidden="true"></span></span>
                   </div>
                 </a>
@@ -153,15 +152,15 @@
             </div>
             <div>
               <div class="service-list">
-                <a class="service-row" href="pages/prices.html?direction=children">
+                <a class="service-row" href="pages/prosthetics.html">
                   <div>
-                    <h3>Детская стоматология</h3>
-                    <p>Лечение молочных зубов · Профилактика</p>
+                    <h3>Протезирование</h3>
+                    <p>Коронки · Восстановление зубов</p>
                   </div>
 
                   <span class="arrow icon-arrow" aria-hidden="true"></span>
                 </a>
-                <a class="service-row" href="pages/prices.html?direction=therapy">
+                <a class="service-row" href="pages/restoration.html">
                   <div>
                     <h3>Лечение зубов</h3>
                     <p>Кариес · Пульпит · Реставрации</p>
@@ -248,6 +247,11 @@
                 </details>
               </div>
             </div>
+          </div>
+          <div class="parent-guide" data-parent-guide hidden>
+            <h3>Приём для ребёнка: начните с разговора</h3>
+            <p>При звонке назовите возраст, что беспокоит и был ли ребёнок у стоматолога раньше. Если он волнуется, расскажите об этом. Уточните, кто принимает детей его возраста и как проходит знакомство с врачом.</p>
+            <a class="content-link" href="tel:+74991853333">Задать вопрос о детском приёме</a>
           </div>
         </section>
         <!-- Расположение клиники -->
@@ -427,6 +431,16 @@
             </div>
           </div>
         </section>
+        <template id="child-price-preview">
+          <table><tbody>
+            <!-- prices:child-preview:start -->
+            <tr><th scope="row">Прием врача детского стоматолога-терапевта первичный</th><td>1 000 ₽</td></tr>
+            <tr><th scope="row">Прием врача детского стоматолога-терапевта повторный</th><td>800 ₽</td></tr>
+            <tr><th scope="row">Лечение кариеса молочного зуба</th><td>4 050 ₽</td></tr>
+            <tr><th scope="row">Удаление подвижного молочного зуба (включая аппликационную анестезию)</th><td>1 950 ₽</td></tr>
+            <!-- prices:child-preview:end -->
+          </tbody></table>
+        </template>
         <!-- Отзывы пациентов -->
         <section class="panel reviews" id="reviews">
           <div class="reviews-top">
@@ -467,7 +481,7 @@
           </div>
         </section>
         <!-- Связь с администратором -->
-        <section class="panel section care-section">
+        <section class="panel section care-section" id="visit-intro">
           <h2>Первый визит начинается с ваших вопросов</h2>
           <p>Что будет на приёме, когда обсуждать стоимость и как рассказать врачу о тревоге — подготовьтесь заранее.</p>
           <div class="care-actions"><a class="locbutton" href="pages/first-visit.html">Подготовиться к первому визиту</a><a class="content-link" href="pages/prices.html#examples">Примеры стоимости</a></div>
@@ -605,6 +619,7 @@
       </footer>
     </div>
     <script src="scripts/navigation.js?v=patient-care" defer></script>
+    <script src="scripts/home-audience.js" defer></script>
     <script src="scripts/home.js?v=hover-pause" defer></script>
   </body>
 </html>

@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: product-mockup. Create one square 1254x1254 high resolution standalone premium dental service illustration for professional dental hygiene. Subject: one clean stainless steel dental mirror with finely knurled handle lying diagonally beside a polished dental prophylaxis handpiece with a small ivory rubber polishing cup. Restrained realistic studio product still-life matching a warm cream and apricot dental object illustration series. Pale beige porous travertine tabletop, softly defocused warm beige background, soft window light from upper left, delicate contact shadows. Precise metal reflections, accurate clean dental instruments, crisp fine detail across both main objects. Objects occupy roughly 70 percent of frame in balanced central composition with breathing room. No people, hands, faces, blood, teeth in mouths, writing, labels, logos, watermark, border, grid or collage. Conceptual object illustration, not a clinical result.",
+  "tool": "built-in image_gen.imagegen",
+  "source": "/Users/skripnikovandrei/.codex/generated_images/01a22193-cb98-7242-b281-0a41f2b835bf/exec-f4fcb60a-5614-44fc-805d-08ecddb1b6f8.png",
+  "processing": "cwebp -q 88; native resolution, no resizing",
+  "asset": "direction-hygiene-v2.webp"
+}
