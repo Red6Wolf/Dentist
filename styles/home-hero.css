@@ -1,4 +1,4 @@
-/* Светлое паспарту и абрикосовая панель с округлым краем апельсиновой дольки. */
+/* Абрикосовая панель с округлым краем и едва заметным срезом апельсина. */
 @font-face {
     font-family: 'Comfortaa';
     font-style: normal;
@@ -29,7 +29,6 @@
     height: clamp(600px, 45vw, 680px);
     min-height: 620px;
     margin: 0 auto;
-    border: 1px solid #d6a577;
     border-radius: 30px;
     overflow: hidden;
     background: var(--cream);
@@ -63,14 +62,28 @@
     top: 12px;
     z-index: 1;
     display: block;
-    width: 52%;
-    max-width: 780px;
+    width: calc(52% - 28px);
+    max-width: 750px;
     margin: 0;
     padding: 32px clamp(24px, 2.4vw, 36px) 32px clamp(68px, 5.6vw, 88px);
     border: 1px solid var(--hero-peel);
     border-radius: 140px 18px 18px 140px;
     background: var(--hero-apricot);
     box-sizing: border-box;
+    isolation: isolate;
+    overflow: hidden;
+}
+.hero--family .hero-family-copy::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    right: -80px;
+    bottom: -104px;
+    width: 360px;
+    height: 360px;
+    background: url('../assets/icons/citrus-signature.svg') center / contain no-repeat;
+    opacity: .04;
+    pointer-events: none;
 }
 .hero--family .audience-switch {
     display: inline-flex;
@@ -222,7 +235,7 @@
 }
 @media (min-width: 1600px) {
     .hero--family .hero-family-copy {
-        width: 49%;
+        width: calc(49% - 28px);
     }
 }
 @media (max-width: 1180px) and (min-width: 761px) {
@@ -302,7 +315,9 @@
         object-position: left center;
     }
     .hero--family .hero-family-copy {
-        position: static;
+        position: relative;
+        top: auto;
+        right: auto;
         order: 0;
         display: block;
         width: 100%;
@@ -310,6 +325,12 @@
         padding: 20px 16px 20px 20px;
         background: var(--hero-apricot);
         border-radius: 40px 16px 16px 40px;
+    }
+    .hero--family .hero-family-copy::before {
+        right: -86px;
+        bottom: -66px;
+        width: 280px;
+        height: 280px;
     }
     .hero--family .audience-switch {
         margin-bottom: 24px;
@@ -366,6 +387,12 @@
     }
 }
 @media (max-width: 400px) {
+    .hero--family .hero-family-copy::before {
+        right: -80px;
+        bottom: -60px;
+        width: 240px;
+        height: 240px;
+    }
     .hero--family .hero-family-copy h1 {
         font-size: clamp(28px, 8.7vw, 34px);
     }
