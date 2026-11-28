@@ -145,11 +145,6 @@ main:focus {
     min-height: 44px;
 }
 
-.brand:hover .brand-caption,
-.brand:focus-visible .brand-caption {
-    color: #fff;
-}
-
 .brand-name {
     color: var(--orange);
     font-size: 28px;

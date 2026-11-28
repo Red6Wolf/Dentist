@@ -167,14 +167,10 @@ body {
     color: rgba(255, 250, 244, .86);
 }
 
-.brand:hover .brand-caption,
-.brand:focus-visible .brand-caption,
 .navlinks a:hover {
     color: var(--ink);
 }
 
-.hero .brand:hover .brand-caption,
-.hero .brand:focus-visible .brand-caption,
 .hero .navlinks a:hover {
     color: #fffaf4;
 }
