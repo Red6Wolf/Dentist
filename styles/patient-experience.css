@@ -1,0 +1,748 @@
+/* Путь пациента: выбор аудитории, навигация и различимые смысловые разделы. */
+:root {
+    --patient-peach: #f7dfc5;
+    --patient-sage: #eaf0e4;
+    --site-nav-bottom: 100px;
+    --section-nav-height: 66px;
+}
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--site-nav-bottom) + 20px);
+}
+html:has([data-service-detail]) {
+    scroll-padding-top: calc(var(--site-nav-bottom) + var(--section-nav-height) + 20px);
+}
+[hidden] {
+    display: none !important;
+}
+.breadcrumbs {
+    margin: 24px clamp(20px, 5vw, 92px);
+    font-size: 15px;
+    line-height: 1.6;
+}
+.breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.breadcrumbs li {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 12px;
+    min-width: 0;
+}
+.breadcrumbs li + li::before {
+    content: "/";
+    color: var(--muted);
+}
+.breadcrumbs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    color: var(--muted);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+.breadcrumbs a:hover {
+    color: var(--orange-action);
+}
+.breadcrumbs [aria-current] {
+    overflow-wrap: anywhere;
+}
+
+/* Первый экран — разговор и выбор сценария вместо текста поверх фотографии. */
+.hero.hero--family {
+    display: block;
+    min-height: 0;
+    height: auto;
+    padding: 132px clamp(24px, 4vw, 72px) 44px;
+    background: var(--cream);
+    color: var(--ink);
+}
+.hero.hero--family::before {
+    display: none;
+}
+.family-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(32px, 4vw, 72px);
+    align-items: center;
+}
+.hero--family .hero-copy {
+    color: var(--ink);
+    max-width: none;
+}
+.hero--family h1 {
+    margin: 30px 0 20px;
+    max-width: 16ch;
+    font-size: clamp(40px, 4.2vw, 72px);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -.035em;
+    text-wrap: balance;
+}
+.hero--family h1 span {
+    color: var(--orange-action);
+}
+.hero--family .hero-copy p {
+    max-width: 43ch;
+    margin: 0 0 28px;
+    color: var(--muted);
+    font-size: clamp(17px, 1.35vw, 20px);
+    line-height: 1.65;
+}
+.audience-switch {
+    display: inline-flex;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+}
+.audience-switch button {
+    min-height: 44px;
+    padding: 10px 24px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    font-weight: 600;
+    cursor: pointer;
+}
+.audience-switch [aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--cream);
+}
+.hero--family [data-audience="child"][aria-pressed="true"] {
+    background: var(--orange-action);
+}
+.family-hero-image {
+    min-width: 0;
+    margin: 0;
+}
+.family-hero-image img {
+    display: block;
+    width: 100%;
+    height: clamp(470px, 44vw, 650px);
+    object-fit: cover;
+    object-position: 43% center;
+    border-radius: 16px;
+}
+.hero--family[data-audience="child"] .family-hero-image img {
+    object-position: 47% center;
+}
+.family-hero-image figcaption,
+.service-art figcaption {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+.hero--family .hero-price-link {
+    background: transparent;
+    border-color: var(--line);
+    color: var(--ink);
+}
+.hero--family .hero-price-link:hover {
+    background: var(--sand);
+    border-color: var(--orange-action);
+}
+.hero--family .hero-family-visit {
+    display: table;
+    margin-top: 22px;
+    min-height: 44px;
+    align-content: center;
+    color: var(--ink);
+}
+.hero--family .hero-location-link {
+    display: inline-flex;
+    min-height: 44px;
+    margin-top: 8px;
+    font-size: 16px;
+    color: var(--muted);
+}
+.hero--family .nav--enhanced :is(.navlinks a, .navphone, .brand-caption, .nav-address, .nav-contact-hours) {
+    color: var(--ink);
+    text-shadow: none;
+}
+
+/* Крупный ориентир на услуге; иллюстрация явно отделена от клинических результатов. */
+.service-page > .service-intro {
+    padding-block: 32px 40px;
+}
+.service-intro .breadcrumbs {
+    margin: 0 0 24px;
+}
+.service-page .service-intro__heading {
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 31%);
+    gap: clamp(28px, 4vw, 64px);
+}
+.service-page .service-art {
+    margin: 0;
+    min-width: 0;
+}
+.service-page .service-intro__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    margin: 0;
+    border-radius: 16px;
+}
+.service-page .service-intro .care-actions {
+    margin: 28px 0 0;
+}
+.service-page .service-reading {
+    overflow: visible;
+    padding: 0;
+    background: transparent;
+    border: 0;
+}
+.service-page .service-reading > section,
+.service-page > .care-section,
+.service-page > .first-visit-guide {
+    margin: 0 0 8px;
+    padding: clamp(32px, 4.5vw, 64px) clamp(24px, 5vw, 92px);
+    border: 0;
+    border-radius: var(--radius-section);
+    background: var(--cream);
+}
+.service-page .service-reading #service-cost,
+.service-page > #service-cost {
+    background: var(--patient-peach);
+}
+.service-page .service-reading #service-steps {
+    background: var(--ink);
+    color: var(--cream);
+}
+.service-page #service-steps p {
+    color: #efdfd0;
+}
+.service-page #service-steps li {
+    border-color: #8e7867;
+}
+.service-page .service-reading p,
+.service-page > .care-section p,
+.first-visit-guide p,
+.first-visit-guide li {
+    font-size: 18px;
+    line-height: 1.65;
+}
+.service-page .service-reading h2,
+.first-visit-guide h2 {
+    max-width: 28ch;
+    margin: 0 0 20px;
+    font-size: clamp(28px, 3vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -.025em;
+}
+.service-page .service-questions {
+    font-size: 18px;
+    line-height: 1.65;
+}
+.service-page .service-section-nav {
+    position: sticky;
+    z-index: 80;
+    top: calc(var(--site-nav-bottom) + 6px);
+    display: flex;
+    gap: 6px;
+    margin: 0 0 12px;
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--cream);
+}
+.service-page .service-section-nav a {
+    flex: 1;
+    justify-content: center;
+    min-height: 44px;
+    padding: 10px 14px;
+    font-size: 16px;
+    font-weight: 600;
+}
+.service-page .service-section-nav a:is(:hover, :focus-visible) {
+    background: var(--sand);
+    color: var(--orange-action);
+}
+.service-page .service-section-nav [aria-current] {
+    background: var(--ink);
+    color: var(--cream);
+}
+.service-page .service-doctor-list {
+    gap: 28px;
+}
+.service-page .service-doctor {
+    gap: 24px;
+    align-items: center;
+    padding-block: 24px;
+}
+.service-page .service-doctor img {
+    width: 148px;
+    height: 180px;
+    flex: 0 0 148px;
+    object-fit: cover;
+    object-position: center top;
+}
+.service-page .service-doctor strong {
+    font-size: 20px;
+    line-height: 1.3;
+}
+.service-page .service-doctor > span > span {
+    font-size: 16px;
+}
+.profile-heading {
+    grid-template-columns: clamp(140px, 14vw, 190px) minmax(0, 1fr);
+    gap: 24px;
+}
+.profile-heading img {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center top;
+}
+
+/* Порядок первого посещения полностью доступен на этой же странице. */
+.service-page .service-reading .first-visit-guide,
+.service-page > .first-visit-guide,
+.first-visit-guide {
+    background: var(--patient-sage);
+}
+.first-visit-guide {
+    padding: clamp(32px, 4.5vw, 64px) clamp(24px, 5vw, 92px);
+    border-radius: var(--radius-section);
+    margin-bottom: 8px;
+}
+.first-visit-guide .first-visit-lead {
+    max-width: 68ch;
+    color: var(--muted);
+}
+.first-visit-steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+    padding: 0;
+    margin: 36px 0;
+    list-style: none;
+}
+.first-visit-steps > li {
+    border-top: 1px solid #b9c4ad;
+    padding-top: 24px;
+}
+.visit-step-label {
+    display: block;
+    margin-bottom: 14px;
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 600;
+}
+.first-visit-steps h3 {
+    margin: 0 0 16px;
+    font-size: 22px;
+    line-height: 1.3;
+}
+.first-visit-steps ul {
+    padding-left: 22px;
+}
+.first-visit-steps li li + li {
+    margin-top: 10px;
+}
+
+/* Быстрый доступ к направлениям и информации о клинике. */
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+.nav-expand {
+    display: inline-grid;
+    place-content: center;
+    width: 30px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+}
+.nav-expand::after {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+}
+.nav-expand[aria-expanded="true"]::after {
+    transform: translateY(2px) rotate(225deg);
+}
+.hero .nav--menu-open,
+.subpage-hero .nav--menu-open {
+    background: var(--cream);
+}
+.mega-menu {
+    position: fixed;
+    z-index: 110;
+    top: calc(var(--site-nav-bottom) + 8px);
+    left: 50%;
+    width: min(960px, calc(100% - 40px));
+    max-height: calc(100dvh - var(--site-nav-bottom) - 28px);
+    overflow-y: auto;
+    transform: translateX(-50%);
+    padding: 30px;
+    border-radius: 16px;
+    background: var(--surface-raised);
+    box-shadow: 0 14px 48px rgba(48, 37, 31, .18);
+}
+.mega-menu-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+}
+.mega-menu-heading strong {
+    font-size: 26px;
+}
+.mega-menu-heading a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--orange-action);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+.mega-menu-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 24px;
+}
+.mega-menu-links a {
+    display: grid;
+    gap: 6px;
+    padding: 14px;
+    border-radius: 10px;
+}
+.mega-menu-links a:hover,
+.mega-menu-links a:focus-visible {
+    background: var(--sand);
+}
+.mega-menu-links strong {
+    font-size: 18px;
+}
+.mega-menu-links span {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.5;
+}
+.mega-menu-help {
+    display: grid;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 20px;
+    background: var(--patient-peach);
+    border-radius: 12px;
+    line-height: 1.6;
+}
+.mega-menu-help:hover {
+    background: #f1d2af;
+}
+.mobile-menu > details {
+    border-top: 1px solid #786658;
+    margin-top: 6px;
+    padding-top: 6px;
+}
+.mobile-menu summary {
+    padding: 12px 14px;
+    min-height: 48px;
+    font-size: 17px;
+    cursor: pointer;
+}
+.mobile-directions {
+    display: grid;
+    gap: 4px;
+    padding-top: 4px;
+}
+.mobile-directions a {
+    font-size: 16px;
+    font-weight: 400;
+}
+.nav-hours,
+.nav-contact-hours {
+    font-size: 14px;
+    letter-spacing: normal;
+}
+
+/* Реквизиты и ограничения всегда находятся в одном и том же месте. */
+.footer-legal {
+    display: grid;
+    gap: 18px;
+    margin-top: 28px;
+    padding-top: 26px;
+    border-top: 1px solid #786658;
+    color: var(--footer-text);
+    font-size: 15px;
+    line-height: 1.65;
+}
+.footer-legal p {
+    margin: 0;
+}
+.footer-legal .footer-medical {
+    max-width: 55ch;
+    font-size: clamp(19px, 2vw, 25px);
+    line-height: 1.4;
+    color: var(--cream);
+}
+.footer-company {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px 28px;
+}
+.footer-legal a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+.privacy-content {
+    font-size: 18px;
+    line-height: 1.7;
+}
+.privacy-content :is(p, ol, h2) {
+    max-width: 72ch;
+}
+.privacy-content h2 {
+    margin-top: 48px;
+    font-size: 26px;
+    line-height: 1.35;
+    letter-spacing: -.02em;
+}
+.privacy-content li + li {
+    margin-top: 12px;
+}
+
+@media (max-width: 1180px) {
+    .hero.hero--family {
+        padding-top: 158px;
+    }
+    .service-page .service-doctor-list {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .profile-heading {
+        grid-template-columns: 145px minmax(0, 1fr);
+        gap: 18px;
+    }
+}
+@media (max-width: 900px) {
+    .first-visit-steps {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+    }
+    .family-hero-grid {
+        gap: 28px;
+    }
+    .family-hero-image img {
+        height: 540px;
+    }
+    .service-page .service-intro__heading {
+        grid-template-columns: minmax(0, 1fr) 220px;
+        gap: 24px;
+    }
+    .profiles {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+@media (max-width: 650px) {
+    .hero.hero--family {
+        padding: 116px 20px 28px;
+    }
+    .family-hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+    }
+    .hero--family h1 {
+        font-size: clamp(32px, 8.5vw, 43px);
+        margin-block: 24px 18px;
+    }
+    .family-hero-image img {
+        height: auto;
+        aspect-ratio: 1.2;
+        object-position: center;
+    }
+    .hero--family .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    .hero--family .hero-actions :is(.pillbtn, .hero-price-link) {
+        font-size: 16px;
+        justify-content: center;
+    }
+    .audience-switch button {
+        padding-inline: 22px;
+    }
+    .hero--family .hero-family-visit {
+        margin-top: 14px;
+    }
+    .service-page .service-intro__heading {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+    }
+    .service-page .service-art {
+        width: min(100%, 310px);
+    }
+    .service-page .service-intro h1 {
+        margin-top: 0;
+        overflow-wrap: normal;
+    }
+    .service-page .service-section-nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4px;
+        padding: 6px;
+    }
+    .service-page .service-section-nav a {
+        padding: 8px;
+        font-size: 15px;
+    }
+    .service-page .service-reading p,
+    .service-page > .care-section p,
+    .first-visit-guide p,
+    .first-visit-guide li,
+    .service-page .service-questions {
+        font-size: 17px;
+    }
+    .service-page .service-doctor {
+        gap: 18px;
+    }
+    .service-page .service-doctor img {
+        flex-basis: 108px;
+        width: 108px;
+        height: 140px;
+    }
+    .service-page .service-doctor strong {
+        font-size: 18px;
+    }
+    .profile-heading {
+        grid-template-columns: 130px minmax(0, 1fr);
+    }
+    .nav--enhanced .navright {
+        margin-right: 48px;
+    }
+    .nav--enhanced .nav-identity {
+        max-width: 49%;
+    }
+    .nav-hours {
+        white-space: normal;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+    .mobile-menu-button {
+        z-index: 105;
+        top: 15px;
+        bottom: auto;
+        right: 14px;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        box-shadow: none;
+    }
+    .mobile-menu:not([hidden]) {
+        top: calc(var(--site-nav-bottom) + 8px);
+        bottom: auto;
+        right: 8px;
+        width: min(400px, calc(100% - 16px));
+        max-height: calc(100dvh - var(--site-nav-bottom) - 20px);
+        overflow-y: auto;
+    }
+    .mega-menu {
+        display: none;
+    }
+    .footer-company {
+        display: grid;
+        gap: 8px;
+    }
+    .privacy-content {
+        font-size: 17px;
+    }
+}
+@media (max-width: 370px) {
+    .nav--enhanced {
+        padding-inline: 12px;
+    }
+    .nav--enhanced .navcta {
+        padding-inline: 12px;
+    }
+    .nav--enhanced .nav-identity {
+        max-width: 43%;
+    }
+    .profile-heading {
+        grid-template-columns: 108px minmax(0, 1fr);
+        gap: 14px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* На телефоне фотография следует сразу за главными действиями. */
+@media (max-width: 650px) {
+    .hero--family .hero-family-copy {
+        display: contents;
+    }
+    .hero--family .family-hero-grid {
+        gap: 0;
+    }
+    .hero-family-copy .audience-switch {
+        justify-self: start;
+        order: 0;
+    }
+    .hero-family-copy h1 {
+        order: 1;
+    }
+    .hero-family-copy > p {
+        order: 2;
+    }
+    .hero-family-copy .hero-actions {
+        order: 3;
+    }
+    .hero--family .family-hero-image {
+        order: 4;
+        margin-top: 24px;
+    }
+    .hero--family .hero-family-visit {
+        order: 5;
+        justify-self: start;
+    }
+    .hero--family .hero-location-link {
+        order: 6;
+        justify-self: start;
+    }
+}
+.service-page .service-section-nav a {
+    transition: none;
+}
+.services-card > .service-image-note {
+    margin: 10px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+.profile-heading h3 {
+    margin: 0;
+    font-size: clamp(18px, 2vw, 25px);
+    line-height: 1.2;
+    letter-spacing: -.02em;
+}
+
+/* Над тёмной секцией подложка появляется заранее, сохраняя контраст расписания. */
+.hero .nav--surface-protected,
+.subpage-hero .nav--surface-protected {
+    background: rgba(255, 249, 242, .96);
+}

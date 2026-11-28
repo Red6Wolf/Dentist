@@ -1,0 +1,11 @@
+{
+  "generator": "OpenAI built-in image_gen.imagegen",
+  "mode": "generate",
+  "use_case": "photorealistic-natural",
+  "prompt": "Create one natural editorial photographic illustration for a warm family dental clinic website called Apelsin. Landscape 3:2 composition with the main subject centered and generous spare edges so this image can be cropped as a 620x650 desktop portrait and 350x300 mobile image. A woman about 35–45 sits upright comfortably in a modern dental chair, having a relaxed conversation with her dentist. Show the dentist only as a softly out-of-focus shoulder at one edge and natural hands in a conversational gesture, never as a second principal face. The woman has believable everyday appearance, real skin texture and a restrained, comfortable smile; no perfect advertising grin. Warm cream interior, a small orange upholstered chair detail and a small green plant, understated everyday clinic environment, soft window daylight, warm orange and cream color harmony. It should feel like an unstaged reassuring everyday moment rather than a posed commercial. Realistic proportions, plausible anatomy and hands, elegant natural photography. No instruments in the mouth, no procedure, no before/after imagery, no medical claims. No text, letters, logos, symbols, watermark or branding in the image. This is explicitly a fictional narrative illustration to be labelled 'Сюжетная иллюстрация' by the site, not a depiction of an actual clinic or actual patient. Do not copy any competitor image or any exact real person.",
+  "generated_source": "/Users/skripnikovandrei/.codex/generated_images/01a21f67-09f8-7461-93d3-050c372c7664/exec-156ece91-8a9a-4f03-98cd-4d5ec65e7f3c.png",
+  "asset": "hero-adult-v2.webp",
+  "disclosure": "Сюжетная иллюстрация",
+  "fictional": true,
+  "optimization": "cwebp -q 82; original 1536x1024 retained"
+}

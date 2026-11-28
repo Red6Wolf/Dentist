@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../styles/price-transitions.css" />
     <link rel="stylesheet" href="../styles/care.css?v=first-visit-link" />
     <link rel="stylesheet" href="../styles/service-detail.css" />
+    <link rel="stylesheet" href="../styles/patient-experience.css" />
   </head>
 
   <body>
@@ -47,23 +48,33 @@
           </div>
         </nav>
       </header>
-      <main class="subpage-main service-page" id="main-content" tabindex="-1">
+      <main class="subpage-main service-page" id="main-content" tabindex="-1" data-service-detail>
 <section class="panel subpage-section service-intro">
-  <a class="content-link" href="services.html">Все услуги</a>
+  <nav class="breadcrumbs" aria-label="Вы здесь"><ol>
+<li><a href="../index.html">Главная</a></li>
+<li><a href="services.html">Услуги</a></li>
+<li><span aria-current="page" data-breadcrumb-current>Гигиена и профилактика</span></li>
+</ol></nav>
   <div class="service-intro__heading">
-    <div><h1>Гигиена и профилактика</h1><p class="subpage-lead">Посмотрите состав комплексной гигиены и отдельные процедуры прайса.</p></div>
-    <span class="service-intro__image" style="background-position: 100% 0%" aria-hidden="true"></span>
-  </div>
-  <p class="service-context" data-service-context hidden></p>
-  <div class="care-actions">
-    <a class="locbutton" href="tel:+74991853333">Позвонить для записи</a>
-    <a class="service-price-link" href="#service-cost">Посмотреть стоимость</a>
+    <div>
+      <h1>Гигиена и профилактика</h1>
+      <p class="subpage-lead">Посмотрите состав комплексной гигиены и отдельные процедуры прайса.</p>
+      <p class="service-context" data-service-context hidden></p>
+      <div class="care-actions">
+        <a class="locbutton" href="tel:+74991853333">Позвонить для консультации</a>
+        <a class="service-price-link" href="#service-cost">Посмотреть стоимость</a>
+      </div>
+    </div>
+    <figure class="service-art">
+      <span class="service-intro__image" style="background-position: 100% 0%" role="img" aria-label="Иллюстрация: Гигиена и профилактика"></span>
+      <figcaption>Предметная иллюстрация, не клинический результат.</figcaption>
+    </figure>
   </div>
 </section>
+<nav class="service-section-nav" aria-label="На странице услуги">
+    <a href="#service-about">Об услуге</a><a href="#service-cost">Стоимость</a><a href="#service-doctors">Специалисты</a><a href="#first-visit">Перед визитом</a>
+</nav>
 <section class="panel subpage-section service-reading">
-  <nav class="service-section-nav" aria-label="На странице услуги">
-    <a href="#service-about">Об услуге</a><a href="#service-cost">Стоимость</a><a href="#service-doctors">Специалисты</a><a href="#consultation">Мои вопросы</a>
-  </nav>
   <section id="service-about" aria-labelledby="service-about-title">
     <h2 id="service-about-title">Что обсудить с врачом</h2>
     <p>В названии комплексной гигиены указаны ультразвук, Air-Flow и полировка. Фторирование и другие процедуры также перечислены в прайсе отдельно.</p>
@@ -71,12 +82,12 @@
 <li>Нужны ли дополнительные процедуры и сколько они стоят?</li>
 <li>Какой уход обсудить после посещения?</li></ul>
   </section>
-  <section aria-labelledby="service-steps-title">
+  <section id="service-steps" aria-labelledby="service-steps-title">
     <h2 id="service-steps-title">От вопроса к понятному плану</h2>
     <ol class="service-steps">
       <li><h3>При записи</h3><p>Назовите интересующую услугу и уточните подходящего специалиста. О подготовке спросите заранее.</p></li>
       <li><h3>На консультации</h3><p>Обсудите свою задачу и необходимую диагностику. Попросите объяснить предлагаемые варианты.</p></li>
-      <li><h3>Перед лечением</h3><p>Уточните этапы, число посещений и состав расчёта. Сохраните вопросы в памятку ниже.</p></li>
+      <li><h3>Перед лечением</h3><p>Уточните этапы, число посещений и состав расчёта. Задайте оставшиеся вопросы до начала процедур.</p></li>
     </ol>
   </section>
   <section id="service-cost" aria-labelledby="service-cost-title">
@@ -100,35 +111,44 @@
   <section id="service-doctors" class="service-doctors" aria-labelledby="service-doctors-title">
     <div><h2 id="service-doctors-title">Выбрать специалиста</h2><p>Посмотрите образование и опыт врачей. Подходящего специалиста и время приёма уточните у администратора.</p></div>
     <a class="content-link" href="doctors.html#therapists">Врачи клиники</a>
-    <div class="service-doctor-list"><a class="service-doctor" href="doctors.html#mukhinvv"><img src="../assets/doctors/mukhinvv.webp" width="64" height="64" alt="" loading="lazy" /><span><strong>Мухин Вячеслав Викторович</strong><span>Стоматолог-терапевт</span><span class="service-doctor__link">Образование и опыт</span></span></a>
-<a class="service-doctor" href="doctors.html#semaginaia"><img src="../assets/doctors/semaginaia.webp" width="64" height="64" alt="" loading="lazy" /><span><strong>Семагина Ирина Алексеевна</strong><span>Стоматолог-терапевт</span><span class="service-doctor__link">Образование и опыт</span></span></a></div>
+    <div class="service-doctor-list"><a class="service-doctor" href="doctors.html#mukhinvv"><img src="../assets/doctors/mukhinvv.webp" width="160" height="200" alt="" loading="lazy" /><span><strong>Мухин Вячеслав Викторович</strong><span>Стоматолог-терапевт</span><span class="service-doctor__link">Образование и опыт</span></span></a>
+<a class="service-doctor" href="doctors.html#semaginaia"><img src="../assets/doctors/semaginaia.webp" width="160" height="200" alt="" loading="lazy" /><span><strong>Семагина Ирина Алексеевна</strong><span>Стоматолог-терапевт</span><span class="service-doctor__link">Образование и опыт</span></span></a></div>
   </section>
-  <section aria-labelledby="service-preparation-title">
-    <h2 id="service-preparation-title">Перед первым посещением</h2>
-    <p>Подготовьте вопросы о вариантах, стоимости и посещениях. Если у вас есть снимки или заключения, уточните, нужно ли взять их с собой.</p>
-    <a class="content-link" href="first-visit.html">Первый визит в клинику</a>
-  </section>
+  <section class="first-visit-guide" id="first-visit" aria-labelledby="first-visit-title">
+  <h2 id="first-visit-title">Первый приём в «Апельсине» — всё по порядку</h2>
+  <p class="first-visit-lead">Не обязательно знать название услуги и выбирать лечение заранее. При звонке расскажите, что беспокоит: администратор поможет уточнить специалиста и время. Порядок и стоимость приёма согласуйте при записи.</p>
+  <ol class="first-visit-steps">
+    <li>
+      <span class="visit-step-label">01 / Перед визитом</span>
+      <h3>Что взять с собой</h3>
+      <ul>
+        <li>Документ, удостоверяющий личность.</li>
+        <li>Снимки, выписки и заключения — если они есть.</li>
+        <li>Список лекарств и сведения об аллергиях.</li>
+        <li>Для ребёнка — его документы и документы законного представителя. Состав уточните при записи.</li>
+      </ul>
+      <p>Не проходите дополнительное обследование заранее без назначения: какое исследование нужно, определяет врач.</p>
+    </li>
+    <li>
+      <span class="visit-step-label">02 / На приёме</span>
+      <h3>Расскажите, что беспокоит</h3>
+      <p>Расскажите о жалобах, предыдущем опыте и пожеланиях. Если тревожитесь, скажите об этом: обсудите с врачом ощущения и возможность перерывов.</p>
+      <p>На консультации можно обсудить состояние зубов и дёсен, необходимость диагностики и возможные варианты помощи. Состав вашего приёма уточните заранее.</p>
+    </li>
+    <li>
+      <span class="visit-step-label">03 / Следующий шаг</span>
+      <h3>Понятный план вместо догадок</h3>
+      <ul>
+        <li>Что требует внимания и какие обследования нужны.</li>
+        <li>Какие варианты лечения можно рассмотреть.</li>
+        <li>В какой последовательности проходить этапы.</li>
+        <li>Что входит в расчёт стоимости и что уточняется после диагностики.</li>
+      </ul>
+      <p>Решение о процедурах принимайте после обсуждения с врачом. При звонке можно начать с вопроса о консультации.</p>
+    </li>
+  </ol>
+  <a class="locbutton" href="tel:+74991853333">Позвонить для консультации</a>
 </section>
-<section class="panel subpage-section consultation-note" id="consultation" data-consultation-note>
-  <h2>Подготовиться к консультации</h2>
-  <p>Отметьте свои вопросы. Сохраните памятку и держите её под рукой во время звонка или приёма.</p>
-  <form data-consultation-form hidden>
-    <fieldset>
-      <legend>Что вы хотите уточнить?</legend>
-      <label class="consultation-option"><input type="checkbox" value="Какие этапы входят в выбранную гигиену?" /><span>Какие этапы входят в выбранную гигиену?</span></label>
-<label class="consultation-option"><input type="checkbox" value="Нужны ли дополнительные процедуры и сколько они стоят?" /><span>Нужны ли дополнительные процедуры и сколько они стоят?</span></label>
-<label class="consultation-option"><input type="checkbox" value="Какой уход обсудить после посещения?" /><span>Какой уход обсудить после посещения?</span></label>
-<label class="consultation-option"><input type="checkbox" value="Что обсудить, если я тревожусь перед лечением?" /><span>Что обсудить, если я тревожусь перед лечением?</span></label>
-<label class="consultation-option"><input type="checkbox" value="Как подготовиться к первому посещению?" /><span>Как подготовиться к первому посещению?</span></label>
-    </fieldset>
-    <div class="consultation-actions">
-      <button type="button" class="consultation-copy" data-consultation-copy>Скопировать памятку</button>
-      <button type="button" class="consultation-download" data-consultation-download>Скачать памятку .txt</button>
-    </div>
-    <p class="consultation-status" data-consultation-status role="status" aria-live="polite"></p>
-  </form>
-  <noscript><p>Вопросы для консультации перечислены выше. Их можно записать и обсудить с администратором.</p></noscript>
-  <a class="locbutton" href="tel:+74991853333">Позвонить администратору</a>
 </section>
       </main>
       <footer class="panel footer">
@@ -185,7 +205,16 @@
           aria-label="Апельсин — на главную"
           >Апельсин</a
         >
-        <div class="foot-end">© 2026 Семейная стоматология «Апельсин»</div>
+        <div class="footer-legal">
+  <p class="footer-medical">Имеются противопоказания. Необходима консультация специалиста.</p>
+  <div class="footer-company">
+    <p>© 2026 «Апельсин» · ООО «Медицинские системы»</p>
+    <a href="clinic.html#licenses">Лицензия № ЛО-77-01-014479</a>
+    <p>ИНН 7722351610 · ОГРН 5157746275902</p>
+    <a href="privacy-policy.html">Политика конфиденциальности</a>
+  </div>
+  <p>Сайт носит информационный характер и не является публичной офертой. Стоимость лечения уточняется после диагностики.</p>
+</div>
       </footer>
     </div>
     <script src="../scripts/service-routes.js" defer></script>

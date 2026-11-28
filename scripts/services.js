@@ -153,6 +153,9 @@ if (servicesCatalogue) {
         const description = document.createElement("p");
         description.textContent = direction.description + ".";
         heading.append(name, description, image);
+        const imageNote = document.createElement("p");
+        imageNote.className = "service-image-note";
+        imageNote.textContent = "Предметная иллюстрация, не клинический результат.";
         const preview = document.createElement("ul");
         preview.className = "services-card__preview";
         for (const id of previews[direction.id]) {
@@ -192,7 +195,7 @@ if (servicesCatalogue) {
             actions.append(guide);
         }
         group.append(actions);
-        card.append(heading, preview, group);
+        card.append(heading, imageNote, preview, group);
         directory.append(card);
 
         const option = document.createElement("option");

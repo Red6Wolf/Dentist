@@ -101,3 +101,60 @@ if (orange) {
         orange.classList.add("is-visible");
     }
 }
+
+// Выбор аудитории меняет содержание первого экрана, не скрывая остальные услуги.
+const familyHero = document.querySelector(".hero--family");
+if (familyHero) {
+    const audienceSwitch = familyHero.querySelector(".audience-switch");
+    const buttons = [...audienceSwitch.querySelectorAll("button")];
+    const title = familyHero.querySelector("[data-audience-title]");
+    const description = familyHero.querySelector("[data-audience-description]");
+    const image = familyHero.querySelector("[data-audience-image]");
+    const serviceLink = familyHero.querySelector("[data-audience-services]");
+    const scenes = {
+        adult: {
+            title: "Семейная стоматология.", emphasis: "Рядом с вами.",
+            description: "Лечение, профилактика и восстановление зубов на Тайнинской. Начните с консультации: обсудите свою задачу, варианты и стоимость.",
+            image: "assets/clinic/hero-adult-v2.webp", width: 1536, height: 1024,
+            alt: "Сюжетная иллюстрация: пациентка беседует со стоматологом",
+            link: "pages/services.html", linkText: "Выбрать услугу"
+        },
+        child: {
+            title: "Детская стоматология.", emphasis: "Начнём со знакомства.",
+            description: "Приём, профилактика и лечение молочных зубов. Расскажите администратору возраст ребёнка и повод обращения — уточните специалиста и порядок первого визита.",
+            image: "assets/clinic/hero-child-v2.webp", width: 1600, height: 1067,
+            alt: "Сюжетная иллюстрация: ребёнок с мамой знакомится со стоматологом",
+            link: "pages/children-dentistry.html", linkText: "Услуги для детей"
+        }
+    };
+    function showAudience(audience, updateAddress = false) {
+        const key = audience === "child" ? "child" : "adult";
+        const scene = scenes[key];
+        familyHero.dataset.audience = key;
+        buttons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.audience === key)));
+        const emphasis = document.createElement("span");
+        emphasis.textContent = scene.emphasis;
+        title.replaceChildren(document.createTextNode(scene.title + " "), emphasis);
+        description.textContent = scene.description;
+        image.src = scene.image;
+        image.width = scene.width;
+        image.height = scene.height;
+        image.alt = scene.alt;
+        serviceLink.href = scene.link;
+        serviceLink.firstChild.textContent = scene.linkText + " ";
+        if (updateAddress) {
+            const url = new URL(location.href);
+            url.searchParams.set("audience", key);
+            history.pushState({ audience: key }, "", url);
+            window.dataLayer ??= [];
+            window.dataLayer.push({ event: "clinic_audience_select", audience: key });
+        }
+    }
+    audienceSwitch.hidden = false;
+    buttons.forEach(button => button.addEventListener("click", () => {
+        if (button.getAttribute("aria-pressed") !== "true") showAudience(button.dataset.audience, true);
+    }));
+    const readAddress = () => showAudience(new URLSearchParams(location.search).get("audience"));
+    window.addEventListener("popstate", readAddress);
+    readAddress();
+}

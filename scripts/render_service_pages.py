@@ -5,6 +5,7 @@ import json
 import re
 from html import escape, unescape
 from pathlib import Path
+from render_shared import breadcrumbs, first_visit, render as render_shared
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_PAGES = {
@@ -56,38 +57,14 @@ def doctor_preview(specialty):
     cards = []
     for identifier, article in re.findall(r'<article class="profile-card" id="([^"]+)">(.*?)</article>', section[0], re.S)[:2]:
         image = re.search(r'<img src="([^"]+)"', article)[1]
-        name = re.search(r'<h4>(.*?)</h4>', article, re.S)[1].strip()
+        name = re.search(r'<h[34]>(.*?)</h[34]>', article, re.S)[1].strip()
         role = re.search(r'<p>(.*?)</p>', article, re.S)[1].strip()
-        cards.append(f'<a class="service-doctor" href="doctors.html#{identifier}"><img src="{image}" width="64" height="64" alt="" loading="lazy" /><span><strong>{name}</strong><span>{role}</span><span class="service-doctor__link">Образование и опыт</span></span></a>')
+        cards.append(f'<a class="service-doctor" href="doctors.html#{identifier}"><img src="{image}" width="160" height="200" alt="" loading="lazy" /><span><strong>{name}</strong><span>{role}</span><span class="service-doctor__link">Образование и опыт</span></span></a>')
     return '<div class="service-doctor-list">' + "\n".join(cards) + '</div>'
 
 
-def preparation(questions):
-    options = questions + ["Что обсудить, если я тревожусь перед лечением?", "Как подготовиться к первому посещению?"]
-    fields = "\n".join(
-        f'<label class="consultation-option"><input type="checkbox" value="{escape(question, quote=True)}" /><span>{escape(question)}</span></label>'
-        for question in options
-    )
-    return f'''<section class="panel subpage-section consultation-note" id="consultation" data-consultation-note>
-  <h2>Подготовиться к консультации</h2>
-  <p>Отметьте свои вопросы. Сохраните памятку и держите её под рукой во время звонка или приёма.</p>
-  <form data-consultation-form hidden>
-    <fieldset>
-      <legend>Что вы хотите уточнить?</legend>
-      {fields}
-    </fieldset>
-    <div class="consultation-actions">
-      <button type="button" class="consultation-copy" data-consultation-copy>Скопировать памятку</button>
-      <button type="button" class="consultation-download" data-consultation-download>Скачать памятку .txt</button>
-    </div>
-    <p class="consultation-status" data-consultation-status role="status" aria-live="polite"></p>
-  </form>
-  <noscript><p>Вопросы для консультации перечислены выше. Их можно записать и обсудить с администратором.</p></noscript>
-  <a class="locbutton" href="tel:+74991853333">Позвонить администратору</a>
-</section>'''
-
-
 def write_file(path, content, check):
+    content = "\n".join(line.rstrip() for line in content.splitlines()) + "\n"
     if path.exists() and path.read_text() == content:
         return True
     if check:
@@ -137,32 +114,38 @@ def render(check=False):
         questions = item["questions"]
         questions_html = "\n".join(f'<li>{escape(question)}</li>' for question in questions)
         body = f'''<section class="panel subpage-section service-intro">
-  <a class="content-link" href="services.html">Все услуги</a>
+  {breadcrumbs(item["title"], direction)}
   <div class="service-intro__heading">
-    <div><h1>{title}</h1><p class="subpage-lead">{escape(item["lead"])}</p></div>
-    <span class="service-intro__image" style="background-position: {image_index % 5 * 25}% {image_index // 5 * 100}%" aria-hidden="true"></span>
-  </div>
-  <p class="service-context" data-service-context hidden></p>
-  <div class="care-actions">
-    <a class="locbutton" href="tel:+74991853333">Позвонить для записи</a>
-    <a class="service-price-link" href="#service-cost">Посмотреть стоимость</a>
+    <div>
+      <h1>{title}</h1>
+      <p class="subpage-lead">{escape(item["lead"])}</p>
+      <p class="service-context" data-service-context hidden></p>
+      <div class="care-actions">
+        <a class="locbutton" href="tel:+74991853333">Позвонить для консультации</a>
+        <a class="service-price-link" href="#service-cost">Посмотреть стоимость</a>
+      </div>
+    </div>
+    <figure class="service-art">
+      <span class="service-intro__image" style="background-position: {image_index % 5 * 25}% {image_index // 5 * 100}%" role="img" aria-label="Иллюстрация: {title}"></span>
+      <figcaption>Предметная иллюстрация, не клинический результат.</figcaption>
+    </figure>
   </div>
 </section>
+<nav class="service-section-nav" aria-label="На странице услуги">
+    <a href="#service-about">Об услуге</a><a href="#service-cost">Стоимость</a><a href="#service-doctors">Специалисты</a><a href="#first-visit">Перед визитом</a>
+</nav>
 <section class="panel subpage-section service-reading">
-  <nav class="service-section-nav" aria-label="На странице услуги">
-    <a href="#service-about">Об услуге</a><a href="#service-cost">Стоимость</a><a href="#service-doctors">Специалисты</a><a href="#consultation">Мои вопросы</a>
-  </nav>
   <section id="service-about" aria-labelledby="service-about-title">
     <h2 id="service-about-title">Что обсудить с врачом</h2>
     <p>{escape(item["about"])}</p>
     <ul class="service-questions">{questions_html}</ul>
   </section>
-  <section aria-labelledby="service-steps-title">
+  <section id="service-steps" aria-labelledby="service-steps-title">
     <h2 id="service-steps-title">От вопроса к понятному плану</h2>
     <ol class="service-steps">
       <li><h3>При записи</h3><p>Назовите интересующую услугу и уточните подходящего специалиста. О подготовке спросите заранее.</p></li>
       <li><h3>На консультации</h3><p>Обсудите свою задачу и необходимую диагностику. Попросите объяснить предлагаемые варианты.</p></li>
-      <li><h3>Перед лечением</h3><p>Уточните этапы, число посещений и состав расчёта. Сохраните вопросы в памятку ниже.</p></li>
+      <li><h3>Перед лечением</h3><p>Уточните этапы, число посещений и состав расчёта. Задайте оставшиеся вопросы до начала процедур.</p></li>
     </ol>
   </section>
   <section id="service-cost" aria-labelledby="service-cost-title">
@@ -180,24 +163,20 @@ def render(check=False):
     <a class="content-link" href="{doctor_target}">Врачи клиники</a>
     {doctor_preview(item["doctors"])}
   </section>
-  <section aria-labelledby="service-preparation-title">
-    <h2 id="service-preparation-title">Перед первым посещением</h2>
-    <p>Подготовьте вопросы о вариантах, стоимости и посещениях. Если у вас есть снимки или заключения, уточните, нужно ли взять их с собой.</p>
-    <a class="content-link" href="first-visit.html">Первый визит в клинику</a>
-  </section>
-</section>
-{preparation(questions)}'''
+  {first_visit()}
+</section>'''
         head = catalogue.split('<body>')[0]
         head = re.sub(r'<title>.*?</title>', f'<title>{title} — Апельсин</title>', head, flags=re.S)
         head = re.sub(r'<meta\s+name="description"\s+content="[^"]*"\s*/>', f'<meta name="description" content="{title}: вопросы к консультации, цены и специалисты семейной стоматологии Апельсин." />', head)
         head = head.replace('/pages/services.html"', f'/pages/{slug}.html"')
         head = re.sub(r'    <link rel="stylesheet" href="../styles/services.css[^\n]+\n', '', head)
-        head = head.replace('  </head>', '    <link rel="stylesheet" href="../styles/service-detail.css" />\n  </head>')
+        head = re.sub(r'    <link rel="stylesheet" href="../styles/patient-experience.css" />\n', '', head)
+        head = head.replace('  </head>', '    <link rel="stylesheet" href="../styles/service-detail.css" />\n    <link rel="stylesheet" href="../styles/patient-experience.css" />\n  </head>')
         markup = head + f'''<body>
     <div class="page">
       <a class="skip-link" href="#main-content">Перейти к содержимому</a>
       {header}
-      <main class="subpage-main service-page" id="main-content" tabindex="-1">
+      <main class="subpage-main service-page" id="main-content" tabindex="-1" data-service-detail>
 {body}
       </main>
       {footer}
@@ -209,31 +188,59 @@ def render(check=False):
 </html>
 '''
         results.append(write_file(ROOT / f"pages/{slug}.html", markup, check))
-    for page in ["implantation.html", "veneers.html", "orthodontics.html"]:
+    legacy = {
+        "implantation.html": ("implantology", "Имплантация зубов", 2, ""),
+        "veneers.html": ("aesthetics", "Виниры", 8, ""),
+        "orthodontics.html": ("ortho", "Исправление прикуса", 5, "orthodontists"),
+    }
+    for page, (direction, title, image_index, specialty) in legacy.items():
         path = ROOT / "pages" / page
         content = path.read_text()
+        content = re.sub(r'\s*<!-- consultation:start -->.*?<!-- consultation:end -->', '', content, flags=re.S)
+        content = re.sub(r'\s*<!-- visit-guide:start -->.*?<!-- visit-guide:end -->', '', content, flags=re.S)
+        content = re.sub(r'\s*<!-- specialists:start -->.*?<!-- specialists:end -->', '', content, flags=re.S)
         if 'href="../styles/service-detail.css"' not in content:
             content = content.replace('  </head>', '    <link rel="stylesheet" href="../styles/service-detail.css" />\n  </head>')
-        if 'data-service-context' not in content:
-            content = content.replace('</h1>', '</h1>\n          <p class="service-context" data-service-context hidden></p>', 1)
-            content = content.replace('</h1>', '</h1>\n          <div class="care-actions"><a class="locbutton" href="tel:+74991853333">Позвонить для записи</a><a class="service-price-link" href="#service-cost">Посмотреть стоимость</a></div>', 1)
-            content = content.replace('<h2>\n            Стоимость и её состав', '<h2 id="service-cost">\n            Стоимость и её состав')
-            if 'id="service-cost"' not in content:
-                content = content.replace('<!-- prices:', '<span id="service-cost"></span>\n          <!-- prices:', 1)
-        action = '          <div class="care-actions"><a class="locbutton" href="tel:+74991853333">Позвонить для записи</a><a class="service-price-link" href="#service-cost">Посмотреть стоимость</a></div>'
-        if action in content:
-            content = re.sub(r"^[ \t]*" + re.escape(action.strip()) + r"\n", "", content, count=1, flags=re.M)
-            intro_end = content.index("</section>", content.index('care-intro'))
-            line_start = content.rfind("\n", 0, intro_end) + 1
-            content = content[:line_start] + action + "\n" + content[line_start:]
-        note = preparation(["Какие варианты подходят для моей задачи?", "Из каких этапов складывается стоимость?", "Что нужно уточнить о подготовке и посещениях?"])
-        if '<!-- consultation:start -->' not in content:
-            content = content.replace('      </main>', f'        <!-- consultation:start -->\n{note}\n        <!-- consultation:end -->\n      </main>')
-        else:
-            content = re.sub(r'<!-- consultation:start -->.*?<!-- consultation:end -->', f'<!-- consultation:start -->\n{note}\n        <!-- consultation:end -->', content, flags=re.S)
+        content = content.replace('class="subpage-main" id="main-content" tabindex="-1"', 'class="subpage-main service-page" id="main-content" tabindex="-1" data-service-detail')
+        intro = re.search(r'<section class="panel subpage-section (?:care-intro|service-intro)">.*?</section>', content, re.S)
+        lead = re.search(r'<p class="subpage-lead">(.*?)</p>', intro[0], re.S)[1].strip()
+        new_intro = f'''<section class="panel subpage-section service-intro">
+  {breadcrumbs(title, direction)}
+  <div class="service-intro__heading">
+    <div>
+      <h1>{title}</h1>
+      <p class="subpage-lead">{lead}</p>
+      <p class="service-context" data-service-context hidden></p>
+      <div class="care-actions"><a class="locbutton" href="tel:+74991853333">Позвонить для консультации</a><a class="service-price-link" href="#service-cost">Посмотреть стоимость</a></div>
+    </div>
+    <figure class="service-art">
+      <span class="service-intro__image" style="background-position: {image_index % 5 * 25}% {image_index // 5 * 100}%" role="img" aria-label="Иллюстрация: {title}"></span>
+      <figcaption>Предметная иллюстрация, не клинический результат.</figcaption>
+    </figure>
+  </div>
+</section>'''
+        content = content[:intro.start()] + new_intro + content[intro.end():]
+        content = re.sub(r'\s*<nav class="service-section-nav".*?</nav>', '', content, flags=re.S)
+        content = content.replace(new_intro, new_intro + '\n<nav class="service-section-nav" aria-label="На странице услуги"><a href="#service-about">Об услуге</a><a href="#service-cost">Стоимость</a><a href="#service-doctors">Специалисты</a><a href="#first-visit">Перед визитом</a></nav>', 1)
+        content = content.replace('<section class="panel subpage-section care-section" id="service-about">', '<section class="panel subpage-section care-section">')
+        content = content.replace('<section class="panel subpage-section care-section">', '<section class="panel subpage-section care-section" id="service-about">', 1)
+        content = content.replace('<h2 id="service-cost">', '<h2>')
+        cost = re.search(r'<section class="panel subpage-section care-section">\s*<h2>\s*Стоимость и её состав', content)
+        if cost:
+            content = content[:cost.start()] + content[cost.start():].replace('<section class="panel subpage-section care-section">', '<section class="panel subpage-section care-section" id="service-cost">', 1)
+        doctors = f'''<!-- specialists:start -->
+<section class="panel subpage-section care-section service-doctors" id="service-doctors">
+  <div><h2>Специалисты клиники</h2><p>Посмотрите образование и опыт. Кто принимает по вашему вопросу, уточните у администратора.</p></div>
+  <a class="content-link" href="doctors.html">Все врачи</a>
+  {doctor_preview(specialty)}
+</section>
+<!-- specialists:end -->'''
+        content = content.replace('      </main>', doctors + '\n<!-- visit-guide:start -->\n' + first_visit() + '\n<!-- visit-guide:end -->\n      </main>')
         if 'src="../scripts/consultation.js"' not in content:
             content = content.replace('    <script src="../scripts/navigation.js', '    <script src="../scripts/service-routes.js" defer></script>\n    <script src="../scripts/consultation.js" defer></script>\n    <script src="../scripts/navigation.js')
+        content = content.replace("Позвонить для записи", "Позвонить для консультации")
         results.append(write_file(path, content, check))
+    results.append(render_shared(check))
     return all(results)
 
 

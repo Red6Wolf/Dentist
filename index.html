@@ -15,7 +15,7 @@
       rel="stylesheet"
     />
     <link rel="canonical" href="https://stomatologiya-apelsin.ru/" />
-    <link rel="preload" as="image" href="assets/clinic/hero-aligner.webp" />
+    <link rel="preload" as="image" href="assets/clinic/hero-adult-v2.webp" />
     <link rel="stylesheet" href="styles/styles.css?v=patient-flow" />
     <link rel="stylesheet" href="styles/pages.css?v=separate-prices" />
     <link rel="stylesheet" href="styles/home.css?v=clinic-hours" />
@@ -51,12 +51,13 @@
       }
     </script>
     <link rel="stylesheet" href="styles/care.css?v=first-visit-link" />
+    <link rel="stylesheet" href="styles/patient-experience.css" />
   </head>
   <body>
     <div class="page">
       <a class="skip-link" href="#main-content">Перейти к содержимому</a>
       <!-- Первый экран и навигация -->
-      <header class="panel hero" id="top">
+      <header class="panel hero hero--family" id="top">
         <nav class="nav" aria-label="Основная навигация">
           <div class="nav-identity">
             <a class="brand" href="#top">
@@ -80,25 +81,25 @@
             <a class="navcta" href="tel:+74991853333">Позвонить</a>
           </div>
         </nav>
-        <div class="hero-copy">
-          <h1>Семейная стоматология <span>на Тайнинской</span></h1>
-          <p>Принимаем взрослых и детей каждый день. Лечение, профилактика и ортодонтия в одной клинике.</p>
-          <div class="hero-visit-note">
-            <a class="hero-visit-link" href="pages/first-visit.html">
-              <span><strong>Первый приём</strong><span>Что обсудить с врачом</span></span>
-              <b class="icon-arrow" aria-hidden="true"></b>
-            </a>
+        <div class="family-hero-grid">
+          <div class="hero-copy hero-family-copy">
+            <div class="audience-switch" role="group" aria-label="Для кого вы ищете стоматологию" hidden>
+              <button type="button" data-audience="adult" aria-pressed="true">Взрослым</button>
+              <button type="button" data-audience="child" aria-pressed="false">Детям</button>
+            </div>
+            <h1 data-audience-title>Семейная стоматология. <span>Рядом с вами.</span></h1>
+            <p data-audience-description>Лечение, профилактика и восстановление зубов на Тайнинской. Начните с консультации: обсудите свою задачу, варианты и стоимость.</p>
+            <div class="hero-actions">
+              <a class="pillbtn" href="tel:+74991853333">Позвонить для консультации</a>
+              <a class="hero-price-link" data-audience-services href="pages/services.html">Выбрать услугу <b class="icon-arrow" aria-hidden="true"></b></a>
+            </div>
+            <a class="hero-family-visit content-link" href="pages/first-visit.html">Как проходит первый приём</a>
+            <a class="hero-location-link" href="pages/contact.html">Тайнинская, 17к1 · Как добраться <b class="icon-arrow" aria-hidden="true"></b></a>
           </div>
-          <div class="hero-actions">
-            <a class="pillbtn" href="tel:+74991853333">Позвонить для записи</a>
-            <a class="hero-price-link" href="pages/prices.html">
-              Посмотреть цены <b class="icon-arrow" aria-hidden="true"></b>
-            </a>
-          </div>
-          <a class="hero-location-link" href="pages/contact.html">
-            Тайнинская, 17к1 · Как добраться
-            <b class="icon-arrow" aria-hidden="true"></b>
-          </a>
+          <figure class="family-hero-image">
+            <img data-audience-image src="assets/clinic/hero-adult-v2.webp" width="1536" height="1024" alt="Сюжетная иллюстрация: пациентка беседует со стоматологом" fetchpriority="high" decoding="async" />
+            <figcaption>Сюжетная иллюстрация. Не фотография пациента клиники.</figcaption>
+          </figure>
         </div>
       </header>
       <main id="main-content" tabindex="-1">
@@ -591,7 +592,16 @@
           aria-label="Апельсин — на главную"
           >Апельсин</a
         >
-        <div class="foot-end">© 2026 Семейная стоматология «Апельсин»</div>
+        <div class="footer-legal">
+  <p class="footer-medical">Имеются противопоказания. Необходима консультация специалиста.</p>
+  <div class="footer-company">
+    <p>© 2026 «Апельсин» · ООО «Медицинские системы»</p>
+    <a href="pages/clinic.html#licenses">Лицензия № ЛО-77-01-014479</a>
+    <p>ИНН 7722351610 · ОГРН 5157746275902</p>
+    <a href="pages/privacy-policy.html">Политика конфиденциальности</a>
+  </div>
+  <p>Сайт носит информационный характер и не является публичной офертой. Стоимость лечения уточняется после диагностики.</p>
+</div>
       </footer>
     </div>
     <script src="scripts/navigation.js?v=patient-care" defer></script>
